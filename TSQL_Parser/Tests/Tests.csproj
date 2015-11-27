@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2E85041A-D8FE-452B-831E-8DEF3CFC4A17}</ProjectGuid>
+    <ProjectGuid>{E8E59503-18E4-4990-AFDF-07994F068F48}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TSQL</RootNamespace>
-    <AssemblyName>TSQL_Parser</AssemblyName>
+    <RootNamespace>Tests</RootNamespace>
+    <AssemblyName>Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -29,7 +29,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,32 +48,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parsing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tokens\TSQLCharacter.cs" />
-    <Compile Include="Tokens\TSQLComment.cs" />
-    <Compile Include="Tokens\TSQLIdentifier.cs" />
-    <Compile Include="Tokens\TSQLKeyword.cs" />
-    <Compile Include="Tokens\TSQLLiteral.cs" />
-    <Compile Include="Tokens\TSQLMultilineComment.cs" />
-    <Compile Include="Tokens\TSQLNumericLiteral.cs" />
-    <Compile Include="Tokens\TSQLOperator.cs" />
-    <Compile Include="Tokens\TSQLSingleLineComment.cs" />
-    <Compile Include="Tokens\TSQLStringLiteral.cs" />
-    <Compile Include="Tokens\TSQLToken.cs" />
-    <Compile Include="Tokens\TSQLWhitespace.cs" />
-    <Compile Include="TSQLCharacters.cs" />
-    <Compile Include="TSQLKeywords.cs" />
-    <Compile Include="TSQLLexer.cs" />
-    <Compile Include="TSQLLexer.IDisposable.cs">
-			<DependentUpon>TSQLLexer.cs</DependentUpon>
-		</Compile>
-    <Compile Include="TSQLTokenizer.cs" />
-    <Compile Include="TSQLTokenizer.IDisposable.cs">
-      <DependentUpon>TSQLTokenizer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TSQLTokenizer.IEnumerable.cs">
-      <DependentUpon>TSQLTokenizer.cs</DependentUpon>
-    </Compile>
+    <Compile Include="TokenEquality.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TSQL_Parser\TSQL_Parser.csproj">
+      <Project>{2e85041a-d8fe-452b-831e-8def3cfc4a17}</Project>
+      <Name>TSQL_Parser</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\AdventureWorks2014.dbo.uspSearchCandidateResumes.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -10,11 +10,9 @@ namespace TSQL.Tokens
 	{
 		public TSQLMultilineComment(
 			int beginPostion,
-			int endPosition,
 			string text) :
 			base(
 				beginPostion,
-				endPosition,
 				text)
 		{
 			Comment = Text.Substring(2, Text.Length - 4);

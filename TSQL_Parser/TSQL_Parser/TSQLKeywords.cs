@@ -254,29 +254,46 @@ namespace TSQL
 			TSQLKeywords a,
 			TSQLKeywords b)
 		{
-			return a.Equals(b);
+			return
+				(object)a != null &&
+				a.Equals(b);
 		}
 
 		public static bool operator !=(
 			TSQLKeywords a,
 			TSQLKeywords b)
 		{
-			return !a.Equals(b);
+			return
+				(object)a != null &&
+				!a.Equals(b);
 		}
 
-		public bool Equals(TSQLKeywords obj)
+		private bool Equals(TSQLKeywords obj)
 		{
-			return Keyword == obj.Keyword;
+			return
+				(
+					ReferenceEquals(this, obj)
+				) ||
+				(
+					(object)obj != null &&
+					Keyword == obj.Keyword
+				);
 		}
 
 		public override bool Equals(object obj)
 		{
-			return base.Equals(obj);
+			return Equals(obj as TSQLKeywords);
 		}
 
 		public override int GetHashCode()
 		{
-			return Keyword.GetHashCode();
+			// http://stackoverflow.com/questions/263400/what-is-the-best-algorithm-for-an-overridden-system-object-gethashcode/263416
+			unchecked // Overflow is fine, just wrap
+			{
+				int hash = 17;
+				hash = hash * 486187739 + Keyword.GetHashCode();
+				return hash;
+			}
 		}
 	}
 }

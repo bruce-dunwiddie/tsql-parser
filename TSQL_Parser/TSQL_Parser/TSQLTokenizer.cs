@@ -1,230 +1,84 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 using TSQL.Tokens;
 
 namespace TSQL
 {
-	public static class TSQLTokenizer
+	public partial class TSQLTokenizer
 	{
-		public static List<TSQLToken> ParseTokens(
-			string definition,
-			bool useQuotedIdentifiers,
-			bool includeWhitespace)
+		private TSQLLexer _lexer = null;
+		private TSQLToken _current = null;
+
+		public TSQLTokenizer(
+			TextReader inputStream)
 		{
-			List<TSQLToken> tokens = new List<TSQLToken>();
-
-			int position = 0;
-
-			while (
-				position != -1 &&
-				position < definition.Length)
-			{
-				position = FindNextToken(
-					position,
-					definition,
-					includeWhitespace);
-
-				if (position != -1)
-				{
-					int endPosition = FindTokenEnd(
-						position,
-						definition);
-
-					string tokenValue = definition.Substring(position, endPosition - position + 1);
-
-					if (tokenValue.StartsWith("--"))
-					{
-						tokens.Add(
-							new TSQLSingleLineComment(
-								position,
-								endPosition,
-								tokenValue));
-					}
-					else if (tokenValue.StartsWith("/*"))
-					{
-						tokens.Add(
-							new TSQLMultilineComment(
-								position,
-								endPosition,
-								tokenValue));
-					}
-					else if (
-						tokenValue.StartsWith("\'") ||
-						tokenValue.StartsWith("N\'") ||
-						(
-							!useQuotedIdentifiers &&
-							(
-								tokenValue.StartsWith("\"") ||
-								tokenValue.StartsWith("N\"")
-							)
-						))
-					{
-						tokens.Add(
-							new TSQLStringLiteral(
-								position,
-								endPosition,
-								tokenValue));
-					}
-					else if (
-						tokenValue[0] == '0' ||
-						tokenValue[0] == '1' ||
-						tokenValue[0] == '2' ||
-						tokenValue[0] == '3' ||
-						tokenValue[0] == '4' ||
-						tokenValue[0] == '5' ||
-						tokenValue[0] == '6' ||
-						tokenValue[0] == '7' ||
-						tokenValue[0] == '8' ||
-						tokenValue[0] == '9' ||
-						tokenValue[0] == '$')
-					{
-						tokens.Add(
-							new TSQLNumericLiteral(
-								position,
-								endPosition,
-								tokenValue));
-					}
-					else if (
-						tokenValue[0] == '=' ||
-						tokenValue[0] == '~' ||
-						tokenValue[0] == '-' ||
-						tokenValue[0] == '+' ||
-						tokenValue[0] == '*' ||
-						tokenValue[0] == '/' ||
-						tokenValue[0] == '<' ||
-						tokenValue[0] == '>' ||
-						tokenValue[0] == '!' ||
-						tokenValue[0] == '&' ||
-						tokenValue[0] == '|' ||
-						tokenValue[0] == '^' ||
-						tokenValue[0] == '%' ||
-						tokenValue[0] == ':')
-					{
-						tokens.Add(
-							new TSQLOperator(
-								position,
-								endPosition,
-								tokenValue));
-					}
-					else if (TSQLCharacters.IsCharacter(tokenValue))
-					{
-						tokens.Add(
-							new TSQLCharacter(
-								position,
-								endPosition,
-								tokenValue));
-					}
-					else if (TSQLKeywords.IsKeyword(tokenValue))
-					{
-						tokens.Add(
-							new TSQLKeyword(
-								position,
-								endPosition,
-								tokenValue));
-					}
-					else if (
-						tokenValue[0] == ' ' ||
-						tokenValue[0] == '\t' ||
-						tokenValue[0] == '\r' ||
-						tokenValue[0] == '\n')
-					{
-						tokens.Add(
-							new TSQLWhitespace(
-								position,
-								endPosition,
-								tokenValue));
-					}
-					else
-					{
-						tokens.Add(
-							new TSQLIdentifier(
-								position,
-								endPosition,
-								tokenValue));
-					}
-
-					position = endPosition + 1;
-				}
-			}
-
-			return tokens;
+			_lexer = new TSQLLexer(inputStream);
 		}
 
-		private static int FindNextToken(
-			int position,
-			string definition,
-			bool includeWhitespace)
+		public bool UseQuotedIdentifiers { get; set; }
+
+		public bool IncludeWhitespace { get; set; }
+
+		public bool Read()
 		{
-			bool tokenFound = false;
+			CheckDisposed();
 
-			while (
-				!tokenFound &&
-				position < definition.Length)
+			bool hasNext;
+
+			if (IncludeWhitespace)
 			{
-				char currentLetter = definition[position];
-
-				switch (currentLetter)
-				{
-					case ' ':
-					case '\t':
-					case '\r':
-					case '\n':
-						{
-							if (includeWhitespace)
-							{
-								tokenFound = true;
-							}
-							else
-							{
-								// ignore
-								position++;
-							}
-
-							break;
-						}
-					default:
-						{
-							tokenFound = true;
-
-							break;
-						}
-				}
-			}
-
-			if (position == definition.Length)
-			{
-				position = -1;
-			}
-
-			return position;
-		}
-
-		private static int FindTokenEnd(
-			int position,
-			string definition)
-		{
-			if (
-				definition[position] == ' ' ||
-				definition[position] == '\t' ||
-				definition[position] == '\r' ||
-				definition[position] == '\n')
-			{
-				while (
-					++position < definition.Length &&
-					(
-						definition[position] == ' ' ||
-						definition[position] == '\t' ||
-						definition[position] == '\r' ||
-						definition[position] == '\n'
-					)) ;			
+				hasNext = _lexer.Read();
 			}
 			else
 			{
-				switch (definition[position])
+				hasNext = _lexer.ReadNextNonWhitespace();
+			}
+
+			if (hasNext)
+			{
+				SetCurrent();
+			}
+
+			return hasNext;
+		}
+
+		private StringBuilder characterHolder = new StringBuilder();
+
+		private void SetCurrent()
+		{
+			characterHolder.Length = 0;
+			int startPosition = _lexer.Position;
+
+			if (
+				IncludeWhitespace &&
+				(
+					_lexer.Current == ' ' ||
+					_lexer.Current == '\t' ||
+					_lexer.Current == '\r' ||
+					_lexer.Current == '\n'
+				))
+			{
+				do
+				{
+					characterHolder.Append(_lexer.Current);
+				} while (
+					_lexer.Read() &&
+					(
+						_lexer.Current == ' ' ||
+						_lexer.Current == '\t' ||
+						_lexer.Current == '\r' ||
+						_lexer.Current == '\n'
+					));
+			}
+			else
+			{
+				characterHolder.Append(_lexer.Current);
+
+				switch (_lexer.Current)
 				{
 					// all single character sequences with no optional double character sequence
 					case '.':
@@ -235,7 +89,7 @@ namespace TSQL
 					case '=':
 					case '~':
 						{
-							position++;
+							
 
 							break;
 						}
@@ -243,19 +97,21 @@ namespace TSQL
 					// -=
 					case '-':
 						{
-							if (++position < definition.Length)
+							if (_lexer.Read())
 							{
-								if (definition[position] == '-')
+								if (_lexer.Current == '-')
 								{
-									// ignore thru end of line
-									while (
-										++position < definition.Length &&
-										definition[position] != '\r' &&
-										definition[position] != '\n') ;
-								}
-								else if (definition[position] == '=')
+									do
+									{
+										characterHolder.Append(_lexer.Current);
+									} while (
+										_lexer.Read() &&
+										_lexer.Current != '\r' &&
+										_lexer.Current != '\n');
+                                }
+								else if (_lexer.Current == '=')
 								{
-									position++;
+									characterHolder.Append(_lexer.Current);
 								}
 							}
 
@@ -265,35 +121,37 @@ namespace TSQL
 					// /=
 					case '/':
 						{
-							if (++position < definition.Length)
+							if (_lexer.Read())
 							{
-								if (definition[position] == '*')
+								if (_lexer.Current == '*')
 								{
-									position++;
+									characterHolder.Append(_lexer.Current);
 
 									do
 									{
-										// find next asterisk
 										while (
-											position < definition.Length - 1 &&
-											definition[position] != '*')
+											_lexer.Read() &&
+											_lexer.Current != '*')
 										{
-											position++;
+											characterHolder.Append(_lexer.Current);
 										}
 
-										if (position < definition.Length - 1)
+										if (!_lexer.EOF)
 										{
-											position++;
+											characterHolder.Append(_lexer.Current);
 										}
 									} while (
-										position < definition.Length - 1 &&
-										definition[position] != '/');
+										_lexer.Read() &&
+										_lexer.Current != '/');
 
-									position++;
+									if (!_lexer.EOF)
+									{
+										characterHolder.Append(_lexer.Current);
+									}
 								}
-								else if (definition[position] == '=')
+								else if (_lexer.Current == '=')
 								{
-									position++;
+									characterHolder.Append(_lexer.Current);
 								}
 							}
 
@@ -303,14 +161,14 @@ namespace TSQL
 					// <=
 					case '<':
 						{
-							if (++position < definition.Length)
+							if (
+								_lexer.Read() &&
+								(
+									_lexer.Current == '>' ||
+									_lexer.Current == '='
+								))
 							{
-								if (
-									definition[position] == '>' ||
-									definition[position] == '=')
-								{
-									position++;
-								}
+								characterHolder.Append(_lexer.Current);
 							}
 
 							break;
@@ -320,15 +178,15 @@ namespace TSQL
 					// !>
 					case '!':
 						{
-							if (++position < definition.Length)
+							if (
+								_lexer.Read() &&
+								(
+									_lexer.Current == '=' ||
+									_lexer.Current == '<' ||
+									_lexer.Current == '>'
+								))
 							{
-								if (
-									definition[position] == '=' ||
-									definition[position] == '<' ||
-									definition[position] == '>')
-								{
-									position++;
-								}
+								characterHolder.Append(_lexer.Current);
 							}
 
 							break;
@@ -349,10 +207,10 @@ namespace TSQL
 					case '>':
 						{
 							if (
-								++position < definition.Length &&
-								definition[position] == '=')
+								_lexer.Read() &&
+								_lexer.Current == '=')
 							{
-								position++;
+								characterHolder.Append(_lexer.Current);
 							}
 
 							break;
@@ -360,80 +218,32 @@ namespace TSQL
 					// N''
 					case 'N':
 						{
-							if (++position < definition.Length)
+							if (_lexer.Read())
 							{
-								if (definition[position] == '\'')
+								if (_lexer.Current == '\'')
 								{
 									goto case '\'';
 								}
-								else if (definition[position] == '\"')
+								else if (_lexer.Current == '\"')
 								{
 									goto case '\"';
 								}
 								else
 								{
-									bool foundEnd = false;
-
-									do
-									{
-										switch (definition[position])
-										{
-											// running into a special character signals the end of a previous grouping of normal characters
-											case ' ':
-											case '\t':
-											case '\r':
-											case '\n':
-											case '.':
-											case ',':
-											case ';':
-											case '(':
-											case ')':
-											case '+':
-											case '-':
-											case '*':
-											case '=':
-											case '/':
-											case '<':
-											case '!':
-											case '%':
-											case '^':
-											case '&':
-											case '|':
-											case '~':
-											case ':':
-											case '[':
-												{
-													foundEnd = true;
-
-													break;
-												}
-											default:
-												{
-													position++;
-
-													break;
-												}
-										}
-									} while (
-										!foundEnd &&
-										position < definition.Length - 1);
-
-									break;
+									goto default;
 								}
 							}
-							else
-							{
-								goto default;
-							}
+
+							break;
 						}
 					// ::
 					case ':':
 						{
 							if (
-								++position < definition.Length &&
-								definition[position] == ':')
+								_lexer.Read() &&
+								_lexer.Current == ':')
 							{
-								position++;
+								characterHolder.Append(_lexer.Current);
 							}
 
 							break;
@@ -447,30 +257,39 @@ namespace TSQL
 						{
 							char escapeChar;
 
-							if (definition[position] == '[')
+							if (_lexer.Current == '[')
 							{
 								escapeChar = ']';
 							}
 							else
 							{
-								escapeChar = definition[position];
+								escapeChar = _lexer.Current;
 							}
+
+							bool stillEscaped;
 
 							// read until '
 							// UNLESS the ' is doubled up
 							do
 							{
 								while (
-									++position < definition.Length &&
-									definition[position] != escapeChar) ;
-
-								if (position < definition.Length - 1)
+									_lexer.Read() &&
+									_lexer.Current != escapeChar)
 								{
-									position++;
+									characterHolder.Append(_lexer.Current);
+								};
+
+								if (!_lexer.EOF)
+								{
+									characterHolder.Append(_lexer.Current);
 								}
-							} while (
-								position < definition.Length &&
-								definition[position] == escapeChar);
+
+								stillEscaped = _lexer.Read() && _lexer.Current == escapeChar;
+								if (stillEscaped)
+								{
+									characterHolder.Append(_lexer.Current);
+								}
+                            } while (stillEscaped);
 
 							break;
 						}
@@ -497,9 +316,9 @@ namespace TSQL
 
 							while (
 								!foundEnd &&
-								++position < definition.Length)
+								_lexer.Read())
 							{
-								switch (definition[position])
+								switch (_lexer.Current)
 								{
 									// running into a special character signals the end of a previous grouping of normal characters
 									case ' ':
@@ -529,7 +348,7 @@ namespace TSQL
 										}
 									default:
 										{
-
+											characterHolder.Append(_lexer.Current);
 
 											break;
 										}
@@ -544,9 +363,9 @@ namespace TSQL
 
 							while (
 								!foundEnd &&
-								++position < definition.Length)
+								_lexer.Read())
 							{
-								switch (definition[position])
+								switch (_lexer.Current)
 								{
 									// running into a special character signals the end of a previous grouping of normal characters
 									case ' ':
@@ -579,7 +398,7 @@ namespace TSQL
 										}
 									default:
 										{
-
+											characterHolder.Append(_lexer.Current);
 
 											break;
 										}
@@ -591,8 +410,151 @@ namespace TSQL
 				}
 			}
 
-			// returning the last position of the token
-			return position - 1;
+			_current = DetermineTokenType(
+				characterHolder.ToString(), 
+				startPosition, 
+				startPosition + characterHolder.Length - 1);
+		}
+
+		private TSQLToken DetermineTokenType(
+			string tokenValue, 
+			int startPosition, 
+			int endPosition)
+		{
+			if (tokenValue.StartsWith("--"))
+			{
+				return
+					new TSQLSingleLineComment(
+						startPosition,
+						tokenValue);
+			}
+			else if (tokenValue.StartsWith("/*"))
+			{
+				return
+					new TSQLMultilineComment(
+						startPosition,
+						tokenValue);
+			}
+			else if (
+				tokenValue.StartsWith("\'") ||
+				tokenValue.StartsWith("N\'") ||
+				(
+					!UseQuotedIdentifiers &&
+					(
+						tokenValue.StartsWith("\"") ||
+						tokenValue.StartsWith("N\"")
+					)
+				))
+			{
+				return
+					new TSQLStringLiteral(
+						startPosition,
+						tokenValue);
+			}
+			else if (
+				tokenValue[0] == '0' ||
+				tokenValue[0] == '1' ||
+				tokenValue[0] == '2' ||
+				tokenValue[0] == '3' ||
+				tokenValue[0] == '4' ||
+				tokenValue[0] == '5' ||
+				tokenValue[0] == '6' ||
+				tokenValue[0] == '7' ||
+				tokenValue[0] == '8' ||
+				tokenValue[0] == '9' ||
+				tokenValue[0] == '$')
+			{
+				return
+					new TSQLNumericLiteral(
+						startPosition,
+						tokenValue);
+			}
+			else if (
+				tokenValue[0] == '=' ||
+				tokenValue[0] == '~' ||
+				tokenValue[0] == '-' ||
+				tokenValue[0] == '+' ||
+				tokenValue[0] == '*' ||
+				tokenValue[0] == '/' ||
+				tokenValue[0] == '<' ||
+				tokenValue[0] == '>' ||
+				tokenValue[0] == '!' ||
+				tokenValue[0] == '&' ||
+				tokenValue[0] == '|' ||
+				tokenValue[0] == '^' ||
+				tokenValue[0] == '%' ||
+				tokenValue[0] == ':')
+			{
+				return
+					new TSQLOperator(
+						startPosition,
+						tokenValue);
+			}
+			else if (TSQLCharacters.IsCharacter(tokenValue))
+			{
+				return
+					new TSQLCharacter(
+						startPosition,
+						tokenValue);
+			}
+			else if (TSQLKeywords.IsKeyword(tokenValue))
+			{
+				return
+					new TSQLKeyword(
+						startPosition,
+						tokenValue);
+			}
+			else if (
+				tokenValue[0] == ' ' ||
+				tokenValue[0] == '\t' ||
+				tokenValue[0] == '\r' ||
+				tokenValue[0] == '\n')
+			{
+				return
+					new TSQLWhitespace(
+						startPosition,
+						tokenValue);
+			}
+			else
+			{
+				return
+					new TSQLIdentifier(
+						startPosition,
+						tokenValue);
+			}
+		}
+
+		public TSQLToken Current
+		{
+			get
+			{
+				CheckDisposed();
+				return _current;
+			}
+		}
+
+		public TSQLToken Next()
+		{
+			if (Read())
+			{
+				return Current;
+			}
+			else
+			{
+				return null;
+			}
+		}
+
+		public static List<TSQLToken> ParseTokens(
+			string definition,
+			bool useQuotedIdentifiers = false,
+			bool includeWhitespace = false)
+		{
+			return new TSQLTokenizer(new StringReader(definition))
+			{
+				UseQuotedIdentifiers = useQuotedIdentifiers,
+				IncludeWhitespace = includeWhitespace
+			}.ToList();
 		}
 	}
 }

@@ -10,11 +10,9 @@ namespace TSQL.Tokens
 	{
 		public TSQLIdentifier(
 			int beginPostion,
-			int endPosition,
 			string text) :
 			base(
 				beginPostion,
-				endPosition,
 				text)
 		{
 			if (Text.StartsWith("["))

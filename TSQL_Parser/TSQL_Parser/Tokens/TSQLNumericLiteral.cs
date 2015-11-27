@@ -10,11 +10,9 @@ namespace TSQL.Tokens
 	{
 		public TSQLNumericLiteral(
 			int beginPostion,
-			int endPosition,
 			string text) :
 			base(
 				beginPostion,
-				endPosition,
 				text)
 		{
 

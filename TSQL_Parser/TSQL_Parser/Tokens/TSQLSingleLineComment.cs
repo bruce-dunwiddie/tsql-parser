@@ -10,11 +10,9 @@ namespace TSQL.Tokens
 	{
 		public TSQLSingleLineComment(
 			int beginPostion,
-			int endPosition,
 			string text) :
 			base(
 				beginPostion,
-				endPosition,
 				text)
 		{
 			Comment = Text.Substring(2);

@@ -10,11 +10,9 @@ namespace TSQL.Tokens
 	{
 		public TSQLOperator(
 			int beginPostion,
-			int endPosition,
 			string text) :
 			base(
 				beginPostion,
-				endPosition,
 				text)
 		{
 

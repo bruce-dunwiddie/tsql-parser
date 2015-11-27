@@ -10,11 +10,9 @@ namespace TSQL.Tokens
 	{
 		public TSQLCharacter(
 			int beginPostion,
-			int endPosition,
 			string text) :
 			base(
 				beginPostion,
-				endPosition,
 				text)
 		{
 			Character = TSQLCharacters.Parse(text);

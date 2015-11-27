@@ -5,6 +5,13 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSQL_Parser", "TSQL_Parser\TSQL_Parser.csproj", "{2E85041A-D8FE-452B-831E-8DEF3CFC4A17}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{E8E59503-18E4-4990-AFDF-07994F068F48}"
+EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "SandcastleDocs", "SandcastleDocs\SandcastleDocs.shfbproj", "{8D47C966-333B-4349-AC54-8F935E215F40}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2E85041A-D8FE-452B-831E-8DEF3CFC4A17} = {2E85041A-D8FE-452B-831E-8DEF3CFC4A17}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +22,13 @@ Global
 		{2E85041A-D8FE-452B-831E-8DEF3CFC4A17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E85041A-D8FE-452B-831E-8DEF3CFC4A17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E85041A-D8FE-452B-831E-8DEF3CFC4A17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8E59503-18E4-4990-AFDF-07994F068F48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8E59503-18E4-4990-AFDF-07994F068F48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8E59503-18E4-4990-AFDF-07994F068F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8E59503-18E4-4990-AFDF-07994F068F48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D47C966-333B-4349-AC54-8F935E215F40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D47C966-333B-4349-AC54-8F935E215F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D47C966-333B-4349-AC54-8F935E215F40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

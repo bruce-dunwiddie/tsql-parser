@@ -10,11 +10,9 @@ namespace TSQL.Tokens
 	{
 		public TSQLStringLiteral(
 			int beginPostion,
-			int endPosition,
 			string text) :
 			base(
 				beginPostion,
-				endPosition,
 				text)
 		{
 			// need to find unescaped value insides quote characters
