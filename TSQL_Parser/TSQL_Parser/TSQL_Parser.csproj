@@ -64,6 +64,9 @@
       <DependentUpon>TSQLLexer.cs</DependentUpon>
     </Compile>
     <Compile Include="TSQLTokenizer.cs" />
+    <Compile Include="TSQLTokenizer.BufferedTextReader.cs">
+			<DependentUpon>TSQLTokenizer.cs</DependentUpon>
+		</Compile>
     <Compile Include="TSQLTokenizer.IDisposable.cs">
       <DependentUpon>TSQLTokenizer.cs</DependentUpon>
     </Compile>

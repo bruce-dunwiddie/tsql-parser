@@ -10,14 +10,16 @@ namespace TSQL
 {
 	public partial class TSQLTokenizer
 	{
-		private TextReader _inputStream = null;
+		private BufferedTextReader _inputStream = null;
 		private bool hasMore = true;
 		private bool hasExtra = false;
 		private char extraChar;
 
 		public TSQLTokenizer(TextReader inputStream)
 		{
-			_inputStream = inputStream;
+			// can't take the risk that the passed in stream is not buffered
+			// because of the high call number of Read
+			_inputStream = new BufferedTextReader(inputStream);
 			Position = -1;
 		}
 
