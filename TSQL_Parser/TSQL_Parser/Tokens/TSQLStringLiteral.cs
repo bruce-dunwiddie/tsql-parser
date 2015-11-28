@@ -22,7 +22,7 @@ namespace TSQL.Tokens
 
 			// if this is a unicode string it will begin with N
 			int quotePosition = 0;
-			int length = Text.Length - 2;
+			int length = text.Length - 2;
 			if (text[0] == 'N')
 			{
 				quotePosition++;
@@ -38,7 +38,7 @@ namespace TSQL.Tokens
 			QuoteCharacter = text[quotePosition];
 
 			// now unescape doubled up quote characters
-			Value = Text.Substring(quotePosition, length)
+			Value = text.Substring(quotePosition + 1, length)
 				.Replace(new string(QuoteCharacter, 2), QuoteCharacter.ToString());
 		}
 

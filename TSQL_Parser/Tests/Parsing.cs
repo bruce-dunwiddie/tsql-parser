@@ -8,7 +8,7 @@ using NUnit.Framework;
 using TSQL;
 using TSQL.Tokens;
 
-using Tests.TokenParsing;
+using Tests.Tokens;
 
 namespace Tests
 {
@@ -92,6 +92,16 @@ namespace Tests
 						new TSQLWhitespace(286, " "),
 						new TSQLIdentifier(287, "[dbo]"),
 						new TSQLCharacter(292, "."),
+						new TSQLIdentifier(293, "[uspSearchCandidateResumes]"),
+						new TSQLWhitespace(320, "\r\n    "),
+						new TSQLIdentifier(326, "@searchString"),
+						new TSQLWhitespace(339, " "),
+						new TSQLIdentifier(340, "[nvarchar]"),
+						new TSQLCharacter(350, "("),
+						new TSQLNumericLiteral(351, "1000"),
+						new TSQLCharacter(355, ")"),
+						new TSQLCharacter(356, ","),
+						new TSQLWhitespace(357, "   \r\n    "),
 					};
         }
 

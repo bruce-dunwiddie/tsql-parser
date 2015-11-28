@@ -9,7 +9,7 @@ using NUnit.Framework;
 using TSQL;
 using TSQL.Tokens;
 
-namespace Tests.TokenParsing
+namespace Tests.Tokens
 {
 	public static class TokenComparisons
 	{

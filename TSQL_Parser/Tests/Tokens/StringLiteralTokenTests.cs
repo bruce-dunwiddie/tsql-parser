@@ -9,7 +9,7 @@ using NUnit.Framework;
 using TSQL;
 using TSQL.Tokens;
 
-namespace Tests.TokenParsing
+namespace Tests.Tokens
 {
 	[TestFixture(Category = "Token Parsing")]
 	public class StringLiteralTokenTests
@@ -90,6 +90,42 @@ namespace Tests.TokenParsing
 						new TSQLWhitespace(7, " ")
 					},
 				tokens);
+		}
+
+		[Test]
+		public void StringLiteralToken_SingleQuoteValue()
+		{
+			TSQLStringLiteral token = new TSQLStringLiteral(0, "'name'");
+			Assert.AreEqual("name", token.Value);
+			Assert.AreEqual('\'', token.QuoteCharacter);
+			Assert.IsFalse(token.IsUnicode);
+		}
+
+		[Test]
+		public void StringLiteralToken_SingleQuoteUnicodeValue()
+		{
+			TSQLStringLiteral token = new TSQLStringLiteral(0, "N'name'");
+			Assert.AreEqual("name", token.Value);
+			Assert.AreEqual('\'', token.QuoteCharacter);
+			Assert.IsTrue(token.IsUnicode);
+		}
+
+		[Test]
+		public void StringLiteralToken_DoubleQuoteValue()
+		{
+			TSQLStringLiteral token = new TSQLStringLiteral(0, "\"name\"");
+			Assert.AreEqual("name", token.Value);
+			Assert.AreEqual('\"', token.QuoteCharacter);
+			Assert.IsFalse(token.IsUnicode);
+		}
+
+		[Test]
+		public void StringLiteralToken_DoubleQuoteUnicodeValue()
+		{
+			TSQLStringLiteral token = new TSQLStringLiteral(0, "N\"name\"");
+			Assert.AreEqual("name", token.Value);
+			Assert.AreEqual('\"', token.QuoteCharacter);
+			Assert.IsTrue(token.IsUnicode);
 		}
 	}
 }

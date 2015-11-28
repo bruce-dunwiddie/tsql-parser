@@ -76,7 +76,7 @@ namespace TSQL
 			TSQLCharacters b)
 		{
 			return
-				(object)a != null &&
+				(object)a == null ||
 				!a.Equals(b);
 		}
 

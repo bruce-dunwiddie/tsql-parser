@@ -9,7 +9,7 @@ using NUnit.Framework;
 using TSQL;
 using TSQL.Tokens;
 
-namespace Tests.TokenParsing
+namespace Tests.Tokens
 {
 	[TestFixture(Category = "Token Parsing")]
 	public class SingleLineCommentTokenTests
@@ -38,6 +38,13 @@ namespace Tests.TokenParsing
 						new TSQLWhitespace(6, "\n")
 					},
 				tokens);
+		}
+
+		[Test]
+		public void MultilineCommentToken_Comment()
+		{
+			TSQLSingleLineComment token = new TSQLSingleLineComment(0, "-- blah");
+			Assert.AreEqual(" blah", token.Comment);
 		}
 	}
 }

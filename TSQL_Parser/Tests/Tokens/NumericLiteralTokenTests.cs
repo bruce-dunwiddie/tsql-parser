@@ -9,10 +9,10 @@ using NUnit.Framework;
 using TSQL;
 using TSQL.Tokens;
 
-namespace Tests.TokenParsing
+namespace Tests.Tokens
 {
 	[TestFixture(Category = "Token Parsing")]
-	class NumericLiteralTokenTests
+	public class NumericLiteralTokenTests
 	{
 	}
 }
