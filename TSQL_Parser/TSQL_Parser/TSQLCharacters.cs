@@ -66,24 +66,35 @@ namespace TSQL
 			TSQLCharacters a,
 			TSQLCharacters b)
 		{
-			return a.Equals(b);
+			return
+				(object)a != null &&
+				a.Equals(b);
 		}
 
 		public static bool operator !=(
 			TSQLCharacters a,
 			TSQLCharacters b)
 		{
-			return !a.Equals(b);
+			return
+				(object)a != null &&
+				!a.Equals(b);
 		}
 
 		public bool Equals(TSQLCharacters obj)
 		{
-			return Token == obj.Token;
+			return
+				(
+					ReferenceEquals(this, obj)
+				) ||
+				(
+					(object)obj != null &&
+					Token == obj.Token
+				);
 		}
 
 		public override bool Equals(object obj)
 		{
-			return base.Equals(obj);
+			return Equals(obj as TSQLCharacters);
 		}
 
 		public override int GetHashCode()

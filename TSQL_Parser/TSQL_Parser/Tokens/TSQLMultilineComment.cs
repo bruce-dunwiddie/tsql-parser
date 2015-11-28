@@ -13,7 +13,8 @@ namespace TSQL.Tokens
 			string text) :
 			base(
 				beginPostion,
-				text)
+				text,
+				TokenType.MultilineComment)
 		{
 			Comment = Text.Substring(2, Text.Length - 4);
 		}

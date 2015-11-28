@@ -51,6 +51,12 @@
     <Compile Include="Parsing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TokenEquality.cs" />
+    <Compile Include="TokenParsing\IdentifierTokenTests.cs" />
+    <Compile Include="TokenParsing\MultilineCommentTokenTests.cs" />
+    <Compile Include="TokenParsing\NumericLiteralTokenTests.cs" />
+    <Compile Include="TokenParsing\SingleLineCommentTokenTests.cs" />
+    <Compile Include="TokenParsing\StringLiteralTokenTests.cs" />
+    <Compile Include="TokenParsing\TokenComparisons.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TSQL_Parser\TSQL_Parser.csproj">

@@ -13,7 +13,8 @@ namespace TSQL.Tokens
 			string text) :
 			base(
 				beginPostion,
-				text)
+				text,
+				TokenType.StringLiteral)
 		{
 			// need to find unescaped value insides quote characters
 

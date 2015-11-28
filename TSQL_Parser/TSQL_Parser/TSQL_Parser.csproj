@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tokens\TokenType.cs" />
     <Compile Include="Tokens\TSQLCharacter.cs" />
     <Compile Include="Tokens\TSQLComment.cs" />
     <Compile Include="Tokens\TSQLIdentifier.cs" />
@@ -57,13 +58,13 @@
     <Compile Include="TSQLKeywords.cs" />
     <Compile Include="TSQLLexer.cs" />
     <Compile Include="TSQLLexer.IDisposable.cs">
-			<DependentUpon>TSQLLexer.cs</DependentUpon>
-		</Compile>
+      <DependentUpon>TSQLLexer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TSQLLexer.IEnumerable.cs">
+      <DependentUpon>TSQLLexer.cs</DependentUpon>
+    </Compile>
     <Compile Include="TSQLTokenizer.cs" />
     <Compile Include="TSQLTokenizer.IDisposable.cs">
-      <DependentUpon>TSQLTokenizer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TSQLTokenizer.IEnumerable.cs">
       <DependentUpon>TSQLTokenizer.cs</DependentUpon>
     </Compile>
   </ItemGroup>

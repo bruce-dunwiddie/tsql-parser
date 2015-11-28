@@ -13,7 +13,8 @@ namespace TSQL.Tokens
 			string text) :
 			base(
 				beginPostion,
-				text)
+				text,
+				TokenType.Identifier)
 		{
 			if (Text.StartsWith("["))
 			{
@@ -26,6 +27,12 @@ namespace TSQL.Tokens
 			{
 				Name = Text
 					.Substring(1, Text.Length - 2)
+					.Replace("\"\"", "\"");
+			}
+			else if (Text.StartsWith("N\""))
+			{
+				Name = Text
+					.Substring(2, Text.Length - 3)
 					.Replace("\"\"", "\"");
 			}
 			else

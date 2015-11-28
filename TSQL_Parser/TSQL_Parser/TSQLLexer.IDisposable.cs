@@ -41,15 +41,32 @@ namespace TSQL
 				// unmanaged resource releases
 				try
 				{
-					(_inputStream as IDisposable).Dispose();
+					(_tokenizer as IDisposable).Dispose();
 				}
 				catch (Exception)
 				{
 					// can't handle Dispose throwing exceptions
 				}
-				_inputStream = null;
+				_tokenizer = null;
 
 				disposed = true;
+			}
+		}
+
+		/// <summary>
+		///		Checks to see if object has already been disposed, which
+		///		would make calling methods on the object invalid.
+		/// </summary>
+		/// <exception cref="ObjectDisposedException">
+		///		Methods were called after the object has been disposed.
+		/// </exception>
+		private void CheckDisposed()
+		{
+			if (disposed)
+			{
+				throw new ObjectDisposedException(GetType().FullName, "This object has been previously disposed." +
+					" Methods on this object can no longer" +
+					" be called.");
 			}
 		}
 

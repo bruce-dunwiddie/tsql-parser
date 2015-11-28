@@ -8,52 +8,18 @@ using NUnit.Framework;
 using TSQL;
 using TSQL.Tokens;
 
+using Tests.TokenParsing;
+
 namespace Tests
 {
-	[TestFixture]
+	[TestFixture(Category = "Expression Parsing")]
 	public class Parsing
 	{
 		[Test]
-		public void Parse_SimpleBracketedIdentifier()
-		{
-			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("[a]");
-			CompareTokenLists(
-				new List<TSQLToken>()
-					{
-						new TSQLIdentifier(0, "[a]")
-					},
-				tokens);
-		}
-
-		[Test]
-		public void Parse_EscapedBracketedIdentifier1()
-		{
-			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("[a]]]");
-			CompareTokenLists(
-				new List<TSQLToken>()
-					{
-						new TSQLIdentifier(0, "[a]]]")
-					},
-				tokens);
-		}
-
-		[Test]
-		public void Parse_EscapedBracketedIdentifier2()
-		{
-			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("[a]]a]");
-			CompareTokenLists(
-				new List<TSQLToken>()
-					{
-						new TSQLIdentifier(0, "[a]]a]")
-					},
-				tokens);
-		}
-
-		[Test]
 		public void Parse_GO()
 		{
-			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("GO");
-			CompareTokenLists(
+			List<TSQLToken> tokens = TSQLLexer.ParseTokens("GO");
+			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
 						new TSQLKeyword(0, "GO")
@@ -65,68 +31,82 @@ namespace Tests
 		public void Parse_GOFromStream()
 		{
 			using (TextReader reader = new StringReader("GO"))
-			using (TSQLTokenizer tokenizer = new TSQLTokenizer(reader))
+			using (TSQLLexer lexer = new TSQLLexer(reader))
 			{
-				CompareStreamToList(
+				TokenComparisons.CompareStreamToList(
 					new List<TSQLToken>()
 						{
 							new TSQLKeyword(0, "GO")
 						},
-						tokenizer);
+						lexer);
 			}
 		}
+
+		[Test]
+		public void Parse_uspSearchCandidateResumes_NoWhitespace()
+		{
+			using (StreamReader reader = new StreamReader("./Scripts/AdventureWorks2014.dbo.uspSearchCandidateResumes.sql"))
+			using (TSQLLexer lexer = new TSQLLexer(reader))
+			{
+				TokenComparisons.CompareStreamStartToList(
+					GetuspSearchCandidateResumesTokens()
+						.Where(t => !(t is TSQLWhitespace)).ToList(),
+					lexer);
+			}
+		}
+
+		private List<TSQLToken> GetuspSearchCandidateResumesTokens()
+		{
+			return 
+				new List<TSQLToken>()
+					{
+						new TSQLKeyword(0, "USE"),
+						new TSQLWhitespace(3, " "),
+						new TSQLIdentifier(4, "[AdventureWorks2014]"),
+						new TSQLWhitespace(24, "\r\n"),
+						new TSQLKeyword(26, "GO"),
+						new TSQLWhitespace(28, "\r\n"),
+						new TSQLMultilineComment(30 , "/****** Object:  StoredProcedure [dbo].[uspSearchCandidateResumes]    Script Date: 11/26/2015 9:21:50 PM ******/"),
+						new TSQLWhitespace(142, "\r\n"),
+						new TSQLKeyword(144, "SET"),
+						new TSQLWhitespace(147, " "),
+						new TSQLIdentifier(148, "ANSI_NULLS"),
+						new TSQLWhitespace(158, " "),
+						new TSQLKeyword(159, "ON"),
+                        new TSQLWhitespace(161, "\r\n"),
+						new TSQLKeyword(163, "GO"),
+						new TSQLWhitespace(165, "\r\n"),
+						new TSQLKeyword(167, "SET"),
+						new TSQLWhitespace(170, " "),
+						new TSQLIdentifier(171, "QUOTED_IDENTIFIER"),
+						new TSQLWhitespace(188, " "),
+						new TSQLKeyword(189, "ON"),
+						new TSQLWhitespace(191, "\r\n"),
+						new TSQLKeyword(193, "GO"),
+						new TSQLWhitespace(195, "\r\n\r\n"),
+						new TSQLSingleLineComment(199, "--A stored procedure which demonstrates integrated full text search"),
+						new TSQLWhitespace(266, "\r\n\r\n"),
+						new TSQLKeyword(270, "CREATE"),
+						new TSQLWhitespace(276, " "),
+						new TSQLKeyword(277, "PROCEDURE"),
+						new TSQLWhitespace(286, " "),
+						new TSQLIdentifier(287, "[dbo]"),
+						new TSQLCharacter(292, "."),
+					};
+        }
 
 		[Test]
 		public void Parse_uspSearchCandidateResumes()
 		{
 			using (StreamReader reader = new StreamReader("./Scripts/AdventureWorks2014.dbo.uspSearchCandidateResumes.sql"))
-			using (TSQLTokenizer tokenizer = new TSQLTokenizer(reader))
+			using (TSQLLexer lexer = new TSQLLexer(reader) { IncludeWhitespace = true })
 			{
-				CompareStreamStartToList(
-					new List<TSQLToken>()
-						{
-							new TSQLKeyword(0, "USE"),
-							new TSQLIdentifier(4, "[AdventureWorks2014]"),
-							new TSQLKeyword(26, "GO")
-						},
-						tokenizer);
+				TokenComparisons.CompareStreamStartToList(
+					GetuspSearchCandidateResumesTokens(),
+					lexer);
 			}
 		}
 
-		private void CompareStreamStartToList(List<TSQLToken> expected, TSQLTokenizer tokenizer)
-		{
-			CompareTokenListStart(expected, tokenizer.ToList());
-		}
 
-		private void CompareTokenListStart(List<TSQLToken> expected, List<TSQLToken> actual)
-		{
-			Assert.AreEqual(expected == null, actual == null);
-			if (expected != null && actual != null)
-			{
-				Assert.IsTrue(actual.Count >= expected.Count);
-				for (int index = 0; index < expected.Count; index++)
-				{
-					Assert.AreEqual(expected[index], actual[index]);
-				}
-			}
-		}
-
-		private void CompareStreamToList(List<TSQLToken> expected, TSQLTokenizer tokenizer)
-		{
-			CompareTokenLists(expected, tokenizer.ToList());
-		}
-
-		private void CompareTokenLists(List<TSQLToken> expected, List<TSQLToken> actual)
-		{
-			Assert.AreEqual(expected == null, actual == null);
-			if (expected != null && actual != null)
-			{
-				Assert.AreEqual(expected.Count, actual.Count);
-				for (int index = 0; index < expected.Count; index++)
-				{
-					Assert.AreEqual(expected[index], actual[index]);
-				}
-			}
-		}
 	}
 }

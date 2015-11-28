@@ -10,7 +10,9 @@ namespace TSQL.Tokens
 	{
 		protected TSQLToken(
 			int beginPostion,
-			string text)
+			string text,
+			TokenType type
+			)
 		{
 			BeginPostion = beginPostion;
 			if (text == null)
@@ -18,6 +20,7 @@ namespace TSQL.Tokens
 				throw new ArgumentNullException("text");
 			}
 			Text = text;
+			Type = type;
 		}
 
 		public int BeginPostion
@@ -43,6 +46,12 @@ namespace TSQL.Tokens
 		}
 
 		public string Text
+		{
+			get;
+			private set;
+		}
+
+		public TokenType Type
 		{
 			get;
 			private set;
@@ -74,10 +83,10 @@ namespace TSQL.Tokens
 				) ||
 				(
 					(object) obj != null &&
-					GetType() == obj.GetType() &&
 					BeginPostion == obj.BeginPostion &&
 					EndPosition == obj.EndPosition &&
-					Text == obj.Text
+					Text == obj.Text &&
+					GetType() == obj.GetType()
 				);
 		}
 
@@ -94,6 +103,7 @@ namespace TSQL.Tokens
 				int hash = 17;
 				hash = hash * 486187739 + BeginPostion.GetHashCode();
 				hash = hash * 486187739 + Text.GetHashCode();
+				hash = hash * 486187739 + Type.GetHashCode();
 				return hash;
 			}
 		}
