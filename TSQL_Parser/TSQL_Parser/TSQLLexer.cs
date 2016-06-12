@@ -477,7 +477,14 @@ namespace TSQL
 			int startPosition,
 			int endPosition)
 		{
-			if (tokenValue.StartsWith("--"))
+			if (tokenValue.StartsWith("@"))
+			{
+				return
+					new TSQLVariable(
+						startPosition,
+						tokenValue);
+			}
+			else if (tokenValue.StartsWith("--"))
 			{
 				return
 					new TSQLSingleLineComment(

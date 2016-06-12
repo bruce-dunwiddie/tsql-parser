@@ -53,6 +53,7 @@
     <Compile Include="Tokens\TSQLSingleLineComment.cs" />
     <Compile Include="Tokens\TSQLStringLiteral.cs" />
     <Compile Include="Tokens\TSQLToken.cs" />
+    <Compile Include="Tokens\TSQLVariable.cs" />
     <Compile Include="Tokens\TSQLWhitespace.cs" />
     <Compile Include="TSQLCharacters.cs" />
     <Compile Include="TSQLKeywords.cs" />
@@ -65,8 +66,8 @@
     </Compile>
     <Compile Include="TSQLTokenizer.cs" />
     <Compile Include="TSQLTokenizer.BufferedTextReader.cs">
-			<DependentUpon>TSQLTokenizer.cs</DependentUpon>
-		</Compile>
+      <DependentUpon>TSQLTokenizer.cs</DependentUpon>
+    </Compile>
     <Compile Include="TSQLTokenizer.IDisposable.cs">
       <DependentUpon>TSQLTokenizer.cs</DependentUpon>
     </Compile>

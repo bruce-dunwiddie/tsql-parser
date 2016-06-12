@@ -94,7 +94,7 @@ namespace Tests
 						new TSQLCharacter(292, "."),
 						new TSQLIdentifier(293, "[uspSearchCandidateResumes]"),
 						new TSQLWhitespace(320, "\r\n    "),
-						new TSQLIdentifier(326, "@searchString"),
+						new TSQLVariable(326, "@searchString"),
 						new TSQLWhitespace(339, " "),
 						new TSQLIdentifier(340, "[nvarchar]"),
 						new TSQLCharacter(350, "("),

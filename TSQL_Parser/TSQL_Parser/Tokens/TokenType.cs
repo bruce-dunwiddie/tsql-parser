@@ -16,6 +16,7 @@ namespace TSQL.Tokens
 		Operator,
 		SingleLineComment,
 		StringLiteral,
-		Whitespace
+		Whitespace,
+		Variable
 	}
 }
