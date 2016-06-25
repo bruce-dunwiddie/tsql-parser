@@ -10,13 +10,13 @@ namespace TSQL
 {
 	public partial class TSQLLexer
 	{
-		private TSQLTokenizer _tokenizer = null;
+		private TSQLCharacterReader _tokenizer = null;
 		private TSQLToken _current = null;
 
 		public TSQLLexer(
 			TextReader inputStream)
 		{
-			_tokenizer = new TSQLTokenizer(inputStream);
+			_tokenizer = new TSQLCharacterReader(inputStream);
 		}
 
 		public bool UseQuotedIdentifiers { get; set; }

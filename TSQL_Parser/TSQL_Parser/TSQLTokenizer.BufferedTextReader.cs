@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TSQL
 {
-	public partial class TSQLTokenizer
+	public partial class TSQLCharacterReader
 	{
 		private class BufferedTextReader : IDisposable
 		{
