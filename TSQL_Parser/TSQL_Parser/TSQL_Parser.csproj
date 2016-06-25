@@ -58,19 +58,11 @@
     <Compile Include="TSQLCharacters.cs" />
     <Compile Include="TSQLKeywords.cs" />
     <Compile Include="TSQLLexer.cs" />
-    <Compile Include="TSQLLexer.IDisposable.cs">
-      <DependentUpon>TSQLLexer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TSQLLexer.IEnumerable.cs">
-      <DependentUpon>TSQLLexer.cs</DependentUpon>
-    </Compile>
+    <Compile Include="TSQLLexer.IDisposable.cs" />
+    <Compile Include="TSQLLexer.IEnumerable.cs" />
     <Compile Include="TSQLCharacterReader.cs" />
-    <Compile Include="TSQLTokenizer.BufferedTextReader.cs">
-      <DependentUpon>TSQLCharacterReader.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TSQLTokenizer.IDisposable.cs">
-      <DependentUpon>TSQLCharacterReader.cs</DependentUpon>
-    </Compile>
+    <Compile Include="TSQLCharacterReader.BufferedTextReader.cs" />
+    <Compile Include="TSQLCharacterReader.IDisposable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
