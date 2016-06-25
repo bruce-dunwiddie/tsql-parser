@@ -10,7 +10,7 @@ namespace TSQL
 {
 	public partial class TSQLCharacterReader
 	{
-		private BufferedTextReader _inputStream = null;
+		private ICharacterReader _inputStream = null;
 		private bool hasMore = true;
 		private bool hasExtra = false;
 		private char extraChar;

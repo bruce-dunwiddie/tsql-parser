@@ -9,7 +9,7 @@ namespace TSQL
 {
 	public partial class TSQLCharacterReader
 	{
-		private class BufferedTextReader : IDisposable
+		private class BufferedTextReader : ICharacterReader
 		{
 			private TextReader _inputStream = null;
 			private char[] buffer = new char[1024];
