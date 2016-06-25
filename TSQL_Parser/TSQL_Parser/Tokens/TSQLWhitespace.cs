@@ -14,7 +14,7 @@ namespace TSQL.Tokens
 			base(
 				beginPostion,
 				text,
-				TokenType.Whitespace)
+				TSQLTokenType.Whitespace)
 		{
 
 		}

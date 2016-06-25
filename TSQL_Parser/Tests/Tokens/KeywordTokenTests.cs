@@ -17,7 +17,7 @@ namespace Tests.Tokens
 		[Test]
 		public void KeywordToken_SimpleKeyword()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("GO ", includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("GO ", includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -30,7 +30,7 @@ namespace Tests.Tokens
 		[Test]
 		public void KeywordToken_SimpleKeywordLowercase()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("go ", includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("go ", includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{

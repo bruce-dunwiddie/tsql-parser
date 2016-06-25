@@ -11,7 +11,7 @@ namespace TSQL.Tokens
 		protected TSQLLiteral(
 			int beginPostion,
 			string text,
-			TokenType type) :
+			TSQLTokenType type) :
 			base(
 				beginPostion,
 				text,

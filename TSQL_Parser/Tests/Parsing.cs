@@ -18,7 +18,7 @@ namespace Tests
 		[Test]
 		public void Parse_GO()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("GO");
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("GO");
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -31,7 +31,7 @@ namespace Tests
 		public void Parse_GOFromStream()
 		{
 			using (TextReader reader = new StringReader("GO"))
-			using (TSQLLexer lexer = new TSQLLexer(reader))
+			using (TSQLTokenizer lexer = new TSQLTokenizer(reader))
 			{
 				TokenComparisons.CompareStreamToList(
 					new List<TSQLToken>()
@@ -46,7 +46,7 @@ namespace Tests
 		public void Parse_uspSearchCandidateResumes_NoWhitespace()
 		{
 			using (StreamReader reader = new StreamReader("./Scripts/AdventureWorks2014.dbo.uspSearchCandidateResumes.sql"))
-			using (TSQLLexer lexer = new TSQLLexer(reader))
+			using (TSQLTokenizer lexer = new TSQLTokenizer(reader))
 			{
 				TokenComparisons.CompareStreamStartToList(
 					GetuspSearchCandidateResumesTokens()
@@ -109,7 +109,7 @@ namespace Tests
 		public void Parse_uspSearchCandidateResumes()
 		{
 			using (StreamReader reader = new StreamReader("./Scripts/AdventureWorks2014.dbo.uspSearchCandidateResumes.sql"))
-			using (TSQLLexer lexer = new TSQLLexer(reader) { IncludeWhitespace = true })
+			using (TSQLTokenizer lexer = new TSQLTokenizer(reader) { IncludeWhitespace = true })
 			{
 				TokenComparisons.CompareStreamStartToList(
 					GetuspSearchCandidateResumesTokens(),

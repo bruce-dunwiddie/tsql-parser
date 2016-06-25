@@ -14,7 +14,7 @@ namespace TSQL.Tokens
 			base(
 				beginPostion,
 				text,
-				TokenType.Character)
+				TSQLTokenType.Character)
 		{
 			Character = TSQLCharacters.Parse(text);
 		}

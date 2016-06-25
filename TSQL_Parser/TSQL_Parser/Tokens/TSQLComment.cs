@@ -11,7 +11,7 @@ namespace TSQL.Tokens
 		public TSQLComment(
 			int beginPostion,
 			string text,
-			TokenType type) :
+			TSQLTokenType type) :
 			base(
 				beginPostion,
 				text,

@@ -17,7 +17,7 @@ namespace Tests.Tokens
 		[Test]
 		public void MultilineCommentToken_Simple()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("/* blah */ ", useQuotedIdentifiers: false, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("/* blah */ ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -30,7 +30,7 @@ namespace Tests.Tokens
 		[Test]
 		public void MultilineCommentToken_MultiParens()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("/* blah **/ ", useQuotedIdentifiers: false, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("/* blah **/ ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -43,7 +43,7 @@ namespace Tests.Tokens
 		[Test]
 		public void MultilineCommentToken_SpanLines()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("/* blah\r\nblah */ ", useQuotedIdentifiers: false, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("/* blah\r\nblah */ ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{

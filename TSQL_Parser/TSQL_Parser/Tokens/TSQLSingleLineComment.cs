@@ -14,7 +14,7 @@ namespace TSQL.Tokens
 			base(
 				beginPostion,
 				text,
-				TokenType.SingleLineComment)
+				TSQLTokenType.SingleLineComment)
 		{
 			Comment = Text.Substring(2);
 		}

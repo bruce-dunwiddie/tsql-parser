@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TSQL.Tokens
 {
-	public enum TokenType
+	public enum TSQLTokenType
 	{
 		Character,
 		Identifier,

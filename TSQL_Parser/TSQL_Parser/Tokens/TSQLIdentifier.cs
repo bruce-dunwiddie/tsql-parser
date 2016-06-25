@@ -14,7 +14,7 @@ namespace TSQL.Tokens
 			base(
 				beginPostion,
 				text,
-				TokenType.Identifier)
+				TSQLTokenType.Identifier)
 		{
 			if (Text.StartsWith("["))
 			{

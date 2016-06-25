@@ -14,7 +14,7 @@ namespace TSQL.Tokens
 			base(
 				beginPostion,
 				text,
-				TokenType.Operator)
+				TSQLTokenType.Operator)
 		{
 
 		}

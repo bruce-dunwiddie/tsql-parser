@@ -17,7 +17,7 @@ namespace Tests.Tokens
 		[Test]
 		public void CharacterToken_Period()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens(". ", includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens(". ", includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{

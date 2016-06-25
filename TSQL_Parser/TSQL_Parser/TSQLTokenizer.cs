@@ -8,12 +8,12 @@ using TSQL.Tokens;
 
 namespace TSQL
 {
-	public partial class TSQLLexer
+	public partial class TSQLTokenizer
 	{
 		private TSQLCharacterReader _tokenizer = null;
 		private TSQLToken _current = null;
 
-		public TSQLLexer(
+		public TSQLTokenizer(
 			TextReader inputStream)
 		{
 			_tokenizer = new TSQLCharacterReader(inputStream);
@@ -613,7 +613,7 @@ namespace TSQL
 			bool useQuotedIdentifiers = false,
 			bool includeWhitespace = false)
 		{
-			return new TSQLLexer(new StringReader(definition))
+			return new TSQLTokenizer(new StringReader(definition))
 			{
 				UseQuotedIdentifiers = useQuotedIdentifiers,
 				IncludeWhitespace = includeWhitespace

@@ -11,7 +11,7 @@ namespace TSQL.Tokens
 		protected TSQLToken(
 			int beginPostion,
 			string text,
-			TokenType type
+			TSQLTokenType type
 			)
 		{
 			BeginPostion = beginPostion;
@@ -51,7 +51,7 @@ namespace TSQL.Tokens
 			private set;
 		}
 
-		public TokenType Type
+		public TSQLTokenType Type
 		{
 			get;
 			private set;

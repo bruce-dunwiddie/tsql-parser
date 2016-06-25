@@ -13,7 +13,7 @@ namespace Tests.Tokens
 {
 	public static class TokenComparisons
 	{
-		public static void CompareStreamStartToList(List<TSQLToken> expected, TSQLLexer lexer)
+		public static void CompareStreamStartToList(List<TSQLToken> expected, TSQLTokenizer lexer)
 		{
 			CompareTokenListStart(expected, lexer.ToList());
 		}
@@ -31,7 +31,7 @@ namespace Tests.Tokens
 			}
 		}
 
-		public static void CompareStreamToList(List<TSQLToken> expected, TSQLLexer lexer)
+		public static void CompareStreamToList(List<TSQLToken> expected, TSQLTokenizer lexer)
 		{
 			CompareTokenLists(expected, lexer.ToList());
 		}

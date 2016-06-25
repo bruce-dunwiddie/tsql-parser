@@ -10,7 +10,7 @@ namespace TSQL.Tokens
 			base(
 				beginPostion,
 				text,
-				TokenType.Variable)
+				TSQLTokenType.Variable)
 		{
 			
 		}
