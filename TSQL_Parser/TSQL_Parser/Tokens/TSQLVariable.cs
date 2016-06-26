@@ -9,10 +9,17 @@ namespace TSQL.Tokens
 			string text) :
 			base(
 				beginPostion,
-				text,
-				TSQLTokenType.Variable)
+				text)
 		{
-			
+
+		}
+
+		public override TSQLTokenType Type
+		{
+			get
+			{
+				return TSQLTokenType.Variable;
+			}
 		}
 	}
 }

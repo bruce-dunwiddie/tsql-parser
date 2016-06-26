@@ -6,11 +6,11 @@ namespace TSQL
 	{
 		#region IDisposable pattern
 
-		private bool disposed = false;
+		private bool _disposed = false;
 
 		void IDisposable.Dispose()
 		{
-			if (!disposed)
+			if (!_disposed)
 			{
 				Dispose(true);
 				GC.SuppressFinalize(this);
@@ -26,7 +26,7 @@ namespace TSQL
 		/// </param>
 		private void Dispose(bool disposing)
 		{
-			if (!disposed)
+			if (!_disposed)
 			{
 				// managed resource releases
 				if (disposing)
@@ -45,7 +45,7 @@ namespace TSQL
 				}
 				_inputStream = null;
 
-				disposed = true;
+				_disposed = true;
 			}
 		}
 

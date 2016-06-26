@@ -13,8 +13,7 @@ namespace TSQL.Tokens
 			string text) :
 			base(
 				beginPostion,
-				text,
-				TSQLTokenType.StringLiteral)
+				text)
 		{
 			// need to find unescaped value insides quote characters
 
@@ -40,6 +39,14 @@ namespace TSQL.Tokens
 			// now unescape doubled up quote characters
 			Value = text.Substring(quotePosition + 1, length)
 				.Replace(new string(QuoteCharacter, 2), QuoteCharacter.ToString());
+		}
+
+		public override TSQLTokenType Type
+		{
+			get
+			{
+				return TSQLTokenType.StringLiteral;
+			}
 		}
 
 		/// <summary>

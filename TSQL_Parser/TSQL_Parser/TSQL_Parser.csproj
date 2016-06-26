@@ -41,6 +41,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Statements\Builders\ITSQLStatementBuilder.cs" />
+    <Compile Include="Statements\Builders\TSQLSelectStatementBuilder.cs" />
+    <Compile Include="Statements\TSQLSelectStatement.cs" />
+    <Compile Include="Statements\TSQLStatement.cs" />
+    <Compile Include="Statements\Builders\TSQLStatementBuilderFactory.cs" />
+    <Compile Include="Statements\TSQLStatementReader.cs" />
+    <Compile Include="Statements\TSQLStatementReader.IDisposable.cs">
+      <DependentUpon>TSQLStatementReader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Statements\TSQLStatementReader.IEnumerable.cs">
+      <DependentUpon>TSQLStatementReader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Statements\TSQLStatementType.cs" />
     <Compile Include="Tokens\TSQLTokenType.cs" />
     <Compile Include="Tokens\TSQLCharacter.cs" />
     <Compile Include="Tokens\TSQLComment.cs" />
@@ -68,13 +81,14 @@
     <Compile Include="TSQLCharacterReader.BufferedTextReader.cs">
       <DependentUpon>TSQLCharacterReader.cs</DependentUpon>
     </Compile>
-		<Compile Include="TSQLCharacterReader.ICharacterReader.cs">
-			<DependentUpon>TSQLCharacterReader.cs</DependentUpon>
-		</Compile>
+    <Compile Include="TSQLCharacterReader.ICharacterReader.cs">
+      <DependentUpon>TSQLCharacterReader.cs</DependentUpon>
+    </Compile>
     <Compile Include="TSQLCharacterReader.IDisposable.cs">
       <DependentUpon>TSQLCharacterReader.cs</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

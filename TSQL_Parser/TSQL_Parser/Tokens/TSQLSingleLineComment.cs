@@ -13,10 +13,17 @@ namespace TSQL.Tokens
 			string text) :
 			base(
 				beginPostion,
-				text,
-				TSQLTokenType.SingleLineComment)
+				text)
 		{
 			Comment = Text.Substring(2);
+		}
+
+		public override TSQLTokenType Type
+		{
+			get
+			{
+				return TSQLTokenType.SingleLineComment;
+			}
 		}
 	}
 }

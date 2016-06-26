@@ -10,9 +10,7 @@ namespace TSQL.Tokens
 	{
 		protected TSQLToken(
 			int beginPostion,
-			string text,
-			TSQLTokenType type
-			)
+			string text)
 		{
 			BeginPostion = beginPostion;
 			if (text == null)
@@ -20,7 +18,6 @@ namespace TSQL.Tokens
 				throw new ArgumentNullException("text");
 			}
 			Text = text;
-			Type = type;
 		}
 
 		public int BeginPostion
@@ -51,10 +48,9 @@ namespace TSQL.Tokens
 			private set;
 		}
 
-		public TSQLTokenType Type
+		public abstract TSQLTokenType Type
 		{
 			get;
-			private set;
 		}
 
 		public static bool operator ==(

@@ -13,10 +13,17 @@ namespace TSQL.Tokens
 			string text) :
 			base(
 				beginPostion,
-				text,
-				TSQLTokenType.Operator)
+				text)
 		{
 
+		}
+
+		public override TSQLTokenType Type
+		{
+			get
+			{
+				return TSQLTokenType.Operator;
+			}
 		}
 	}
 }

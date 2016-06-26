@@ -10,13 +10,16 @@ namespace TSQL
 {
 	public partial class TSQLTokenizer
 	{
-		private TSQLCharacterReader _tokenizer = null;
+		private TSQLCharacterReader _charReader = null;
 		private TSQLToken _current = null;
+		private bool _hasMore = true;
+		private bool _hasExtra = false;
+		private TSQLToken _extraToken;
 
 		public TSQLTokenizer(
 			TextReader inputStream)
 		{
-			_tokenizer = new TSQLCharacterReader(inputStream);
+			_charReader = new TSQLCharacterReader(inputStream);
 		}
 
 		public bool UseQuotedIdentifiers { get; set; }
@@ -27,23 +30,32 @@ namespace TSQL
 		{
 			CheckDisposed();
 
-			bool hasNext;
-
-			if (IncludeWhitespace)
+			if (_hasMore)
 			{
-				hasNext = _tokenizer.Read();
-			}
-			else
-			{
-				hasNext = _tokenizer.ReadNextNonWhitespace();
+				if (_hasExtra)
+				{
+					_current = _extraToken;
+					_hasExtra = false;
+				}
+				else
+				{
+					if (IncludeWhitespace)
+					{
+						_hasMore = _charReader.Read();
+					}
+					else
+					{
+						_hasMore = _charReader.ReadNextNonWhitespace();
+					}
+
+					if (_hasMore)
+					{
+						SetCurrent();
+					}
+				}
 			}
 
-			if (hasNext)
-			{
-				SetCurrent();
-			}
-
-			return hasNext;
+			return _hasMore;
 		}
 
 		private StringBuilder characterHolder = new StringBuilder();
@@ -51,39 +63,39 @@ namespace TSQL
 		private void SetCurrent()
 		{
 			characterHolder.Length = 0;
-			int startPosition = _tokenizer.Position;
+			int startPosition = _charReader.Position;
 
 			if (
 				IncludeWhitespace &&
 				(
-					_tokenizer.Current == ' ' ||
-					_tokenizer.Current == '\t' ||
-					_tokenizer.Current == '\r' ||
-					_tokenizer.Current == '\n'
+					_charReader.Current == ' ' ||
+					_charReader.Current == '\t' ||
+					_charReader.Current == '\r' ||
+					_charReader.Current == '\n'
 				))
 			{
 				do
 				{
-					characterHolder.Append(_tokenizer.Current);
+					characterHolder.Append(_charReader.Current);
 				} while (
-					_tokenizer.Read() &&
+					_charReader.Read() &&
 					(
-						_tokenizer.Current == ' ' ||
-						_tokenizer.Current == '\t' ||
-						_tokenizer.Current == '\r' ||
-						_tokenizer.Current == '\n'
+						_charReader.Current == ' ' ||
+						_charReader.Current == '\t' ||
+						_charReader.Current == '\r' ||
+						_charReader.Current == '\n'
 					));
 
-				if (!_tokenizer.EOF)
+				if (!_charReader.EOF)
 				{
-					_tokenizer.Putback();
+					_charReader.Putback();
 				}
 			}
 			else
 			{
-				characterHolder.Append(_tokenizer.Current);
+				characterHolder.Append(_charReader.Current);
 
-				switch (_tokenizer.Current)
+				switch (_charReader.Current)
 				{
 					// all single character sequences with no optional double character sequence
 					case '.':
@@ -103,30 +115,30 @@ namespace TSQL
 					// -
 					case '-':
 						{
-							if (_tokenizer.Read())
+							if (_charReader.Read())
 							{
-								if (_tokenizer.Current == '-')
+								if (_charReader.Current == '-')
 								{
 									do
 									{
-										characterHolder.Append(_tokenizer.Current);
+										characterHolder.Append(_charReader.Current);
 									} while (
-										_tokenizer.Read() &&
-										_tokenizer.Current != '\r' &&
-										_tokenizer.Current != '\n');
+										_charReader.Read() &&
+										_charReader.Current != '\r' &&
+										_charReader.Current != '\n');
 
-									if (!_tokenizer.EOF)
+									if (!_charReader.EOF)
 									{
-										_tokenizer.Putback();
+										_charReader.Putback();
 									}
 								}
-								else if (_tokenizer.Current == '=')
+								else if (_charReader.Current == '=')
 								{
-									characterHolder.Append(_tokenizer.Current);
+									characterHolder.Append(_charReader.Current);
 								}
 								else
 								{
-									_tokenizer.Putback();
+									_charReader.Putback();
 								}
 							}
 
@@ -137,34 +149,34 @@ namespace TSQL
 					// /
 					case '/':
 						{
-							if (_tokenizer.Read())
+							if (_charReader.Read())
 							{
-								if (_tokenizer.Current == '*')
+								if (_charReader.Current == '*')
 								{
-									characterHolder.Append(_tokenizer.Current);
+									characterHolder.Append(_charReader.Current);
 
 									while (
-										_tokenizer.Read() &&
+										_charReader.Read() &&
 										!(
-											_tokenizer.Current == '/' &&
+											_charReader.Current == '/' &&
 											characterHolder[characterHolder.Length - 1] == '*'
 										))
 									{
-										characterHolder.Append(_tokenizer.Current);
+										characterHolder.Append(_charReader.Current);
 									}
 
-									if (!_tokenizer.EOF)
+									if (!_charReader.EOF)
 									{
-										characterHolder.Append(_tokenizer.Current);
+										characterHolder.Append(_charReader.Current);
 									}
 								}
-								else if (_tokenizer.Current == '=')
+								else if (_charReader.Current == '=')
 								{
-									characterHolder.Append(_tokenizer.Current);
+									characterHolder.Append(_charReader.Current);
 								}
 								else
 								{
-									_tokenizer.Putback();
+									_charReader.Putback();
 								}
 							}
 
@@ -175,18 +187,18 @@ namespace TSQL
 					// <
 					case '<':
 						{
-							if (_tokenizer.Read())
+							if (_charReader.Read())
 							{
 								if (
-									_tokenizer.Current == '>' ||
-									_tokenizer.Current == '='
+									_charReader.Current == '>' ||
+									_charReader.Current == '='
 								)
 								{
-									characterHolder.Append(_tokenizer.Current);
+									characterHolder.Append(_charReader.Current);
 								}
 								else
 								{
-									_tokenizer.Putback();
+									_charReader.Putback();
 								}
 							}
 
@@ -197,19 +209,19 @@ namespace TSQL
 					// !>
 					case '!':
 						{
-							if (_tokenizer.Read())
+							if (_charReader.Read())
 							{
 								if (
-									_tokenizer.Current == '=' ||
-									_tokenizer.Current == '<' ||
-									_tokenizer.Current == '>'
+									_charReader.Current == '=' ||
+									_charReader.Current == '<' ||
+									_charReader.Current == '>'
 								)
 								{
-									characterHolder.Append(_tokenizer.Current);
+									characterHolder.Append(_charReader.Current);
 								}
 								else
 								{
-									_tokenizer.Putback();
+									_charReader.Putback();
 								}
 							}
 
@@ -230,15 +242,15 @@ namespace TSQL
 					// >=
 					case '>':
 						{
-							if (_tokenizer.Read())
+							if (_charReader.Read())
 							{
-								if (_tokenizer.Current == '=')
+								if (_charReader.Current == '=')
 								{
-									characterHolder.Append(_tokenizer.Current);
+									characterHolder.Append(_charReader.Current);
 								}
 								else
 								{
-									_tokenizer.Putback();
+									_charReader.Putback();
 								}
 							}
 
@@ -247,21 +259,21 @@ namespace TSQL
 					// N''
 					case 'N':
 						{
-							if (_tokenizer.Read())
+							if (_charReader.Read())
 							{
-								if (_tokenizer.Current == '\'')
+								if (_charReader.Current == '\'')
 								{
-									characterHolder.Append(_tokenizer.Current);
+									characterHolder.Append(_charReader.Current);
 									goto case '\'';
 								}
-								else if (_tokenizer.Current == '\"')
+								else if (_charReader.Current == '\"')
 								{
-									characterHolder.Append(_tokenizer.Current);
+									characterHolder.Append(_charReader.Current);
 									goto case '\"';
 								}
 								else
 								{
-									_tokenizer.Putback();
+									_charReader.Putback();
 									goto default;
 								}
 							}
@@ -271,15 +283,15 @@ namespace TSQL
 					// ::
 					case ':':
 						{
-							if (_tokenizer.Read())
+							if (_charReader.Read())
 							{
-								if (_tokenizer.Current == ':')
+								if (_charReader.Current == ':')
 								{
-									characterHolder.Append(_tokenizer.Current);
+									characterHolder.Append(_charReader.Current);
 								}
 								else
 								{
-									_tokenizer.Putback();
+									_charReader.Putback();
 								}
 							}
 
@@ -294,13 +306,13 @@ namespace TSQL
 						{
 							char escapeChar;
 
-							if (_tokenizer.Current == '[')
+							if (_charReader.Current == '[')
 							{
 								escapeChar = ']';
 							}
 							else
 							{
-								escapeChar = _tokenizer.Current;
+								escapeChar = _charReader.Current;
 							}
 
 							bool stillEscaped;
@@ -310,31 +322,31 @@ namespace TSQL
 							do
 							{
 								while (
-									_tokenizer.Read() &&
-									_tokenizer.Current != escapeChar)
+									_charReader.Read() &&
+									_charReader.Current != escapeChar)
 								{
-									characterHolder.Append(_tokenizer.Current);
+									characterHolder.Append(_charReader.Current);
 								};
 
-								if (!_tokenizer.EOF)
+								if (!_charReader.EOF)
 								{
-									characterHolder.Append(_tokenizer.Current);
+									characterHolder.Append(_charReader.Current);
 								}
 
 								stillEscaped =
-									!_tokenizer.EOF && 
-									_tokenizer.Read() && 
-									_tokenizer.Current == escapeChar;
+									!_charReader.EOF && 
+									_charReader.Read() && 
+									_charReader.Current == escapeChar;
 
 								if (stillEscaped)
 								{
-									characterHolder.Append(_tokenizer.Current);
+									characterHolder.Append(_charReader.Current);
 								}
 							} while (stillEscaped);
 
-							if (!_tokenizer.EOF)
+							if (!_charReader.EOF)
 							{
-								_tokenizer.Putback();
+								_charReader.Putback();
 							}
 
 							break;
@@ -362,9 +374,9 @@ namespace TSQL
 
 							while (
 								!foundEnd &&
-								_tokenizer.Read())
+								_charReader.Read())
 							{
-								switch (_tokenizer.Current)
+								switch (_charReader.Current)
 								{
 									// running into a special character signals the end of a previous grouping of normal characters
 									case ' ':
@@ -394,7 +406,7 @@ namespace TSQL
 										}
 									default:
 										{
-											characterHolder.Append(_tokenizer.Current);
+											characterHolder.Append(_charReader.Current);
 
 											break;
 										}
@@ -403,7 +415,7 @@ namespace TSQL
 
 							if (foundEnd)
 							{
-								_tokenizer.Putback();
+								_charReader.Putback();
 							}
 
 							break;
@@ -414,9 +426,9 @@ namespace TSQL
 
 							while (
 								!foundEnd &&
-								_tokenizer.Read())
+								_charReader.Read())
 							{
-								switch (_tokenizer.Current)
+								switch (_charReader.Current)
 								{
 									// running into a special character signals the end of a previous grouping of normal characters
 									case ' ':
@@ -449,7 +461,7 @@ namespace TSQL
 										}
 									default:
 										{
-											characterHolder.Append(_tokenizer.Current);
+											characterHolder.Append(_charReader.Current);
 
 											break;
 										}
@@ -458,7 +470,7 @@ namespace TSQL
 
 							if (foundEnd)
 							{
-								_tokenizer.Putback();
+								_charReader.Putback();
 							}
 
 							break;
@@ -606,6 +618,13 @@ namespace TSQL
 			{
 				return null;
 			}
+		}
+
+		public void Putback()
+		{
+			_hasExtra = true;
+			_extraToken = Current;
+			_hasMore = true;
 		}
 
 		public static List<TSQLToken> ParseTokens(

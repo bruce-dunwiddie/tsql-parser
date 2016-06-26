@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TSQL
+namespace TSQL.Statements
 {
-	public partial class TSQLTokenizer : IDisposable
+	public partial class TSQLStatementReader : IDisposable
 	{
 		#region IDisposable pattern
 
@@ -41,13 +41,13 @@ namespace TSQL
 				// unmanaged resource releases
 				try
 				{
-					(_charReader as IDisposable).Dispose();
+					(_tokenizer as IDisposable).Dispose();
 				}
 				catch (Exception)
 				{
 					// can't handle Dispose throwing exceptions
 				}
-				_charReader = null;
+				_tokenizer = null;
 
 				_disposed = true;
 			}

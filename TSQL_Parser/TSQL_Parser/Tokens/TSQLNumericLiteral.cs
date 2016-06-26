@@ -13,10 +13,17 @@ namespace TSQL.Tokens
 			string text) :
 			base(
 				beginPostion,
-				text,
-				TSQLTokenType.NumericLiteral)
+				text)
 		{
 
+		}
+
+		public override TSQLTokenType Type
+		{
+			get
+			{
+				return TSQLTokenType.NumericLiteral;
+			}
 		}
 	}
 }

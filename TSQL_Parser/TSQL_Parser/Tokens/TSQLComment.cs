@@ -10,12 +10,10 @@ namespace TSQL.Tokens
 	{
 		public TSQLComment(
 			int beginPostion,
-			string text,
-			TSQLTokenType type) :
+			string text) :
 			base(
 				beginPostion,
-				text,
-				type)
+				text)
 		{
 
 		}

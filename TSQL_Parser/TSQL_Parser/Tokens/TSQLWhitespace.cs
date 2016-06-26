@@ -13,10 +13,17 @@ namespace TSQL.Tokens
 			string text) :
 			base(
 				beginPostion,
-				text,
-				TSQLTokenType.Whitespace)
+				text)
 		{
 
+		}
+
+		public override TSQLTokenType Type
+		{
+			get
+			{
+				return TSQLTokenType.Whitespace;
+			}
 		}
 	}
 }

@@ -11,9 +11,9 @@ namespace TSQL
 	public partial class TSQLCharacterReader
 	{
 		private ICharacterReader _inputStream = null;
-		private bool hasMore = true;
-		private bool hasExtra = false;
-		private char extraChar;
+		private bool _hasMore = true;
+		private bool _hasExtra = false;
+		private char _extraChar;
 
 		public TSQLCharacterReader(TextReader inputStream)
 		{
@@ -25,12 +25,12 @@ namespace TSQL
 
 		public bool Read()
 		{
-			if (hasMore)
+			if (_hasMore)
 			{
-				if (hasExtra)
+				if (_hasExtra)
 				{
-					Current = extraChar;
-					hasExtra = false;
+					Current = _extraChar;
+					_hasExtra = false;
 				}
 				else
 				{
@@ -43,12 +43,12 @@ namespace TSQL
 					else
 					{
 						Current = char.MinValue;
-						hasMore = false;
+						_hasMore = false;
 					}
 				}
 			}
 
-			return hasMore;
+			return _hasMore;
 		}
 
 		public bool ReadNextNonWhitespace()
@@ -71,9 +71,9 @@ namespace TSQL
 
 		public void Putback()
 		{
-			hasExtra = true;
-			extraChar = Current;
-			hasMore = true;
+			_hasExtra = true;
+			_extraChar = Current;
+			_hasMore = true;
 		}
 
 		public char Current
@@ -94,7 +94,7 @@ namespace TSQL
 		{
 			get
 			{
-				return !hasMore;
+				return !_hasMore;
 			}
 		}
 	}
