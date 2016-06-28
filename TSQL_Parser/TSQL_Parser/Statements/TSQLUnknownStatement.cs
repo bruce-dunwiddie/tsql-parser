@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace TSQL.Statements
 {
-	public enum TSQLStatementType
+	public class TSQLUnknownStatement : TSQLStatement
 	{
-		Select,
-		Unknown
+		public override TSQLStatementType Type
+		{
+			get
+			{
+				return TSQLStatementType.Unknown;
+			}
+		}
 	}
 }

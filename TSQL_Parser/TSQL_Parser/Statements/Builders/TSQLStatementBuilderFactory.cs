@@ -18,7 +18,7 @@ namespace TSQL.Statements.Builders
 			}
 			else
 			{
-				return null;
+				return new TSQLUnknownStatementBuilder();
 			}
 		}
 	}

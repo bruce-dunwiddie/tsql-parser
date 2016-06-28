@@ -103,5 +103,101 @@ namespace TSQL.Tokens
 				return hash;
 			}
 		}
+
+		public TSQLCharacter AsCharacter
+		{
+			get
+			{
+				return this as TSQLCharacter;
+			}
+		}
+
+		public TSQLComment AsComment
+		{
+			get
+			{
+				return this as TSQLComment;
+			}
+		}
+
+		public TSQLIdentifier AsIdentifier
+		{
+			get
+			{
+				return this as TSQLIdentifier;
+			}
+		}
+
+		public TSQLKeyword AsKeyword
+		{
+			get
+			{
+				return this as TSQLKeyword;
+			}
+		}
+
+		public TSQLLiteral AsLiteral
+		{
+			get
+			{
+				return this as TSQLLiteral;
+			}
+		}
+
+		public TSQLMultilineComment AsMultilineComment
+		{
+			get
+			{
+				return this as TSQLMultilineComment;
+			}
+		}
+
+		public TSQLNumericLiteral AsNumericLiteral
+		{
+			get
+			{
+				return this as TSQLNumericLiteral;
+			}
+		}
+
+		public TSQLOperator AsOperator
+		{
+			get
+			{
+				return this as TSQLOperator;
+			}
+		}
+
+		public TSQLSingleLineComment AsSingleLineComment
+		{
+			get
+			{
+				return this as TSQLSingleLineComment;
+			}
+		}
+
+		public TSQLStringLiteral AsStringLiteral
+		{
+			get
+			{
+				return this as TSQLStringLiteral;
+			}
+		}
+
+		public TSQLVariable AsVariable
+		{
+			get
+			{
+				return this as TSQLVariable;
+			}
+		}
+
+		public TSQLWhitespace AsWhitespace
+		{
+			get
+			{
+				return this as TSQLWhitespace;
+			}
+		}
 	}
 }

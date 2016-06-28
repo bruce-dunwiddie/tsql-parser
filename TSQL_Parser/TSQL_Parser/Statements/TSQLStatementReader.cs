@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,6 +84,20 @@ namespace TSQL.Statements
 			{
 				return null;
 			}
+		}
+
+		public static List<TSQLStatement> ParseStatements(
+			string statements,
+			bool useQuotedIdentifiers = false)
+		{
+			return new TSQLStatementReader(
+				new TSQLTokenizer(
+					new StringReader(
+						statements))
+				{
+					IncludeWhitespace = true,
+					UseQuotedIdentifiers = useQuotedIdentifiers
+				}).ToList();
 		}
 	}
 }

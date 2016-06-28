@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Parsing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Statements\SelectStatementTests.cs" />
     <Compile Include="Tokens\CharacterTokenTests.cs" />
     <Compile Include="Tokens\KeywordTokenTests.cs" />
     <Compile Include="Tokens\TokenEqualityTests.cs" />

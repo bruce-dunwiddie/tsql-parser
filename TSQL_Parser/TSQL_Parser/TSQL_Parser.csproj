@@ -43,6 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Statements\Builders\ITSQLStatementBuilder.cs" />
     <Compile Include="Statements\Builders\TSQLSelectStatementBuilder.cs" />
+    <Compile Include="Statements\Builders\TSQLUnknownStatementBuilder.cs" />
     <Compile Include="Statements\TSQLSelectStatement.cs" />
     <Compile Include="Statements\TSQLStatement.cs" />
     <Compile Include="Statements\Builders\TSQLStatementBuilderFactory.cs" />
@@ -54,6 +55,7 @@
       <DependentUpon>TSQLStatementReader.cs</DependentUpon>
     </Compile>
     <Compile Include="Statements\TSQLStatementType.cs" />
+    <Compile Include="Statements\TSQLUnknownStatement.cs" />
     <Compile Include="Tokens\TSQLTokenType.cs" />
     <Compile Include="Tokens\TSQLCharacter.cs" />
     <Compile Include="Tokens\TSQLComment.cs" />
