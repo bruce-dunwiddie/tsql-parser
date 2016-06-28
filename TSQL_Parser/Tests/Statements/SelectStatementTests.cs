@@ -49,5 +49,34 @@ namespace Tests.Statements
 			Assert.AreEqual("2", statements[1].Tokens[2].AsNumericLiteral.Text);
 			Assert.AreEqual(TSQLCharacters.Semicolon, statements[1].Tokens[3].AsCharacter.Character);
 		}
+
+		[Test]
+		public void SelectStatement_CommonSelect()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"select t.a, t.b, (select 1) as e
+				from
+					[table] t
+						inner join [table] t2 on
+							t.id = t2.id
+				where
+					t.c = 5
+				group by
+					t.a,
+					t.b
+				having
+					count(*) > 1
+				order by
+					t.a,
+					t.b;");
+			Assert.IsNotNull(statements);
+			Assert.AreEqual(1, statements.Count);
+			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
+			Assert.AreEqual(90, statements[0].Tokens.Count);
+			Assert.AreEqual(TSQLKeywords.SELECT, statements[0].Tokens[0].AsKeyword.Keyword);
+			Assert.AreEqual(" ", statements[0].Tokens[1].AsWhitespace.Text);
+			Assert.AreEqual("t", statements[0].Tokens[2].AsIdentifier.Name);
+			Assert.AreEqual(TSQLCharacters.Period, statements[0].Tokens[3].AsCharacter.Character);
+		}
 	}
 }
