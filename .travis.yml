@@ -1,2 +1,4 @@
 language: csharp
 solution: TSQL_Parser/TSQL_Parser.sln
+after_success:
+  - coveralls
