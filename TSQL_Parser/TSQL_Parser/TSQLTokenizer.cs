@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -67,24 +68,14 @@ namespace TSQL
 
 			if (
 				IncludeWhitespace &&
-				(
-					_charReader.Current == ' ' ||
-					_charReader.Current == '\t' ||
-					_charReader.Current == '\r' ||
-					_charReader.Current == '\n'
-				))
+				char.IsWhiteSpace(_charReader.Current))
 			{
 				do
 				{
 					characterHolder.Append(_charReader.Current);
 				} while (
 					_charReader.Read() &&
-					(
-						_charReader.Current == ' ' ||
-						_charReader.Current == '\t' ||
-						_charReader.Current == '\r' ||
-						_charReader.Current == '\n'
-					));
+					char.IsWhiteSpace(_charReader.Current));
 
 				if (!_charReader.EOF)
 				{
@@ -103,7 +94,6 @@ namespace TSQL
 					case ';':
 					case '(':
 					case ')':
-					case '=':
 					case '~':
 						{
 
@@ -215,6 +205,26 @@ namespace TSQL
 									_charReader.Current == '=' ||
 									_charReader.Current == '<' ||
 									_charReader.Current == '>'
+								)
+								{
+									characterHolder.Append(_charReader.Current);
+								}
+								else
+								{
+									_charReader.Putback();
+								}
+							}
+
+							break;
+						}
+					// =*
+					// =
+					case '=':
+						{
+							if (_charReader.Read())
+							{
+								if (
+									_charReader.Current == '*'
 								)
 								{
 									characterHolder.Append(_charReader.Current);
@@ -356,7 +366,6 @@ namespace TSQL
 					// 0x
 					// 1894.1204
 					// 0.5E-2
-					// $45.56
 					// 123E-3
 					case '0':
 					case '1':
@@ -368,7 +377,42 @@ namespace TSQL
 					case '7':
 					case '8':
 					case '9':
+					// $45.56
 					case '$':
+					// other Unicode currency symbols recognized by SSMS
+					case '£':
+					case '¢':
+					case '¤':
+					case '¥':
+					case '€':
+					case '₡':
+					case '₱':
+					case '﷼':
+					case '₩':
+					case '₮':
+					case '₨':
+					case '₫':
+					case '฿':
+					case '៛':
+					case '₪':
+					case '₭':
+					case '₦':
+					case '৲':
+					case '৳':
+					case '﹩':
+					case '₠':
+					case '₢':
+					case '₣':
+					case '₤':
+					case '₥':
+					case '₧':
+					case '₯':
+					case '₰':
+					case '＄':
+					case '￠':
+					case '￡':
+					case '￥':
+					case '￦':
 						{
 							bool foundEnd = false;
 
@@ -489,7 +533,15 @@ namespace TSQL
 			int startPosition,
 			int endPosition)
 		{
-			if (tokenValue.StartsWith("@"))
+			if (
+				char.IsWhiteSpace(tokenValue[0]))
+			{
+				return
+					new TSQLWhitespace(
+						startPosition,
+						tokenValue);
+			}
+			else if (tokenValue.StartsWith("@"))
 			{
 				return
 					new TSQLVariable(
@@ -527,17 +579,30 @@ namespace TSQL
 						tokenValue);
 			}
 			else if (
-				tokenValue[0] == '0' ||
-				tokenValue[0] == '1' ||
-				tokenValue[0] == '2' ||
-				tokenValue[0] == '3' ||
-				tokenValue[0] == '4' ||
-				tokenValue[0] == '5' ||
-				tokenValue[0] == '6' ||
-				tokenValue[0] == '7' ||
-				tokenValue[0] == '8' ||
-				tokenValue[0] == '9' ||
 				tokenValue[0] == '$')
+			{
+				// $IDENTITY
+				if (
+					tokenValue.Length > 1 &&
+					char.IsLetter(tokenValue[1]))
+				{
+					return
+						new TSQLIdentifier(
+							startPosition,
+							tokenValue);
+				}
+				// $45.56
+				else
+				{
+					return
+						new TSQLNumericLiteral(
+							startPosition,
+							tokenValue);
+				}
+			}
+			else if (
+				char.IsDigit(tokenValue[0]) ||
+				CharUnicodeInfo.GetUnicodeCategory(tokenValue[0]) == UnicodeCategory.CurrencySymbol)
 			{
 				return
 					new TSQLNumericLiteral(
@@ -576,17 +641,6 @@ namespace TSQL
 			{
 				return
 					new TSQLKeyword(
-						startPosition,
-						tokenValue);
-			}
-			else if (
-				tokenValue[0] == ' ' ||
-				tokenValue[0] == '\t' ||
-				tokenValue[0] == '\r' ||
-				tokenValue[0] == '\n')
-			{
-				return
-					new TSQLWhitespace(
 						startPosition,
 						tokenValue);
 			}

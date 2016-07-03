@@ -117,6 +117,69 @@ namespace Tests
 			}
 		}
 
+		[Test]
+		public void Parse_SystemIdentifiers()
+		{
+			// $IDENTITY, $ROWGUID, $PARTITION
+			// https://msdn.microsoft.com/en-us/library/ms176104.aspx
+			// https://msdn.microsoft.com/en-us/library/ms188071.aspx
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens(
+				"$IDENTITY $ROWGUID $PARTITION", 
+				includeWhitespace : false);
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLIdentifier(0, "$IDENTITY"),
+                        new TSQLIdentifier(10, "$ROWGUID"),
+                        new TSQLIdentifier(19, "$PARTITION")
+					},
+				tokens);
+		}
 
+		[Test]
+		public void Parse_OldStyleOuterJoins()
+		{
+			// .. WHERE tablea.id *= tableb.id
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens(
+				"*= =*",
+				includeWhitespace: false);
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLOperator(0, "*="),
+                        new TSQLOperator(3, "=*")
+					},
+				tokens);
+		}
+
+		[Test]
+		public void Parse_EmptyMoney()
+		{
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens(
+				"$,",
+				includeWhitespace: false);
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLNumericLiteral(0, "$"),
+                        new TSQLCharacter(1, ",")
+					},
+				tokens);
+		}
+
+		[Test]
+		public void Parse_MoneySymbols()
+		{
+			// http://stackoverflow.com/questions/30345777/t-sql-dollar-sign-in-expressions
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens(
+				"select $,£,¢,¤,¥,€,₡,₱,﷼,₩,₮,₨,₫,฿,៛,₪,₭,₦,৲,৳,﹩,₠,₢,₣,₤,₥,₧,₯,₰,＄,￠,￡,￥,￦;",
+				includeWhitespace: false);
+			Assert.AreEqual(69, tokens.Count);
+			Assert.AreEqual(TSQLKeywords.SELECT, tokens[0].AsKeyword.Keyword);
+			for (int i = 1; i < 69; i += 2)
+			{
+				Assert.AreEqual(TSQLTokenType.NumericLiteral, tokens[i].Type);
+			}
+		}
 	}
 }
