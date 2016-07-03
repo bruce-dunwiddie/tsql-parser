@@ -8,6 +8,7 @@ using NUnit.Framework;
 using TSQL;
 using TSQL.Tokens;
 
+using Tests.Properties;
 using Tests.Tokens;
 
 namespace Tests
@@ -45,7 +46,7 @@ namespace Tests
 		[Test]
 		public void Parse_uspSearchCandidateResumes_NoWhitespace()
 		{
-			using (StreamReader reader = new StreamReader("./Scripts/AdventureWorks2014.dbo.uspSearchCandidateResumes.sql"))
+			using (StringReader reader = new StringReader(Resources.AdventureWorks2014_dbo_uspSearchCandidateResumes))
 			using (TSQLTokenizer lexer = new TSQLTokenizer(reader))
 			{
 				TokenComparisons.CompareStreamStartToList(
@@ -108,7 +109,7 @@ namespace Tests
 		[Test]
 		public void Parse_uspSearchCandidateResumes()
 		{
-			using (StreamReader reader = new StreamReader("./Scripts/AdventureWorks2014.dbo.uspSearchCandidateResumes.sql"))
+			using (StringReader reader = new StringReader(Resources.AdventureWorks2014_dbo_uspSearchCandidateResumes))
 			using (TSQLTokenizer lexer = new TSQLTokenizer(reader) { IncludeWhitespace = true })
 			{
 				TokenComparisons.CompareStreamStartToList(
