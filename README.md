@@ -17,7 +17,7 @@ Library for parsing SQL Server TSQL scripts
 - Script validation.
 
 ### Future Additions
-- Statement parsers built on top of lexer.
+- Statement parsers built on top of tokenizer.
 
 ### Code Samples
 - See [wiki] for simple code example and output.
