@@ -1,2 +1,6 @@
 language: csharp
 solution: TSQL_Parser/TSQL_Parser.sln
+before_install:
+  - sudo apt-get install nunit-console
+after_script:
+  - nunit-console TSQL_Parser/Tests/bin/Release/Tests.dll
