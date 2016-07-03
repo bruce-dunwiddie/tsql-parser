@@ -5,6 +5,8 @@ Library for parsing SQL Server TSQL scripts
 
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/lcfjc4jox76dia8q?svg=true)](https://ci.appveyor.com/project/bruce-dunwiddie/tsql-parser)
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 ### Current Features
 - Full TSQL implementation.
 - Streaming tokenizer for parsing scripts into tokens.
