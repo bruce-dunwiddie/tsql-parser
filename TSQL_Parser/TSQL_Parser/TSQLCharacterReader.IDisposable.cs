@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TSQL
 {
-	public partial class TSQLTokenizer : IDisposable
+	public partial class TSQLCharacterReader : IDisposable
 	{
 		#region IDisposable pattern
 
@@ -41,32 +37,15 @@ namespace TSQL
 				// unmanaged resource releases
 				try
 				{
-					(_charReader as IDisposable).Dispose();
+					(_inputStream as IDisposable).Dispose();
 				}
 				catch (Exception)
 				{
 					// can't handle Dispose throwing exceptions
 				}
-				_charReader = null;
+				_inputStream = null;
 
 				_disposed = true;
-			}
-		}
-
-		/// <summary>
-		///		Checks to see if object has already been disposed, which
-		///		would make calling methods on the object invalid.
-		/// </summary>
-		/// <exception cref="ObjectDisposedException">
-		///		Methods were called after the object has been disposed.
-		/// </exception>
-		private void CheckDisposed()
-		{
-			if (_disposed)
-			{
-				throw new ObjectDisposedException(GetType().FullName, "This object has been previously disposed." +
-					" Methods on this object can no longer" +
-					" be called.");
 			}
 		}
 

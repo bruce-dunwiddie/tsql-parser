@@ -17,7 +17,7 @@ namespace Tests.Tokens
 		[Test]
 		public void SingleLineCommentToken_CarriageReturn()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("--blah\r", useQuotedIdentifiers: false, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("--blah\r", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -30,7 +30,7 @@ namespace Tests.Tokens
 		[Test]
 		public void SingleLineCommentToken_LineFeed()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("--blah\n", useQuotedIdentifiers: false, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("--blah\n", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{

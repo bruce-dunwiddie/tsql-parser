@@ -3,15 +3,15 @@ using System.IO;
 
 namespace TSQL
 {
-	public partial class TSQLTokenizer
+	public partial class TSQLCharacterReader
 	{
-		private class BufferedTextReader : IDisposable
+		private class BufferedTextReader : ICharacterReader
 		{
 			private TextReader _inputStream = null;
-			private char[] buffer = new char[1024];
-			private int position = 0;
-			private int read = 0;
-			private bool hasMore = true;
+			private char[] _buffer = new char[1024];
+			private int _position = 0;
+			private int _read = 0;
+			private bool _hasMore = true;
 
 			public BufferedTextReader(TextReader inputStream)
 			{
@@ -20,20 +20,20 @@ namespace TSQL
 
 			public int Read()
 			{
-				if (hasMore)
+				if (_hasMore)
 				{
-					if (position >= read)
+					if (_position >= _read)
 					{
-						read = _inputStream.Read(buffer, 0, buffer.Length);
-						position = 0;
-						hasMore = read > 0;
-						if (!hasMore)
+						_read = _inputStream.Read(_buffer, 0, _buffer.Length);
+						_position = 0;
+						_hasMore = _read > 0;
+						if (!_hasMore)
 						{
 							return -1;
 						}
 					}
 
-					return buffer[position++];
+					return _buffer[_position++];
 				}
 				else
 				{

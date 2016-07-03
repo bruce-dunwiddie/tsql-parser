@@ -9,10 +9,17 @@ namespace TSQL.Tokens
 			string text) :
 			base(
 				beginPostion,
-				text,
-				TokenType.Keyword)
+				text)
 		{
 			Keyword = TSQLKeywords.Parse(text);
+		}
+
+		public override TSQLTokenType Type
+		{
+			get
+			{
+				return TSQLTokenType.Keyword;
+			}
 		}
 
 		public TSQLKeywords Keyword

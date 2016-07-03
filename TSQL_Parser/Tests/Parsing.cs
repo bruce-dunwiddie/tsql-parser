@@ -8,6 +8,7 @@ using NUnit.Framework;
 using TSQL;
 using TSQL.Tokens;
 
+using Tests.Properties;
 using Tests.Tokens;
 
 namespace Tests
@@ -18,7 +19,7 @@ namespace Tests
 		[Test]
 		public void Parse_GO()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("GO");
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("GO");
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -31,7 +32,7 @@ namespace Tests
 		public void Parse_GOFromStream()
 		{
 			using (TextReader reader = new StringReader("GO"))
-			using (TSQLLexer lexer = new TSQLLexer(reader))
+			using (TSQLTokenizer lexer = new TSQLTokenizer(reader))
 			{
 				TokenComparisons.CompareStreamToList(
 					new List<TSQLToken>()
@@ -45,8 +46,8 @@ namespace Tests
 		[Test]
 		public void Parse_uspSearchCandidateResumes_NoWhitespace()
 		{
-			using (StreamReader reader = new StreamReader("./Scripts/AdventureWorks2014.dbo.uspSearchCandidateResumes.sql"))
-			using (TSQLLexer lexer = new TSQLLexer(reader))
+			using (StringReader reader = new StringReader(Resources.AdventureWorks2014_dbo_uspSearchCandidateResumes))
+			using (TSQLTokenizer lexer = new TSQLTokenizer(reader))
 			{
 				TokenComparisons.CompareStreamStartToList(
 					GetuspSearchCandidateResumesTokens()
@@ -94,7 +95,7 @@ namespace Tests
 						new TSQLCharacter(292, "."),
 						new TSQLIdentifier(293, "[uspSearchCandidateResumes]"),
 						new TSQLWhitespace(320, "\r\n    "),
-						new TSQLIdentifier(326, "@searchString"),
+						new TSQLVariable(326, "@searchString"),
 						new TSQLWhitespace(339, " "),
 						new TSQLIdentifier(340, "[nvarchar]"),
 						new TSQLCharacter(350, "("),
@@ -108,8 +109,8 @@ namespace Tests
 		[Test]
 		public void Parse_uspSearchCandidateResumes()
 		{
-			using (StreamReader reader = new StreamReader("./Scripts/AdventureWorks2014.dbo.uspSearchCandidateResumes.sql"))
-			using (TSQLLexer lexer = new TSQLLexer(reader) { IncludeWhitespace = true })
+			using (StringReader reader = new StringReader(Resources.AdventureWorks2014_dbo_uspSearchCandidateResumes))
+			using (TSQLTokenizer lexer = new TSQLTokenizer(reader) { IncludeWhitespace = true })
 			{
 				TokenComparisons.CompareStreamStartToList(
 					GetuspSearchCandidateResumesTokens(),
@@ -117,6 +118,69 @@ namespace Tests
 			}
 		}
 
+		[Test]
+		public void Parse_SystemIdentifiers()
+		{
+			// $IDENTITY, $ROWGUID, $PARTITION
+			// https://msdn.microsoft.com/en-us/library/ms176104.aspx
+			// https://msdn.microsoft.com/en-us/library/ms188071.aspx
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens(
+				"$IDENTITY $ROWGUID $PARTITION", 
+				includeWhitespace : false);
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLIdentifier(0, "$IDENTITY"),
+                        new TSQLIdentifier(10, "$ROWGUID"),
+                        new TSQLIdentifier(19, "$PARTITION")
+					},
+				tokens);
+		}
 
+		[Test]
+		public void Parse_OldStyleOuterJoins()
+		{
+			// .. WHERE tablea.id *= tableb.id
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens(
+				"*= =*",
+				includeWhitespace: false);
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLOperator(0, "*="),
+                        new TSQLOperator(3, "=*")
+					},
+				tokens);
+		}
+
+		[Test]
+		public void Parse_EmptyMoney()
+		{
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens(
+				"$,",
+				includeWhitespace: false);
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLNumericLiteral(0, "$"),
+                        new TSQLCharacter(1, ",")
+					},
+				tokens);
+		}
+
+		[Test]
+		public void Parse_MoneySymbols()
+		{
+			// http://stackoverflow.com/questions/30345777/t-sql-dollar-sign-in-expressions
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens(
+				"select $,£,¢,¤,¥,€,₡,₱,﷼,₩,₮,₨,₫,฿,៛,₪,₭,₦,৲,৳,﹩,₠,₢,₣,₤,₥,₧,₯,₰,＄,￠,￡,￥,￦;",
+				includeWhitespace: false);
+			Assert.AreEqual(69, tokens.Count);
+			Assert.AreEqual(TSQLKeywords.SELECT, tokens[0].AsKeyword.Keyword);
+			for (int i = 1; i < 69; i += 2)
+			{
+				Assert.AreEqual(TSQLTokenType.NumericLiteral, tokens[i].Type);
+			}
+		}
 	}
 }

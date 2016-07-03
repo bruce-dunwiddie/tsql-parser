@@ -9,10 +9,17 @@ namespace TSQL.Tokens
 			string text) :
 			base(
 				beginPostion,
-				text,
-				TokenType.Character)
+				text)
 		{
 			Character = TSQLCharacters.Parse(text);
+		}
+
+		public override TSQLTokenType Type
+		{
+			get
+			{
+				return TSQLTokenType.Character;
+			}
 		}
 
 		public TSQLCharacters Character

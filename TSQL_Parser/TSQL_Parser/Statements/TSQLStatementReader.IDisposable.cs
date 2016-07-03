@@ -1,16 +1,16 @@
 ﻿using System;
 
-namespace TSQL
+namespace TSQL.Statements
 {
-	public partial class TSQLLexer : IDisposable
+	public partial class TSQLStatementReader : IDisposable
 	{
 		#region IDisposable pattern
 
-		private bool disposed = false;
+		private bool _disposed = false;
 
 		void IDisposable.Dispose()
 		{
-			if (!disposed)
+			if (!_disposed)
 			{
 				Dispose(true);
 				GC.SuppressFinalize(this);
@@ -26,7 +26,7 @@ namespace TSQL
 		/// </param>
 		private void Dispose(bool disposing)
 		{
-			if (!disposed)
+			if (!_disposed)
 			{
 				// managed resource releases
 				if (disposing)
@@ -45,7 +45,7 @@ namespace TSQL
 				}
 				_tokenizer = null;
 
-				disposed = true;
+				_disposed = true;
 			}
 		}
 
@@ -58,7 +58,7 @@ namespace TSQL
 		/// </exception>
 		private void CheckDisposed()
 		{
-			if (disposed)
+			if (_disposed)
 			{
 				throw new ObjectDisposedException(GetType().FullName, "This object has been previously disposed." +
 					" Methods on this object can no longer" +

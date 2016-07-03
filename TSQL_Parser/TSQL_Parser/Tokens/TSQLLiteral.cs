@@ -6,12 +6,10 @@ namespace TSQL.Tokens
 	{
 		protected TSQLLiteral(
 			int beginPostion,
-			string text,
-			TokenType type) :
+			string text) :
 			base(
 				beginPostion,
-				text,
-				type)
+				text)
 		{
 
 		}

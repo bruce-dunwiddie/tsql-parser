@@ -2,9 +2,9 @@
 
 namespace TSQL.Tokens
 {
-	public class TSQLWhitespace : TSQLToken
+	public class TSQLVariable : TSQLToken
 	{
-		public TSQLWhitespace(
+		public TSQLVariable(
 			int beginPostion,
 			string text) :
 			base(
@@ -18,7 +18,7 @@ namespace TSQL.Tokens
 		{
 			get
 			{
-				return TSQLTokenType.Whitespace;
+				return TSQLTokenType.Variable;
 			}
 		}
 	}

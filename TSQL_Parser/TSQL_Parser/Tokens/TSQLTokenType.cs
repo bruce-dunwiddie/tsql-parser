@@ -2,7 +2,7 @@
 
 namespace TSQL.Tokens
 {
-	public enum TokenType
+	public enum TSQLTokenType
 	{
 		Character,
 		Identifier,
@@ -12,6 +12,7 @@ namespace TSQL.Tokens
 		Operator,
 		SingleLineComment,
 		StringLiteral,
-		Whitespace
+		Whitespace,
+		Variable
 	}
 }

@@ -17,7 +17,7 @@ namespace Tests.Tokens
 		[Test]
 		public void IdentifierToken_SimpleIdentifier()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("a ", useQuotedIdentifiers: false, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("a ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -30,7 +30,7 @@ namespace Tests.Tokens
 		[Test]
 		public void IdentifierToken_SimpleBracketedIdentifier()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("[a] ", useQuotedIdentifiers: false, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("[a] ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -43,7 +43,7 @@ namespace Tests.Tokens
 		[Test]
 		public void IdentifierToken_EscapedBracketedIdentifier1()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("[a]]] ", useQuotedIdentifiers: false, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("[a]]] ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -56,7 +56,7 @@ namespace Tests.Tokens
 		[Test]
 		public void IdentifierToken_EscapedBracketedIdentifier2()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("[a]]a] ", useQuotedIdentifiers: false, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("[a]]a] ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -71,7 +71,7 @@ namespace Tests.Tokens
 		{
 			// unicode string literals are a special case that start with N
 			// test here to make sure it gets parsed as an identity token
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("Name ", useQuotedIdentifiers: false, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("Name ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -86,7 +86,7 @@ namespace Tests.Tokens
 		{
 			// unicode string literals are a special case that start with N
 			// test here to make sure it gets parsed as an identity token
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("N ", useQuotedIdentifiers: false, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("N ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -99,7 +99,7 @@ namespace Tests.Tokens
 		[Test]
 		public void IdentifierToken_QuotedIdentifier()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("\"name\" ", useQuotedIdentifiers: true, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("\"name\" ", useQuotedIdentifiers: true, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -112,7 +112,7 @@ namespace Tests.Tokens
 		[Test]
 		public void IdentifierToken_QuotedUnicodeIdentifier()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("N\"name\" ", useQuotedIdentifiers: true, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("N\"name\" ", useQuotedIdentifiers: true, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{

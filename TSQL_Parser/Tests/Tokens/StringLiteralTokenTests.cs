@@ -17,7 +17,7 @@ namespace Tests.Tokens
 		[Test]
 		public void StringLiteralToken_EmptySingleQuote()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("'' ", useQuotedIdentifiers: false, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("'' ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -30,7 +30,7 @@ namespace Tests.Tokens
 		[Test]
 		public void StringLiteralToken_SingleQuote()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("'name' ", useQuotedIdentifiers: false, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("'name' ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -43,7 +43,7 @@ namespace Tests.Tokens
 		[Test]
 		public void StringLiteralToken_SingleQuoteUnicode()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("N'name' ", useQuotedIdentifiers: false, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("N'name' ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -56,7 +56,7 @@ namespace Tests.Tokens
 		[Test]
 		public void StringLiteralToken_EmptyDoubleQuote()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("\"\" ", useQuotedIdentifiers: false, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("\"\" ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -69,7 +69,7 @@ namespace Tests.Tokens
 		[Test]
 		public void StringLiteralToken_DoubleQuote()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("\"name\" ", useQuotedIdentifiers: false, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("\"name\" ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
@@ -82,7 +82,7 @@ namespace Tests.Tokens
 		[Test]
 		public void StringLiteralToken_DoubleQuoteUnicode()
 		{
-			List<TSQLToken> tokens = TSQLLexer.ParseTokens("N\"name\" ", useQuotedIdentifiers: false, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("N\"name\" ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{

@@ -9,8 +9,7 @@ namespace TSQL.Tokens
 			string text) :
 			base(
 				beginPostion,
-				text,
-				TokenType.Identifier)
+				text)
 		{
 			if (Text.StartsWith("["))
 			{
@@ -34,6 +33,14 @@ namespace TSQL.Tokens
 			else
 			{
 				Name = Text;
+			}
+		}
+
+		public override TSQLTokenType Type
+		{
+			get
+			{
+				return TSQLTokenType.Identifier;
 			}
 		}
 

@@ -9,10 +9,17 @@ namespace TSQL.Tokens
 			string text) :
 			base(
 				beginPostion,
-				text,
-				TokenType.MultilineComment)
+				text)
 		{
 			Comment = Text.Substring(2, Text.Length - 4);
+		}
+
+		public override TSQLTokenType Type
+		{
+			get
+			{
+				return TSQLTokenType.MultilineComment;
+			}
 		}
 	}
 }
