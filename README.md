@@ -1,11 +1,12 @@
 # tsql-parser
 Library for parsing SQL Server TSQL scripts
 
+[![Travis](https://travis-ci.org/bruce-dunwiddie/tsql-parser.svg)](https://travis-ci.org/bruce-dunwiddie/tsql-parser/)
+
 ### Current Features
 - Full TSQL implementation.
-- Streaming tokenizer for parsing letter by letter.
-- Streaming lexer for combining letters into tokens.
-- Returns tokens of type comments, identifiers, keywords, literals, and operators.
+- Streaming tokenizer for parsing scripts into tokens.
+- Returns tokens of type characters, comments, identifiers, keywords, literals, variables, and operators.
 - Handles both single line and multi line comments.
 
 ### Some Possible Current Uses
