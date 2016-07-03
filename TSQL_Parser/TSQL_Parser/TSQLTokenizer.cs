@@ -5,6 +5,7 @@ using System.Linq;
 using System.IO;
 using System.Text;
 
+using TSQL.IO;
 using TSQL.Tokens;
 
 namespace TSQL

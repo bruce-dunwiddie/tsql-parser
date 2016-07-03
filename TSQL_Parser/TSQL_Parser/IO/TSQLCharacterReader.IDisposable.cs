@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TSQL
+namespace TSQL.IO
 {
 	public partial class TSQLCharacterReader : IDisposable
 	{
