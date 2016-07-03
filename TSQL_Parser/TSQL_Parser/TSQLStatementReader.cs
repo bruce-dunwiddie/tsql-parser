@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using TSQL.Statements;
 using TSQL.Statements.Builders;
 using TSQL.Tokens;
 
-namespace TSQL.Statements
+namespace TSQL
 {
 	public partial class TSQLStatementReader
 	{

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TSQL.Statements
+namespace TSQL
 {
 	public partial class TSQLStatementReader : IDisposable
 	{

@@ -40,24 +40,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-		<Compile Include="IO\BufferedTextReader.cs" />
-		<Compile Include="IO\ICharacterReader.cs" />
-		<Compile Include="IO\TSQLCharacterReader.cs" />
-		<Compile Include="IO\TSQLCharacterReader.IDisposable.cs">
-			<DependentUpon>TSQLCharacterReader.cs</DependentUpon>
-		</Compile>
+    <Compile Include="IO\BufferedTextReader.cs" />
+    <Compile Include="IO\ICharacterReader.cs" />
+    <Compile Include="IO\TSQLCharacterReader.cs" />
+    <Compile Include="IO\TSQLCharacterReader.IDisposable.cs">
+      <DependentUpon>TSQLCharacterReader.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Statements\Builders\ITSQLStatementBuilder.cs" />
     <Compile Include="Statements\Builders\TSQLSelectStatementBuilder.cs" />
-		<Compile Include="Statements\Builders\TSQLStatementBuilderFactory.cs" />
+    <Compile Include="Statements\Builders\TSQLStatementBuilderFactory.cs" />
     <Compile Include="Statements\Builders\TSQLUnknownStatementBuilder.cs" />
     <Compile Include="Statements\TSQLSelectStatement.cs" />
     <Compile Include="Statements\TSQLStatement.cs" />
-    <Compile Include="Statements\TSQLStatementReader.cs" />
-    <Compile Include="Statements\TSQLStatementReader.IDisposable.cs">
+    <Compile Include="TSQLStatementReader.cs" />
+    <Compile Include="TSQLStatementReader.IDisposable.cs">
       <DependentUpon>TSQLStatementReader.cs</DependentUpon>
     </Compile>
-    <Compile Include="Statements\TSQLStatementReader.IEnumerable.cs">
+    <Compile Include="TSQLStatementReader.IEnumerable.cs">
       <DependentUpon>TSQLStatementReader.cs</DependentUpon>
     </Compile>
     <Compile Include="Statements\TSQLStatementType.cs" />
