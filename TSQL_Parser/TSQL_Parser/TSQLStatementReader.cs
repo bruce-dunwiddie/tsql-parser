@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using TSQL.Statements;
-using TSQL.Statements.Builders;
+using TSQL.Statements.Parsers;
 using TSQL.Tokens;
 
 namespace TSQL
@@ -59,7 +59,7 @@ namespace TSQL
 				TSQLKeywords keyword = (_tokenizer.Current as TSQLKeyword).Keyword;
 				_tokenizer.Putback();
 
-				_current = new TSQLStatementBuilderFactory().Create(keyword).Build(_tokenizer);
+				_current = new TSQLStatementParserFactory().Create(keyword).Parse(_tokenizer);
 			}
 
 			return _hasMore;
@@ -89,14 +89,15 @@ namespace TSQL
 
 		public static List<TSQLStatement> ParseStatements(
 			string statements,
-			bool useQuotedIdentifiers = false)
+			bool useQuotedIdentifiers = false,
+			bool includeWhitespace = false)
 		{
 			return new TSQLStatementReader(
 				new TSQLTokenizer(
 					new StringReader(
 						statements))
 				{
-					IncludeWhitespace = true,
+					IncludeWhitespace = includeWhitespace,
 					UseQuotedIdentifiers = useQuotedIdentifiers
 				}).ToList();
 		}

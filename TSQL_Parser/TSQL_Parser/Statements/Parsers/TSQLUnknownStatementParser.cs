@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 using TSQL.Tokens;
 
-namespace TSQL.Statements.Builders
+namespace TSQL.Statements.Parsers
 {
-	public class TSQLUnknownStatementBuilder : ITSQLStatementBuilder
+	public class TSQLUnknownStatementParser : ITSQLStatementParser
 	{
-		public TSQLStatement Build(TSQLTokenizer tokenizer)
+		public TSQLStatement Parse(TSQLTokenizer tokenizer)
 		{
 			TSQLUnknownStatement statement = new TSQLUnknownStatement();
 

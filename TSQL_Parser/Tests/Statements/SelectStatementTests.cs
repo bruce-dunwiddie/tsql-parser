@@ -18,7 +18,8 @@ namespace Tests.Statements
 		public void SelectStatement_SelectLiteral()
 		{
 			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
-				"select 1;");
+				"select 1;",
+				includeWhitespace : true);
 			Assert.IsNotNull(statements);
 			Assert.AreEqual(1, statements.Count);
 			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
@@ -33,7 +34,8 @@ namespace Tests.Statements
 		public void SelectStatement_TwoLiteralSelects()
 		{
 			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
-				"select 1;select 2;");
+				"select 1;select 2;",
+				includeWhitespace: true);
 			Assert.IsNotNull(statements);
 			Assert.AreEqual(2, statements.Count);
 			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
@@ -48,6 +50,26 @@ namespace Tests.Statements
 			Assert.AreEqual(" ", statements[1].Tokens[1].AsWhitespace.Text);
 			Assert.AreEqual("2", statements[1].Tokens[2].AsNumericLiteral.Text);
 			Assert.AreEqual(TSQLCharacters.Semicolon, statements[1].Tokens[3].AsCharacter.Character);
+		}
+
+		[Test]
+		public void SelectStatement_CorrelatedSelect()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				"select (select 1);",
+				includeWhitespace: true);
+			Assert.IsNotNull(statements);
+			Assert.AreEqual(1, statements.Count);
+			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
+			Assert.AreEqual(8, statements[0].Tokens.Count);
+			Assert.AreEqual(TSQLKeywords.SELECT, statements[0].Tokens[0].AsKeyword.Keyword);
+			Assert.AreEqual(" ", statements[0].Tokens[1].AsWhitespace.Text);
+			Assert.AreEqual("(", statements[0].Tokens[2].AsCharacter.Text);
+			Assert.AreEqual("select", statements[0].Tokens[3].AsKeyword.Text);
+			Assert.AreEqual(" ", statements[0].Tokens[4].AsWhitespace.Text);
+			Assert.AreEqual("1", statements[0].Tokens[5].AsNumericLiteral.Text);
+			Assert.AreEqual(")", statements[0].Tokens[6].AsCharacter.Text);
+			Assert.AreEqual(";", statements[0].Tokens[7].AsCharacter.Text);
 		}
 
 		[Test]
@@ -68,7 +90,8 @@ namespace Tests.Statements
 					count(*) > 1
 				order by
 					t.a,
-					t.b;");
+					t.b;",
+				includeWhitespace: true);
 			Assert.IsNotNull(statements);
 			Assert.AreEqual(1, statements.Count);
 			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
