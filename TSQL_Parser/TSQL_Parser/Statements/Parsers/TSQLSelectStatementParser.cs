@@ -32,36 +32,15 @@ namespace TSQL.Statements.Parsers
 			int nestedLevel = 0;
 
 			if (
+				tokenizer.Current != null &&
 				tokenizer.Current.Type == TSQLTokenType.Keyword &&
 				tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.INTO
 			)
 			{
-				while (
-					tokenizer.Read() &&
-					!(
-						tokenizer.Current.Type == TSQLTokenType.Character &&
-						tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
-					) &&
-					!(
-						tokenizer.Current.Type == TSQLTokenType.Keyword &&
-						(
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.FROM ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.WHERE ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.GROUP ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.HAVING ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.UNION ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.EXCEPT ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.INTERSECT ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.ORDER ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.FOR ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.OPTION
-						)
-					))
-				{
-					select.Tokens.Add(tokenizer.Current);
-				}
-			}
+				// TSQLIntoClause intoClause = new TSQLIntoClauseParser().Parse(tokenizer);
 
+				// select.Tokens.AddRange(intoClause.Tokens);
+			}
 
 			if (
 				tokenizer.Current.Type == TSQLTokenType.Keyword &&
@@ -313,10 +292,6 @@ namespace TSQL.Statements.Parsers
 			)
 			{
 				select.Tokens.Add(tokenizer.Current);
-			}
-			else if (tokenizer.Current != null)
-			{
-				tokenizer.Putback();
 			}
 
 			return select;
