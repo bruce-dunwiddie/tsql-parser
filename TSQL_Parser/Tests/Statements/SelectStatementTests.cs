@@ -95,7 +95,7 @@ namespace Tests.Statements
 			Assert.IsNotNull(statements);
 			Assert.AreEqual(1, statements.Count);
 			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
-			Assert.AreEqual(90, statements[0].Tokens.Count);
+			Assert.AreEqual(95, statements[0].Tokens.Count);
 			Assert.AreEqual(TSQLKeywords.SELECT, statements[0].Tokens[0].AsKeyword.Keyword);
 			Assert.AreEqual(" ", statements[0].Tokens[1].AsWhitespace.Text);
 			Assert.AreEqual("t", statements[0].Tokens[2].AsIdentifier.Name);
