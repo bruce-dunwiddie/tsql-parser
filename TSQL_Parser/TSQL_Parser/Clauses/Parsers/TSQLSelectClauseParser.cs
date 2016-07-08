@@ -12,7 +12,7 @@ namespace TSQL.Clauses.Parsers
 {
 	public class TSQLSelectClauseParser
 	{
-		public TSQLSelectClause Build(TSQLTokenizer tokenizer)
+		public TSQLSelectClause Parse(TSQLTokenizer tokenizer)
 		{
 			TSQLSelectClause select = new TSQLSelectClause();
 

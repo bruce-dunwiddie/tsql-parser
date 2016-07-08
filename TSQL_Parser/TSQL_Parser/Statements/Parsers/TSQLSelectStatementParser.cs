@@ -25,7 +25,7 @@ namespace TSQL.Statements.Parsers
 
 			// SELECT clause
 
-			TSQLSelectClause selectClause = new TSQLSelectClauseParser().Build(tokenizer);
+			TSQLSelectClause selectClause = new TSQLSelectClauseParser().Parse(tokenizer);
 
 			select.Tokens.AddRange(selectClause.Tokens);
 

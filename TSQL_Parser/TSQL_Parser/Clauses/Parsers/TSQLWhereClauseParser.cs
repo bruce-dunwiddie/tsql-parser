@@ -8,7 +8,7 @@ namespace TSQL.Clauses.Parsers
 {
 	public class TSQLWhereClauseParser
 	{
-		public TSQLWhereClause Build(TSQLTokenizer tokenizer)
+		public TSQLWhereClause Parse(TSQLTokenizer tokenizer)
 		{
 			TSQLWhereClause where = new TSQLWhereClause();
 

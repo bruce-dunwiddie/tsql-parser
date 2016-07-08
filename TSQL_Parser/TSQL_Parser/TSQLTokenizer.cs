@@ -675,13 +675,6 @@ namespace TSQL
 			}
 		}
 
-		public void Putback()
-		{
-			_hasExtra = true;
-			_extraToken = Current;
-			_hasMore = true;
-		}
-
 		public static List<TSQLToken> ParseTokens(
 			string definition,
 			bool useQuotedIdentifiers = false,
