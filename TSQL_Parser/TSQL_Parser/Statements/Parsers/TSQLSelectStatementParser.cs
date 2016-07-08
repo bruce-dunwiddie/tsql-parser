@@ -287,6 +287,7 @@ namespace TSQL.Statements.Parsers
 			}
 
 			if (
+				tokenizer.Current != null &&
 				tokenizer.Current.Type == TSQLTokenType.Character &&
 				tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
 			)
