@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +16,7 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLSelectClause select = new TSQLSelectClause();
 
-			TSQLKeyword keyword = tokenizer.Next().AsKeyword;
+			TSQLKeyword keyword = tokenizer.Current.AsKeyword;
 
 			// assert SELECT
 
@@ -80,11 +80,12 @@ namespace TSQL.Clauses.Parsers
 								tokenizer.Current.Type == TSQLTokenType.Keyword &&
 								tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.SELECT)
 							{
-								tokenizer.Putback();
-
 								TSQLSelectStatement selectStatement = new TSQLSelectStatementParser().Parse(tokenizer);
 
 								select.Tokens.AddRange(selectStatement.Tokens);
+
+								// close parentheses
+								select.Tokens.Add(tokenizer.Current);
 							}
 							else
 							{
