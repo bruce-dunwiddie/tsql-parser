@@ -14,8 +14,18 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLWhereClause where = new TSQLWhereClause();
 
-			// subqueries
-			int nestedLevel = 0;
+            TSQLKeyword keyword = tokenizer.Current.AsKeyword;
+
+            if (keyword == null ||
+                keyword.Keyword != TSQLKeywords.WHERE)
+            {
+                throw new ApplicationException("WHERE expected.");
+            }
+
+            where.Tokens.Add(keyword);
+
+            // subqueries
+            int nestedLevel = 0;
 
 			while (
 				tokenizer.Read() &&

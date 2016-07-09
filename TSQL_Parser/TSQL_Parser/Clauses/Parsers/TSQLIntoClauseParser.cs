@@ -14,7 +14,17 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLIntoClause into = new TSQLIntoClause();
 
-			while (
+            if (
+                tokenizer.Current == null ||
+                tokenizer.Current.Type != TSQLTokenType.Keyword ||
+                tokenizer.Current.AsKeyword.Keyword != TSQLKeywords.INTO)
+            {
+                throw new ApplicationException("INTO expected.");
+            }
+
+            into.Tokens.Add(tokenizer.Current);
+
+            while (
 				tokenizer.Read() &&
 				!(
 					tokenizer.Current is TSQLCharacter &&

@@ -14,8 +14,18 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLGroupByClause groupBy = new TSQLGroupByClause();
 
-			// subqueries
-			int nestedLevel = 0;
+            if (
+                tokenizer.Current == null ||
+                tokenizer.Current.Type != TSQLTokenType.Keyword ||
+                tokenizer.Current.AsKeyword.Keyword != TSQLKeywords.GROUP)
+            {
+                throw new ApplicationException("GROUP expected.");
+            }
+
+            groupBy.Tokens.Add(tokenizer.Current);
+
+            // subqueries
+            int nestedLevel = 0;
 
 			while (
 				tokenizer.Read() &&

@@ -14,9 +14,19 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLFromClause from = new TSQLFromClause();
 
-			// derived tables
-			// TVF
-			int nestedLevel = 0;
+            if (
+                tokenizer.Current == null ||
+                tokenizer.Current.Type != TSQLTokenType.Keyword ||
+                tokenizer.Current.AsKeyword.Keyword != TSQLKeywords.FROM)
+            {
+                throw new ApplicationException("FROM expected.");
+            }
+
+            from.Tokens.Add(tokenizer.Current);
+
+            // derived tables
+            // TVF
+            int nestedLevel = 0;
 
 			while (
 				tokenizer.Read() &&

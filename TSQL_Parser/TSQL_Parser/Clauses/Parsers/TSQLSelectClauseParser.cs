@@ -16,17 +16,15 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLSelectClause select = new TSQLSelectClause();
 
-			TSQLKeyword keyword = tokenizer.Current.AsKeyword;
-
-			// assert SELECT
-
-			if (keyword == null ||
-				keyword.Keyword != TSQLKeywords.SELECT)
+			if (
+                tokenizer.Current == null ||
+                tokenizer.Current.Type != TSQLTokenType.Keyword ||
+                tokenizer.Current.AsKeyword.Keyword != TSQLKeywords.SELECT)
 			{
 				throw new ApplicationException("SELECT expected.");
 			}
 
-			select.Tokens.Add(keyword);
+			select.Tokens.Add(tokenizer.Current);
 
 			// can contain ALL, DISTINCT, TOP, PERCENT, WITH TIES, AS
 
@@ -84,8 +82,14 @@ namespace TSQL.Clauses.Parsers
 
 								select.Tokens.AddRange(selectStatement.Tokens);
 
-								// close parentheses
-								select.Tokens.Add(tokenizer.Current);
+                                if (
+                                    tokenizer.Current != null &&
+                                    tokenizer.Current.Type == TSQLTokenType.Character &&
+                                    tokenizer.Current.AsCharacter.Character == TSQLCharacters.CloseParentheses)
+                                {
+                                    nestedLevel--;
+                                    select.Tokens.Add(tokenizer.Current);
+                                }
 							}
 							else
 							{

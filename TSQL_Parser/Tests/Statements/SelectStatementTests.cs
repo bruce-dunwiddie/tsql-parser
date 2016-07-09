@@ -9,6 +9,8 @@ using NUnit.Framework;
 using TSQL;
 using TSQL.Statements;
 
+using Tests.Tokens;
+
 namespace Tests.Statements
 {
 	[TestFixture(Category = "Statement Parsing")]

@@ -14,8 +14,18 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLOrderByClause orderBy = new TSQLOrderByClause();
 
-			// subqueries
-			int nestedLevel = 0;
+            TSQLKeyword keyword = tokenizer.Current.AsKeyword;
+
+            if (keyword == null ||
+                keyword.Keyword != TSQLKeywords.ORDER)
+            {
+                throw new ApplicationException("ORDER expected.");
+            }
+
+            orderBy.Tokens.Add(keyword);
+
+            // subqueries
+            int nestedLevel = 0;
 
 			while (
 				tokenizer.Read() &&
