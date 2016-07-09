@@ -56,9 +56,7 @@ namespace TSQL
 					return _hasMore;
 				}
 
-				TSQLKeywords keyword = (_tokenizer.Current as TSQLKeyword).Keyword;
-
-				_current = new TSQLStatementParserFactory().Create(keyword).Parse(_tokenizer);
+				_current = new TSQLStatementParserFactory().Create(_tokenizer.Current).Parse(_tokenizer);
 			}
 
 			return _hasMore;

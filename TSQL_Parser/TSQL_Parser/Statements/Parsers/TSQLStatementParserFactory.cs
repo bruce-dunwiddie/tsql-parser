@@ -10,15 +10,24 @@ namespace TSQL.Statements.Parsers
 {
 	public class TSQLStatementParserFactory
 	{
-		public ITSQLStatementParser Create(TSQLKeywords keyword)
+		public ITSQLStatementParser Create(TSQLToken token)
 		{
-			if (keyword == TSQLKeywords.SELECT)
+			if (token.Type == TSQLTokenType.Keyword)
 			{
-				return new TSQLSelectStatementParser();
+				TSQLKeywords keyword = token.AsKeyword.Keyword;
+				
+				if (keyword == TSQLKeywords.SELECT)
+				{
+					return new TSQLSelectStatementParser();
+				}
+				else
+				{
+					return new TSQLUnknownStatementParser();
+				}
 			}
 			else
 			{
-				return new TSQLUnknownStatementParser();
+				return new TSQLExecuteStatementParser();
 			}
 		}
 	}

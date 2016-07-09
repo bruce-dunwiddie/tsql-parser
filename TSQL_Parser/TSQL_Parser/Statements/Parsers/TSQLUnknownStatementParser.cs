@@ -10,7 +10,7 @@ namespace TSQL.Statements.Parsers
 {
 	public class TSQLUnknownStatementParser : ITSQLStatementParser
 	{
-		public TSQLStatement Parse(TSQLTokenizer tokenizer)
+		public TSQLUnknownStatement Parse(TSQLTokenizer tokenizer)
 		{
 			TSQLUnknownStatement statement = new TSQLUnknownStatement();
 
@@ -24,7 +24,20 @@ namespace TSQL.Statements.Parsers
 				statement.Tokens.Add(tokenizer.Current);
 			}
 
+			if (
+				tokenizer.Current != null &&
+				tokenizer.Current is TSQLCharacter &&
+				tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon)
+			{
+				statement.Tokens.Add(tokenizer.Current);
+			}
+
 			return statement;
+		}
+
+		TSQLStatement ITSQLStatementParser.Parse(TSQLTokenizer tokenizer)
+		{
+			return Parse(tokenizer);
 		}
 	}
 }

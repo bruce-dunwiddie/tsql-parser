@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace TSQL.Statements
 {
-	public enum TSQLStatementType
+	public class TSQLExecuteStatement : TSQLStatement
 	{
-		Select,
-		Insert,
-		Update,
-		Delete,
-		With,
-		Execute,
-		Unknown
+		public override TSQLStatementType Type
+		{
+			get
+			{
+				return TSQLStatementType.Execute;
+			}
+		}
 	}
 }

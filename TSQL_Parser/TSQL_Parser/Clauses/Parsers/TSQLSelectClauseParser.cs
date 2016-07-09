@@ -10,7 +10,7 @@ using TSQL.Tokens;
 
 namespace TSQL.Clauses.Parsers
 {
-	public class TSQLSelectClauseParser
+	public class TSQLSelectClauseParser : ITSQLClauseParser
 	{
 		public TSQLSelectClause Parse(TSQLTokenizer tokenizer)
 		{
@@ -101,6 +101,11 @@ namespace TSQL.Clauses.Parsers
 			}
 
 			return select;
+		}
+
+		TSQLClause ITSQLClauseParser.Parse(TSQLTokenizer tokenizer)
+		{
+			return Parse(tokenizer);
 		}
 	}
 }

@@ -4,16 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TSQL.Statements
+namespace TSQL.Clauses
 {
-	public enum TSQLStatementType
+	public class TSQLGroupByClause : TSQLClause
 	{
-		Select,
-		Insert,
-		Update,
-		Delete,
-		With,
-		Execute,
-		Unknown
 	}
 }
