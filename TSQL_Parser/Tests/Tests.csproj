@@ -66,6 +66,7 @@
     <Compile Include="Tokens\SingleLineCommentTokenTests.cs" />
     <Compile Include="Tokens\StringLiteralTokenTests.cs" />
     <Compile Include="Tokens\TokenComparisons.cs" />
+    <Compile Include="Tokens\TokenExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TSQL_Parser\TSQL_Parser.csproj">
