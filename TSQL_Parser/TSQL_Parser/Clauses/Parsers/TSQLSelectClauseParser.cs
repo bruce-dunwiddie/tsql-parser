@@ -71,7 +71,8 @@ namespace TSQL.Clauses.Parsers
 							TSQLKeywords.IN,
 							TSQLKeywords.IS,
 							TSQLKeywords.NOT,
-							TSQLKeywords.OVER
+							TSQLKeywords.OVER,
+							TSQLKeywords.IDENTITY
 						)
 					)
 				))
