@@ -50,13 +50,28 @@ namespace TSQL.Clauses.Parsers
 					tokenizer.Current.Type != TSQLTokenType.Keyword ||
 					(
 						tokenizer.Current.Type == TSQLTokenType.Keyword &&
+						tokenizer.Current.AsKeyword.Keyword.In
 						(
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.ALL ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.AS ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.DISTINCT ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.PERCENT ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.TOP ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.WITH
+							TSQLKeywords.ALL,
+							TSQLKeywords.AS,
+							TSQLKeywords.DISTINCT,
+							TSQLKeywords.PERCENT,
+							TSQLKeywords.TOP,
+							TSQLKeywords.WITH,
+							TSQLKeywords.NULL,
+							TSQLKeywords.CASE,
+							TSQLKeywords.WHEN,
+							TSQLKeywords.THEN,
+							TSQLKeywords.ELSE,
+							TSQLKeywords.AND,
+							TSQLKeywords.OR,
+							TSQLKeywords.BETWEEN,
+							TSQLKeywords.EXISTS,
+							TSQLKeywords.END,
+							TSQLKeywords.IN,
+							TSQLKeywords.IS,
+							TSQLKeywords.NOT,
+							TSQLKeywords.OVER
 						)
 					)
 				))

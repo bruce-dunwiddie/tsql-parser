@@ -64,6 +64,7 @@ namespace TSQL.Tokens
 				// Only the left side is null.
 				return false;
 			}
+
 			// Equals handles case of null on right side.
 			return a.Equals(b);
 		}
