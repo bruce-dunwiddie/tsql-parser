@@ -26,21 +26,15 @@ namespace TSQL.Clauses.Parsers
 
             while (
 				tokenizer.Read() &&
-				!(
-					tokenizer.Current is TSQLCharacter &&
-					tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
-				) &&
-				!(
-					tokenizer.Current.Type == TSQLTokenType.Keyword &&
+				(
+					tokenizer.Current.Type == TSQLTokenType.Identifier ||
 					(
-						tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.FROM ||
-						tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.UNION ||
-						tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.EXCEPT ||
-						tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.INTERSECT ||
-						tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.ORDER ||
-						tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.FOR ||
-						tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.OPTION
-					)
+						tokenizer.Current.Type == TSQLTokenType.Character &&
+						tokenizer.Current.AsCharacter.Character == TSQLCharacters.Period
+					) ||
+					tokenizer.Current.Type == TSQLTokenType.Whitespace ||
+					tokenizer.Current.Type == TSQLTokenType.SingleLineComment ||
+					tokenizer.Current.Type == TSQLTokenType.MultilineComment
 				))
 			{
 				into.Tokens.Add(tokenizer.Current);
