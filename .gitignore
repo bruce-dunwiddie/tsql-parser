@@ -3,8 +3,6 @@
 ################################################################################
 
 /TSQL_Parser/.vs/TSQL_Parser/v14
-/TSQL_Parser/UpgradeLog.htm
-/TSQL_Parser/UpgradeLog2.htm
 /TSQL_Parser/TSQL_Parser/obj/Debug
 /TSQL_Parser/TSQL_Parser/bin/Debug
 /TSQL_Parser/Tests/bin/Debug
@@ -14,4 +12,3 @@
 /TSQL_Parser/Tests/obj/Release
 /TSQL_Parser/TSQL_Parser/bin/Release
 /TSQL_Parser/TSQL_Parser/obj/Release
-/TSQL_Parser/UpgradeLog3.htm
