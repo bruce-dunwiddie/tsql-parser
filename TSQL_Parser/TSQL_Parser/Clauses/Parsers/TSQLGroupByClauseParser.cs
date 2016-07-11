@@ -1,9 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using TSQL.Statements;
+using TSQL.Statements.Parsers;
 using TSQL.Tokens;
 
 namespace TSQL.Clauses.Parsers
@@ -14,18 +16,18 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLGroupByClause groupBy = new TSQLGroupByClause();
 
-            if (
-                tokenizer.Current == null ||
-                tokenizer.Current.Type != TSQLTokenType.Keyword ||
-                tokenizer.Current.AsKeyword.Keyword != TSQLKeywords.GROUP)
-            {
-                throw new ApplicationException("GROUP expected.");
-            }
+			if (
+				tokenizer.Current == null ||
+				tokenizer.Current.Type != TSQLTokenType.Keyword ||
+				tokenizer.Current.AsKeyword.Keyword != TSQLKeywords.GROUP)
+			{
+				throw new ApplicationException("GROUP expected.");
+			}
 
-            groupBy.Tokens.Add(tokenizer.Current);
+			groupBy.Tokens.Add(tokenizer.Current);
 
-            // subqueries
-            int nestedLevel = 0;
+			// subqueries
+			int nestedLevel = 0;
 
 			while (
 				tokenizer.Read() &&
@@ -33,18 +35,34 @@ namespace TSQL.Clauses.Parsers
 					tokenizer.Current.Type == TSQLTokenType.Character &&
 					tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
 				) &&
+				!(
+					nestedLevel == 0 &&
+					tokenizer.Current.Type == TSQLTokenType.Character &&
+					tokenizer.Current.AsCharacter.Character == TSQLCharacters.CloseParentheses
+				) &&
 				(
 					nestedLevel > 0 ||
-					!(
+					tokenizer.Current.Type != TSQLTokenType.Keyword ||
+					(
 						tokenizer.Current.Type == TSQLTokenType.Keyword &&
+						tokenizer.Current.AsKeyword.Keyword.In
 						(
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.HAVING ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.UNION ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.EXCEPT ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.INTERSECT ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.ORDER ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.FOR ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.OPTION
+							TSQLKeywords.BY,
+							TSQLKeywords.NULL,
+							TSQLKeywords.CASE,
+							TSQLKeywords.WHEN,
+							TSQLKeywords.THEN,
+							TSQLKeywords.ELSE,
+							TSQLKeywords.AND,
+							TSQLKeywords.OR,
+							TSQLKeywords.BETWEEN,
+							TSQLKeywords.EXISTS,
+							TSQLKeywords.END,
+							TSQLKeywords.IN,
+							TSQLKeywords.IS,
+							TSQLKeywords.NOT,
+							TSQLKeywords.OVER,
+							TSQLKeywords.LIKE
 						)
 					)
 				))
@@ -59,6 +77,31 @@ namespace TSQL.Clauses.Parsers
 					{
 						// should we recurse for subqueries?
 						nestedLevel++;
+
+						if (tokenizer.Read())
+						{
+							if (
+								tokenizer.Current.Type == TSQLTokenType.Keyword &&
+								tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.SELECT)
+							{
+								TSQLSelectStatement selectStatement = new TSQLSelectStatementParser().Parse(tokenizer);
+
+								groupBy.Tokens.AddRange(selectStatement.Tokens);
+
+								if (
+									tokenizer.Current != null &&
+									tokenizer.Current.Type == TSQLTokenType.Character &&
+									tokenizer.Current.AsCharacter.Character == TSQLCharacters.CloseParentheses)
+								{
+									nestedLevel--;
+									groupBy.Tokens.Add(tokenizer.Current);
+								}
+							}
+							else
+							{
+								groupBy.Tokens.Add(tokenizer.Current);
+							}
+						}
 					}
 					else if (character == TSQLCharacters.CloseParentheses)
 					{
