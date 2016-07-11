@@ -59,7 +59,8 @@ namespace TSQL.Clauses.Parsers
 							TSQLKeywords.END,
 							TSQLKeywords.IN,
 							TSQLKeywords.IS,
-							TSQLKeywords.NOT
+							TSQLKeywords.NOT,
+							TSQLKeywords.LIKE
 						)
 					)
 				))
