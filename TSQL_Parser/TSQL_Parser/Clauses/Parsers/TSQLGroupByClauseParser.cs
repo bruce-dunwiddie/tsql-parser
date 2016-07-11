@@ -62,7 +62,10 @@ namespace TSQL.Clauses.Parsers
 							TSQLKeywords.IS,
 							TSQLKeywords.NOT,
 							TSQLKeywords.OVER,
-							TSQLKeywords.LIKE
+							TSQLKeywords.LIKE,
+							TSQLKeywords.ALL,
+							TSQLKeywords.WITH,
+							TSQLKeywords.DISTINCT
 						)
 					)
 				))
