@@ -1,9 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using TSQL.Statements;
+using TSQL.Statements.Parsers;
 using TSQL.Tokens;
 
 namespace TSQL.Clauses.Parsers
@@ -14,18 +16,18 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLOrderByClause orderBy = new TSQLOrderByClause();
 
-            TSQLKeyword keyword = tokenizer.Current.AsKeyword;
+			TSQLKeyword keyword = tokenizer.Current.AsKeyword;
 
-            if (keyword == null ||
-                keyword.Keyword != TSQLKeywords.ORDER)
-            {
-                throw new ApplicationException("ORDER expected.");
-            }
+			if (keyword == null ||
+				keyword.Keyword != TSQLKeywords.ORDER)
+			{
+				throw new ApplicationException("ORDER expected.");
+			}
 
-            orderBy.Tokens.Add(keyword);
+			orderBy.Tokens.Add(keyword);
 
-            // subqueries
-            int nestedLevel = 0;
+			// subqueries
+			int nestedLevel = 0;
 
 			while (
 				tokenizer.Read() &&
@@ -33,13 +35,38 @@ namespace TSQL.Clauses.Parsers
 					tokenizer.Current.Type == TSQLTokenType.Character &&
 					tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
 				) &&
+				!(
+					nestedLevel == 0 &&
+					tokenizer.Current.Type == TSQLTokenType.Character &&
+					tokenizer.Current.AsCharacter.Character == TSQLCharacters.CloseParentheses
+				) &&
 				(
 					nestedLevel > 0 ||
-					!(
+					tokenizer.Current.Type != TSQLTokenType.Keyword ||
+					(
 						tokenizer.Current.Type == TSQLTokenType.Keyword &&
+						tokenizer.Current.AsKeyword.Keyword.In
 						(
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.FOR ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.OPTION
+							TSQLKeywords.BY,
+							TSQLKeywords.NULL,
+							TSQLKeywords.CASE,
+							TSQLKeywords.WHEN,
+							TSQLKeywords.THEN,
+							TSQLKeywords.ELSE,
+							TSQLKeywords.AND,
+							TSQLKeywords.OR,
+							TSQLKeywords.BETWEEN,
+							TSQLKeywords.EXISTS,
+							TSQLKeywords.END,
+							TSQLKeywords.IN,
+							TSQLKeywords.IS,
+							TSQLKeywords.NOT,
+							TSQLKeywords.OVER,
+							TSQLKeywords.LIKE,
+							TSQLKeywords.ASC,
+							TSQLKeywords.DESC,
+							TSQLKeywords.FETCH,
+							TSQLKeywords.COLLATE
 						)
 					)
 				))
@@ -54,6 +81,31 @@ namespace TSQL.Clauses.Parsers
 					{
 						// should we recurse for subqueries?
 						nestedLevel++;
+
+						if (tokenizer.Read())
+						{
+							if (
+								tokenizer.Current.Type == TSQLTokenType.Keyword &&
+								tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.SELECT)
+							{
+								TSQLSelectStatement selectStatement = new TSQLSelectStatementParser().Parse(tokenizer);
+
+								orderBy.Tokens.AddRange(selectStatement.Tokens);
+
+								if (
+									tokenizer.Current != null &&
+									tokenizer.Current.Type == TSQLTokenType.Character &&
+									tokenizer.Current.AsCharacter.Character == TSQLCharacters.CloseParentheses)
+								{
+									nestedLevel--;
+									orderBy.Tokens.Add(tokenizer.Current);
+								}
+							}
+							else
+							{
+								orderBy.Tokens.Add(tokenizer.Current);
+							}
+						}
 					}
 					else if (character == TSQLCharacters.CloseParentheses)
 					{
