@@ -1,9 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using TSQL.Statements;
+using TSQL.Statements.Parsers;
 using TSQL.Tokens;
 
 namespace TSQL.Clauses.Parsers
@@ -34,20 +36,39 @@ namespace TSQL.Clauses.Parsers
 					tokenizer.Current.Type == TSQLTokenType.Character &&
 					tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
 				) &&
+				!(
+					nestedLevel == 0 &&
+					tokenizer.Current.Type == TSQLTokenType.Character &&
+					tokenizer.Current.AsCharacter.Character == TSQLCharacters.CloseParentheses
+				) &&
 				(
 					nestedLevel > 0 ||
-					!(
+					tokenizer.Current.Type != TSQLTokenType.Keyword ||
+					(
 						tokenizer.Current.Type == TSQLTokenType.Keyword &&
+						tokenizer.Current.AsKeyword.Keyword.In
 						(
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.WHERE ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.GROUP ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.HAVING ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.UNION ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.EXCEPT ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.INTERSECT ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.ORDER ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.FOR ||
-							tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.OPTION
+							TSQLKeywords.JOIN,
+							TSQLKeywords.ON,
+							TSQLKeywords.INNER,
+							TSQLKeywords.LEFT,
+							TSQLKeywords.RIGHT,
+							TSQLKeywords.OUTER,
+							TSQLKeywords.CROSS,
+							TSQLKeywords.FULL,
+							TSQLKeywords.AS,
+							TSQLKeywords.PIVOT,
+							TSQLKeywords.UNPIVOT,
+							TSQLKeywords.WITH,
+							TSQLKeywords.MERGE,
+							TSQLKeywords.TABLESAMPLE,
+							TSQLKeywords.FOR,
+							TSQLKeywords.FROM, // FOR SYSTEM_TIME FROM
+							TSQLKeywords.BETWEEN,
+							TSQLKeywords.AND,
+							TSQLKeywords.IN,
+							TSQLKeywords.REPEATABLE,
+							TSQLKeywords.ALL
 						)
 					)
 				))
@@ -62,6 +83,31 @@ namespace TSQL.Clauses.Parsers
 					{
 						// should we recurse for derived tables?
 						nestedLevel++;
+
+						if (tokenizer.Read())
+						{
+							if (
+								tokenizer.Current.Type == TSQLTokenType.Keyword &&
+								tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.SELECT)
+							{
+								TSQLSelectStatement selectStatement = new TSQLSelectStatementParser().Parse(tokenizer);
+
+								from.Tokens.AddRange(selectStatement.Tokens);
+
+								if (
+									tokenizer.Current != null &&
+									tokenizer.Current.Type == TSQLTokenType.Character &&
+									tokenizer.Current.AsCharacter.Character == TSQLCharacters.CloseParentheses)
+								{
+									nestedLevel--;
+									from.Tokens.Add(tokenizer.Current);
+								}
+							}
+							else
+							{
+								from.Tokens.Add(tokenizer.Current);
+							}
+						}
 					}
 					else if (character == TSQLCharacters.CloseParentheses)
 					{
@@ -75,7 +121,7 @@ namespace TSQL.Clauses.Parsers
 
 		TSQLClause ITSQLClauseParser.Parse(TSQLTokenizer tokenizer)
 		{
-			throw new NotImplementedException();
+			return Parse(tokenizer);
 		}
 	}
 }
