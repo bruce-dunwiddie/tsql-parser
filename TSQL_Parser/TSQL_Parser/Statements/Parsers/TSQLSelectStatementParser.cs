@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +27,8 @@ namespace TSQL.Statements.Parsers
 
 			TSQLSelectClause selectClause = new TSQLSelectClauseParser().Parse(tokenizer);
 
+			select.Select = selectClause;
+
 			select.Tokens.AddRange(selectClause.Tokens);
 
 			if (
@@ -36,6 +38,8 @@ namespace TSQL.Statements.Parsers
 			)
 			{
 				TSQLIntoClause intoClause = new TSQLIntoClauseParser().Parse(tokenizer);
+
+				select.Into = intoClause;
 
 				select.Tokens.AddRange(intoClause.Tokens);
 			}
@@ -48,6 +52,8 @@ namespace TSQL.Statements.Parsers
 			{
 				TSQLFromClause fromClause = new TSQLFromClauseParser().Parse(tokenizer);
 
+				select.From = fromClause;
+
 				select.Tokens.AddRange(fromClause.Tokens);
 			}
 
@@ -57,6 +63,8 @@ namespace TSQL.Statements.Parsers
 			)
 			{
 				TSQLWhereClause whereClause = new TSQLWhereClauseParser().Parse(tokenizer);
+
+				select.Where = whereClause;
 
 				select.Tokens.AddRange(whereClause.Tokens);
 			}
@@ -68,6 +76,8 @@ namespace TSQL.Statements.Parsers
 			{
 				TSQLGroupByClause groupByClause = new TSQLGroupByClauseParser().Parse(tokenizer);
 
+				select.GroupBy = groupByClause;
+
 				select.Tokens.AddRange(groupByClause.Tokens);
 			}
 
@@ -78,6 +88,8 @@ namespace TSQL.Statements.Parsers
 			{
 				TSQLHavingClause havingClause = new TSQLHavingClauseParser().Parse(tokenizer);
 
+				select.Having = havingClause;
+
 				select.Tokens.AddRange(havingClause.Tokens);
 			}
 
@@ -87,6 +99,8 @@ namespace TSQL.Statements.Parsers
 			)
 			{
 				TSQLOrderByClause orderByClause = new TSQLOrderByClauseParser().Parse(tokenizer);
+
+				select.OrderBy = orderByClause;
 
 				select.Tokens.AddRange(orderByClause.Tokens);
 			}
