@@ -31,11 +31,7 @@ namespace TSQL.Statements.Parsers
 
 			select.Tokens.AddRange(selectClause.Tokens);
 
-			if (
-				tokenizer.Current != null &&
-				tokenizer.Current.Type == TSQLTokenType.Keyword &&
-				tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.INTO
-			)
+			if (tokenizer.Current.IsKeyword(TSQLKeywords.INTO))
 			{
 				TSQLIntoClause intoClause = new TSQLIntoClauseParser().Parse(tokenizer);
 
@@ -44,11 +40,7 @@ namespace TSQL.Statements.Parsers
 				select.Tokens.AddRange(intoClause.Tokens);
 			}
 
-			if (
-				tokenizer.Current != null &&
-				tokenizer.Current.Type == TSQLTokenType.Keyword &&
-				tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.FROM
-			)
+			if (tokenizer.Current.IsKeyword(TSQLKeywords.FROM))
 			{
 				TSQLFromClause fromClause = new TSQLFromClauseParser().Parse(tokenizer);
 
@@ -57,11 +49,7 @@ namespace TSQL.Statements.Parsers
 				select.Tokens.AddRange(fromClause.Tokens);
 			}
 
-			if (
-				tokenizer.Current != null &&
-				tokenizer.Current.Type == TSQLTokenType.Keyword &&
-				tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.WHERE
-			)
+			if (tokenizer.Current.IsKeyword(TSQLKeywords.WHERE))
 			{
 				TSQLWhereClause whereClause = new TSQLWhereClauseParser().Parse(tokenizer);
 
@@ -70,11 +58,7 @@ namespace TSQL.Statements.Parsers
 				select.Tokens.AddRange(whereClause.Tokens);
 			}
 
-			if (
-				tokenizer.Current != null &&
-				tokenizer.Current.Type == TSQLTokenType.Keyword &&
-				tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.GROUP
-			)
+			if (tokenizer.Current.IsKeyword(TSQLKeywords.GROUP))
 			{
 				TSQLGroupByClause groupByClause = new TSQLGroupByClauseParser().Parse(tokenizer);
 
@@ -83,11 +67,7 @@ namespace TSQL.Statements.Parsers
 				select.Tokens.AddRange(groupByClause.Tokens);
 			}
 
-			if (
-				tokenizer.Current != null &&
-				tokenizer.Current.Type == TSQLTokenType.Keyword &&
-				tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.HAVING
-			)
+			if (tokenizer.Current.IsKeyword(TSQLKeywords.HAVING))
 			{
 				TSQLHavingClause havingClause = new TSQLHavingClauseParser().Parse(tokenizer);
 
@@ -96,11 +76,7 @@ namespace TSQL.Statements.Parsers
 				select.Tokens.AddRange(havingClause.Tokens);
 			}
 
-			if (
-				tokenizer.Current != null &&
-				tokenizer.Current.Type == TSQLTokenType.Keyword &&
-				tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.ORDER
-			)
+			if (tokenizer.Current.IsKeyword(TSQLKeywords.ORDER))
 			{
 				TSQLOrderByClause orderByClause = new TSQLOrderByClauseParser().Parse(tokenizer);
 
@@ -109,11 +85,7 @@ namespace TSQL.Statements.Parsers
 				select.Tokens.AddRange(orderByClause.Tokens);
 			}
 
-			if (
-				tokenizer.Current != null &&
-				tokenizer.Current.Type == TSQLTokenType.Character &&
-				tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
-			)
+			if (tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon))
 			{
 				select.Tokens.Add(tokenizer.Current);
 			}
