@@ -58,6 +58,7 @@ namespace TSQL.Statements.Parsers
 			}
 
 			if (
+				tokenizer.Current != null &&
 				tokenizer.Current.Type == TSQLTokenType.Keyword &&
 				tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.WHERE
 			)
@@ -70,6 +71,7 @@ namespace TSQL.Statements.Parsers
 			}
 
 			if (
+				tokenizer.Current != null &&
 				tokenizer.Current.Type == TSQLTokenType.Keyword &&
 				tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.GROUP
 			)
@@ -82,6 +84,7 @@ namespace TSQL.Statements.Parsers
 			}
 
 			if (
+				tokenizer.Current != null &&
 				tokenizer.Current.Type == TSQLTokenType.Keyword &&
 				tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.HAVING
 			)
@@ -94,6 +97,7 @@ namespace TSQL.Statements.Parsers
 			}
 
 			if (
+				tokenizer.Current != null &&
 				tokenizer.Current.Type == TSQLTokenType.Keyword &&
 				tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.ORDER
 			)
