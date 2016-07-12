@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace TSQL.Tokens
 {
@@ -34,7 +34,7 @@ namespace TSQL.Tokens
 		{
 			get
 			{
-				return Text.Length;		
+				return Text.Length;
 			}
 		}
 
@@ -215,6 +215,49 @@ namespace TSQL.Tokens
 			{
 				return this as TSQLWhitespace;
 			}
+		}
+	}
+
+	public static class TSQLTokenExtensions
+	{
+		public static bool IsKeyword(this TSQLToken token, TSQLKeywords keyword)
+		{
+			if (token == null)
+			{
+				return false;
+			}
+
+			if (token.Type != TSQLTokenType.Keyword)
+			{
+				return false;
+			}
+
+			if (token.AsKeyword.Keyword != keyword)
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		public static bool IsCharacter(this TSQLToken token, TSQLCharacters character)
+		{
+			if (token == null)
+			{
+				return false;
+			}
+
+			if (token.Type != TSQLTokenType.Character)
+			{
+				return false;
+			}
+
+			if (token.AsCharacter.Character != character)
+			{
+				return false;
+			}
+
+			return true;
 		}
 	}
 }
