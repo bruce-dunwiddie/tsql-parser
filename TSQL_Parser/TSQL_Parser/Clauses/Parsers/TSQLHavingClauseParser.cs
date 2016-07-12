@@ -16,18 +16,18 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLHavingClause having = new TSQLHavingClause();
 
-            if (
-                tokenizer.Current == null ||
-                tokenizer.Current.Type != TSQLTokenType.Keyword ||
-                tokenizer.Current.AsKeyword.Keyword != TSQLKeywords.HAVING)
-            {
-                throw new ApplicationException("HAVING expected.");
-            }
+			if (
+				tokenizer.Current == null ||
+				tokenizer.Current.Type != TSQLTokenType.Keyword ||
+				tokenizer.Current.AsKeyword.Keyword != TSQLKeywords.HAVING)
+			{
+				throw new ApplicationException("HAVING expected.");
+			}
 
-            having.Tokens.Add(tokenizer.Current);
+			having.Tokens.Add(tokenizer.Current);
 
-            // subqueries
-            int nestedLevel = 0;
+			// subqueries
+			int nestedLevel = 0;
 
 			while (
 				tokenizer.Read() &&
