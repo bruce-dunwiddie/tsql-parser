@@ -8,9 +8,14 @@ namespace TSQL.Statements.Parsers
 {
 	public class TSQLWithStatementParser : ITSQLStatementParser
 	{
-		TSQLStatement ITSQLStatementParser.Parse(TSQLTokenizer tokenizer)
+		public TSQLWithStatement Parse(TSQLTokenizer tokenizer)
 		{
 			throw new NotImplementedException();
+		}
+
+		TSQLStatement ITSQLStatementParser.Parse(TSQLTokenizer tokenizer)
+		{
+			return Parse(tokenizer);
 		}
 	}
 }

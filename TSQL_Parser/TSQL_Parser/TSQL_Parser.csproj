@@ -71,6 +71,7 @@
     <Compile Include="Statements\Parsers\TSQLStatementParserFactory.cs" />
     <Compile Include="Statements\Parsers\TSQLUnknownStatementParser.cs" />
     <Compile Include="Statements\Parsers\TSQLUpdateStatementParser.cs" />
+    <Compile Include="Statements\Parsers\TSQLWithAggregateStatementParser.cs" />
     <Compile Include="Statements\Parsers\TSQLWithStatementParser.cs" />
     <Compile Include="Statements\TSQLDeleteStatement.cs" />
     <Compile Include="Statements\TSQLExecuteStatement.cs" />
