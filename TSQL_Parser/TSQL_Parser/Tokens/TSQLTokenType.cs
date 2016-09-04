@@ -14,6 +14,7 @@ namespace TSQL.Tokens
 		StringLiteral,
 		Whitespace,
 		Variable,
-		MoneyLiteral
+		MoneyLiteral,
+		BinaryLiteral
 	}
 }

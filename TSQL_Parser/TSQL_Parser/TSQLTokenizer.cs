@@ -591,17 +591,24 @@ namespace TSQL
 							tokenValue);
 				}
 			}
-			else if (char.IsDigit(tokenValue[0]))
-			{
-				return
-					new TSQLNumericLiteral(
-						startPosition,
-						tokenValue);
-			}
 			else if (CharUnicodeInfo.GetUnicodeCategory(tokenValue[0]) == UnicodeCategory.CurrencySymbol)
 			{
 				return
 					new TSQLMoneyLiteral(
+						startPosition,
+						tokenValue);
+			}
+			else if (tokenValue.StartsWith("0x", StringComparison.InvariantCultureIgnoreCase))
+			{
+				return
+					new TSQLBinaryLiteral(
+						startPosition,
+						tokenValue);
+			}
+			else if (char.IsDigit(tokenValue[0]))
+			{
+				return
+					new TSQLNumericLiteral(
 						startPosition,
 						tokenValue);
 			}

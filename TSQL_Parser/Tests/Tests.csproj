@@ -85,6 +85,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Statements\SelectStatementTests.cs" />
+    <Compile Include="Tokens\BinaryTokenTests.cs" />
     <Compile Include="Tokens\CharacterTokenTests.cs" />
     <Compile Include="Tokens\KeywordTokenTests.cs" />
     <Compile Include="Tokens\TokenEqualityTests.cs" />
