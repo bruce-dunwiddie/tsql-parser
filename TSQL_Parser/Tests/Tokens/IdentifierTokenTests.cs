@@ -70,7 +70,7 @@ namespace Tests.Tokens
 		public void IdentifierToken_StartWithN()
 		{
 			// unicode string literals are a special case that start with N
-			// test here to make sure it gets parsed as an identity token
+			// test here to make sure it gets parsed as an identifier token
 			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("Name ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
@@ -85,7 +85,7 @@ namespace Tests.Tokens
 		public void IdentifierToken_OnlyN()
 		{
 			// unicode string literals are a special case that start with N
-			// test here to make sure it gets parsed as an identity token
+			// test here to make sure it gets parsed as an identifier token
 			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("N ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
