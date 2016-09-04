@@ -86,7 +86,6 @@ namespace TSQL.IO
 			if (!disposed)
 			{
 				Dispose(true);
-				GC.SuppressFinalize(this);
 			}
 		}
 

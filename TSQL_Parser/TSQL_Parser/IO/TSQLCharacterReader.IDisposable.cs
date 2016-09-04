@@ -13,7 +13,6 @@ namespace TSQL.IO
 			if (!_disposed)
 			{
 				Dispose(true);
-				GC.SuppressFinalize(this);
 			}
 		}
 
