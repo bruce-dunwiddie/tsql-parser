@@ -368,6 +368,57 @@ namespace TSQL
 					case '7':
 					case '8':
 					case '9':
+						{
+							bool foundEnd = false;
+
+							while (
+								!foundEnd &&
+								_charReader.Read())
+							{
+								switch (_charReader.Current)
+								{
+									// running into a special character signals the end of a previous grouping of normal characters
+									case ' ':
+									case '\t':
+									case '\r':
+									case '\n':
+									case ',':
+									case ';':
+									case '(':
+									case ')':
+									case '*':
+									case '=':
+									case '/':
+									case '<':
+									case '!':
+									case '%':
+									case '^':
+									case '&':
+									case '|':
+									case '~':
+									case ':':
+									case '[':
+										{
+											foundEnd = true;
+
+											break;
+										}
+									default:
+										{
+											characterHolder.Append(_charReader.Current);
+
+											break;
+										}
+								}
+							}
+
+							if (foundEnd)
+							{
+								_charReader.Putback();
+							}
+
+							break;
+						}
 					// $45.56
 					case '$':
 					// other Unicode currency symbols recognized by SSMS
