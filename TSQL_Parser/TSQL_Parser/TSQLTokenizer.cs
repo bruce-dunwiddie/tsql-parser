@@ -586,17 +586,22 @@ namespace TSQL
 				else
 				{
 					return
-						new TSQLNumericLiteral(
+						new TSQLMoneyLiteral(
 							startPosition,
 							tokenValue);
 				}
 			}
-			else if (
-				char.IsDigit(tokenValue[0]) ||
-				CharUnicodeInfo.GetUnicodeCategory(tokenValue[0]) == UnicodeCategory.CurrencySymbol)
+			else if (char.IsDigit(tokenValue[0]))
 			{
 				return
 					new TSQLNumericLiteral(
+						startPosition,
+						tokenValue);
+			}
+			else if (CharUnicodeInfo.GetUnicodeCategory(tokenValue[0]) == UnicodeCategory.CurrencySymbol)
+			{
+				return
+					new TSQLMoneyLiteral(
 						startPosition,
 						tokenValue);
 			}

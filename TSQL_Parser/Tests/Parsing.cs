@@ -162,7 +162,7 @@ namespace Tests
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
-						new TSQLNumericLiteral(0, "$"),
+						new TSQLMoneyLiteral(0, "$"),
                         new TSQLCharacter(1, ",")
 					},
 				tokens);
@@ -179,7 +179,7 @@ namespace Tests
 			Assert.AreEqual(TSQLKeywords.SELECT, tokens[0].AsKeyword.Keyword);
 			for (int i = 1; i < 69; i += 2)
 			{
-				Assert.AreEqual(TSQLTokenType.NumericLiteral, tokens[i].Type);
+				Assert.AreEqual(TSQLTokenType.MoneyLiteral, tokens[i].Type);
 			}
 		}
 	}

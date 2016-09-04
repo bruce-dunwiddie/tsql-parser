@@ -13,6 +13,7 @@ namespace TSQL.Tokens
 		SingleLineComment,
 		StringLiteral,
 		Whitespace,
-		Variable
+		Variable,
+		MoneyLiteral
 	}
 }
