@@ -45,5 +45,19 @@ namespace Tests.Tokens
 					},
 				tokens);
 		}
+
+		[Test]
+		public void NumericLiteral_DecimalStartingWithPeriod()
+		{
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens(".545878 ", includeWhitespace: true);
+
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLNumericLiteral(0, ".545878"),
+                        new TSQLWhitespace(7, " ")
+					},
+				tokens);
+		}
 	}
 }
