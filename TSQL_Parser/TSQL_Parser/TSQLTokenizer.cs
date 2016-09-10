@@ -79,8 +79,37 @@ namespace TSQL
 
 				switch (_charReader.Current)
 				{
-					// all single character sequences with no optional double character sequence
+					// period can signal the start of a numeric literal if followed by a number
 					case '.':
+						{
+							if (_charReader.Read())
+							{
+								if (
+									_charReader.Current == '0' ||
+									_charReader.Current == '1' ||
+									_charReader.Current == '2' ||
+									_charReader.Current == '3' ||
+									_charReader.Current == '4' ||
+									_charReader.Current == '5' ||
+									_charReader.Current == '6' ||
+									_charReader.Current == '7' ||
+									_charReader.Current == '8' ||
+									_charReader.Current == '9'
+								)
+								{
+									characterHolder.Append(_charReader.Current);
+									
+									goto case '0';
+								}
+								else
+								{
+									_charReader.Putback();
+								}
+							}
+
+							break;
+						}
+					// all single character sequences with no optional double character sequence
 					case ',':
 					case ';':
 					case '(':
@@ -265,16 +294,19 @@ namespace TSQL
 								if (_charReader.Current == '\'')
 								{
 									characterHolder.Append(_charReader.Current);
+
 									goto case '\'';
 								}
 								else if (_charReader.Current == '\"')
 								{
 									characterHolder.Append(_charReader.Current);
+
 									goto case '\"';
 								}
 								else
 								{
 									_charReader.Putback();
+
 									goto default;
 								}
 							}
@@ -335,8 +367,8 @@ namespace TSQL
 								}
 
 								stillEscaped =
-									!_charReader.EOF && 
-									_charReader.Read() && 
+									!_charReader.EOF &&
+									_charReader.Read() &&
 									_charReader.Current == escapeChar;
 
 								if (stillEscaped)
@@ -646,7 +678,13 @@ namespace TSQL
 						startPosition,
 						tokenValue);
 			}
-			else if (char.IsDigit(tokenValue[0]))
+			else if (
+				char.IsDigit(tokenValue[0]) ||
+				(
+					tokenValue[0] == '.' &&
+					tokenValue.Length > 1 &&
+					char.IsDigit(tokenValue[1])
+				))
 			{
 				return
 					new TSQLNumericLiteral(
@@ -729,6 +767,5 @@ namespace TSQL
 				IncludeWhitespace = includeWhitespace
 			}.ToList();
 		}
-		
 	}
 }
