@@ -123,6 +123,26 @@ namespace Tests.Tokens
 		}
 
 		[Test]
+		public void IdentifierToken_NoWhitespace()
+		{
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("select[id]from[blah]order by[orderdate];", useQuotedIdentifiers: false, includeWhitespace: true);
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLKeyword(0, "select"),
+						new TSQLIdentifier(6, "[id]"),
+						new TSQLKeyword(10, "from"),
+						new TSQLIdentifier(14, "[blah]"),
+						new TSQLKeyword(20, "order"),
+						new TSQLWhitespace(25, " "),
+						new TSQLKeyword(26, "by"),
+						new TSQLIdentifier(28, "[orderdate]"),
+						new TSQLCharacter(39, ";")
+					},
+				tokens);
+		}
+
+		[Test]
 		public void IdentifierToken_SimpleName()
 		{
 			TSQLIdentifier token = new TSQLIdentifier(0, "a");
