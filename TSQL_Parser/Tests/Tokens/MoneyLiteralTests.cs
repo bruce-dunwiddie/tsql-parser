@@ -29,5 +29,19 @@ namespace Tests.Tokens
 					},
 				tokens);
 		}
+
+		[Test]
+		public void MoneyLiteral_StartingWithPeriod()
+		{
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("$.1 ", includeWhitespace: true);
+
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLMoneyLiteral(0, "$.1"),
+						new TSQLWhitespace(3, " ")
+					},
+				tokens);
+		}
 	}
 }

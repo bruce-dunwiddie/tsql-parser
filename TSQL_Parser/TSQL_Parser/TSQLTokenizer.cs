@@ -464,35 +464,25 @@ namespace TSQL
 							{
 								switch (_charReader.Current)
 								{
-									// running into a special character signals the end of a previous grouping of normal characters
-									case ' ':
-									case '\t':
-									case '\r':
-									case '\n':
-									case ',':
-									case ';':
-									case '(':
-									case ')':
-									case '*':
-									case '=':
-									case '/':
-									case '<':
-									case '!':
-									case '%':
-									case '^':
-									case '&':
-									case '|':
-									case '~':
-									case ':':
-									case '[':
+									case '0':
+									case '1':
+									case '2':
+									case '3':
+									case '4':
+									case '5':
+									case '6':
+									case '7':
+									case '8':
+									case '9':
+									case '.':
 										{
-											foundEnd = true;
+											characterHolder.Append(_charReader.Current);
 
 											break;
 										}
 									default:
 										{
-											characterHolder.Append(_charReader.Current);
+											foundEnd = true;
 
 											break;
 										}
