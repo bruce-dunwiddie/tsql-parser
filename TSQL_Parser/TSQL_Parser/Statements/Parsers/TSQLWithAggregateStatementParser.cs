@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TSQL.Statements.Parsers
 {
+	// represents the CTE's portion of the statement along with the following SELECT/INSERT/UPDATE/DELETE statement
 	public class TSQLWithAggregateStatementParser : ITSQLStatementParser
 	{
 		public TSQLStatement Parse(TSQLTokenizer tokenizer)

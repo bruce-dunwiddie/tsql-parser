@@ -17,9 +17,47 @@ namespace TSQL
 		private bool _hasMore = true;
 		private TSQLStatement _current = null;
 
+		public TSQLStatementReader(
+			string tsqlText)
+		{
+			_tokenizer = new TSQLTokenizer(tsqlText);
+		}
+
+		public TSQLStatementReader(
+			TextReader tsqlStream)
+		{
+			_tokenizer = new TSQLTokenizer(tsqlStream);
+		}
+
 		public TSQLStatementReader(TSQLTokenizer tokenizer)
 		{
 			_tokenizer = tokenizer;
+		}
+
+		public bool UseQuotedIdentifiers
+		{
+			get
+			{
+				return _tokenizer.UseQuotedIdentifiers;
+			}
+
+			set
+			{
+				_tokenizer.UseQuotedIdentifiers = value;
+			}
+		}
+
+		public bool IncludeWhitespace
+		{
+			get
+			{
+				return _tokenizer.IncludeWhitespace;
+			}
+
+			set
+			{
+				_tokenizer.IncludeWhitespace = value;
+			}
 		}
 
 		public bool Read()
@@ -33,7 +71,11 @@ namespace TSQL
 					(
 						_tokenizer.Current.Type == TSQLTokenType.SingleLineComment ||
 						_tokenizer.Current.Type == TSQLTokenType.MultilineComment ||
-						_tokenizer.Current.Type == TSQLTokenType.Whitespace
+						_tokenizer.Current.Type == TSQLTokenType.Whitespace ||
+						(
+							_tokenizer.Current.Type == TSQLTokenType.Character &&
+							_tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
+						)
 					))
 
 				{
@@ -42,15 +84,6 @@ namespace TSQL
 
 				if (_tokenizer.Current == null)
 				{
-					_hasMore = false;
-
-					return _hasMore;
-				}
-
-				if (_tokenizer.Current.Type != TSQLTokenType.Keyword)
-				{
-					// don't know what I want to do here yet
-
 					_hasMore = false;
 
 					return _hasMore;
@@ -85,18 +118,16 @@ namespace TSQL
 		}
 
 		public static List<TSQLStatement> ParseStatements(
-			string statements,
+			string tsqlText,
 			bool useQuotedIdentifiers = false,
 			bool includeWhitespace = false)
 		{
 			return new TSQLStatementReader(
-				new TSQLTokenizer(
-					new StringReader(
-						statements))
+				tsqlText)
 				{
 					IncludeWhitespace = includeWhitespace,
 					UseQuotedIdentifiers = useQuotedIdentifiers
-				}).ToList();
+				}.ToList();
 		}
 	}
 }

@@ -20,26 +20,27 @@ namespace TSQL.Statements.Parsers
 				{
 					return new TSQLSelectStatementParser();
 				}
-				else if (keyword == TSQLKeywords.INSERT)
-				{
-					return new TSQLInsertStatementParser();
-				}
-				else if (keyword == TSQLKeywords.UPDATE)
-				{
-					return new TSQLUpdateStatementParser();
-				}
-				else if (keyword == TSQLKeywords.DELETE)
-				{
-					return new TSQLDeleteStatementParser();
-				}
-				else if (keyword == TSQLKeywords.MERGE)
-				{
-					return new TSQLMergeStatementParser();
-				}
-				else if (keyword == TSQLKeywords.WITH)
-				{
-					return new TSQLWithAggregateStatementParser();
-				}
+				// not fully implemented yet
+				//else if (keyword == TSQLKeywords.INSERT)
+				//{
+				//	return new TSQLInsertStatementParser();
+				//}
+				//else if (keyword == TSQLKeywords.UPDATE)
+				//{
+				//	return new TSQLUpdateStatementParser();
+				//}
+				//else if (keyword == TSQLKeywords.DELETE)
+				//{
+				//	return new TSQLDeleteStatementParser();
+				//}
+				//else if (keyword == TSQLKeywords.MERGE)
+				//{
+				//	return new TSQLMergeStatementParser();
+				//}
+				//else if (keyword == TSQLKeywords.WITH)
+				//{
+				//	return new TSQLWithAggregateStatementParser();
+				//}
 				else
 				{
 					return new TSQLUnknownStatementParser();
@@ -47,7 +48,10 @@ namespace TSQL.Statements.Parsers
 			}
 			else
 			{
-				return new TSQLExecuteStatementParser();
+				return new TSQLUnknownStatementParser();
+
+				// not fully implemented yet
+				//return new TSQLExecuteStatementParser();
 			}
 		}
 	}

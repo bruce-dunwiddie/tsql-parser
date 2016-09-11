@@ -17,9 +17,16 @@ namespace TSQL
 		private bool _hasMore = true;
 
 		public TSQLTokenizer(
-			TextReader inputStream)
+			string tsqlText) :
+				this(new StringReader(tsqlText))
 		{
-			_charReader = new TSQLCharacterReader(inputStream);
+			
+		}
+
+		public TSQLTokenizer(
+			TextReader tsqlStream)
+		{
+			_charReader = new TSQLCharacterReader(tsqlStream);
 		}
 
 		public bool UseQuotedIdentifiers { get; set; }
@@ -44,6 +51,10 @@ namespace TSQL
 				if (_hasMore)
 				{
 					SetCurrent();
+				}
+				else
+				{
+					_current = null;
 				}
 			}
 
@@ -991,11 +1002,11 @@ namespace TSQL
 		}
 
 		public static List<TSQLToken> ParseTokens(
-			string definition,
+			string tsqlText,
 			bool useQuotedIdentifiers = false,
 			bool includeWhitespace = false)
 		{
-			return new TSQLTokenizer(new StringReader(definition))
+			return new TSQLTokenizer(tsqlText)
 			{
 				UseQuotedIdentifiers = useQuotedIdentifiers,
 				IncludeWhitespace = includeWhitespace
