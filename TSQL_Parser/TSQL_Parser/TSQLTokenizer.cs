@@ -804,7 +804,8 @@ namespace TSQL
 						startPosition,
 						tokenValue);
 			}
-			else if (tokenValue.StartsWith("@"))
+			else if (
+				tokenValue[0] == '@')
 			{
 				return
 					new TSQLVariable(
