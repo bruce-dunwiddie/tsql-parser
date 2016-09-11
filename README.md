@@ -12,6 +12,7 @@ Library for parsing SQL Server TSQL scripts
 - Streaming tokenizer for parsing scripts into tokens.
 - Returns tokens of type characters, comments, identifiers, keywords, literals, variables, and operators.
 - Handles both single line and multi line comments.
+- Select statement parser.
 
 ### Some Possible Current Uses
 - Parsing comments.
@@ -19,7 +20,7 @@ Library for parsing SQL Server TSQL scripts
 - Script validation.
 
 ### Future Additions
-- Statement parsers built on top of tokenizer.
+- More statement parsers built on top of tokenizer.
 
 ### Code Samples
 - See [wiki] for simple code example and output.
