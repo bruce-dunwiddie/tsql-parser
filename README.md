@@ -1,5 +1,5 @@
 # tsql-parser
-Library for parsing SQL Server TSQL scripts
+Library For Parsing SQL Server TSQL Scripts
 
 [![Travis](https://travis-ci.org/bruce-dunwiddie/tsql-parser.svg)](https://travis-ci.org/bruce-dunwiddie/tsql-parser/)
 
