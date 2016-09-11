@@ -116,8 +116,6 @@ namespace TSQL
 					case ')':
 					case '~':
 						{
-
-
 							break;
 						}
 					// --
@@ -471,6 +469,7 @@ namespace TSQL
 					case '9':
 						{
 							bool foundEnd = false;
+							bool foundPeriod = false;
 
 							while (
 								!foundEnd &&
@@ -478,35 +477,97 @@ namespace TSQL
 							{
 								switch (_charReader.Current)
 								{
-									// running into a special character signals the end of a previous grouping of normal characters
-									case ' ':
-									case '\t':
-									case '\r':
-									case '\n':
-									case ',':
-									case ';':
-									case '(':
-									case ')':
-									case '*':
-									case '=':
-									case '/':
-									case '<':
-									case '!':
-									case '%':
-									case '^':
-									case '&':
-									case '|':
-									case '~':
-									case ':':
-									case '[':
+									case 'e':
+									case 'E':
 										{
-											foundEnd = true;
+											characterHolder.Append(_charReader.Current);
+
+											if (_charReader.Read())
+											{
+												switch (_charReader.Current)
+												{
+													case '-':
+													case '+':
+														{
+															characterHolder.Append(_charReader.Current);
+
+															break;
+														}
+													default:
+														{
+															_charReader.Putback();
+
+															break;
+														}
+												}
+											}
+
+											while (
+												!foundEnd &&
+												_charReader.Read())
+											{
+												switch (_charReader.Current)
+												{
+													case '0':
+													case '1':
+													case '2':
+													case '3':
+													case '4':
+													case '5':
+													case '6':
+													case '7':
+													case '8':
+													case '9':
+														{
+															characterHolder.Append(_charReader.Current);
+
+															break;
+														}
+													default:
+														{
+															foundEnd = true;
+
+															break;
+														}
+												}
+											}
 
 											break;
 										}
-									default:
+									case '.':
+										{
+											if (foundPeriod)
+											{
+												foundEnd = true;
+											}
+											else
+											{
+												characterHolder.Append(_charReader.Current);
+
+												foundPeriod = true;
+                                            }
+
+											break;
+										}
+									case '0':
+									case '1':
+									case '2':
+									case '3':
+									case '4':
+									case '5':
+									case '6':
+									case '7':
+									case '8':
+									case '9':
 										{
 											characterHolder.Append(_charReader.Current);
+
+											break;
+										}
+									// running into a special character signals the end of a previous grouping of normal characters
+									default:
+										{
+											foundEnd = true;
 
 											break;
 										}
@@ -521,7 +582,41 @@ namespace TSQL
 							break;
 						}
 					// $45.56
+					// $IDENTITY
 					case '$':
+						{
+							if (_charReader.Read())
+							{
+								if (
+									_charReader.Current == '-' ||
+									_charReader.Current == '+' ||
+									_charReader.Current == '.' ||
+									_charReader.Current == '0' ||
+									_charReader.Current == '1' ||
+									_charReader.Current == '2' ||
+									_charReader.Current == '3' ||
+									_charReader.Current == '4' ||
+									_charReader.Current == '5' ||
+									_charReader.Current == '6' ||
+									_charReader.Current == '7' ||
+									_charReader.Current == '8' ||
+									_charReader.Current == '9'
+                                    )
+								{
+									_charReader.Putback();
+
+									goto case '£';
+								}
+								else
+								{
+									_charReader.Putback();
+
+									goto default;
+								}
+                            }
+
+							break;
+						}
 					// other Unicode currency symbols recognized by SSMS
 					case '£':
 					case '¢':
@@ -558,6 +653,27 @@ namespace TSQL
 					case '￦':
 						{
 							bool foundEnd = false;
+							bool foundPeriod = false;
+
+							if (_charReader.Read())
+							{
+								switch (_charReader.Current)
+								{
+									case '-':
+									case '+':
+										{
+											characterHolder.Append(_charReader.Current);
+
+											break;
+										}
+									default:
+										{
+											_charReader.Putback();
+
+											break;
+										}
+								}
+							}
 
 							while (
 								!foundEnd &&
@@ -565,6 +681,21 @@ namespace TSQL
 							{
 								switch (_charReader.Current)
 								{
+									case '.':
+										{
+											if (foundPeriod)
+											{
+												foundEnd = true;
+											}
+											else
+											{
+												characterHolder.Append(_charReader.Current);
+
+												foundPeriod = true;
+											}
+
+											break;
+										}
 									case '0':
 									case '1':
 									case '2':
@@ -575,7 +706,6 @@ namespace TSQL
 									case '7':
 									case '8':
 									case '9':
-									case '.':
 										{
 											characterHolder.Append(_charReader.Current);
 
