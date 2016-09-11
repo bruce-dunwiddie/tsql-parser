@@ -163,13 +163,47 @@ namespace TSQL
 								{
 									characterHolder.Append(_charReader.Current);
 
+									// supporting nested comments
+									int currentLevel = 1;
+
+									bool lastWasStar = false;
+									bool lastWasSlash = false;
+
 									while (
 										_charReader.Read() &&
-										!(
-											_charReader.Current == '/' &&
-											characterHolder[characterHolder.Length - 1] == '*'
+										(
+											currentLevel > 1 ||
+											// */
+											!(
+												lastWasStar &&
+                                                _charReader.Current == '/'												
+											)
 										))
 									{
+										// /*
+										if (
+											lastWasSlash &&
+                                            _charReader.Current == '*')
+										{
+											currentLevel++;
+											lastWasSlash = false;
+											lastWasStar = false;
+										}
+										// */
+										else if (
+											lastWasStar &&
+											_charReader.Current == '/')
+										{
+											currentLevel--;
+											lastWasSlash = false;
+											lastWasStar = false;
+										}
+										else
+										{
+											lastWasSlash = _charReader.Current == '/';
+											lastWasStar = _charReader.Current == '*';
+										}
+
 										characterHolder.Append(_charReader.Current);
 									}
 
