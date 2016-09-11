@@ -102,6 +102,15 @@ namespace Tests.Tokens
 		}
 
 		[Test]
+		public void StringLiteralToken_SingleQuoteEscapedValue()
+		{
+			TSQLStringLiteral token = new TSQLStringLiteral(0, "'bob''s'");
+			Assert.AreEqual("bob's", token.Value);
+			Assert.AreEqual('\'', token.QuoteCharacter);
+			Assert.IsFalse(token.IsUnicode);
+		}
+
+		[Test]
 		public void StringLiteralToken_SingleQuoteUnicodeValue()
 		{
 			TSQLStringLiteral token = new TSQLStringLiteral(0, "N'name'");

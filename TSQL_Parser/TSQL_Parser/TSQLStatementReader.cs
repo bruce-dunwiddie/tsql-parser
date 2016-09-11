@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using TSQL.Statements.Builders;
+using TSQL.Statements;
+using TSQL.Statements.Parsers;
 using TSQL.Tokens;
 
-namespace TSQL.Statements
+namespace TSQL
 {
 	public partial class TSQLStatementReader
 	{
@@ -16,9 +17,47 @@ namespace TSQL.Statements
 		private bool _hasMore = true;
 		private TSQLStatement _current = null;
 
+		public TSQLStatementReader(
+			string tsqlText)
+		{
+			_tokenizer = new TSQLTokenizer(tsqlText);
+		}
+
+		public TSQLStatementReader(
+			TextReader tsqlStream)
+		{
+			_tokenizer = new TSQLTokenizer(tsqlStream);
+		}
+
 		public TSQLStatementReader(TSQLTokenizer tokenizer)
 		{
 			_tokenizer = tokenizer;
+		}
+
+		public bool UseQuotedIdentifiers
+		{
+			get
+			{
+				return _tokenizer.UseQuotedIdentifiers;
+			}
+
+			set
+			{
+				_tokenizer.UseQuotedIdentifiers = value;
+			}
+		}
+
+		public bool IncludeWhitespace
+		{
+			get
+			{
+				return _tokenizer.IncludeWhitespace;
+			}
+
+			set
+			{
+				_tokenizer.IncludeWhitespace = value;
+			}
 		}
 
 		public bool Read()
@@ -32,7 +71,11 @@ namespace TSQL.Statements
 					(
 						_tokenizer.Current.Type == TSQLTokenType.SingleLineComment ||
 						_tokenizer.Current.Type == TSQLTokenType.MultilineComment ||
-						_tokenizer.Current.Type == TSQLTokenType.Whitespace
+						_tokenizer.Current.Type == TSQLTokenType.Whitespace ||
+						(
+							_tokenizer.Current.Type == TSQLTokenType.Character &&
+							_tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
+						)
 					))
 
 				{
@@ -46,19 +89,7 @@ namespace TSQL.Statements
 					return _hasMore;
 				}
 
-				if (_tokenizer.Current.Type != TSQLTokenType.Keyword)
-				{
-					// don't know what I want to do here yet
-
-					_hasMore = false;
-
-					return _hasMore;
-				}
-
-				TSQLKeywords keyword = (_tokenizer.Current as TSQLKeyword).Keyword;
-				_tokenizer.Putback();
-
-				_current = new TSQLStatementBuilderFactory().Create(keyword).Build(_tokenizer);
+				_current = new TSQLStatementParserFactory().Create(_tokenizer.Current).Parse(_tokenizer);
 			}
 
 			return _hasMore;
@@ -87,17 +118,16 @@ namespace TSQL.Statements
 		}
 
 		public static List<TSQLStatement> ParseStatements(
-			string statements,
-			bool useQuotedIdentifiers = false)
+			string tsqlText,
+			bool useQuotedIdentifiers = false,
+			bool includeWhitespace = false)
 		{
 			return new TSQLStatementReader(
-				new TSQLTokenizer(
-					new StringReader(
-						statements))
+				tsqlText)
 				{
-					IncludeWhitespace = true,
+					IncludeWhitespace = includeWhitespace,
 					UseQuotedIdentifiers = useQuotedIdentifiers
-				}).ToList();
+				}.ToList();
 		}
 	}
 }

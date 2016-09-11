@@ -41,10 +41,10 @@ namespace Tests.Tokens
 			Assert.AreEqual(expected == null, actual == null);
 			if (expected != null && actual != null)
 			{
-				Assert.AreEqual(expected.Count, actual.Count);
+				Assert.AreEqual(expected.Count, actual.Count, "Token list count does not match.");
 				for (int index = 0; index < expected.Count; index++)
 				{
-					Assert.AreEqual(expected[index], actual[index]);
+					Assert.AreEqual(expected[index], actual[index], "Token value does not match.");
 				}
 			}
 		}

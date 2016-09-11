@@ -17,7 +17,6 @@ namespace TSQL
 			if (!_disposed)
 			{
 				Dispose(true);
-				GC.SuppressFinalize(this);
 			}
 		}
 

@@ -6,7 +6,7 @@ using System.Text;
 
 using TSQL.Tokens;
 
-namespace TSQL
+namespace TSQL.IO
 {
 	public partial class TSQLCharacterReader
 	{
@@ -34,16 +34,15 @@ namespace TSQL
 				}
 				else
 				{
-					int nextValue = _inputStream.Read();
-					if (nextValue > -1)
+					_hasMore = _inputStream.MoveNext();
+					if (_hasMore)
 					{
-						Current = (char)nextValue;
+						Current = _inputStream.Current;
 						Position++;
 					}
 					else
 					{
 						Current = char.MinValue;
-						_hasMore = false;
 					}
 				}
 			}
@@ -59,12 +58,7 @@ namespace TSQL
 			{
 				hasNext = Read();
 			} while (hasNext &&
-				(
-					Current == ' ' ||
-					Current == '\t' ||
-					Current == '\n' ||
-					Current == '\r'
-				));
+				char.IsWhiteSpace(Current));
 
 			return hasNext;
 		}

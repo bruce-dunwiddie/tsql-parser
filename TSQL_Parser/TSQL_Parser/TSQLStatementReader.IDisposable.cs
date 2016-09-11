@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TSQL.Statements
+namespace TSQL
 {
 	public partial class TSQLStatementReader : IDisposable
 	{
@@ -13,7 +13,6 @@ namespace TSQL.Statements
 			if (!_disposed)
 			{
 				Dispose(true);
-				GC.SuppressFinalize(this);
 			}
 		}
 
