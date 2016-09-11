@@ -384,13 +384,82 @@ namespace TSQL
 
 							break;
 						}
-					// numeric literals
+					// 0 can start a numeric or binary literal with different parsing logic
 					// 0x69048AEFDD010E
 					// 0x
+					case '0':
+						{
+							if (_charReader.Read())
+							{
+								if (
+									_charReader.Current == 'x' ||
+									_charReader.Current == 'X')
+								{
+									characterHolder.Append(_charReader.Current);
+
+									bool foundEnd = false;
+
+									while (
+										!foundEnd &&
+										_charReader.Read())
+									{
+										switch (_charReader.Current)
+										{
+											case '0':
+											case '1':
+											case '2':
+											case '3':
+											case '4':
+											case '5':
+											case '6':
+											case '7':
+											case '8':
+											case '9':
+											case 'a':
+											case 'b':
+											case 'c':
+											case 'd':
+											case 'e':
+											case 'f':
+											case 'A':
+											case 'B':
+											case 'C':
+											case 'D':
+											case 'E':
+											case 'F':
+												{
+													characterHolder.Append(_charReader.Current);
+
+													break;
+												}
+											default:
+												{
+													foundEnd = true;
+
+													break;
+												}
+										}
+									}
+
+									if (foundEnd)
+									{
+										_charReader.Putback();
+									}
+								}
+								else
+								{
+									_charReader.Putback();
+
+									goto case '1';
+								}
+							}
+
+							break;
+						}
+					// numeric literals
 					// 1894.1204
 					// 0.5E-2
 					// 123E-3
-					case '0':
 					case '1':
 					case '2':
 					case '3':

@@ -55,5 +55,19 @@ namespace Tests.Tokens
 					},
 				tokens);
 		}
+
+		[Test]
+		public void BinaryToken_BinaryLiteralEndWithLetter()
+		{
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("0x69048AEFDD010EJ", includeWhitespace: true);
+
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLBinaryLiteral(0, "0x69048AEFDD010E"),
+						new TSQLIdentifier(16, "J")
+					},
+				tokens);
+		}
 	}
 }
