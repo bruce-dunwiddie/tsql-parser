@@ -16,7 +16,7 @@
     <header>
       <div class="container">
         <h1>TSQL Parser</h1>
-        <h2>Library for parsing SQL Server TSQL scripts</h2>
+        <h2>Library For Parsing SQL Server TSQL Scripts</h2>
 
         <section id="downloads">
           <a href="https://github.com/bruce-dunwiddie/tsql-parser/zipball/master" class="btn">Download as .zip</a>
@@ -31,17 +31,23 @@
         <h1>
 <a id="tsql-parser" class="anchor" href="#tsql-parser" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>tsql-parser</h1>
 
-<p>Library for parsing SQL Server TSQL scripts</p>
+<p>Library For Parsing SQL Server TSQL Scripts</p>
+
+<p><a href="https://travis-ci.org/bruce-dunwiddie/tsql-parser/"><img src="https://travis-ci.org/bruce-dunwiddie/tsql-parser.svg" alt="Travis"></a></p>
+
+<p><a href="https://ci.appveyor.com/project/bruce-dunwiddie/tsql-parser"><img src="https://ci.appveyor.com/api/projects/status/lcfjc4jox76dia8q?svg=true" alt="AppVeyor"></a></p>
+
+<p><a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a></p>
 
 <h3>
 <a id="current-features" class="anchor" href="#current-features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Current Features</h3>
 
 <ul>
 <li>Full TSQL implementation.</li>
-<li>Streaming tokenizer for parsing letter by letter.</li>
-<li>Streaming lexer for combining letters into tokens.</li>
-<li>Returns tokens of type comments, identifiers, keywords, literals, and operators.</li>
+<li>Streaming tokenizer for parsing scripts into tokens.</li>
+<li>Returns tokens of type characters, comments, identifiers, keywords, literals, variables, and operators.</li>
 <li>Handles both single line and multi line comments.</li>
+<li>Select statement parser.</li>
 </ul>
 
 <h3>
@@ -57,7 +63,7 @@
 <a id="future-additions" class="anchor" href="#future-additions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Future Additions</h3>
 
 <ul>
-<li>Statement parsers built on top of lexer.</li>
+<li>More statement parsers built on top of tokenizer.</li>
 </ul>
 
 <h3>
