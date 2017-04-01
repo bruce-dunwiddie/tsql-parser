@@ -12,3 +12,4 @@
 /TSQL_Parser/Tests/obj/Release
 /TSQL_Parser/TSQL_Parser/bin/Release
 /TSQL_Parser/TSQL_Parser/obj/Release
+*.user

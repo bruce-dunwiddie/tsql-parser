@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TSQL_Parser</name>
+    </assembly>
+    <members>
+        <member name="M:TSQL.IO.BufferedTextReader.Dispose(System.Boolean)">
+            <summary>
+            	Closes and releases all related resources.
+            </summary>
+            <param name="disposing">
+            	Whether this call is coming from an explicit call,
+            	instead of from the implicit GC finalizer call.
+            </param>
+        </member>
+        <member name="M:TSQL.IO.TSQLCharacterReader.Dispose(System.Boolean)">
+            <summary>
+            	Closes and releases all related resources.
+            </summary>
+            <param name="disposing">
+            	Whether this call is coming from an explicit call,
+            	instead of from the implicit GC finalizer call.
+            </param>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLIdentifier.Name">
+            <summary>
+            	Unescaped value for the name of the identifier.
+            </summary>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLStringLiteral.Value">
+            <summary>
+            	Value inside quotes unescaped.
+            </summary>
+        </member>
+        <member name="M:TSQL.TSQLStatementReader.Dispose(System.Boolean)">
+            <summary>
+            	Closes and releases all related resources.
+            </summary>
+            <param name="disposing">
+            	Whether this call is coming from an explicit call,
+            	instead of from the implicit GC finalizer call.
+            </param>
+        </member>
+        <member name="M:TSQL.TSQLStatementReader.CheckDisposed">
+            <summary>
+            	Checks to see if object has already been disposed, which
+            	would make calling methods on the object invalid.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">
+            	Methods were called after the object has been disposed.
+            </exception>
+        </member>
+        <member name="M:TSQL.TSQLTokenizer.Dispose(System.Boolean)">
+            <summary>
+            	Closes and releases all related resources.
+            </summary>
+            <param name="disposing">
+            	Whether this call is coming from an explicit call,
+            	instead of from the implicit GC finalizer call.
+            </param>
+        </member>
+        <member name="M:TSQL.TSQLTokenizer.CheckDisposed">
+            <summary>
+            	Checks to see if object has already been disposed, which
+            	would make calling methods on the object invalid.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">
+            	Methods were called after the object has been disposed.
+            </exception>
+        </member>
+    </members>
+</doc>
