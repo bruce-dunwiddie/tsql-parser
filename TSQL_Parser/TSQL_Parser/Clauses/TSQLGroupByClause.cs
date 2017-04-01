@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TSQL.Statements.Builders
+namespace TSQL.Clauses
 {
-	public interface ITSQLStatementBuilder
+	public class TSQLGroupByClause : TSQLClause
 	{
-		TSQLStatement Build(TSQLTokenizer tokenizer);
 	}
 }

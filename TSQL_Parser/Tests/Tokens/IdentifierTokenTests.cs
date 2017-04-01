@@ -70,7 +70,7 @@ namespace Tests.Tokens
 		public void IdentifierToken_StartWithN()
 		{
 			// unicode string literals are a special case that start with N
-			// test here to make sure it gets parsed as an identity token
+			// test here to make sure it gets parsed as an identifier token
 			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("Name ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
@@ -85,7 +85,7 @@ namespace Tests.Tokens
 		public void IdentifierToken_OnlyN()
 		{
 			// unicode string literals are a special case that start with N
-			// test here to make sure it gets parsed as an identity token
+			// test here to make sure it gets parsed as an identifier token
 			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("N ", useQuotedIdentifiers: false, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
@@ -118,6 +118,26 @@ namespace Tests.Tokens
 					{
 						new TSQLIdentifier(0, "N\"name\""),
 						new TSQLWhitespace(7, " ")
+					},
+				tokens);
+		}
+
+		[Test]
+		public void IdentifierToken_NoWhitespace()
+		{
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("select[id]from[blah]order by[orderdate];", useQuotedIdentifiers: false, includeWhitespace: true);
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLKeyword(0, "select"),
+						new TSQLIdentifier(6, "[id]"),
+						new TSQLKeyword(10, "from"),
+						new TSQLIdentifier(14, "[blah]"),
+						new TSQLKeyword(20, "order"),
+						new TSQLWhitespace(25, " "),
+						new TSQLKeyword(26, "by"),
+						new TSQLIdentifier(28, "[orderdate]"),
+						new TSQLCharacter(39, ";")
 					},
 				tokens);
 		}

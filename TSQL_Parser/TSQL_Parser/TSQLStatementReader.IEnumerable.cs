@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TSQL.Statements
+using TSQL.Statements;
+
+namespace TSQL
 {
 	public partial class TSQLStatementReader : IEnumerator, IEnumerable, IEnumerator<TSQLStatement>, IEnumerable<TSQLStatement>
 	{

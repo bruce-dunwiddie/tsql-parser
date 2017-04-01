@@ -41,7 +41,7 @@ namespace Tests.Tokens
 		}
 
 		[Test]
-		public void MultilineCommentToken_Comment()
+		public void SingleLineCommentToken_Comment()
 		{
 			TSQLSingleLineComment token = new TSQLSingleLineComment(0, "-- blah");
 			Assert.AreEqual(" blah", token.Comment);

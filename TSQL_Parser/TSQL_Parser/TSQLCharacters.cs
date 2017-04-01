@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TSQL
 {
@@ -8,16 +9,16 @@ namespace TSQL
 		private static Dictionary<string, TSQLCharacters> characterLookup =
 			new Dictionary<string, TSQLCharacters>(StringComparer.InvariantCultureIgnoreCase);
 
-		public static TSQLCharacters None = new TSQLCharacters(string.Empty);
-		public static TSQLCharacters Comma = new TSQLCharacters(",");
-		public static TSQLCharacters Semicolon = new TSQLCharacters(";");
-		public static TSQLCharacters OpenParentheses = new TSQLCharacters("(");
-		public static TSQLCharacters CloseParentheses = new TSQLCharacters(")");
-		public static TSQLCharacters Space = new TSQLCharacters(" ");
-		public static TSQLCharacters Tab = new TSQLCharacters("\t");
-		public static TSQLCharacters CarriageReturn = new TSQLCharacters("\r");
-		public static TSQLCharacters LineFeed = new TSQLCharacters("\n");
-		public static TSQLCharacters Period = new TSQLCharacters(".");
+		public static readonly TSQLCharacters None = new TSQLCharacters(string.Empty);
+		public static readonly TSQLCharacters Comma = new TSQLCharacters(",");
+		public static readonly TSQLCharacters Semicolon = new TSQLCharacters(";");
+		public static readonly TSQLCharacters OpenParentheses = new TSQLCharacters("(");
+		public static readonly TSQLCharacters CloseParentheses = new TSQLCharacters(")");
+		public static readonly TSQLCharacters Space = new TSQLCharacters(" ");
+		public static readonly TSQLCharacters Tab = new TSQLCharacters("\t");
+		public static readonly TSQLCharacters CarriageReturn = new TSQLCharacters("\r");
+		public static readonly TSQLCharacters LineFeed = new TSQLCharacters("\n");
+		public static readonly TSQLCharacters Period = new TSQLCharacters(".");
 
 		private string Token;
 
@@ -63,30 +64,51 @@ namespace TSQL
 			TSQLCharacters a,
 			TSQLCharacters b)
 		{
-			return
-				(object)a != null &&
-				a.Equals(b);
+			if (Object.ReferenceEquals(a, null))
+			{
+				if (Object.ReferenceEquals(b, null))
+				{
+					// null == null = true.
+					return true;
+				}
+
+				// Only the left side is null.
+				return false;
+			}
+
+			// Equals handles case of null on right side.
+			return a.Equals(b);
 		}
 
 		public static bool operator !=(
 			TSQLCharacters a,
 			TSQLCharacters b)
 		{
-			return
-				(object)a == null ||
-				!a.Equals(b);
+			return !(a == b);
 		}
 
 		public bool Equals(TSQLCharacters obj)
 		{
-			return
-				(
-					ReferenceEquals(this, obj)
-				) ||
-				(
-					(object)obj != null &&
-					Token == obj.Token
-				);
+			// If parameter is null, return false.
+			if (Object.ReferenceEquals(obj, null))
+			{
+				return false;
+			}
+
+			// Optimization for a common success case.
+			if (Object.ReferenceEquals(this, obj))
+			{
+				return true;
+			}
+
+			// If run-time types are not exactly the same, return false.
+			if (this.GetType() != obj.GetType())
+				return false;
+
+			// Return true if the fields match.
+			// Note that the base class is not invoked because it is
+			// System.Object, which defines Equals as reference equality.
+			return Token == obj.Token;
 		}
 
 		public override bool Equals(object obj)
@@ -97,6 +119,13 @@ namespace TSQL
 		public override int GetHashCode()
 		{
 			return Token.GetHashCode();
+		}
+
+		public bool In(params TSQLCharacters[] characters)
+		{
+			return
+				characters != null &&
+				characters.Contains(this);
 		}
 	}
 

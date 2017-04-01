@@ -54,6 +54,32 @@ namespace Tests.Tokens
 		}
 
 		[Test]
+		public void MultilineCommentToken_Nesting()
+		{
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("/* blah /* blah */ */ ", useQuotedIdentifiers: false, includeWhitespace: true);
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLMultilineComment(0, "/* blah /* blah */ */"),
+						new TSQLWhitespace(21, " ")
+					},
+				tokens);
+		}
+
+		[Test]
+		public void MultilineCommentToken_RequireFullEnding()
+		{
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("/*/ blah */ ", useQuotedIdentifiers: false, includeWhitespace: true);
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLMultilineComment(0, "/*/ blah */"),
+						new TSQLWhitespace(11, " ")
+					},
+				tokens);
+		}
+
+		[Test]
 		public void MultilineCommentToken_Comment()
 		{
 			TSQLMultilineComment token = new TSQLMultilineComment(0, "/* blah */");

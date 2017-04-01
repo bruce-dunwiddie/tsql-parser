@@ -9,6 +9,12 @@ namespace TSQL.Statements
 	public enum TSQLStatementType
 	{
 		Select,
+		Insert,
+		Update,
+		Delete,
+		With,
+		Execute,
+		Merge,
 		Unknown
 	}
 }
