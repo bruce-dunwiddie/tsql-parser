@@ -1,7 +1,7 @@
 # tsql-parser
 Library For Parsing SQL Server TSQL Scripts
 
-Available on Nuget, [TSQL_Parser](https://www.nuget.org/packages/TSQL.Parser/).
+Available on Nuget, [TSQL.Parser](https://www.nuget.org/packages/TSQL.Parser/).
 
     Install-Package TSQL.Parser
 
