@@ -33,7 +33,7 @@ namespace TSQL
 
 		public bool IncludeWhitespace { get; set; }
 
-		public bool Read()
+		public bool MoveNext()
 		{
 			CheckDisposed();
 
@@ -986,18 +986,6 @@ namespace TSQL
 			{
 				CheckDisposed();
 				return _current;
-			}
-		}
-
-		public TSQLToken Next()
-		{
-			if (Read())
-			{
-				return Current;
-			}
-			else
-			{
-				return null;
 			}
 		}
 

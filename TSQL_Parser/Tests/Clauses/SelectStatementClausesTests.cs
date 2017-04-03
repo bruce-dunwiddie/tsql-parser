@@ -10,6 +10,7 @@ using NUnit.Framework;
 using TSQL;
 using TSQL.Clauses;
 using TSQL.Clauses.Parsers;
+using TSQL.Tokens;
 
 namespace Tests.Clauses
 {
@@ -20,9 +21,9 @@ namespace Tests.Clauses
 		public void SelectClause_StopAtFrom()
 		{
 			using (StringReader reader = new StringReader(@"select a from b;"))
-			using (TSQLTokenizer tokenizer = new TSQLTokenizer(reader))
+			using (IEnumerator<TSQLToken> tokenizer = new TSQLTokenizer(reader))
 			{
-				Assert.IsTrue(tokenizer.Read());
+				Assert.IsTrue(tokenizer.MoveNext());
 				TSQLSelectClause select = new TSQLSelectClauseParser().Parse(tokenizer);
 				Assert.AreEqual(2, select.Tokens.Count);
 				Assert.AreEqual(TSQLKeywords.FROM, tokenizer.Current.AsKeyword.Keyword);

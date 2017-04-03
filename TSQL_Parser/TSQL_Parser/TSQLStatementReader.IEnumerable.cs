@@ -21,16 +21,11 @@ namespace TSQL
 			return this;
 		}
 
-		bool IEnumerator.MoveNext()
-		{
-			return Read();
-		}
-
 		object IEnumerator.Current
 		{
 			get
 			{
-				return Current;
+				return (this as IEnumerator<TSQLStatement>).Current;
 			}
 		}
 

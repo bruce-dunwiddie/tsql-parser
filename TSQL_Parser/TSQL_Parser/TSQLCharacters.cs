@@ -10,6 +10,9 @@ namespace TSQL
 			new Dictionary<string, TSQLCharacters>(StringComparer.InvariantCultureIgnoreCase);
 
 		public static readonly TSQLCharacters None = new TSQLCharacters(string.Empty);
+
+#pragma warning disable 1591
+
 		public static readonly TSQLCharacters Comma = new TSQLCharacters(",");
 		public static readonly TSQLCharacters Semicolon = new TSQLCharacters(";");
 		public static readonly TSQLCharacters OpenParentheses = new TSQLCharacters("(");
@@ -19,6 +22,8 @@ namespace TSQL
 		public static readonly TSQLCharacters CarriageReturn = new TSQLCharacters("\r");
 		public static readonly TSQLCharacters LineFeed = new TSQLCharacters("\n");
 		public static readonly TSQLCharacters Period = new TSQLCharacters(".");
+
+#pragma warning restore 1591
 
 		private string Token;
 
@@ -59,6 +64,15 @@ namespace TSQL
 				return false;
 			}
 		}
+
+		public bool In(params TSQLCharacters[] characters)
+		{
+			return
+				characters != null &&
+				characters.Contains(this);
+		}
+
+#pragma warning disable 1591
 
 		public static bool operator ==(
 			TSQLCharacters a,
@@ -121,12 +135,7 @@ namespace TSQL
 			return Token.GetHashCode();
 		}
 
-		public bool In(params TSQLCharacters[] characters)
-		{
-			return
-				characters != null &&
-				characters.Contains(this);
-		}
+#pragma warning restore 1591
 	}
 
 }

@@ -37,6 +37,8 @@ namespace TSQL.Tokens
 				.Replace(new string(QuoteCharacter, 2), QuoteCharacter.ToString());
 		}
 
+#pragma warning disable 1591
+
 		public override TSQLTokenType Type
 		{
 			get
@@ -44,6 +46,8 @@ namespace TSQL.Tokens
 				return TSQLTokenType.StringLiteral;
 			}
 		}
+
+#pragma warning restore 1591
 
 		/// <summary>
 		///		Value inside quotes unescaped.

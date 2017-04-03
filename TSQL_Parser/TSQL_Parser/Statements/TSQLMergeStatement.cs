@@ -8,6 +8,8 @@ namespace TSQL.Statements
 {
 	public class TSQLMergeStatement : TSQLStatement
 	{
+#pragma warning disable 1591
+
 		public override TSQLStatementType Type
 		{
 			get
@@ -15,5 +17,7 @@ namespace TSQL.Statements
 				return TSQLStatementType.Merge;
 			}
 		}
+
+#pragma warning restore 1591
 	}
 }

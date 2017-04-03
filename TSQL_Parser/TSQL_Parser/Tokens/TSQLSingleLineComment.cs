@@ -14,6 +14,8 @@ namespace TSQL.Tokens
 			Comment = Text.Substring(2);
 		}
 
+#pragma warning disable 1591
+
 		public override TSQLTokenType Type
 		{
 			get
@@ -21,5 +23,7 @@ namespace TSQL.Tokens
 				return TSQLTokenType.SingleLineComment;
 			}
 		}
+
+#pragma warning restore 1591
 	}
 }

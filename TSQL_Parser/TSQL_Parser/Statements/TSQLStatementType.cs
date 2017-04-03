@@ -8,6 +8,8 @@ namespace TSQL.Statements
 {
 	public enum TSQLStatementType
 	{
+#pragma warning disable 1591
+
 		Select,
 		Insert,
 		Update,
@@ -15,6 +17,9 @@ namespace TSQL.Statements
 		With,
 		Execute,
 		Merge,
+
+#pragma warning restore 1591
+
 		Unknown
 	}
 }

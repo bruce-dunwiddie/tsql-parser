@@ -36,6 +36,8 @@ namespace TSQL.Tokens
 			}
 		}
 
+#pragma warning disable 1591
+
 		public override TSQLTokenType Type
 		{
 			get
@@ -43,6 +45,8 @@ namespace TSQL.Tokens
 				return TSQLTokenType.Identifier;
 			}
 		}
+
+#pragma warning restore 1591
 
 		/// <summary>
 		///		Unescaped value for the name of the identifier.

@@ -10,12 +10,12 @@ namespace TSQL.Statements.Parsers
 {
 	public class TSQLUnknownStatementParser : ITSQLStatementParser
 	{
-		public TSQLUnknownStatement Parse(TSQLTokenizer tokenizer)
+		public TSQLUnknownStatement Parse(IEnumerator<TSQLToken> tokenizer)
 		{
 			TSQLUnknownStatement statement = new TSQLUnknownStatement();
 
 			while (
-				tokenizer.Read() &&
+				tokenizer.MoveNext() &&
 				!(
 					tokenizer.Current is TSQLCharacter &&
 					tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
@@ -35,7 +35,7 @@ namespace TSQL.Statements.Parsers
 			return statement;
 		}
 
-		TSQLStatement ITSQLStatementParser.Parse(TSQLTokenizer tokenizer)
+		TSQLStatement ITSQLStatementParser.Parse(IEnumerator<TSQLToken> tokenizer)
 		{
 			return Parse(tokenizer);
 		}

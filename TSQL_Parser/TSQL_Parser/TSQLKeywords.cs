@@ -11,6 +11,8 @@ namespace TSQL
 
 		public static readonly TSQLKeywords None = new TSQLKeywords("");
 
+#pragma warning disable 1591
+
 		#region commands
 
 		public static readonly TSQLKeywords ALTER = new TSQLKeywords("ALTER");
@@ -75,8 +77,6 @@ namespace TSQL
 		public static readonly TSQLKeywords REVERT = new TSQLKeywords("REVERT");
 
 		#endregion
-
-		// {stored procedure}
 
 		#region other
 
@@ -185,17 +185,9 @@ namespace TSQL
 		// WITHIN {GROUP}
 		public static readonly TSQLKeywords WITHIN = new TSQLKeywords("WITHIN");
 
+#pragma warning restore 1591
+
 		#endregion
-
-		// system stored procs
-
-		// built in functions
-
-		// datatypes
-
-		// operators
-
-		// characters? comma, semicolon, etc
 
 		private string Keyword;
 
@@ -247,6 +239,15 @@ namespace TSQL
 				return false;
 			}
 		}
+
+		public bool In(params TSQLKeywords[] keywords)
+		{
+			return
+				keywords != null &&
+				keywords.Contains(this);
+		}
+
+#pragma warning disable 1591
 
 		public static bool operator ==(
 			TSQLKeywords a,
@@ -309,11 +310,6 @@ namespace TSQL
 			return Keyword.GetHashCode();
 		}
 
-		public bool In(params TSQLKeywords[] keywords)
-		{
-			return
-				keywords != null &&
-				keywords.Contains(this);
-		}
+#pragma warning restore 1591
 	}
 }

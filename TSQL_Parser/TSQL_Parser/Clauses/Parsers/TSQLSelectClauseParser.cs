@@ -12,7 +12,7 @@ namespace TSQL.Clauses.Parsers
 {
 	public class TSQLSelectClauseParser : ITSQLClauseParser
 	{
-		public TSQLSelectClause Parse(TSQLTokenizer tokenizer)
+		public TSQLSelectClause Parse(IEnumerator<TSQLToken> tokenizer)
 		{
 			TSQLSelectClause select = new TSQLSelectClause();
 
@@ -35,7 +35,7 @@ namespace TSQL.Clauses.Parsers
 			int nestedLevel = 0;
 
 			while (
-				tokenizer.Read() &&
+				tokenizer.MoveNext() &&
 				!(
 					tokenizer.Current.Type == TSQLTokenType.Character &&
 					tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
@@ -89,7 +89,7 @@ namespace TSQL.Clauses.Parsers
 						// should we recurse for correlated subqueries?
 						nestedLevel++;
 
-						if (tokenizer.Read())
+						if (tokenizer.MoveNext())
 						{
 							if (
 								tokenizer.Current.Type == TSQLTokenType.Keyword &&
@@ -124,7 +124,7 @@ namespace TSQL.Clauses.Parsers
 			return select;
 		}
 
-		TSQLClause ITSQLClauseParser.Parse(TSQLTokenizer tokenizer)
+		TSQLClause ITSQLClauseParser.Parse(IEnumerator<TSQLToken> tokenizer)
 		{
 			return Parse(tokenizer);
 		}

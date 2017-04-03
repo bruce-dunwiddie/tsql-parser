@@ -12,7 +12,7 @@ namespace TSQL.Clauses.Parsers
 {
 	public class TSQLFromClauseParser : ITSQLClauseParser
 	{
-		public TSQLFromClause Parse(TSQLTokenizer tokenizer)
+		public TSQLFromClause Parse(IEnumerator<TSQLToken> tokenizer)
 		{
 			TSQLFromClause from = new TSQLFromClause();
 
@@ -31,7 +31,7 @@ namespace TSQL.Clauses.Parsers
             int nestedLevel = 0;
 
 			while (
-				tokenizer.Read() &&
+				tokenizer.MoveNext() &&
 				!(
 					tokenizer.Current.Type == TSQLTokenType.Character &&
 					tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
@@ -84,7 +84,7 @@ namespace TSQL.Clauses.Parsers
 						// should we recurse for derived tables?
 						nestedLevel++;
 
-						if (tokenizer.Read())
+						if (tokenizer.MoveNext())
 						{
 							if (
 								tokenizer.Current.Type == TSQLTokenType.Keyword &&
@@ -119,7 +119,7 @@ namespace TSQL.Clauses.Parsers
 			return from;
 		}
 
-		TSQLClause ITSQLClauseParser.Parse(TSQLTokenizer tokenizer)
+		TSQLClause ITSQLClauseParser.Parse(IEnumerator<TSQLToken> tokenizer)
 		{
 			return Parse(tokenizer);
 		}

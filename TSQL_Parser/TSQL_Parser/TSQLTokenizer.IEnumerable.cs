@@ -28,13 +28,6 @@ namespace TSQL
 			}
 		}
 
-		// moving IEnumerator<TSQLToken>.Current to the main context
-
-		bool IEnumerator.MoveNext()
-		{
-			return Read();
-		}
-
 		void IEnumerator.Reset()
 		{
 			throw new NotSupportedException("Reset is not currently supported by the IEnumerator implementation supplied by " + GetType().FullName + ".");
