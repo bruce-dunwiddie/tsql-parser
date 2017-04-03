@@ -1,6 +1,12 @@
 # tsql-parser
 Library For Parsing SQL Server TSQL Scripts
 
+Available on Nuget, [TSQL_Parser](https://www.nuget.org/packages/TSQL.Parser/).
+
+    Install-Package TSQL.Parser
+
+https://www.nuget.org/packages/TSQL.Parser/
+
 [![Travis](https://travis-ci.org/bruce-dunwiddie/tsql-parser.svg)](https://travis-ci.org/bruce-dunwiddie/tsql-parser/)
 
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/lcfjc4jox76dia8q?svg=true)](https://ci.appveyor.com/project/bruce-dunwiddie/tsql-parser)
@@ -23,7 +29,5 @@ Library For Parsing SQL Server TSQL Scripts
 - More statement parsers built on top of tokenizer.
 
 ### Code Samples
-- See [wiki] for simple code example and output.
+- See [wiki](<https://github.com/bruce-dunwiddie/tsql-parser/wiki>) for simple code example and output.
 - See test cases in project.
-
-[wiki]: <https://github.com/bruce-dunwiddie/tsql-parser/wiki>
