@@ -8,7 +8,7 @@ using TSQL.Tokens;
 
 namespace TSQL.Statements.Parsers
 {
-	public class TSQLExecuteStatementParser : ITSQLStatementParser
+	internal class TSQLExecuteStatementParser : ITSQLStatementParser
 	{
 		public TSQLExecuteStatement Parse(IEnumerator<TSQLToken> tokenizer)
 		{

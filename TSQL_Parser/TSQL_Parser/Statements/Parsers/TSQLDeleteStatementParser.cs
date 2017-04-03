@@ -8,7 +8,7 @@ using TSQL.Tokens;
 
 namespace TSQL.Statements.Parsers
 {
-	public class TSQLDeleteStatementParser : ITSQLStatementParser
+	internal class TSQLDeleteStatementParser : ITSQLStatementParser
 	{
 		public TSQLDeleteStatement Parse(IEnumerator<TSQLToken> tokenizer)
 		{

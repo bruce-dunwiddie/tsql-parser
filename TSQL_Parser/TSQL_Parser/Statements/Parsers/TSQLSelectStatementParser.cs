@@ -10,7 +10,7 @@ using TSQL.Tokens;
 
 namespace TSQL.Statements.Parsers
 {
-	public class TSQLSelectStatementParser : ITSQLStatementParser
+	internal class TSQLSelectStatementParser : ITSQLStatementParser
 	{
 		public TSQLSelectStatement Parse(IEnumerator<TSQLToken> tokenizer)
 		{

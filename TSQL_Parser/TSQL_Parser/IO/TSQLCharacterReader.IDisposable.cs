@@ -2,7 +2,7 @@
 
 namespace TSQL.IO
 {
-	public partial class TSQLCharacterReader : IDisposable
+	partial class TSQLCharacterReader : IDisposable
 	{
 		#region IDisposable pattern
 

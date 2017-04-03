@@ -10,7 +10,7 @@ using TSQL.Tokens;
 
 namespace TSQL.Clauses.Parsers
 {
-	public class TSQLHavingClauseParser : ITSQLClauseParser
+	internal class TSQLHavingClauseParser : ITSQLClauseParser
 	{
 		public TSQLHavingClause Parse(IEnumerator<TSQLToken> tokenizer)
 		{
