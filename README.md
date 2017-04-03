@@ -12,7 +12,7 @@ Available on Nuget, [TSQL.Parser](https://www.nuget.org/packages/TSQL.Parser/).
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ### Current Features
-- Full TSQL implementation.
+- Full T-SQL implementation.
 - Streaming tokenizer for parsing scripts into tokens.
 - Returns tokens of type characters, comments, identifiers, keywords, literals, variables, and operators.
 - Handles both single line and multi line comments.
