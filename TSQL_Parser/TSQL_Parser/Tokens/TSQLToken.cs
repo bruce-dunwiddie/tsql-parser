@@ -163,6 +163,18 @@ namespace TSQL.Tokens
 
 		/// <summary>
 		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLSystemIdentifier"/>.
+		/// </summary>
+		public TSQLSystemIdentifier AsSystemIdentifier
+		{
+			get
+			{
+				return this as TSQLSystemIdentifier;
+			}
+		}
+
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
 		///		as <see cref="TSQL.Tokens.TSQLKeyword"/>.
 		/// </summary>
 		public TSQLKeyword AsKeyword
@@ -254,6 +266,18 @@ namespace TSQL.Tokens
 			get
 			{
 				return this as TSQLVariable;
+			}
+		}
+
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLSystemVariable"/>.
+		/// </summary>
+		public TSQLSystemVariable AsSystemVariable
+		{
+			get
+			{
+				return this as TSQLSystemVariable;
 			}
 		}
 

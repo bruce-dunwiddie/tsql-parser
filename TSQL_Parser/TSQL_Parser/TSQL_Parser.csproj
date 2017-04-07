@@ -86,6 +86,8 @@
     <Compile Include="Statements\TSQLStatement.cs" />
     <Compile Include="Statements\TSQLUpdateStatement.cs" />
     <Compile Include="Statements\TSQLWithStatement.cs" />
+    <Compile Include="Tokens\TSQLSystemIdentifier.cs" />
+    <Compile Include="Tokens\TSQLSystemVariable.cs" />
     <Compile Include="Tokens\TSQLBinaryLiteral.cs" />
     <Compile Include="Tokens\TSQLMoneyLiteral.cs" />
     <Compile Include="TSQLStatementReader.cs" />

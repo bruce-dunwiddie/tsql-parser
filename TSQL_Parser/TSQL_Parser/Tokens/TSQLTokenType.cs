@@ -23,6 +23,12 @@ namespace TSQL.Tokens
 		Identifier,
 
 		/// <summary>
+		///		Recognized T-SQL built-in reserved system identifier,
+		///		e.g. OPENROWSET
+		/// </summary>
+		SystemIdentifier,
+
+		/// <summary>
 		///		Recognized T-SQL keyword,
 		///		e.g. SELECT.
 		/// </summary>
@@ -51,6 +57,12 @@ namespace TSQL.Tokens
 		///		e.g. @id.
 		/// </summary>
 		Variable,
+
+		/// <summary>
+		///		Recognized server variables starting with @@,
+		///		e.g. @@ROWCOUNT.
+		/// </summary>
+		SystemVariable,
 
 		/// <summary>
 		///		Simple numeric value, with or without a decimal, without sign,
