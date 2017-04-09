@@ -4,7 +4,7 @@ namespace TSQL.Tokens
 {
 	public class TSQLWhitespace : TSQLToken
 	{
-		public TSQLWhitespace(
+		internal TSQLWhitespace(
 			int beginPostion,
 			string text) :
 			base(

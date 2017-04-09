@@ -8,5 +8,9 @@ namespace TSQL.Clauses
 {
 	public class TSQLHavingClause : TSQLClause
 	{
+		internal TSQLHavingClause()
+		{
+
+		}
 	}
 }

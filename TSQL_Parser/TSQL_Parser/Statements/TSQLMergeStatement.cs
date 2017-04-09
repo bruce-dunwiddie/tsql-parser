@@ -8,6 +8,11 @@ namespace TSQL.Statements
 {
 	public class TSQLMergeStatement : TSQLStatement
 	{
+		internal TSQLMergeStatement()
+		{
+
+		}
+
 #pragma warning disable 1591
 
 		public override TSQLStatementType Type

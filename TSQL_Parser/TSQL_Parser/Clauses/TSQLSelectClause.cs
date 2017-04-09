@@ -8,5 +8,9 @@ namespace TSQL.Clauses
 {
 	public class TSQLSelectClause : TSQLClause
 	{
+		internal TSQLSelectClause()
+		{
+
+		}
 	}
 }

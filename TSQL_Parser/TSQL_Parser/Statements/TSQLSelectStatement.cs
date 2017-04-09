@@ -10,7 +10,7 @@ namespace TSQL.Statements
 {
 	public class TSQLSelectStatement : TSQLStatement
 	{
-		public TSQLSelectStatement()
+		internal TSQLSelectStatement()
 		{
 
 		}

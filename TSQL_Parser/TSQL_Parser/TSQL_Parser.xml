@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TSQL_Parser</name>
+    </assembly>
+    <members>
+        <member name="M:TSQL.IO.BufferedTextReader.Dispose(System.Boolean)">
+            <summary>
+            	Closes and releases all related resources.
+            </summary>
+            <param name="disposing">
+            	Whether this call is coming from an explicit call,
+            	instead of from the implicit GC finalizer call.
+            </param>
+        </member>
+        <member name="M:TSQL.IO.TSQLCharacterReader.Dispose(System.Boolean)">
+            <summary>
+            	Closes and releases all related resources.
+            </summary>
+            <param name="disposing">
+            	Whether this call is coming from an explicit call,
+            	instead of from the implicit GC finalizer call.
+            </param>
+        </member>
+        <member name="F:TSQL.Tokens.TSQLTokenType.Whitespace">
+            <summary>
+            	Whitespace characters,
+            	i.e. line feeds or tabs.
+            </summary>
+        </member>
+        <member name="F:TSQL.Tokens.TSQLTokenType.Character">
+            <summary>
+            	Special character in T-SQL,
+            	e.g. . or ,.
+            </summary>
+        </member>
+        <member name="F:TSQL.Tokens.TSQLTokenType.Identifier">
+            <summary>
+            	Object name, alias, or other reference,
+            	e.g. dbo.
+            </summary>
+        </member>
+        <member name="F:TSQL.Tokens.TSQLTokenType.SystemIdentifier">
+            <summary>
+            	Recognized T-SQL built-in reserved system identifier,
+            	e.g. OPENROWSET
+            </summary>
+        </member>
+        <member name="F:TSQL.Tokens.TSQLTokenType.Keyword">
+            <summary>
+            	Recognized T-SQL keyword,
+            	e.g. SELECT.
+            </summary>
+        </member>
+        <member name="F:TSQL.Tokens.TSQLTokenType.SingleLineComment">
+            <summary>
+            	Comment starting with -- and continuing until the end of the line,
+            	e.g. -- this code creates a new lookup table.
+            </summary>
+        </member>
+        <member name="F:TSQL.Tokens.TSQLTokenType.MultilineComment">
+            <summary>
+            	Comment spanning multiple lines starting with /* and ending with */
+            	e.g. /* here be dragons */.
+            </summary>
+        </member>
+        <member name="F:TSQL.Tokens.TSQLTokenType.Operator">
+            <summary>
+            	Symbol representing an operation in T-SQL,
+            	e.g. + or !=.
+            </summary>
+        </member>
+        <member name="F:TSQL.Tokens.TSQLTokenType.Variable">
+            <summary>
+            	Variable starting with @,
+            	e.g. @id.
+            </summary>
+        </member>
+        <member name="F:TSQL.Tokens.TSQLTokenType.SystemVariable">
+            <summary>
+            	Recognized server variables starting with @@,
+            	e.g. @@ROWCOUNT.
+            </summary>
+        </member>
+        <member name="F:TSQL.Tokens.TSQLTokenType.NumericLiteral">
+            <summary>
+            	Simple numeric value, with or without a decimal, without sign,
+            	e.g. 210.5.
+            </summary>
+        </member>
+        <member name="F:TSQL.Tokens.TSQLTokenType.StringLiteral">
+            <summary>
+            	Unicode or non-Unicode string value,
+            	e.g. 'Cincinnati' or N'München'.
+            </summary>
+        </member>
+        <member name="F:TSQL.Tokens.TSQLTokenType.MoneyLiteral">
+            <summary>
+            	Numeric value starting with a currency symbol,
+            	e.g. $4.25 or £3.42.
+            </summary>
+        </member>
+        <member name="F:TSQL.Tokens.TSQLTokenType.BinaryLiteral">
+            <summary>
+            	Binary value serialized as hexadecimal and starting with 0x,
+            	e.g. 0x69048AEFDD010E.
+            </summary>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLIdentifier.Name">
+            <summary>
+            	Unescaped value for the name of the identifier.
+            </summary>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLStringLiteral.Value">
+            <summary>
+            	Value inside quotes unescaped.
+            </summary>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLToken.AsCharacter">
+            <summary>
+            	Fluent convenience shortcut for casting object
+            	as <see cref="T:TSQL.Tokens.TSQLCharacter"/>.
+            </summary>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLToken.AsComment">
+            <summary>
+            	Fluent convenience shortcut for casting object
+            	as <see cref="T:TSQL.Tokens.TSQLComment"/>.
+            </summary>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLToken.AsIdentifier">
+            <summary>
+            	Fluent convenience shortcut for casting object
+            	as <see cref="T:TSQL.Tokens.TSQLIdentifier"/>.
+            </summary>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLToken.AsSystemIdentifier">
+            <summary>
+            	Fluent convenience shortcut for casting object
+            	as <see cref="T:TSQL.Tokens.TSQLSystemIdentifier"/>.
+            </summary>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLToken.AsKeyword">
+            <summary>
+            	Fluent convenience shortcut for casting object
+            	as <see cref="T:TSQL.Tokens.TSQLKeyword"/>.
+            </summary>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLToken.AsLiteral">
+            <summary>
+            	Fluent convenience shortcut for casting object
+            	as <see cref="T:TSQL.Tokens.TSQLLiteral"/>.
+            </summary>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLToken.AsMultilineComment">
+            <summary>
+            	Fluent convenience shortcut for casting object
+            	as <see cref="T:TSQL.Tokens.TSQLMultilineComment"/>.
+            </summary>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLToken.AsNumericLiteral">
+            <summary>
+            	Fluent convenience shortcut for casting object
+            	as <see cref="T:TSQL.Tokens.TSQLNumericLiteral"/>.
+            </summary>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLToken.AsOperator">
+            <summary>
+            	Fluent convenience shortcut for casting object
+            	as <see cref="T:TSQL.Tokens.TSQLOperator"/>.
+            </summary>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLToken.AsSingleLineComment">
+            <summary>
+            	Fluent convenience shortcut for casting object
+            	as <see cref="T:TSQL.Tokens.TSQLSingleLineComment"/>.
+            </summary>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLToken.AsStringLiteral">
+            <summary>
+            	Fluent convenience shortcut for casting object
+            	as <see cref="T:TSQL.Tokens.TSQLStringLiteral"/>.
+            </summary>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLToken.AsVariable">
+            <summary>
+            	Fluent convenience shortcut for casting object
+            	as <see cref="T:TSQL.Tokens.TSQLVariable"/>.
+            </summary>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLToken.AsSystemVariable">
+            <summary>
+            	Fluent convenience shortcut for casting object
+            	as <see cref="T:TSQL.Tokens.TSQLSystemVariable"/>.
+            </summary>
+        </member>
+        <member name="P:TSQL.Tokens.TSQLToken.AsWhitespace">
+            <summary>
+            	Fluent convenience shortcut for casting object
+            	as <see cref="T:TSQL.Tokens.TSQLWhitespace"/>.
+            </summary>
+        </member>
+        <member name="M:TSQL.TSQLStatementReader.Dispose(System.Boolean)">
+            <summary>
+            	Closes and releases all related resources.
+            </summary>
+            <param name="disposing">
+            	Whether this call is coming from an explicit call,
+            	instead of from the implicit GC finalizer call.
+            </param>
+        </member>
+        <member name="M:TSQL.TSQLStatementReader.CheckDisposed">
+            <summary>
+            	Checks to see if object has already been disposed, which
+            	would make calling methods on the object invalid.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">
+            	Methods were called after the object has been disposed.
+            </exception>
+        </member>
+        <member name="M:TSQL.TSQLTokenizer.Dispose(System.Boolean)">
+            <summary>
+            	Closes and releases all related resources.
+            </summary>
+            <param name="disposing">
+            	Whether this call is coming from an explicit call,
+            	instead of from the implicit GC finalizer call.
+            </param>
+        </member>
+        <member name="M:TSQL.TSQLTokenizer.CheckDisposed">
+            <summary>
+            	Checks to see if object has already been disposed, which
+            	would make calling methods on the object invalid.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">
+            	Methods were called after the object has been disposed.
+            </exception>
+        </member>
+    </members>
+</doc>

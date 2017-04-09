@@ -90,6 +90,7 @@
     <Compile Include="Tokens\TSQLSystemVariable.cs" />
     <Compile Include="Tokens\TSQLBinaryLiteral.cs" />
     <Compile Include="Tokens\TSQLMoneyLiteral.cs" />
+    <Compile Include="TSQLIdentifiers.cs" />
     <Compile Include="TSQLStatementReader.cs" />
     <Compile Include="TSQLStatementReader.IDisposable.cs">
       <DependentUpon>TSQLStatementReader.cs</DependentUpon>
@@ -122,6 +123,7 @@
     <Compile Include="TSQLTokenizer.IEnumerable.cs">
       <DependentUpon>TSQLTokenizer.cs</DependentUpon>
     </Compile>
+    <Compile Include="TSQLVariables.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Pack.bat" />

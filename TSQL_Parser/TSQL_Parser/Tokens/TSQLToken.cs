@@ -4,7 +4,7 @@ namespace TSQL.Tokens
 {
 	public abstract class TSQLToken
 	{
-		protected TSQLToken(
+		internal protected TSQLToken(
 			int beginPostion,
 			string text)
 		{

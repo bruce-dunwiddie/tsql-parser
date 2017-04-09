@@ -8,6 +8,11 @@ namespace TSQL.Statements
 {
 	public class TSQLExecuteStatement : TSQLStatement
 	{
+		internal TSQLExecuteStatement()
+		{
+
+		}
+
 #pragma warning disable 1591
 
 		public override TSQLStatementType Type

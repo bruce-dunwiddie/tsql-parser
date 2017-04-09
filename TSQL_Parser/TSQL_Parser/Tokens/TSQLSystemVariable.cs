@@ -8,7 +8,7 @@ namespace TSQL.Tokens
 {
 	public class TSQLSystemVariable : TSQLVariable
 	{
-		public TSQLSystemVariable(
+		internal TSQLSystemVariable(
 			int beginPostion,
 			string text) :
 			base(
@@ -56,5 +56,11 @@ namespace TSQL.Tokens
 		}
 
 #pragma warning restore 1591
+
+		public TSQLVariables Variable
+		{
+			get;
+			private set;
+		}
 	}
 }

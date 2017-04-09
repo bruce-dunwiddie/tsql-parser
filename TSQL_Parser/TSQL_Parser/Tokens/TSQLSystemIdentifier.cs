@@ -8,7 +8,7 @@ namespace TSQL.Tokens
 {
 	public class TSQLSystemIdentifier : TSQLIdentifier
 	{
-		public TSQLSystemIdentifier(
+		internal TSQLSystemIdentifier(
 			int beginPostion,
 			string text) :
 			base(
@@ -40,5 +40,11 @@ namespace TSQL.Tokens
 		}
 
 #pragma warning restore 1591
+
+		public TSQLIdentifiers Identifier
+		{
+			get;
+			private set;
+		}
 	}
 }

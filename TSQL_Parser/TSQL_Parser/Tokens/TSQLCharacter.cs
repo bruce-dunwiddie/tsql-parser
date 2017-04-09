@@ -4,7 +4,7 @@ namespace TSQL.Tokens
 {
 	public class TSQLCharacter : TSQLToken
 	{
-		public TSQLCharacter(
+		internal TSQLCharacter(
 			int beginPostion,
 			string text) :
 			base(

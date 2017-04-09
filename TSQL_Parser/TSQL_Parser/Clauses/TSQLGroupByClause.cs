@@ -8,5 +8,9 @@ namespace TSQL.Clauses
 {
 	public class TSQLGroupByClause : TSQLClause
 	{
+		internal TSQLGroupByClause()
+		{
+
+		}
 	}
 }

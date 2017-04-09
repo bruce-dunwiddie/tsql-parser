@@ -4,7 +4,7 @@ namespace TSQL.Tokens
 {
 	public class TSQLOperator : TSQLToken
 	{
-		public TSQLOperator(
+		internal TSQLOperator(
 			int beginPostion,
 			string text) :
 			base(
