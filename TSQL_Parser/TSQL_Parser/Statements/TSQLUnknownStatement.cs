@@ -8,6 +8,13 @@ namespace TSQL.Statements
 {
 	public class TSQLUnknownStatement : TSQLStatement
 	{
+		internal TSQLUnknownStatement()
+		{
+
+		}
+
+#pragma warning disable 1591
+
 		public override TSQLStatementType Type
 		{
 			get
@@ -15,5 +22,7 @@ namespace TSQL.Statements
 				return TSQLStatementType.Unknown;
 			}
 		}
+
+#pragma warning restore 1591
 	}
 }

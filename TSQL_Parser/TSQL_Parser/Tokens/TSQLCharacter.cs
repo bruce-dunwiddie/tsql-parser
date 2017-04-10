@@ -4,7 +4,7 @@ namespace TSQL.Tokens
 {
 	public class TSQLCharacter : TSQLToken
 	{
-		public TSQLCharacter(
+		internal TSQLCharacter(
 			int beginPostion,
 			string text) :
 			base(
@@ -14,6 +14,8 @@ namespace TSQL.Tokens
 			Character = TSQLCharacters.Parse(text);
 		}
 
+#pragma warning disable 1591
+
 		public override TSQLTokenType Type
 		{
 			get
@@ -21,6 +23,8 @@ namespace TSQL.Tokens
 				return TSQLTokenType.Character;
 			}
 		}
+
+#pragma warning restore 1591
 
 		public TSQLCharacters Character
 		{

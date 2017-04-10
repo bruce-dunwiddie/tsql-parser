@@ -8,5 +8,9 @@ namespace TSQL.Clauses
 {
 	public class TSQLOrderByClause : TSQLClause
 	{
+		internal TSQLOrderByClause()
+		{
+
+		}
 	}
 }

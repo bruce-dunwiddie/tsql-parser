@@ -8,7 +8,7 @@ namespace TSQL.Tokens
 {
 	public class TSQLBinaryLiteral : TSQLLiteral
 	{
-		public TSQLBinaryLiteral(
+		internal TSQLBinaryLiteral(
 			int beginPostion,
 			string text) :
 			base(
@@ -18,6 +18,8 @@ namespace TSQL.Tokens
 
 		}
 
+#pragma warning disable 1591
+
 		public override TSQLTokenType Type
 		{
 			get
@@ -25,5 +27,7 @@ namespace TSQL.Tokens
 				return TSQLTokenType.BinaryLiteral;
 			}
 		}
+
+#pragma warning restore 1591
 	}
 }

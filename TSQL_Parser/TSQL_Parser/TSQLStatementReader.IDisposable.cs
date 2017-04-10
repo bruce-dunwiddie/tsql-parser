@@ -2,7 +2,7 @@
 
 namespace TSQL
 {
-	public partial class TSQLStatementReader : IDisposable
+	partial class TSQLStatementReader : IDisposable
 	{
 		#region IDisposable pattern
 

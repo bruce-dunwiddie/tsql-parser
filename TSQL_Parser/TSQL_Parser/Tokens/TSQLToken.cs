@@ -4,7 +4,7 @@ namespace TSQL.Tokens
 {
 	public abstract class TSQLToken
 	{
-		protected TSQLToken(
+		internal protected TSQLToken(
 			int beginPostion,
 			string text)
 		{
@@ -48,6 +48,8 @@ namespace TSQL.Tokens
 		{
 			get;
 		}
+
+#pragma warning disable 1591
 
 		public static bool operator ==(
 			TSQLToken a,
@@ -121,6 +123,12 @@ namespace TSQL.Tokens
 			}
 		}
 
+#pragma warning restore 1591
+
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLCharacter"/>.
+		/// </summary>
 		public TSQLCharacter AsCharacter
 		{
 			get
@@ -129,6 +137,10 @@ namespace TSQL.Tokens
 			}
 		}
 
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLComment"/>.
+		/// </summary>
 		public TSQLComment AsComment
 		{
 			get
@@ -137,6 +149,10 @@ namespace TSQL.Tokens
 			}
 		}
 
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLIdentifier"/>.
+		/// </summary>
 		public TSQLIdentifier AsIdentifier
 		{
 			get
@@ -145,6 +161,22 @@ namespace TSQL.Tokens
 			}
 		}
 
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLSystemIdentifier"/>.
+		/// </summary>
+		public TSQLSystemIdentifier AsSystemIdentifier
+		{
+			get
+			{
+				return this as TSQLSystemIdentifier;
+			}
+		}
+
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLKeyword"/>.
+		/// </summary>
 		public TSQLKeyword AsKeyword
 		{
 			get
@@ -153,6 +185,10 @@ namespace TSQL.Tokens
 			}
 		}
 
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLLiteral"/>.
+		/// </summary>
 		public TSQLLiteral AsLiteral
 		{
 			get
@@ -161,6 +197,10 @@ namespace TSQL.Tokens
 			}
 		}
 
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLMultilineComment"/>.
+		/// </summary>
 		public TSQLMultilineComment AsMultilineComment
 		{
 			get
@@ -169,6 +209,10 @@ namespace TSQL.Tokens
 			}
 		}
 
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLNumericLiteral"/>.
+		/// </summary>
 		public TSQLNumericLiteral AsNumericLiteral
 		{
 			get
@@ -177,6 +221,10 @@ namespace TSQL.Tokens
 			}
 		}
 
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLOperator"/>.
+		/// </summary>
 		public TSQLOperator AsOperator
 		{
 			get
@@ -185,6 +233,10 @@ namespace TSQL.Tokens
 			}
 		}
 
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLSingleLineComment"/>.
+		/// </summary>
 		public TSQLSingleLineComment AsSingleLineComment
 		{
 			get
@@ -193,6 +245,10 @@ namespace TSQL.Tokens
 			}
 		}
 
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLStringLiteral"/>.
+		/// </summary>
 		public TSQLStringLiteral AsStringLiteral
 		{
 			get
@@ -201,6 +257,10 @@ namespace TSQL.Tokens
 			}
 		}
 
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLVariable"/>.
+		/// </summary>
 		public TSQLVariable AsVariable
 		{
 			get
@@ -209,6 +269,22 @@ namespace TSQL.Tokens
 			}
 		}
 
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLSystemVariable"/>.
+		/// </summary>
+		public TSQLSystemVariable AsSystemVariable
+		{
+			get
+			{
+				return this as TSQLSystemVariable;
+			}
+		}
+
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLWhitespace"/>.
+		/// </summary>
 		public TSQLWhitespace AsWhitespace
 		{
 			get

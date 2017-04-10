@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using TSQL.Tokens;
+
 namespace TSQL.Clauses.Parsers
 {
-	public interface ITSQLClauseParser
+	internal interface ITSQLClauseParser
 	{
-		TSQLClause Parse(TSQLTokenizer tokenizer);
+		TSQLClause Parse(IEnumerator<TSQLToken> tokenizer);
     }
 }

@@ -6,7 +6,7 @@ using TSQL.Tokens;
 
 namespace TSQL
 {
-	public partial class TSQLTokenizer : IEnumerator, IEnumerable, IEnumerator<TSQLToken>, IEnumerable<TSQLToken>
+	partial class TSQLTokenizer : IEnumerator, IEnumerable, IEnumerator<TSQLToken>, IEnumerable<TSQLToken>
 	{
 		#region IEnumerable/IEnumerator Members
 
@@ -26,13 +26,6 @@ namespace TSQL
 			{
 				return (this as IEnumerator<TSQLToken>).Current;
 			}
-		}
-
-		// moving IEnumerator<TSQLToken>.Current to the main context
-
-		bool IEnumerator.MoveNext()
-		{
-			return Read();
 		}
 
 		void IEnumerator.Reset()

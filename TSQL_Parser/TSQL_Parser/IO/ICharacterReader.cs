@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TSQL.IO
 {
-	interface ICharacterReader : IDisposable, IEnumerator, IEnumerable, IEnumerator<char>, IEnumerable<char>
+	internal interface ICharacterReader : IDisposable, IEnumerator, IEnumerable, IEnumerator<char>, IEnumerable<char>
 	{
 		
     }

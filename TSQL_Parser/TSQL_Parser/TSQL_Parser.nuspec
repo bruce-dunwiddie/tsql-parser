@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
-<package >
+<package>
   <metadata>
     <id>TSQL.Parser</id>
-    <version>1.0.0</version>
-    <title>TSQL_Parser</title>
-    <authors>shriop</authors>
+    <version>1.1.0</version>
+    <title>TSQL.Parser</title>
+    <authors>Bruce Dunwiddie</authors>
     <owners>shriop</owners>
     <licenseUrl>https://github.com/bruce-dunwiddie/tsql-parser/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/bruce-dunwiddie/tsql-parser</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Library for Parsing SQL Server TSQL Scripts</description>
-    <releaseNotes>Initial release with base parsing functionality.</releaseNotes>
+    <description>Library for Parsing SQL Server T-SQL Scripts</description>
+    <releaseNotes>Cleaned up public interfaces and classification of tokens.</releaseNotes>
     <copyright>Copyright © 2017</copyright>
     <tags>sql parser sql-server tsql</tags>
   </metadata>

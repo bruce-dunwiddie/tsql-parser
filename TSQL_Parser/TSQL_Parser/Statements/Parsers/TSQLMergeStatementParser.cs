@@ -4,16 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using TSQL.Tokens;
+
 namespace TSQL.Statements.Parsers
 {
-	public class TSQLMergeStatementParser : ITSQLStatementParser
+	internal class TSQLMergeStatementParser : ITSQLStatementParser
 	{
-		TSQLMergeStatement Parse(TSQLTokenizer tokenizer)
+		TSQLMergeStatement Parse(IEnumerator<TSQLToken> tokenizer)
 		{
 			throw new NotImplementedException();
 		}
 
-		TSQLStatement ITSQLStatementParser.Parse(TSQLTokenizer tokenizer)
+		TSQLStatement ITSQLStatementParser.Parse(IEnumerator<TSQLToken> tokenizer)
 		{
 			return Parse(tokenizer);
 		}

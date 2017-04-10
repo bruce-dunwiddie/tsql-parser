@@ -4,7 +4,7 @@ namespace TSQL.Tokens
 {
 	public class TSQLKeyword : TSQLToken
 	{
-		public TSQLKeyword(
+		internal TSQLKeyword(
 			int beginPostion,
 			string text) :
 			base(
@@ -14,6 +14,8 @@ namespace TSQL.Tokens
 			Keyword = TSQLKeywords.Parse(text);
 		}
 
+#pragma warning disable 1591
+
 		public override TSQLTokenType Type
 		{
 			get
@@ -21,6 +23,8 @@ namespace TSQL.Tokens
 				return TSQLTokenType.Keyword;
 			}
 		}
+
+#pragma warning restore 1591
 
 		public TSQLKeywords Keyword
 		{

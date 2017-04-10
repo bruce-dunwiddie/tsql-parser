@@ -11,6 +11,8 @@ namespace TSQL
 
 		public static readonly TSQLKeywords None = new TSQLKeywords("");
 
+#pragma warning disable 1591
+
 		#region commands
 
 		public static readonly TSQLKeywords ALTER = new TSQLKeywords("ALTER");
@@ -76,8 +78,6 @@ namespace TSQL
 
 		#endregion
 
-		// {stored procedure}
-
 		#region other
 
 		public static readonly TSQLKeywords ALL = new TSQLKeywords("ALL");
@@ -107,11 +107,15 @@ namespace TSQL
 		public static readonly TSQLKeywords DISK = new TSQLKeywords("DISK");
 		public static readonly TSQLKeywords DISTINCT = new TSQLKeywords("DISTINCT");
 		public static readonly TSQLKeywords DISTRIBUTED = new TSQLKeywords("DISTRIBUTED");
+		// DOUBLE PRECISION
+		public static readonly TSQLKeywords DOUBLE = new TSQLKeywords("DOUBLE");
 		public static readonly TSQLKeywords ELSE = new TSQLKeywords("ELSE");
 		public static readonly TSQLKeywords END = new TSQLKeywords("END");
+		// public static readonly TSQLKeywords ERRLVL = new TSQLKeywords("ERRLVL");
 		public static readonly TSQLKeywords ESCAPE = new TSQLKeywords("ESCAPE");
 		public static readonly TSQLKeywords EXCEPT = new TSQLKeywords("EXCEPT");
 		public static readonly TSQLKeywords EXISTS = new TSQLKeywords("EXISTS");
+		// public static readonly TSQLKeywords EXIT = new TSQLKeywords("EXIT");
 		public static readonly TSQLKeywords EXTERNAL = new TSQLKeywords("EXTERNAL");
 		public static readonly TSQLKeywords FILE = new TSQLKeywords("FILE");
 		public static readonly TSQLKeywords FILLFACTOR = new TSQLKeywords("FILLFACTOR");
@@ -137,10 +141,12 @@ namespace TSQL
 		public static readonly TSQLKeywords LEFT = new TSQLKeywords("LEFT");
 		public static readonly TSQLKeywords LIKE = new TSQLKeywords("LIKE");
 		public static readonly TSQLKeywords LINENO = new TSQLKeywords("LINENO");
+		// public static readonly TSQLKeywords NATIONAL = new TSQLKeywords("NATIONAL");
 		public static readonly TSQLKeywords NOCHECK = new TSQLKeywords("NOCHECK");
 		public static readonly TSQLKeywords NONCLUSTERED = new TSQLKeywords("NONCLUSTERED");
 		public static readonly TSQLKeywords NOT = new TSQLKeywords("NOT");
 		public static readonly TSQLKeywords NULL = new TSQLKeywords("NULL");
+		// public static readonly TSQLKeywords OF = new TSQLKeywords("OF");
 		public static readonly TSQLKeywords OFF = new TSQLKeywords("OFF");
 		public static readonly TSQLKeywords OFFSETS = new TSQLKeywords("OFFSETS");
 		public static readonly TSQLKeywords ON = new TSQLKeywords("ON");
@@ -152,31 +158,42 @@ namespace TSQL
 		public static readonly TSQLKeywords PERCENT = new TSQLKeywords("PERCENT");
 		public static readonly TSQLKeywords PIVOT = new TSQLKeywords("PIVOT");
 		public static readonly TSQLKeywords PLAN = new TSQLKeywords("PLAN");
+		// DOUBLE PRECISION
+		public static readonly TSQLKeywords PRECISION = new TSQLKeywords("PRECISION");
 		public static readonly TSQLKeywords PRIMARY = new TSQLKeywords("PRIMARY");
 		public static readonly TSQLKeywords PROCEDURE = new TSQLKeywords("PROCEDURE");
+		public static readonly TSQLKeywords PUBLIC = new TSQLKeywords("PUBLIC");
 		public static readonly TSQLKeywords READ = new TSQLKeywords("READ");
 		public static readonly TSQLKeywords REPEATABLE = new TSQLKeywords("REPEATABLE");
 		public static readonly TSQLKeywords RECONFIGURE = new TSQLKeywords("RECONFIGURE");
 		public static readonly TSQLKeywords REFERENCES = new TSQLKeywords("REFERENCES");
 		public static readonly TSQLKeywords REPLICATION = new TSQLKeywords("REPLICATION");
+		// public static readonly TSQLKeywords RESTRICT = new TSQLKeywords("RESTRICT");
 		public static readonly TSQLKeywords RETURNS = new TSQLKeywords("RETURNS");
 		public static readonly TSQLKeywords RIGHT = new TSQLKeywords("RIGHT");
 		public static readonly TSQLKeywords ROWCOUNT = new TSQLKeywords("ROWCOUNT");
 		public static readonly TSQLKeywords ROWGUIDCOL = new TSQLKeywords("ROWGUIDCOL");
 		public static readonly TSQLKeywords RULE = new TSQLKeywords("RULE");
+		// SAVE TRANSACTION
+		public static readonly TSQLKeywords SAVE = new TSQLKeywords("SAVE");
 		public static readonly TSQLKeywords SCHEMA = new TSQLKeywords("SCHEMA");
+		// public static readonly TSQLKeywords SECURITYAUDIT = new TSQLKeywords("SECURITYAUDIT");
+		public static readonly TSQLKeywords SETUSER = new TSQLKeywords("SETUSER");
 		public static readonly TSQLKeywords SOME = new TSQLKeywords("SOME");
 		public static readonly TSQLKeywords STATISTICS = new TSQLKeywords("STATISTICS");
 		public static readonly TSQLKeywords TABLE = new TSQLKeywords("TABLE");
 		public static readonly TSQLKeywords TABLESAMPLE = new TSQLKeywords("TABLESAMPLE");
 		public static readonly TSQLKeywords TEXTSIZE = new TSQLKeywords("TEXTSIZE");
 		public static readonly TSQLKeywords THEN = new TSQLKeywords("THEN");
+		// public static readonly TSQLKeywords TO = new TSQLKeywords("TO");
 		public static readonly TSQLKeywords TOP = new TSQLKeywords("TOP");
 		public static readonly TSQLKeywords TRANSACTION = new TSQLKeywords("TRANSACTION");
 		public static readonly TSQLKeywords TRIGGER = new TSQLKeywords("TRIGGER");
+		// public static readonly TSQLKeywords TSEQUAL = new TSQLKeywords("TSEQUAL");
 		public static readonly TSQLKeywords UNION = new TSQLKeywords("UNION");
 		public static readonly TSQLKeywords UNIQUE = new TSQLKeywords("UNIQUE");
 		public static readonly TSQLKeywords UNPIVOT = new TSQLKeywords("UNPIVOT");
+		// public static readonly TSQLKeywords USER = new TSQLKeywords("USER");
 		public static readonly TSQLKeywords VALUES = new TSQLKeywords("VALUES");
 		public static readonly TSQLKeywords VARYING = new TSQLKeywords("VARYING");
 		public static readonly TSQLKeywords VIEW = new TSQLKeywords("VIEW");
@@ -185,17 +202,9 @@ namespace TSQL
 		// WITHIN {GROUP}
 		public static readonly TSQLKeywords WITHIN = new TSQLKeywords("WITHIN");
 
+#pragma warning restore 1591
+
 		#endregion
-
-		// system stored procs
-
-		// built in functions
-
-		// datatypes
-
-		// operators
-
-		// characters? comma, semicolon, etc
 
 		private string Keyword;
 
@@ -247,6 +256,15 @@ namespace TSQL
 				return false;
 			}
 		}
+
+		public bool In(params TSQLKeywords[] keywords)
+		{
+			return
+				keywords != null &&
+				keywords.Contains(this);
+		}
+
+#pragma warning disable 1591
 
 		public static bool operator ==(
 			TSQLKeywords a,
@@ -309,11 +327,6 @@ namespace TSQL
 			return Keyword.GetHashCode();
 		}
 
-		public bool In(params TSQLKeywords[] keywords)
-		{
-			return
-				keywords != null &&
-				keywords.Contains(this);
-		}
+#pragma warning restore 1591
 	}
 }

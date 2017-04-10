@@ -60,14 +60,14 @@ namespace TSQL
 			}
 		}
 
-		public bool Read()
+		public bool MoveNext()
 		{
 			CheckDisposed();
 
 			if (_hasMore)
 			{
 				while (
-					_tokenizer.Read() &&
+					_tokenizer.MoveNext() &&
 					(
 						_tokenizer.Current.Type == TSQLTokenType.SingleLineComment ||
 						_tokenizer.Current.Type == TSQLTokenType.MultilineComment ||
@@ -102,18 +102,6 @@ namespace TSQL
 				CheckDisposed();
 
 				return _current;
-			}
-		}
-
-		public TSQLStatement Next()
-		{
-			if (Read())
-			{
-				return Current;
-			}
-			else
-			{
-				return null;
 			}
 		}
 

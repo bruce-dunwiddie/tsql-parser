@@ -10,10 +10,12 @@ namespace TSQL.Statements
 {
 	public class TSQLSelectStatement : TSQLStatement
 	{
-		public TSQLSelectStatement()
+		internal TSQLSelectStatement()
 		{
 
 		}
+
+#pragma warning disable 1591
 
 		public override TSQLStatementType Type
 		{
@@ -22,6 +24,8 @@ namespace TSQL.Statements
 				return TSQLStatementType.Select;
 			}
 		}
+
+#pragma warning restore 1591
 
 		public TSQLSelectClause Select { get; set; }
 

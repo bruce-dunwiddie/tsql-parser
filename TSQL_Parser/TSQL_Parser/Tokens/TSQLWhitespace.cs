@@ -4,7 +4,7 @@ namespace TSQL.Tokens
 {
 	public class TSQLWhitespace : TSQLToken
 	{
-		public TSQLWhitespace(
+		internal TSQLWhitespace(
 			int beginPostion,
 			string text) :
 			base(
@@ -14,6 +14,8 @@ namespace TSQL.Tokens
 
 		}
 
+#pragma warning disable 1591
+
 		public override TSQLTokenType Type
 		{
 			get
@@ -21,5 +23,7 @@ namespace TSQL.Tokens
 				return TSQLTokenType.Whitespace;
 			}
 		}
+
+#pragma warning restore 1591
 	}
 }

@@ -10,9 +10,9 @@ using TSQL.Tokens;
 
 namespace TSQL.Clauses.Parsers
 {
-	public class TSQLHavingClauseParser : ITSQLClauseParser
+	internal class TSQLHavingClauseParser : ITSQLClauseParser
 	{
-		public TSQLHavingClause Parse(TSQLTokenizer tokenizer)
+		public TSQLHavingClause Parse(IEnumerator<TSQLToken> tokenizer)
 		{
 			TSQLHavingClause having = new TSQLHavingClause();
 
@@ -30,7 +30,7 @@ namespace TSQL.Clauses.Parsers
 			int nestedLevel = 0;
 
 			while (
-				tokenizer.Read() &&
+				tokenizer.MoveNext() &&
 				!(
 					tokenizer.Current.Type == TSQLTokenType.Character &&
 					tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
@@ -76,7 +76,7 @@ namespace TSQL.Clauses.Parsers
 						// should we recurse for subqueries?
 						nestedLevel++;
 
-						if (tokenizer.Read())
+						if (tokenizer.MoveNext())
 						{
 							if (
 								tokenizer.Current.Type == TSQLTokenType.Keyword &&
@@ -111,7 +111,7 @@ namespace TSQL.Clauses.Parsers
 			return having;
 		}
 
-		TSQLClause ITSQLClauseParser.Parse(TSQLTokenizer tokenizer)
+		TSQLClause ITSQLClauseParser.Parse(IEnumerator<TSQLToken> tokenizer)
 		{
 			return Parse(tokenizer);
 		}

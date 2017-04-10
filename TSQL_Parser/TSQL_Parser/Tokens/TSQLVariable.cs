@@ -4,7 +4,7 @@ namespace TSQL.Tokens
 {
 	public class TSQLVariable : TSQLToken
 	{
-		public TSQLVariable(
+		internal TSQLVariable(
 			int beginPostion,
 			string text) :
 			base(
@@ -14,6 +14,8 @@ namespace TSQL.Tokens
 
 		}
 
+#pragma warning disable 1591
+
 		public override TSQLTokenType Type
 		{
 			get
@@ -21,5 +23,7 @@ namespace TSQL.Tokens
 				return TSQLTokenType.Variable;
 			}
 		}
+
+#pragma warning restore 1591
 	}
 }

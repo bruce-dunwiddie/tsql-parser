@@ -8,14 +8,14 @@ using TSQL.Tokens;
 
 namespace TSQL.Statements.Parsers
 {
-	public class TSQLInsertStatementParser : ITSQLStatementParser
+	internal class TSQLInsertStatementParser : ITSQLStatementParser
 	{
-		public TSQLInsertStatement Parse(TSQLTokenizer tokenizer)
+		public TSQLInsertStatement Parse(IEnumerator<TSQLToken> tokenizer)
 		{
 			throw new NotImplementedException();
 		}
 
-		TSQLStatement ITSQLStatementParser.Parse(TSQLTokenizer tokenizer)
+		TSQLStatement ITSQLStatementParser.Parse(IEnumerator<TSQLToken> tokenizer)
 		{
 			return Parse(tokenizer);
 		}

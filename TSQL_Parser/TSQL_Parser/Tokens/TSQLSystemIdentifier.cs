@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TSQL.Tokens
 {
-	public class TSQLMoneyLiteral : TSQLLiteral
+	public class TSQLSystemIdentifier : TSQLIdentifier
 	{
-		internal TSQLMoneyLiteral(
+		internal TSQLSystemIdentifier(
 			int beginPostion,
 			string text) :
 			base(
@@ -24,10 +24,16 @@ namespace TSQL.Tokens
 		{
 			get
 			{
-				return TSQLTokenType.MoneyLiteral;
+				return TSQLTokenType.SystemVariable;
 			}
 		}
 
 #pragma warning restore 1591
+
+		public TSQLIdentifiers Identifier
+		{
+			get;
+			private set;
+		}
 	}
 }

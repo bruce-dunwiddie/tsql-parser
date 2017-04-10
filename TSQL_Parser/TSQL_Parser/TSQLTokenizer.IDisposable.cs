@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TSQL
 {
-	public partial class TSQLTokenizer : IDisposable
+	partial class TSQLTokenizer : IDisposable
 	{
 		#region IDisposable pattern
 

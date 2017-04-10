@@ -9,7 +9,7 @@ using TSQL.Statements;
 
 namespace TSQL
 {
-	public partial class TSQLStatementReader : IEnumerator, IEnumerable, IEnumerator<TSQLStatement>, IEnumerable<TSQLStatement>
+	partial class TSQLStatementReader : IEnumerator, IEnumerable, IEnumerator<TSQLStatement>, IEnumerable<TSQLStatement>
 	{
 		IEnumerator<TSQLStatement> IEnumerable<TSQLStatement>.GetEnumerator()
 		{
@@ -21,16 +21,11 @@ namespace TSQL
 			return this;
 		}
 
-		bool IEnumerator.MoveNext()
-		{
-			return Read();
-		}
-
 		object IEnumerator.Current
 		{
 			get
 			{
-				return Current;
+				return (this as IEnumerator<TSQLStatement>).Current;
 			}
 		}
 

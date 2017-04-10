@@ -8,7 +8,7 @@ using TSQL.Tokens;
 
 namespace TSQL.IO
 {
-	public partial class TSQLCharacterReader
+	internal partial class TSQLCharacterReader
 	{
 		private ICharacterReader _inputStream = null;
 		private bool _hasMore = true;

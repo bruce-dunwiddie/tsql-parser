@@ -4,7 +4,7 @@ namespace TSQL.Tokens
 {
 	public class TSQLMultilineComment : TSQLComment
 	{
-		public TSQLMultilineComment(
+		internal TSQLMultilineComment(
 			int beginPostion,
 			string text) :
 			base(
@@ -14,6 +14,8 @@ namespace TSQL.Tokens
 			Comment = Text.Substring(2, Text.Length - 4);
 		}
 
+#pragma warning disable 1591
+
 		public override TSQLTokenType Type
 		{
 			get
@@ -21,5 +23,7 @@ namespace TSQL.Tokens
 				return TSQLTokenType.MultilineComment;
 			}
 		}
+
+#pragma warning restore 1591
 	}
 }

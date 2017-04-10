@@ -5,7 +5,7 @@ using System.IO;
 
 namespace TSQL.IO
 {
-	public class BufferedTextReader : ICharacterReader
+	internal class BufferedTextReader : ICharacterReader
 	{
 		private TextReader _inputStream = null;
 		private char[] _buffer = new char[1024];
@@ -18,7 +18,7 @@ namespace TSQL.IO
 			_inputStream = inputStream;
 		}
 
-		public char Current
+		char IEnumerator<char>.Current
 		{
 			get
 			{
@@ -33,7 +33,7 @@ namespace TSQL.IO
 			}
 		}
 
-		public bool MoveNext()
+		bool IEnumerator.MoveNext()
 		{
 			if (_hasMore)
 			{
@@ -58,7 +58,7 @@ namespace TSQL.IO
 		{
 			get
 			{
-				return Current;
+				return (this as IEnumerator<char>).Current;
 			}
 		}
 
@@ -67,7 +67,7 @@ namespace TSQL.IO
 			throw new NotSupportedException("Reset is not currently supported by the IEnumerator implementation supplied by " + GetType().FullName + ".");
 		}
 
-		public IEnumerator<char> GetEnumerator()
+		IEnumerator<char> IEnumerable<char>.GetEnumerator()
 		{
 			return this;
 		}
