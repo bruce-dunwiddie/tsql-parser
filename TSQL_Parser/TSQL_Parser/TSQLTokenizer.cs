@@ -20,7 +20,7 @@ namespace TSQL
 			string tsqlText) :
 				this(new StringReader(tsqlText))
 		{
-			
+
 		}
 
 		public TSQLTokenizer(
@@ -109,7 +109,7 @@ namespace TSQL
 								)
 								{
 									characterHolder.Append(_charReader.Current);
-									
+
 									goto case '0';
 								}
 								else
@@ -187,14 +187,14 @@ namespace TSQL
 											// */
 											!(
 												lastWasStar &&
-                                                _charReader.Current == '/'												
+												_charReader.Current == '/'
 											)
 										))
 									{
 										// /*
 										if (
 											lastWasSlash &&
-                                            _charReader.Current == '*')
+											_charReader.Current == '*')
 										{
 											currentLevel++;
 											lastWasSlash = false;
@@ -590,7 +590,7 @@ namespace TSQL
 												characterHolder.Append(_charReader.Current);
 
 												foundPeriod = true;
-                                            }
+											}
 
 											break;
 										}
@@ -646,7 +646,7 @@ namespace TSQL
 									_charReader.Current == '7' ||
 									_charReader.Current == '8' ||
 									_charReader.Current == '9'
-                                    )
+									)
 								{
 									_charReader.Putback();
 
@@ -658,7 +658,7 @@ namespace TSQL
 
 									goto default;
 								}
-                            }
+							}
 
 							break;
 						}
@@ -852,10 +852,20 @@ namespace TSQL
 			else if (
 				tokenValue[0] == '@')
 			{
-				return
-					new TSQLVariable(
-						startPosition,
-						tokenValue);
+				if (TSQLVariables.IsVariable(tokenValue))
+				{
+					return
+						new TSQLSystemVariable(
+							startPosition,
+							tokenValue);
+				}
+				else
+				{
+					return
+						new TSQLVariable(
+							startPosition,
+							tokenValue);
+				}
 			}
 			else if (tokenValue.StartsWith("--"))
 			{
@@ -968,6 +978,13 @@ namespace TSQL
 			{
 				return
 					new TSQLKeyword(
+						startPosition,
+						tokenValue);
+			}
+			else if (TSQLIdentifiers.IsIdentifier(tokenValue))
+			{
+				return
+					new TSQLSystemIdentifier(
 						startPosition,
 						tokenValue);
 			}

@@ -18,17 +18,6 @@ namespace TSQL.Tokens
 
 		}
 
-		/*
-
-		https://docs.microsoft.com/en-us/sql/t-sql/language-elements/reserved-keywords-transact-sql
-
-		where not already in TSQLKeywords
-
-		RAISERROR
-		...
-
-		*/
-
 #pragma warning disable 1591
 
 		public override TSQLTokenType Type

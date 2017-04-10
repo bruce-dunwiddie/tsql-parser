@@ -18,33 +18,6 @@ namespace TSQL.Tokens
 
 		}
 
-		/*
-
-		@@CONNECTIONS
-		@@MAX_CONNECTIONS
-		@@CPU_BUSY
-		@@ERROR  
-		@@IDENTITY
-		@@IDLE
-		@@IO_BUSY
-		@@LANGID  
-		@@LANGUAGE
-		@@MAXCHARLEN
-		@@PACK_RECEIVED  
-		@@PACK_SENT
-		@@PACKET_ERRORS
-		@@ROWCOUNT  
-		@@SERVERNAME 
-		@@SPID
-		@@TEXTSIZE 
-		@@TIMETICKS
-		@@TOTAL_ERRORS
-		@@TOTAL_READ / @@TOTAL_WRITE
-		@@TRANCOUNT
-		@@VERSION  
-
-		*/
-
 #pragma warning disable 1591
 
 		public override TSQLTokenType Type
