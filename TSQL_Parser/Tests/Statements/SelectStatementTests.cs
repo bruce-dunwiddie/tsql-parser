@@ -137,5 +137,22 @@ namespace Tests.Statements
 			Assert.AreEqual(11, select.Having.Tokens.Count);
 			Assert.AreEqual(12, select.OrderBy.Tokens.Count);
 		}
+
+		[Test]
+		public void SelectStatement_MultipleSelectsWithoutSemicolon()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				"select top 1 * from dbo.ACCOUNTS select top 1 * from dbo.ACTIONS",
+				includeWhitespace: true);
+			TSQLSelectStatement select1 = statements[0] as TSQLSelectStatement;
+			TSQLSelectStatement select2 = statements[1] as TSQLSelectStatement;
+
+			Assert.IsNotNull(statements);
+			Assert.AreEqual(2, statements.Count);
+
+			Assert.AreEqual(TSQLStatementType.Select, select1.Type);
+
+			Assert.AreEqual(TSQLStatementType.Select, select2.Type);
+		}
 	}
 }
