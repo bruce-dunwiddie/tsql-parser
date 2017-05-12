@@ -21,7 +21,7 @@ namespace Tests.Clauses
 		public void SelectClause_StopAtFrom()
 		{
 			using (StringReader reader = new StringReader(@"select a from b;"))
-			using (IEnumerator<TSQLToken> tokenizer = new TSQLTokenizer(reader))
+			using (ITSQLTokenizer tokenizer = new TSQLTokenizer(reader))
 			{
 				Assert.IsTrue(tokenizer.MoveNext());
 				TSQLSelectClause select = new TSQLSelectClauseParser().Parse(tokenizer);

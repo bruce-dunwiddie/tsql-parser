@@ -9,7 +9,7 @@ namespace TSQL.Statements.Parsers
 {
 	internal class TSQLUnknownStatementParser : ITSQLStatementParser
 	{
-		public TSQLUnknownStatement Parse(IEnumerator<TSQLToken> tokenizer)
+		public TSQLUnknownStatement Parse(ITSQLTokenizer tokenizer)
 		{
 			TSQLUnknownStatement statement = new TSQLUnknownStatement();
 
@@ -34,7 +34,7 @@ namespace TSQL.Statements.Parsers
 			return statement;
 		}
 
-		TSQLStatement ITSQLStatementParser.Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLStatement ITSQLStatementParser.Parse(ITSQLTokenizer tokenizer)
 		{
 			return Parse(tokenizer);
 		}

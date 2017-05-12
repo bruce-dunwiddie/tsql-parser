@@ -67,6 +67,7 @@
     <Compile Include="IO\TSQLCharacterReader.IDisposable.cs">
       <DependentUpon>TSQLCharacterReader.cs</DependentUpon>
     </Compile>
+    <Compile Include="ITSQLTokenizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Statements\Parsers\ITSQLStatementParser.cs" />
     <Compile Include="Statements\Parsers\TSQLDeleteStatementParser.cs" />

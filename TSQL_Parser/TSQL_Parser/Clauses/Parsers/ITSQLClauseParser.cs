@@ -9,6 +9,6 @@ namespace TSQL.Clauses.Parsers
 {
 	internal interface ITSQLClauseParser
 	{
-		TSQLClause Parse(IEnumerator<TSQLToken> tokenizer);
+		TSQLClause Parse(ITSQLTokenizer tokenizer);
     }
 }

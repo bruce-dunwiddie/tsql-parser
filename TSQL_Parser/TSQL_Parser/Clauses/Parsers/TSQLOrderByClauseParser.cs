@@ -11,7 +11,7 @@ namespace TSQL.Clauses.Parsers
 {
 	internal class TSQLOrderByClauseParser : ITSQLClauseParser
 	{
-		public TSQLOrderByClause Parse(IEnumerator<TSQLToken> tokenizer)
+		public TSQLOrderByClause Parse(ITSQLTokenizer tokenizer)
 		{
 			TSQLOrderByClause orderBy = new TSQLOrderByClause();
 
@@ -116,7 +116,7 @@ namespace TSQL.Clauses.Parsers
 			return orderBy;
 		}
 
-		TSQLClause ITSQLClauseParser.Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLClause ITSQLClauseParser.Parse(ITSQLTokenizer tokenizer)
 		{
 			return Parse(tokenizer);
 		}

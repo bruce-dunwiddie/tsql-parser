@@ -11,7 +11,7 @@ namespace TSQL.Clauses.Parsers
 {
 	internal class TSQLGroupByClauseParser : ITSQLClauseParser
 	{
-		public TSQLGroupByClause Parse(IEnumerator<TSQLToken> tokenizer)
+		public TSQLGroupByClause Parse(ITSQLTokenizer tokenizer)
 		{
 			TSQLGroupByClause groupBy = new TSQLGroupByClause();
 
@@ -115,7 +115,7 @@ namespace TSQL.Clauses.Parsers
 			return groupBy;
 		}
 
-		TSQLClause ITSQLClauseParser.Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLClause ITSQLClauseParser.Parse(ITSQLTokenizer tokenizer)
 		{
 			return Parse(tokenizer);
 		}

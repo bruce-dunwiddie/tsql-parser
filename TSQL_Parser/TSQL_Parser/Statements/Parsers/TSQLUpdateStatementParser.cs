@@ -9,12 +9,12 @@ namespace TSQL.Statements.Parsers
 {
 	internal class TSQLUpdateStatementParser : ITSQLStatementParser
 	{
-		TSQLUpdateStatement Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLUpdateStatement Parse(ITSQLTokenizer tokenizer)
 		{
 			throw new NotImplementedException();
 		}
 
-		TSQLStatement ITSQLStatementParser.Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLStatement ITSQLStatementParser.Parse(ITSQLTokenizer tokenizer)
 		{
 			return Parse(tokenizer);
 		}

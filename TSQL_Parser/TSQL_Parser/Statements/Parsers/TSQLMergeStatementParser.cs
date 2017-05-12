@@ -9,12 +9,12 @@ namespace TSQL.Statements.Parsers
 {
 	internal class TSQLMergeStatementParser : ITSQLStatementParser
 	{
-		TSQLMergeStatement Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLMergeStatement Parse(ITSQLTokenizer tokenizer)
 		{
 			throw new NotImplementedException();
 		}
 
-		TSQLStatement ITSQLStatementParser.Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLStatement ITSQLStatementParser.Parse(ITSQLTokenizer tokenizer)
 		{
 			return Parse(tokenizer);
 		}

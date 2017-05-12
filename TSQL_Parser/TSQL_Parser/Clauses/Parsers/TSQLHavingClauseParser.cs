@@ -11,7 +11,7 @@ namespace TSQL.Clauses.Parsers
 {
 	internal class TSQLHavingClauseParser : ITSQLClauseParser
 	{
-		public TSQLHavingClause Parse(IEnumerator<TSQLToken> tokenizer)
+		public TSQLHavingClause Parse(ITSQLTokenizer tokenizer)
 		{
 			TSQLHavingClause having = new TSQLHavingClause();
 
@@ -110,7 +110,7 @@ namespace TSQL.Clauses.Parsers
 			return having;
 		}
 
-		TSQLClause ITSQLClauseParser.Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLClause ITSQLClauseParser.Parse(ITSQLTokenizer tokenizer)
 		{
 			return Parse(tokenizer);
 		}

@@ -11,7 +11,7 @@ namespace TSQL.Statements.Parsers
 {
 	internal class TSQLSelectStatementParser : ITSQLStatementParser
 	{
-		public TSQLSelectStatement Parse(IEnumerator<TSQLToken> tokenizer)
+		public TSQLSelectStatement Parse(ITSQLTokenizer tokenizer)
 		{
 			TSQLSelectStatement select = new TSQLSelectStatement();
 
@@ -84,15 +84,17 @@ namespace TSQL.Statements.Parsers
 				select.Tokens.AddRange(orderByClause.Tokens);
 			}
 
-			if (tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon))
+			if (
+				tokenizer.Current != null &&
+				tokenizer.Current.Type == TSQLTokenType.Keyword)
 			{
-				select.Tokens.Add(tokenizer.Current);
+				tokenizer.Putback();
 			}
 
 			return select;
 		}
 
-		TSQLStatement ITSQLStatementParser.Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLStatement ITSQLStatementParser.Parse(ITSQLTokenizer tokenizer)
 		{
 			return Parse(tokenizer);
 		}

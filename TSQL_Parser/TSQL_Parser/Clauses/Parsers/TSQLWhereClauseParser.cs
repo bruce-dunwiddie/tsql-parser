@@ -11,7 +11,7 @@ namespace TSQL.Clauses.Parsers
 {
 	internal class TSQLWhereClauseParser : ITSQLClauseParser
 	{
-		public TSQLWhereClause Parse(IEnumerator<TSQLToken> tokenizer)
+		public TSQLWhereClause Parse(ITSQLTokenizer tokenizer)
 		{
 			TSQLWhereClause where = new TSQLWhereClause();
 
@@ -110,7 +110,7 @@ namespace TSQL.Clauses.Parsers
 			return where;
 		}
 
-		TSQLClause ITSQLClauseParser.Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLClause ITSQLClauseParser.Parse(ITSQLTokenizer tokenizer)
 		{
 			return Parse(tokenizer);
 		}

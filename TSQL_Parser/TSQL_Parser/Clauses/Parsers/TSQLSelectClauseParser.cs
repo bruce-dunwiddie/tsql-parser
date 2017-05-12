@@ -11,7 +11,7 @@ namespace TSQL.Clauses.Parsers
 {
 	internal class TSQLSelectClauseParser : ITSQLClauseParser
 	{
-		public TSQLSelectClause Parse(IEnumerator<TSQLToken> tokenizer)
+		public TSQLSelectClause Parse(ITSQLTokenizer tokenizer)
 		{
 			TSQLSelectClause select = new TSQLSelectClause();
 
@@ -123,7 +123,7 @@ namespace TSQL.Clauses.Parsers
 			return select;
 		}
 
-		TSQLClause ITSQLClauseParser.Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLClause ITSQLClauseParser.Parse(ITSQLTokenizer tokenizer)
 		{
 			return Parse(tokenizer);
 		}

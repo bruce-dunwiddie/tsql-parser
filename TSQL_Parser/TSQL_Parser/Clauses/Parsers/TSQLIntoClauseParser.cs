@@ -9,7 +9,7 @@ namespace TSQL.Clauses.Parsers
 {
 	internal class TSQLIntoClauseParser : ITSQLClauseParser
 	{
-		public TSQLIntoClause Parse(IEnumerator<TSQLToken> tokenizer)
+		public TSQLIntoClause Parse(ITSQLTokenizer tokenizer)
 		{
 			TSQLIntoClause into = new TSQLIntoClause();
 
@@ -42,7 +42,7 @@ namespace TSQL.Clauses.Parsers
 			return into;
 		}
 
-		TSQLClause ITSQLClauseParser.Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLClause ITSQLClauseParser.Parse(ITSQLTokenizer tokenizer)
 		{
 			return Parse(tokenizer);
 		}

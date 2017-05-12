@@ -9,12 +9,12 @@ namespace TSQL.Statements.Parsers
 {
 	internal class TSQLDeleteStatementParser : ITSQLStatementParser
 	{
-		public TSQLDeleteStatement Parse(IEnumerator<TSQLToken> tokenizer)
+		public TSQLDeleteStatement Parse(ITSQLTokenizer tokenizer)
 		{
 			throw new NotImplementedException();
 		}
 
-		TSQLStatement ITSQLStatementParser.Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLStatement ITSQLStatementParser.Parse(ITSQLTokenizer tokenizer)
 		{
 			return Parse(tokenizer);
 		}

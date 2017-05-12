@@ -10,7 +10,7 @@ namespace TSQL.Statements.Parsers
 	// represents the CTE's portion of the statement along with the following SELECT/INSERT/UPDATE/DELETE statement
 	internal class TSQLWithAggregateStatementParser : ITSQLStatementParser
 	{
-		public TSQLStatement Parse(IEnumerator<TSQLToken> tokenizer)
+		public TSQLStatement Parse(ITSQLTokenizer tokenizer)
 		{
 			TSQLWithStatement with = new TSQLWithStatementParser().Parse(tokenizer);
 
