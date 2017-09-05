@@ -15,10 +15,7 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLSelectClause select = new TSQLSelectClause();
 
-			if (
-                tokenizer.Current == null ||
-                tokenizer.Current.Type != TSQLTokenType.Keyword ||
-                tokenizer.Current.AsKeyword.Keyword != TSQLKeywords.SELECT)
+			if (!tokenizer.Current.IsKeyword(TSQLKeywords.SELECT))
 			{
 				throw new ApplicationException("SELECT expected.");
 			}
@@ -35,14 +32,10 @@ namespace TSQL.Clauses.Parsers
 
 			while (
 				tokenizer.MoveNext() &&
-				!(
-					tokenizer.Current.Type == TSQLTokenType.Character &&
-					tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
-				) &&
+				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
 				!(
 					nestedLevel == 0 &&
-					tokenizer.Current.Type == TSQLTokenType.Character &&
-					tokenizer.Current.AsCharacter.Character == TSQLCharacters.CloseParentheses
+					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
 				) &&
 				(
 					nestedLevel > 0 ||
@@ -90,18 +83,15 @@ namespace TSQL.Clauses.Parsers
 
 						if (tokenizer.MoveNext())
 						{
-							if (
-								tokenizer.Current.Type == TSQLTokenType.Keyword &&
-								tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.SELECT)
+							if (tokenizer.Current.IsKeyword(
+								TSQLKeywords.SELECT))
 							{
 								TSQLSelectStatement selectStatement = new TSQLSelectStatementParser().Parse(tokenizer);
 
 								select.Tokens.AddRange(selectStatement.Tokens);
 
-                                if (
-                                    tokenizer.Current != null &&
-                                    tokenizer.Current.Type == TSQLTokenType.Character &&
-                                    tokenizer.Current.AsCharacter.Character == TSQLCharacters.CloseParentheses)
+                                if (tokenizer.Current.IsCharacter(
+									TSQLCharacters.CloseParentheses))
                                 {
                                     nestedLevel--;
                                     select.Tokens.Add(tokenizer.Current);

@@ -39,6 +39,8 @@ namespace TSQL
 		{
 			CheckDisposed();
 
+			_current = null;
+
 			if (_hasMore)
 			{
 				if (_hasExtra)
@@ -60,10 +62,6 @@ namespace TSQL
 					if (_hasMore)
 					{
 						SetCurrent();
-					}
-					else
-					{
-						_current = null;
 					}
 				}
 			}

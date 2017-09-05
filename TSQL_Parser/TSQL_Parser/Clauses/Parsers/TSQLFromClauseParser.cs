@@ -15,10 +15,7 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLFromClause from = new TSQLFromClause();
 
-            if (
-                tokenizer.Current == null ||
-                tokenizer.Current.Type != TSQLTokenType.Keyword ||
-                tokenizer.Current.AsKeyword.Keyword != TSQLKeywords.FROM)
+            if (!tokenizer.Current.IsKeyword(TSQLKeywords.FROM))
             {
                 throw new ApplicationException("FROM expected.");
             }

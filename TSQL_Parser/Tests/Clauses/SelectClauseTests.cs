@@ -15,7 +15,7 @@ using TSQL.Tokens;
 namespace Tests.Clauses
 {
 	[TestFixture(Category = "Clause Parsing")]
-	public class SelectStatementClausesTests
+	public class SelectClauseTests
 	{
 		[Test]
 		public void SelectClause_StopAtFrom()
@@ -26,6 +26,23 @@ namespace Tests.Clauses
 				Assert.IsTrue(tokenizer.MoveNext());
 				TSQLSelectClause select = new TSQLSelectClauseParser().Parse(tokenizer);
 				Assert.AreEqual(2, select.Tokens.Count);
+				Assert.AreEqual(TSQLKeywords.FROM, tokenizer.Current.AsKeyword.Keyword);
+			}
+		}
+
+		[Test]
+		public void SelectClause_Comments()
+		{
+			using (StringReader reader = new StringReader(
+				@"select top 1
+					oh.TaxAmt / oh.SubTotal /* tax percent */
+				from
+					Sales.SalesOrderHeader oh;"))
+			using (ITSQLTokenizer tokenizer = new TSQLTokenizer(reader))
+			{
+				Assert.IsTrue(tokenizer.MoveNext());
+				TSQLSelectClause select = new TSQLSelectClauseParser().Parse(tokenizer);
+				Assert.AreEqual(11, select.Tokens.Count);
 				Assert.AreEqual(TSQLKeywords.FROM, tokenizer.Current.AsKeyword.Keyword);
 			}
 		}

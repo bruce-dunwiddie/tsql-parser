@@ -15,10 +15,7 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLHavingClause having = new TSQLHavingClause();
 
-			if (
-				tokenizer.Current == null ||
-				tokenizer.Current.Type != TSQLTokenType.Keyword ||
-				tokenizer.Current.AsKeyword.Keyword != TSQLKeywords.HAVING)
+			if (!tokenizer.Current.IsKeyword(TSQLKeywords.HAVING))
 			{
 				throw new ApplicationException("HAVING expected.");
 			}
@@ -30,14 +27,10 @@ namespace TSQL.Clauses.Parsers
 
 			while (
 				tokenizer.MoveNext() &&
-				!(
-					tokenizer.Current.Type == TSQLTokenType.Character &&
-					tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
-				) &&
+				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
 				!(
 					nestedLevel == 0 &&
-					tokenizer.Current.Type == TSQLTokenType.Character &&
-					tokenizer.Current.AsCharacter.Character == TSQLCharacters.CloseParentheses
+					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
 				) &&
 				(
 					nestedLevel > 0 ||
@@ -77,18 +70,13 @@ namespace TSQL.Clauses.Parsers
 
 						if (tokenizer.MoveNext())
 						{
-							if (
-								tokenizer.Current.Type == TSQLTokenType.Keyword &&
-								tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.SELECT)
+							if (tokenizer.Current.IsKeyword(TSQLKeywords.SELECT))
 							{
 								TSQLSelectStatement selectStatement = new TSQLSelectStatementParser().Parse(tokenizer);
 
 								having.Tokens.AddRange(selectStatement.Tokens);
 
-								if (
-									tokenizer.Current != null &&
-									tokenizer.Current.Type == TSQLTokenType.Character &&
-									tokenizer.Current.AsCharacter.Character == TSQLCharacters.CloseParentheses)
+								if (tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
 								{
 									nestedLevel--;
 									having.Tokens.Add(tokenizer.Current);

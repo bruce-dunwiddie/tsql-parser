@@ -15,29 +15,22 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLOrderByClause orderBy = new TSQLOrderByClause();
 
-			TSQLKeyword keyword = tokenizer.Current.AsKeyword;
-
-			if (keyword == null ||
-				keyword.Keyword != TSQLKeywords.ORDER)
+			if (!tokenizer.Current.IsKeyword(TSQLKeywords.ORDER))
 			{
 				throw new ApplicationException("ORDER expected.");
 			}
 
-			orderBy.Tokens.Add(keyword);
+			orderBy.Tokens.Add(tokenizer.Current);
 
 			// subqueries
 			int nestedLevel = 0;
 
 			while (
 				tokenizer.MoveNext() &&
-				!(
-					tokenizer.Current.Type == TSQLTokenType.Character &&
-					tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
-				) &&
+				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
 				!(
 					nestedLevel == 0 &&
-					tokenizer.Current.Type == TSQLTokenType.Character &&
-					tokenizer.Current.AsCharacter.Character == TSQLCharacters.CloseParentheses
+					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
 				) &&
 				(
 					nestedLevel > 0 ||
@@ -83,18 +76,13 @@ namespace TSQL.Clauses.Parsers
 
 						if (tokenizer.MoveNext())
 						{
-							if (
-								tokenizer.Current.Type == TSQLTokenType.Keyword &&
-								tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.SELECT)
+							if (tokenizer.Current.IsKeyword(TSQLKeywords.SELECT))
 							{
 								TSQLSelectStatement selectStatement = new TSQLSelectStatementParser().Parse(tokenizer);
 
 								orderBy.Tokens.AddRange(selectStatement.Tokens);
 
-								if (
-									tokenizer.Current != null &&
-									tokenizer.Current.Type == TSQLTokenType.Character &&
-									tokenizer.Current.AsCharacter.Character == TSQLCharacters.CloseParentheses)
+								if (tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
 								{
 									nestedLevel--;
 									orderBy.Tokens.Add(tokenizer.Current);

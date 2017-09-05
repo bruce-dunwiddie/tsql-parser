@@ -36,10 +36,10 @@ namespace TSQL.Statements.Parsers
 				//{
 				//	return new TSQLMergeStatementParser();
 				//}
-				//else if (keyword == TSQLKeywords.WITH)
-				//{
-				//	return new TSQLWithAggregateStatementParser();
-				//}
+				else if (keyword == TSQLKeywords.WITH)
+				{
+					return new TSQLWithStatementParser();
+				}
 				else
 				{
 					return new TSQLUnknownStatementParser();

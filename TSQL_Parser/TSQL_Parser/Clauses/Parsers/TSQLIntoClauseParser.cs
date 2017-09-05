@@ -13,10 +13,7 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLIntoClause into = new TSQLIntoClause();
 
-            if (
-                tokenizer.Current == null ||
-                tokenizer.Current.Type != TSQLTokenType.Keyword ||
-                tokenizer.Current.AsKeyword.Keyword != TSQLKeywords.INTO)
+            if (!tokenizer.Current.IsKeyword(TSQLKeywords.INTO))
             {
                 throw new ApplicationException("INTO expected.");
             }
@@ -27,10 +24,7 @@ namespace TSQL.Clauses.Parsers
 				tokenizer.MoveNext() &&
 				(
 					tokenizer.Current.Type == TSQLTokenType.Identifier ||
-					(
-						tokenizer.Current.Type == TSQLTokenType.Character &&
-						tokenizer.Current.AsCharacter.Character == TSQLCharacters.Period
-					) ||
+					tokenizer.Current.IsCharacter(TSQLCharacters.Period) ||
 					tokenizer.Current.Type == TSQLTokenType.Whitespace ||
 					tokenizer.Current.Type == TSQLTokenType.SingleLineComment ||
 					tokenizer.Current.Type == TSQLTokenType.MultilineComment
