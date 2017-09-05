@@ -15,15 +15,6 @@ namespace TSQL.Statements.Parsers
 		{
 			TSQLSelectStatement select = new TSQLSelectStatement();
 
-			// should whitespace be excluded from statement parsing logic?
-
-			// should I differentiate keywords that start commands?
-
-			// correlated subqueries
-			// scalar function calls
-
-			// SELECT clause
-
 			TSQLSelectClause selectClause = new TSQLSelectClauseParser().Parse(tokenizer);
 
 			select.Select = selectClause;
@@ -82,6 +73,15 @@ namespace TSQL.Statements.Parsers
 				select.OrderBy = orderByClause;
 
 				select.Tokens.AddRange(orderByClause.Tokens);
+			}
+
+			if (tokenizer.Current.IsKeyword(TSQLKeywords.OPTION))
+			{
+				TSQLOptionClause optionClause = new TSQLOptionClauseParser().Parse(tokenizer);
+
+				select.Option = optionClause;
+
+				select.Tokens.AddRange(optionClause.Tokens);
 			}
 
 			if (

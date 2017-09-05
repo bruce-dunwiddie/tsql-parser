@@ -39,5 +39,7 @@ namespace TSQL.Statements
 		public TSQLHavingClause Having { get; set; }
 
 		public TSQLOrderByClause OrderBy { get; set; }
+
+		public TSQLOptionClause Option { get; set; }
 	}
 }

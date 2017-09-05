@@ -149,5 +149,44 @@ namespace Tests.Statements
 
 			Assert.AreEqual(TSQLStatementType.Select, select2.Type);
 		}
+
+		[Test]
+		public void SelectStatement_Option()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT *
+				FROM
+					Sales.SalesOrderHeader oh
+				OPTION (FAST 10)",
+				includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
+
+			TSQLSelectStatement select = statements[0] as TSQLSelectStatement;
+
+			Assert.AreEqual(12, select.Tokens.Count);
+			Assert.IsNotNull(select.Option);
+			Assert.AreEqual(5, select.Option.Tokens.Count);
+		}
+
+		[Test]
+		public void SelectStatement_DontEatFinalDescAsKeyword()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"select 1 as blah order by 1 desc select 1",
+				includeWhitespace: false);
+
+			Assert.AreEqual(2, statements.Count);
+			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
+			Assert.AreEqual(TSQLStatementType.Select, statements[1].Type);
+
+			TSQLSelectStatement select1 = statements[0] as TSQLSelectStatement;
+			TSQLSelectStatement select2 = statements[1] as TSQLSelectStatement;
+
+			Assert.AreEqual(8, select1.Tokens.Count);
+
+			Assert.AreEqual(2, select2.Tokens.Count);
+		}
 	}
 }
