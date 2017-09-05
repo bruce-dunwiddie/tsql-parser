@@ -23,7 +23,7 @@ namespace TSQL.Tokens
 		{
 			get
 			{
-				return TSQLTokenType.SystemVariable;
+				return TSQLTokenType.SystemIdentifier;
 			}
 		}
 
