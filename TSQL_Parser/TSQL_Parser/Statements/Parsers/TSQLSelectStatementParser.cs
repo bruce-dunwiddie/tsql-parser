@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 using TSQL.Clauses;
 using TSQL.Clauses.Parsers;
@@ -12,18 +11,9 @@ namespace TSQL.Statements.Parsers
 {
 	internal class TSQLSelectStatementParser : ITSQLStatementParser
 	{
-		public TSQLSelectStatement Parse(IEnumerator<TSQLToken> tokenizer)
+		public TSQLSelectStatement Parse(ITSQLTokenizer tokenizer)
 		{
 			TSQLSelectStatement select = new TSQLSelectStatement();
-
-			// should whitespace be excluded from statement parsing logic?
-
-			// should I differentiate keywords that start commands?
-
-			// correlated subqueries
-			// scalar function calls
-
-			// SELECT clause
 
 			TSQLSelectClause selectClause = new TSQLSelectClauseParser().Parse(tokenizer);
 
@@ -85,15 +75,26 @@ namespace TSQL.Statements.Parsers
 				select.Tokens.AddRange(orderByClause.Tokens);
 			}
 
-			if (tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon))
+			if (tokenizer.Current.IsKeyword(TSQLKeywords.OPTION))
 			{
-				select.Tokens.Add(tokenizer.Current);
+				TSQLOptionClause optionClause = new TSQLOptionClauseParser().Parse(tokenizer);
+
+				select.Option = optionClause;
+
+				select.Tokens.AddRange(optionClause.Tokens);
+			}
+
+			if (
+				tokenizer.Current != null &&
+				tokenizer.Current.Type == TSQLTokenType.Keyword)
+			{
+				tokenizer.Putback();
 			}
 
 			return select;
 		}
 
-		TSQLStatement ITSQLStatementParser.Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLStatement ITSQLStatementParser.Parse(ITSQLTokenizer tokenizer)
 		{
 			return Parse(tokenizer);
 		}

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 using TSQL.Tokens;
 
@@ -10,9 +9,11 @@ namespace TSQL.Statements.Parsers
 {
 	internal class TSQLUnknownStatementParser : ITSQLStatementParser
 	{
-		public TSQLUnknownStatement Parse(IEnumerator<TSQLToken> tokenizer)
+		public TSQLUnknownStatement Parse(ITSQLTokenizer tokenizer)
 		{
 			TSQLUnknownStatement statement = new TSQLUnknownStatement();
+
+			statement.Tokens.Add(tokenizer.Current);
 
 			while (
 				tokenizer.MoveNext() &&
@@ -35,7 +36,7 @@ namespace TSQL.Statements.Parsers
 			return statement;
 		}
 
-		TSQLStatement ITSQLStatementParser.Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLStatement ITSQLStatementParser.Parse(ITSQLTokenizer tokenizer)
 		{
 			return Parse(tokenizer);
 		}

@@ -25,11 +25,10 @@ namespace Tests.Statements
 			Assert.IsNotNull(statements);
 			Assert.AreEqual(1, statements.Count);
 			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
-			Assert.AreEqual(4, select.Tokens.Count);
+			Assert.AreEqual(3, select.Tokens.Count);
 			Assert.AreEqual(TSQLKeywords.SELECT, select.Tokens[0].AsKeyword.Keyword);
 			Assert.AreEqual(" ", select.Tokens[1].AsWhitespace.Text);
 			Assert.AreEqual("1", select.Tokens[2].AsNumericLiteral.Text);
-			Assert.AreEqual(TSQLCharacters.Semicolon, select.Tokens[3].AsCharacter.Character);
 		}
 
 		[Test]
@@ -43,10 +42,9 @@ namespace Tests.Statements
 			Assert.IsNotNull(statements);
 			Assert.AreEqual(1, statements.Count);
 			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
-			Assert.AreEqual(3, select.Tokens.Count);
+			Assert.AreEqual(2, select.Tokens.Count);
 			Assert.AreEqual(TSQLKeywords.SELECT, select.Tokens[0].AsKeyword.Keyword);
 			Assert.AreEqual("1", select.Tokens[1].AsNumericLiteral.Text);
-			Assert.AreEqual(TSQLCharacters.Semicolon, select.Tokens[2].AsCharacter.Character);
 		}
 
 		[Test]
@@ -62,18 +60,16 @@ namespace Tests.Statements
 			Assert.AreEqual(2, statements.Count);
 
 			Assert.AreEqual(TSQLStatementType.Select, select1.Type);
-			Assert.AreEqual(4, select1.Tokens.Count);
+			Assert.AreEqual(3, select1.Tokens.Count);
 			Assert.AreEqual(TSQLKeywords.SELECT, select1.Tokens[0].AsKeyword.Keyword);
 			Assert.AreEqual(" ", select1.Tokens[1].AsWhitespace.Text);
 			Assert.AreEqual("1", select1.Tokens[2].AsNumericLiteral.Text);
-			Assert.AreEqual(TSQLCharacters.Semicolon, select1.Tokens[3].AsCharacter.Character);
 
 			Assert.AreEqual(TSQLStatementType.Select, select2.Type);
-			Assert.AreEqual(4, select2.Tokens.Count);
+			Assert.AreEqual(3, select2.Tokens.Count);
 			Assert.AreEqual(TSQLKeywords.SELECT, select2.Tokens[0].AsKeyword.Keyword);
 			Assert.AreEqual(" ", select2.Tokens[1].AsWhitespace.Text);
 			Assert.AreEqual("2", select2.Tokens[2].AsNumericLiteral.Text);
-			Assert.AreEqual(TSQLCharacters.Semicolon, select2.Tokens[3].AsCharacter.Character);
 		}
 
 		[Test]
@@ -87,7 +83,7 @@ namespace Tests.Statements
 			Assert.IsNotNull(statements);
 			Assert.AreEqual(1, statements.Count);
 			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
-			Assert.AreEqual(8, statements[0].Tokens.Count);
+			Assert.AreEqual(7, statements[0].Tokens.Count);
 			Assert.AreEqual(TSQLKeywords.SELECT, select.Tokens[0].AsKeyword.Keyword);
 			Assert.AreEqual(" ", select.Tokens[1].AsWhitespace.Text);
 			Assert.AreEqual("(", select.Tokens[2].AsCharacter.Text);
@@ -95,7 +91,6 @@ namespace Tests.Statements
 			Assert.AreEqual(" ", select.Tokens[4].AsWhitespace.Text);
 			Assert.AreEqual("1", select.Tokens[5].AsNumericLiteral.Text);
 			Assert.AreEqual(")", select.Tokens[6].AsCharacter.Text);
-			Assert.AreEqual(";", select.Tokens[7].AsCharacter.Text);
 		}
 
 		[Test]
@@ -124,7 +119,7 @@ namespace Tests.Statements
 			Assert.IsNotNull(statements);
 			Assert.AreEqual(1, statements.Count);
 			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
-			Assert.AreEqual(99, select.Tokens.Count);
+			Assert.AreEqual(98, select.Tokens.Count);
 			Assert.AreEqual(TSQLKeywords.SELECT, select.Tokens[0].AsKeyword.Keyword);
 			Assert.AreEqual(" ", select.Tokens[1].AsWhitespace.Text);
 			Assert.AreEqual("t", select.Tokens[2].AsIdentifier.Name);
@@ -136,6 +131,62 @@ namespace Tests.Statements
 			Assert.AreEqual(13, select.GroupBy.Tokens.Count);
 			Assert.AreEqual(11, select.Having.Tokens.Count);
 			Assert.AreEqual(12, select.OrderBy.Tokens.Count);
+		}
+
+		[Test]
+		public void SelectStatement_MultipleSelectsWithoutSemicolon()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				"select 1 select 1",
+				includeWhitespace: true);
+			TSQLSelectStatement select1 = statements[0] as TSQLSelectStatement;
+			TSQLSelectStatement select2 = statements[1] as TSQLSelectStatement;
+
+			Assert.IsNotNull(statements);
+			Assert.AreEqual(2, statements.Count);
+
+			Assert.AreEqual(TSQLStatementType.Select, select1.Type);
+
+			Assert.AreEqual(TSQLStatementType.Select, select2.Type);
+		}
+
+		[Test]
+		public void SelectStatement_Option()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT *
+				FROM
+					Sales.SalesOrderHeader oh
+				OPTION (FAST 10)",
+				includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
+
+			TSQLSelectStatement select = statements[0] as TSQLSelectStatement;
+
+			Assert.AreEqual(12, select.Tokens.Count);
+			Assert.IsNotNull(select.Option);
+			Assert.AreEqual(5, select.Option.Tokens.Count);
+		}
+
+		[Test]
+		public void SelectStatement_DontEatFinalDescAsKeyword()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"select 1 as blah order by 1 desc select 1",
+				includeWhitespace: false);
+
+			Assert.AreEqual(2, statements.Count);
+			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
+			Assert.AreEqual(TSQLStatementType.Select, statements[1].Type);
+
+			TSQLSelectStatement select1 = statements[0] as TSQLSelectStatement;
+			TSQLSelectStatement select2 = statements[1] as TSQLSelectStatement;
+
+			Assert.AreEqual(8, select1.Tokens.Count);
+
+			Assert.AreEqual(2, select2.Tokens.Count);
 		}
 	}
 }

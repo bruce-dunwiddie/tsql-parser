@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 using TSQL.Clauses;
 using TSQL.Clauses.Parsers;
@@ -12,6 +11,6 @@ namespace TSQL.Statements.Parsers
 {
 	internal interface ITSQLStatementParser
 	{
-		TSQLStatement Parse(IEnumerator<TSQLToken> tokenizer);
+		TSQLStatement Parse(ITSQLTokenizer tokenizer);
 	}
 }

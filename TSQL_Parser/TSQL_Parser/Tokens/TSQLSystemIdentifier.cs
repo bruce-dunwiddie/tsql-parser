@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace TSQL.Tokens
 {
@@ -24,7 +23,7 @@ namespace TSQL.Tokens
 		{
 			get
 			{
-				return TSQLTokenType.SystemVariable;
+				return TSQLTokenType.SystemIdentifier;
 			}
 		}
 

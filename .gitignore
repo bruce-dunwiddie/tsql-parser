@@ -3,9 +3,9 @@
 ################################################################################
 
 /TSQL_Parser/.vs
-/TSQL_Parser/TSQL_Parser/obj/
-/TSQL_Parser/TSQL_Parser/bin/
-/TSQL_Parser/Tests/bin/
-/TSQL_Parser/Tests/obj/
+/TSQL_Parser/TSQL_Parser/obj
+/TSQL_Parser/TSQL_Parser/bin
+/TSQL_Parser/Tests/bin
+/TSQL_Parser/Tests/obj
 /TSQL_Parser/packages
 *.user

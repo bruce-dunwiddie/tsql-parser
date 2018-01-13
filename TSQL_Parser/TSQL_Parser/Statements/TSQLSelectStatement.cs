@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 using TSQL.Clauses;
 
@@ -40,5 +39,7 @@ namespace TSQL.Statements
 		public TSQLHavingClause Having { get; set; }
 
 		public TSQLOrderByClause OrderBy { get; set; }
+
+		public TSQLOptionClause Option { get; set; }
 	}
 }
