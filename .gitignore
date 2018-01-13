@@ -9,3 +9,4 @@
 /TSQL_Parser/Tests/obj
 /TSQL_Parser/packages
 *.user
+/TSQL_Parser/TSQL_Parser/TSQL.Parser.*.nupkg
