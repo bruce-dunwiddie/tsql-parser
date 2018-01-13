@@ -13,6 +13,8 @@ namespace TSQL.Statements.Parsers
 		{
 			TSQLUnknownStatement statement = new TSQLUnknownStatement();
 
+			statement.Tokens.Add(tokenizer.Current);
+
 			while (
 				tokenizer.MoveNext() &&
 				!(

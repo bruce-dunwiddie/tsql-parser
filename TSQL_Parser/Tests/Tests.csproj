@@ -57,6 +57,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Statements\GeneralStatementTests.cs" />
     <Compile Include="Statements\SelectStatementTests.cs" />
     <Compile Include="Statements\WithStatementTests.cs" />
     <Compile Include="Tokens\BinaryTokenTests.cs" />
