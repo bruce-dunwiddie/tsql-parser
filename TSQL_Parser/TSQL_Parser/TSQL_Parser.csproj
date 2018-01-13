@@ -47,10 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clauses\Parsers\TSQLCommonTableExpressionClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLOptionClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLWithClauseParser.cs" />
-    <Compile Include="Clauses\TSQLCommonTableExpressionClause.cs" />
     <Compile Include="Clauses\Parsers\ITSQLClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLFromClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLGroupByClauseParser.cs" />
@@ -78,23 +76,11 @@
     <Compile Include="ITSQLTokenizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Statements\Parsers\ITSQLStatementParser.cs" />
-    <Compile Include="Statements\Parsers\TSQLDeleteStatementParser.cs" />
-    <Compile Include="Statements\Parsers\TSQLExecuteStatementParser.cs" />
-    <Compile Include="Statements\Parsers\TSQLInsertStatementParser.cs" />
-    <Compile Include="Statements\Parsers\TSQLMergeStatementParser.cs" />
     <Compile Include="Statements\Parsers\TSQLSelectStatementParser.cs" />
     <Compile Include="Statements\Parsers\TSQLStatementParserFactory.cs" />
     <Compile Include="Statements\Parsers\TSQLUnknownStatementParser.cs" />
-    <Compile Include="Statements\Parsers\TSQLUpdateStatementParser.cs" />
-    <Compile Include="Statements\Parsers\TSQLWithStatementParser.cs" />
-    <Compile Include="Statements\TSQLDeleteStatement.cs" />
-    <Compile Include="Statements\TSQLExecuteStatement.cs" />
-    <Compile Include="Statements\TSQLInsertStatement.cs" />
-    <Compile Include="Statements\TSQLMergeStatement.cs" />
     <Compile Include="Statements\TSQLSelectStatement.cs" />
     <Compile Include="Statements\TSQLStatement.cs" />
-    <Compile Include="Statements\TSQLUpdateStatement.cs" />
-    <Compile Include="Statements\TSQLWithStatement.cs" />
     <Compile Include="Tokens\TSQLSystemIdentifier.cs" />
     <Compile Include="Tokens\TSQLSystemVariable.cs" />
     <Compile Include="Tokens\TSQLBinaryLiteral.cs" />

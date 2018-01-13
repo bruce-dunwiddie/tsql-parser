@@ -10,12 +10,12 @@ namespace TSQL.Statements
 #pragma warning disable 1591
 
 		Select,
-		Insert,
-		Update,
-		Delete,
-		With,
-		Execute,
-		Merge,
+		//Insert,
+		//Update,
+		//Delete,
+		//With,
+		//Execute,
+		//Merge,
 
 #pragma warning restore 1591
 
