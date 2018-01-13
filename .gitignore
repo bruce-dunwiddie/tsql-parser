@@ -2,14 +2,10 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/TSQL_Parser/.vs/TSQL_Parser/v14
-/TSQL_Parser/TSQL_Parser/obj/Debug
-/TSQL_Parser/TSQL_Parser/bin/Debug
-/TSQL_Parser/Tests/bin/Debug
-/TSQL_Parser/Tests/obj/Debug
+/TSQL_Parser/.vs
+/TSQL_Parser/TSQL_Parser/obj/
+/TSQL_Parser/TSQL_Parser/bin/
+/TSQL_Parser/Tests/bin/
+/TSQL_Parser/Tests/obj/
 /TSQL_Parser/packages
-/TSQL_Parser/Tests/bin/Release
-/TSQL_Parser/Tests/obj/Release
-/TSQL_Parser/TSQL_Parser/bin/Release
-/TSQL_Parser/TSQL_Parser/obj/Release
 *.user

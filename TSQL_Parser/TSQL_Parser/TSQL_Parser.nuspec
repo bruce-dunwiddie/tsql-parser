@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>TSQL.Parser</id>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <title>TSQL.Parser</title>
     <authors>Bruce Dunwiddie</authors>
     <owners>shriop</owners>
@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library for Parsing SQL Server T-SQL Scripts</description>
     <releaseNotes>Cleaned up public interfaces and classification of tokens.</releaseNotes>
-    <copyright>Copyright © 2017</copyright>
+    <copyright>Copyright © 2018</copyright>
     <tags>sql parser sql-server tsql</tags>
   </metadata>
 </package>
