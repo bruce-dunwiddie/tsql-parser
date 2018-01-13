@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
+using TSQL.Clauses;
 
 namespace TSQL.Statements
 {
-	public class TSQLWithStatement : TSQLStatement
+	internal class TSQLWithStatement : TSQLStatement
 	{
 		internal TSQLWithStatement()
 		{
-
+			
 		}
 
 #pragma warning disable 1591
@@ -24,5 +25,8 @@ namespace TSQL.Statements
 		}
 
 #pragma warning restore 1591
+
+		public List<TSQLCommonTableExpressionClause> CommonTableExpressions { get; set; }
+			= new List<TSQLCommonTableExpressionClause>();
 	}
 }

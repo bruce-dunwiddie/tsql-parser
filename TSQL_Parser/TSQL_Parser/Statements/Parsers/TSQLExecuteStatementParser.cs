@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 using TSQL.Tokens;
 
@@ -10,12 +9,12 @@ namespace TSQL.Statements.Parsers
 {
 	internal class TSQLExecuteStatementParser : ITSQLStatementParser
 	{
-		public TSQLExecuteStatement Parse(IEnumerator<TSQLToken> tokenizer)
+		public TSQLExecuteStatement Parse(ITSQLTokenizer tokenizer)
 		{
 			throw new NotImplementedException();
 		}
 
-		TSQLStatement ITSQLStatementParser.Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLStatement ITSQLStatementParser.Parse(ITSQLTokenizer tokenizer)
 		{
 			return Parse(tokenizer);
 		}

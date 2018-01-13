@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 using TSQL.Statements;
 using TSQL.Statements.Parsers;
@@ -12,14 +11,11 @@ namespace TSQL.Clauses.Parsers
 {
 	internal class TSQLFromClauseParser : ITSQLClauseParser
 	{
-		public TSQLFromClause Parse(IEnumerator<TSQLToken> tokenizer)
+		public TSQLFromClause Parse(ITSQLTokenizer tokenizer)
 		{
 			TSQLFromClause from = new TSQLFromClause();
 
-            if (
-                tokenizer.Current == null ||
-                tokenizer.Current.Type != TSQLTokenType.Keyword ||
-                tokenizer.Current.AsKeyword.Keyword != TSQLKeywords.FROM)
+            if (!tokenizer.Current.IsKeyword(TSQLKeywords.FROM))
             {
                 throw new ApplicationException("FROM expected.");
             }
@@ -119,7 +115,7 @@ namespace TSQL.Clauses.Parsers
 			return from;
 		}
 
-		TSQLClause ITSQLClauseParser.Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLClause ITSQLClauseParser.Parse(ITSQLTokenizer tokenizer)
 		{
 			return Parse(tokenizer);
 		}

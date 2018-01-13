@@ -6,7 +6,7 @@ using TSQL.Tokens;
 
 namespace TSQL
 {
-	partial class TSQLTokenizer : IEnumerator, IEnumerable, IEnumerator<TSQLToken>, IEnumerable<TSQLToken>
+	partial class TSQLTokenizer : ITSQLTokenizer
 	{
 		#region IEnumerable/IEnumerator Members
 

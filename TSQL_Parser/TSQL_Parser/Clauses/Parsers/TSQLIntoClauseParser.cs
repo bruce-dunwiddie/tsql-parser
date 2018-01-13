@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 using TSQL.Tokens;
 
@@ -10,14 +9,11 @@ namespace TSQL.Clauses.Parsers
 {
 	internal class TSQLIntoClauseParser : ITSQLClauseParser
 	{
-		public TSQLIntoClause Parse(IEnumerator<TSQLToken> tokenizer)
+		public TSQLIntoClause Parse(ITSQLTokenizer tokenizer)
 		{
 			TSQLIntoClause into = new TSQLIntoClause();
 
-            if (
-                tokenizer.Current == null ||
-                tokenizer.Current.Type != TSQLTokenType.Keyword ||
-                tokenizer.Current.AsKeyword.Keyword != TSQLKeywords.INTO)
+            if (!tokenizer.Current.IsKeyword(TSQLKeywords.INTO))
             {
                 throw new ApplicationException("INTO expected.");
             }
@@ -28,10 +24,7 @@ namespace TSQL.Clauses.Parsers
 				tokenizer.MoveNext() &&
 				(
 					tokenizer.Current.Type == TSQLTokenType.Identifier ||
-					(
-						tokenizer.Current.Type == TSQLTokenType.Character &&
-						tokenizer.Current.AsCharacter.Character == TSQLCharacters.Period
-					) ||
+					tokenizer.Current.IsCharacter(TSQLCharacters.Period) ||
 					tokenizer.Current.Type == TSQLTokenType.Whitespace ||
 					tokenizer.Current.Type == TSQLTokenType.SingleLineComment ||
 					tokenizer.Current.Type == TSQLTokenType.MultilineComment
@@ -43,7 +36,7 @@ namespace TSQL.Clauses.Parsers
 			return into;
 		}
 
-		TSQLClause ITSQLClauseParser.Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLClause ITSQLClauseParser.Parse(ITSQLTokenizer tokenizer)
 		{
 			return Parse(tokenizer);
 		}

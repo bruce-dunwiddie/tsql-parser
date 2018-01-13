@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 using TSQL.Statements;
 using TSQL.Statements.Parsers;
@@ -12,14 +11,11 @@ namespace TSQL.Clauses.Parsers
 {
 	internal class TSQLGroupByClauseParser : ITSQLClauseParser
 	{
-		public TSQLGroupByClause Parse(IEnumerator<TSQLToken> tokenizer)
+		public TSQLGroupByClause Parse(ITSQLTokenizer tokenizer)
 		{
 			TSQLGroupByClause groupBy = new TSQLGroupByClause();
 
-			if (
-				tokenizer.Current == null ||
-				tokenizer.Current.Type != TSQLTokenType.Keyword ||
-				tokenizer.Current.AsKeyword.Keyword != TSQLKeywords.GROUP)
+			if (!tokenizer.Current.IsKeyword(TSQLKeywords.GROUP))
 			{
 				throw new ApplicationException("GROUP expected.");
 			}
@@ -31,14 +27,10 @@ namespace TSQL.Clauses.Parsers
 
 			while (
 				tokenizer.MoveNext() &&
-				!(
-					tokenizer.Current.Type == TSQLTokenType.Character &&
-					tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
-				) &&
+				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
 				!(
 					nestedLevel == 0 &&
-					tokenizer.Current.Type == TSQLTokenType.Character &&
-					tokenizer.Current.AsCharacter.Character == TSQLCharacters.CloseParentheses
+					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
 				) &&
 				(
 					nestedLevel > 0 ||
@@ -83,18 +75,13 @@ namespace TSQL.Clauses.Parsers
 
 						if (tokenizer.MoveNext())
 						{
-							if (
-								tokenizer.Current.Type == TSQLTokenType.Keyword &&
-								tokenizer.Current.AsKeyword.Keyword == TSQLKeywords.SELECT)
+							if (tokenizer.Current.IsKeyword(TSQLKeywords.SELECT))
 							{
 								TSQLSelectStatement selectStatement = new TSQLSelectStatementParser().Parse(tokenizer);
 
 								groupBy.Tokens.AddRange(selectStatement.Tokens);
 
-								if (
-									tokenizer.Current != null &&
-									tokenizer.Current.Type == TSQLTokenType.Character &&
-									tokenizer.Current.AsCharacter.Character == TSQLCharacters.CloseParentheses)
+								if (tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
 								{
 									nestedLevel--;
 									groupBy.Tokens.Add(tokenizer.Current);
@@ -116,7 +103,7 @@ namespace TSQL.Clauses.Parsers
 			return groupBy;
 		}
 
-		TSQLClause ITSQLClauseParser.Parse(IEnumerator<TSQLToken> tokenizer)
+		TSQLClause ITSQLClauseParser.Parse(ITSQLTokenizer tokenizer)
 		{
 			return Parse(tokenizer);
 		}
