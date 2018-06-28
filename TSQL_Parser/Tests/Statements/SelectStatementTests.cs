@@ -188,5 +188,30 @@ namespace Tests.Statements
 
 			Assert.AreEqual(2, select2.Tokens.Count);
 		}
+
+		[Test]
+		public void SelectStatement_WindowedAggregate()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(@"
+				SELECT 
+				*, 
+				ROW_NUMBER() OVER (
+				PARTITION BY 
+				some_field 
+				ORDER BY 
+				some_other_field) AS some_row_number
+				FROM my_db.my_schema.my_table", includeWhitespace:false);
+
+			Assert.AreEqual(1, statements.Count);
+			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
+
+			TSQLSelectStatement select = statements[0] as TSQLSelectStatement;
+
+			Assert.AreEqual(23, select.Tokens.Count);
+
+			Assert.AreEqual(17, select.Select.Tokens.Count);
+
+			Assert.AreEqual(6, select.From.Tokens.Count);
+		}
 	}
 }
