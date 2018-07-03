@@ -99,6 +99,12 @@ namespace TSQL.Clauses.Parsers
 									from.Tokens.Add(tokenizer.Current);
 								}
 							}
+							else if (tokenizer.Current.IsCharacter(
+								TSQLCharacters.CloseParentheses))
+							{
+								nestedLevel--;
+								from.Tokens.Add(tokenizer.Current);
+							}
 							else
 							{
 								from.Tokens.Add(tokenizer.Current);
