@@ -87,6 +87,12 @@ namespace TSQL.Clauses.Parsers
 									groupBy.Tokens.Add(tokenizer.Current);
 								}
 							}
+							else if (tokenizer.Current.IsCharacter(
+								TSQLCharacters.CloseParentheses))
+							{
+								nestedLevel--;
+								groupBy.Tokens.Add(tokenizer.Current);
+							}
 							else
 							{
 								groupBy.Tokens.Add(tokenizer.Current);

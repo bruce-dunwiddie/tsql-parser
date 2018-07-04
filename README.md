@@ -1,5 +1,5 @@
 # tsql-parser
-Library For Parsing SQL Server T-SQL Scripts
+Library Written in C# For Parsing SQL Server T-SQL Scripts in .Net
 
 Available on Nuget, [TSQL.Parser](https://www.nuget.org/packages/TSQL.Parser/).
 
