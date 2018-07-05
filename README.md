@@ -12,6 +12,8 @@ Available on Nuget, [TSQL.Parser](https://www.nuget.org/packages/TSQL.Parser/).
 
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/lcfjc4jox76dia8q?svg=true)](https://ci.appveyor.com/project/bruce-dunwiddie/tsql-parser)
 
+[![Coverage Status](https://coveralls.io/repos/github/bruce-dunwiddie/tsql-parser/badge.svg?branch=master)](https://coveralls.io/github/bruce-dunwiddie/tsql-parser?branch=master)
+
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ### Current Features
