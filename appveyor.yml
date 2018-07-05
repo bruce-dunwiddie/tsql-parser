@@ -1,0 +1,9 @@
+version: 1.0.{build}
+branches:
+  only:
+  - master
+before_build:
+- cmd: nuget restore TSQL_Parser/TSQL_Parser.sln
+build:
+  project: TSQL_Parser/TSQL_Parser.sln
+  verbosity: minimal
