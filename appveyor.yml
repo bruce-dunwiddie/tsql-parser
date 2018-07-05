@@ -11,5 +11,5 @@ build:
   project: TSQL_Parser/TSQL_Parser.sln
   verbosity: minimal
 after_test: 
-- cmd: "packages\\OpenCover.4.6.519\\tools\\OpenCover.Console.exe" -target:"packages\\NUnit.ConsoleRunner.3.8.0\\tools\\nunit3-console.exe" -targetargs:"Tests\\bin\\Debug\\Tests.dll"  -filter:"+[TSQL*]*" -excludebyattribute:"System.CodeDom.Compiler.GeneratedCodeAttribute" -register:user -output:"Tests\\bin\\Debug\\CodeCoverageResult.xml"
-- cmd: "packages\\coveralls.io.1.4.2\\tools\\coveralls.net.exe" --opencover "Tests\\bin\\Debug\\CodeCoverageResult.xml" -r %COVERALLS_REPO_TOKEN%
+    -cmd: "packages\\OpenCover.4.6.519\\tools\\OpenCover.Console.exe" -target:"packages\\NUnit.ConsoleRunner.3.8.0\\tools\\nunit3-console.exe" -targetargs:"Tests\\bin\\Debug\\Tests.dll"  -filter:"+[TSQL*]*" -excludebyattribute:"System.CodeDom.Compiler.GeneratedCodeAttribute" -register:user -output:"Tests\\bin\\Debug\\CodeCoverageResult.xml"
+    - cmd: "packages\\coveralls.io.1.4.2\\tools\\coveralls.net.exe" --opencover "Tests\\bin\\Debug\\CodeCoverageResult.xml" -r %COVERALLS_REPO_TOKEN%
