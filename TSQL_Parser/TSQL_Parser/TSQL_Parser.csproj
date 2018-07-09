@@ -121,6 +121,7 @@
     <Compile Include="TSQLVariables.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CodeQuality.bat" />
     <None Include="Pack.bat" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
