@@ -1,0 +1,7 @@
+organization=bruce-dunwiddie-github
+projectKey=tsqlparser
+serverUrl=https://sonarcloud.io
+serverVersion=7.3.0.14089
+dashboardUrl=https://sonarcloud.io/dashboard?id=tsqlparser
+ceTaskId=AWR9YEzlowGp6EI3la4x
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWR9YEzlowGp6EI3la4x

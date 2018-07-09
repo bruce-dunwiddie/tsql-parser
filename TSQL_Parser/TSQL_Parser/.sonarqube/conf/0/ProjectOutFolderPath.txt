@@ -1,0 +1,1 @@
+C:\Users\shrio\Source\Repos\tsql-parser\TSQL_Parser\TSQL_Parser\.sonarqube\out\0
