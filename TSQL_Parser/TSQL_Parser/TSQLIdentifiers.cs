@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TSQL
 {
-	public class TSQLIdentifiers
+	public struct TSQLIdentifiers
 	{
 		private static Dictionary<string, TSQLIdentifiers> identifierLookup =
 			new Dictionary<string, TSQLIdentifiers>(StringComparer.InvariantCultureIgnoreCase);
@@ -39,7 +39,7 @@ namespace TSQL
 
 #pragma warning restore 1591
 
-		private string Identifier;
+		private readonly string Identifier;
 
 		private TSQLIdentifiers(
 			string identifier)
@@ -92,19 +92,6 @@ namespace TSQL
 			TSQLIdentifiers a,
 			TSQLIdentifiers b)
 		{
-			if (Object.ReferenceEquals(a, null))
-			{
-				if (Object.ReferenceEquals(b, null))
-				{
-					// null == null = true.
-					return true;
-				}
-
-				// Only the left side is null.
-				return false;
-			}
-
-			// Equals handles case of null on right side.
 			return a.Equals(b);
 		}
 
@@ -117,31 +104,19 @@ namespace TSQL
 
 		public bool Equals(TSQLIdentifiers obj)
 		{
-			// If parameter is null, return false.
-			if (Object.ReferenceEquals(obj, null))
-			{
-				return false;
-			}
-
-			// Optimization for a common success case.
-			if (Object.ReferenceEquals(this, obj))
-			{
-				return true;
-			}
-
-			// If run-time types are not exactly the same, return false.
-			if (this.GetType() != obj.GetType())
-				return false;
-
-			// Return true if the fields match.
-			// Note that the base class is not invoked because it is
-			// System.Object, which defines Equals as reference equality.
 			return Identifier == obj.Identifier;
 		}
 
 		public override bool Equals(object obj)
 		{
-			return Equals(obj as TSQLIdentifiers);
+			if (obj is TSQLIdentifiers)
+			{
+				return Equals((TSQLIdentifiers)obj);
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		public override int GetHashCode()

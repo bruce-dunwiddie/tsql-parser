@@ -17,7 +17,7 @@ namespace TSQL.Clauses.Parsers
 
 			if (!tokenizer.Current.IsKeyword(TSQLKeywords.GROUP))
 			{
-				throw new ApplicationException("GROUP expected.");
+				throw new InvalidOperationException("GROUP expected.");
 			}
 
 			groupBy.Tokens.Add(tokenizer.Current);

@@ -14,7 +14,7 @@ namespace TSQL.Tokens
 				beginPostion,
 				text)
 		{
-
+			Identifier = TSQLIdentifiers.Parse(text);
 		}
 
 #pragma warning disable 1591

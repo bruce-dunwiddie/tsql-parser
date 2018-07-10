@@ -17,7 +17,7 @@ namespace TSQL.Clauses.Parsers
 
 			if (!tokenizer.Current.IsKeyword(TSQLKeywords.SELECT))
 			{
-				throw new ApplicationException("SELECT expected.");
+				throw new InvalidOperationException("SELECT expected.");
 			}
 
 			select.Tokens.Add(tokenizer.Current);
@@ -90,12 +90,12 @@ namespace TSQL.Clauses.Parsers
 
 								select.Tokens.AddRange(selectStatement.Tokens);
 
-                                if (tokenizer.Current.IsCharacter(
+								if (tokenizer.Current.IsCharacter(
 									TSQLCharacters.CloseParentheses))
-                                {
-                                    nestedLevel--;
-                                    select.Tokens.Add(tokenizer.Current);
-                                }
+								{
+									nestedLevel--;
+									select.Tokens.Add(tokenizer.Current);
+								}
 							}
 							else if (tokenizer.Current.IsCharacter(
 								TSQLCharacters.CloseParentheses))

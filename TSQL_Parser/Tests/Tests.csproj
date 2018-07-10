@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clauses\FromClauseTests.cs" />
+    <Compile Include="Clauses\WhereClauseTests.cs" />
+    <Compile Include="Clauses\GroupByClauseTests.cs" />
+    <Compile Include="Clauses\HavingClauseTests.cs" />
+    <Compile Include="Clauses\OrderByClauseTests.cs" />
+    <Compile Include="Clauses\IntoClauseTests.cs" />
     <Compile Include="Clauses\SelectClauseTests.cs" />
     <Compile Include="Parsing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,9 +69,10 @@
     <Compile Include="Statements\SelectStatementTests.cs" />
     <Compile Include="Tokens\BinaryTokenTests.cs" />
     <Compile Include="Tokens\CharacterTokenTests.cs" />
+    <Compile Include="Tokens\SystemIdentifierTokenTests.cs" />
+    <Compile Include="Tokens\SystemVariableTokenTests.cs" />
     <Compile Include="Tokens\KeywordTokenTests.cs" />
     <Compile Include="Tokens\MoneyLiteralTests.cs" />
-    <Compile Include="Tokens\TokenEqualityTests.cs" />
     <Compile Include="Tokens\IdentifierTokenTests.cs" />
     <Compile Include="Tokens\MultilineCommentTokenTests.cs" />
     <Compile Include="Tokens\NumericLiteralTokenTests.cs" />

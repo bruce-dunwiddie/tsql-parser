@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace TSQL
 {
-	public class TSQLKeywords
+	public struct TSQLKeywords
 	{
 		private static Dictionary<string, TSQLKeywords> keywordLookup =
 			new Dictionary<string, TSQLKeywords>(StringComparer.InvariantCultureIgnoreCase);
@@ -206,7 +206,7 @@ namespace TSQL
 
 		#endregion
 
-		private string Keyword;
+		private readonly string Keyword;
 
 		private TSQLKeywords(
 			string keyword)
@@ -270,19 +270,6 @@ namespace TSQL
 			TSQLKeywords a,
 			TSQLKeywords b)
 		{
-			if (Object.ReferenceEquals(a, null))
-			{
-				if (Object.ReferenceEquals(b, null))
-				{
-					// null == null = true.
-					return true;
-				}
-
-				// Only the left side is null.
-				return false;
-			}
-
-			// Equals handles case of null on right side.
 			return a.Equals(b);
 		}
 
@@ -295,31 +282,19 @@ namespace TSQL
 
 		private bool Equals(TSQLKeywords obj)
 		{
-			// If parameter is null, return false.
-			if (Object.ReferenceEquals(obj, null))
-			{
-				return false;
-			}
-
-			// Optimization for a common success case.
-			if (Object.ReferenceEquals(this, obj))
-			{
-				return true;
-			}
-
-			// If run-time types are not exactly the same, return false.
-			if (this.GetType() != obj.GetType())
-				return false;
-
-			// Return true if the fields match.
-			// Note that the base class is not invoked because it is
-			// System.Object, which defines Equals as reference equality.
 			return Keyword == obj.Keyword;
 		}
 
 		public override bool Equals(object obj)
 		{
-			return Equals(obj as TSQLKeywords);
+			if (obj is TSQLKeywords)
+			{
+				return Equals((TSQLKeywords)obj);
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		public override int GetHashCode()

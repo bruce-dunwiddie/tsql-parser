@@ -13,14 +13,14 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLIntoClause into = new TSQLIntoClause();
 
-            if (!tokenizer.Current.IsKeyword(TSQLKeywords.INTO))
-            {
-                throw new ApplicationException("INTO expected.");
-            }
+			if (!tokenizer.Current.IsKeyword(TSQLKeywords.INTO))
+			{
+				throw new InvalidOperationException("INTO expected.");
+			}
 
-            into.Tokens.Add(tokenizer.Current);
+			into.Tokens.Add(tokenizer.Current);
 
-            while (
+			while (
 				tokenizer.MoveNext() &&
 				(
 					tokenizer.Current.Type == TSQLTokenType.Identifier ||
