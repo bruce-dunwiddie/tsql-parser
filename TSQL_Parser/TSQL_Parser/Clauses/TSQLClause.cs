@@ -9,7 +9,7 @@ namespace TSQL.Clauses
 {
 	public abstract class TSQLClause
 	{
-		private List<TSQLToken> _tokens = new List<TSQLToken>();
+		private readonly List<TSQLToken> _tokens = new List<TSQLToken>();
 
 		public List<TSQLToken> Tokens
 		{

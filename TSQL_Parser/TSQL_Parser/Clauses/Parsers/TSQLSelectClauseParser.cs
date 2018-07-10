@@ -17,7 +17,7 @@ namespace TSQL.Clauses.Parsers
 
 			if (!tokenizer.Current.IsKeyword(TSQLKeywords.SELECT))
 			{
-				throw new ApplicationException("SELECT expected.");
+				throw new Exception("SELECT expected.");
 			}
 
 			select.Tokens.Add(tokenizer.Current);

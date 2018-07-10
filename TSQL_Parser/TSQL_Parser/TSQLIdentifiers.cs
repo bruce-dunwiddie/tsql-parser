@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TSQL
 {
-	public class TSQLIdentifiers
+	public struct TSQLIdentifiers
 	{
 		private static Dictionary<string, TSQLIdentifiers> identifierLookup =
 			new Dictionary<string, TSQLIdentifiers>(StringComparer.InvariantCultureIgnoreCase);
@@ -39,7 +39,7 @@ namespace TSQL
 
 #pragma warning restore 1591
 
-		private string Identifier;
+		private readonly string Identifier;
 
 		private TSQLIdentifiers(
 			string identifier)
@@ -141,7 +141,14 @@ namespace TSQL
 
 		public override bool Equals(object obj)
 		{
-			return Equals(obj as TSQLIdentifiers);
+			if (obj is TSQLIdentifiers)
+			{
+				return Equals((TSQLIdentifiers)obj);
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		public override int GetHashCode()

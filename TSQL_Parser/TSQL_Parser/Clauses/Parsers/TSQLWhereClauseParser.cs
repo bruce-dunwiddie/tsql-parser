@@ -17,7 +17,7 @@ namespace TSQL.Clauses.Parsers
 
             if (!tokenizer.Current.IsKeyword(TSQLKeywords.WHERE))
             {
-                throw new ApplicationException("WHERE expected.");
+                throw new Exception("WHERE expected.");
             }
 
             where.Tokens.Add(tokenizer.Current);

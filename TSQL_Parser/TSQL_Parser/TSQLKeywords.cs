@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace TSQL
 {
-	public class TSQLKeywords
+	public struct TSQLKeywords
 	{
 		private static Dictionary<string, TSQLKeywords> keywordLookup =
 			new Dictionary<string, TSQLKeywords>(StringComparer.InvariantCultureIgnoreCase);
@@ -206,7 +206,7 @@ namespace TSQL
 
 		#endregion
 
-		private string Keyword;
+		private readonly string Keyword;
 
 		private TSQLKeywords(
 			string keyword)
@@ -319,7 +319,14 @@ namespace TSQL
 
 		public override bool Equals(object obj)
 		{
-			return Equals(obj as TSQLKeywords);
+			if (obj is TSQLKeywords)
+			{
+				return Equals((TSQLKeywords)obj);
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		public override int GetHashCode()

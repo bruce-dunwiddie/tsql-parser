@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace TSQL
 {
-	public class TSQLCharacters
+	public struct TSQLCharacters
 	{
 		private static Dictionary<string, TSQLCharacters> characterLookup =
 			new Dictionary<string, TSQLCharacters>(StringComparer.InvariantCultureIgnoreCase);
@@ -25,7 +25,7 @@ namespace TSQL
 
 #pragma warning restore 1591
 
-		private string Token;
+		private readonly string Token;
 
 		private TSQLCharacters(
 			string token)
@@ -127,7 +127,14 @@ namespace TSQL
 
 		public override bool Equals(object obj)
 		{
-			return Equals(obj as TSQLCharacters);
+			if (obj is TSQLCharacters)
+			{
+				return Equals((TSQLCharacters)obj);
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		public override int GetHashCode()

@@ -15,7 +15,7 @@ namespace TSQL.Clauses.Parsers
 
             if (!tokenizer.Current.IsKeyword(TSQLKeywords.INTO))
             {
-                throw new ApplicationException("INTO expected.");
+                throw new Exception("INTO expected.");
             }
 
             into.Tokens.Add(tokenizer.Current);

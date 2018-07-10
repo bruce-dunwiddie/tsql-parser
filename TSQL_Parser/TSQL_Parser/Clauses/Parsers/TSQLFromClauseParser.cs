@@ -17,7 +17,7 @@ namespace TSQL.Clauses.Parsers
 
             if (!tokenizer.Current.IsKeyword(TSQLKeywords.FROM))
             {
-                throw new ApplicationException("FROM expected.");
+                throw new Exception("FROM expected.");
             }
 
             from.Tokens.Add(tokenizer.Current);

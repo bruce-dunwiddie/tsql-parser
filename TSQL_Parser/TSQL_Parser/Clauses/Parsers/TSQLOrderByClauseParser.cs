@@ -17,7 +17,7 @@ namespace TSQL.Clauses.Parsers
 
 			if (!tokenizer.Current.IsKeyword(TSQLKeywords.ORDER))
 			{
-				throw new ApplicationException("ORDER expected.");
+				throw new Exception("ORDER expected.");
 			}
 
 			orderBy.Tokens.Add(tokenizer.Current);

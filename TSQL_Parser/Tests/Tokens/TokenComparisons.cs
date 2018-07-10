@@ -26,7 +26,7 @@ namespace Tests.Tokens
 				Assert.IsTrue(actual.Count >= expected.Count);
 				for (int index = 0; index < expected.Count; index++)
 				{
-					Assert.AreEqual(expected[index], actual[index]);
+					CompareTokens(expected[index], actual[index]);
 				}
 			}
 		}
@@ -44,9 +44,16 @@ namespace Tests.Tokens
 				Assert.AreEqual(expected.Count, actual.Count, "Token list count does not match.");
 				for (int index = 0; index < expected.Count; index++)
 				{
-					Assert.AreEqual(expected[index], actual[index], "Token value does not match.");
+					CompareTokens(expected[index], actual[index]);
 				}
 			}
+		}
+
+		public static void CompareTokens(TSQLToken expected, TSQLToken actual)
+		{
+			Assert.AreEqual(expected.BeginPostion, actual.BeginPostion, "Token begin position does not match.");
+			Assert.AreEqual(expected.EndPosition, actual.EndPosition, "Token end position does not match.");
+			Assert.AreEqual(expected.Text, actual.Text, "Token text does not match.");
 		}
 	}
 }

@@ -65,7 +65,6 @@
     <Compile Include="Tokens\CharacterTokenTests.cs" />
     <Compile Include="Tokens\KeywordTokenTests.cs" />
     <Compile Include="Tokens\MoneyLiteralTests.cs" />
-    <Compile Include="Tokens\TokenEqualityTests.cs" />
     <Compile Include="Tokens\IdentifierTokenTests.cs" />
     <Compile Include="Tokens\MultilineCommentTokenTests.cs" />
     <Compile Include="Tokens\NumericLiteralTokenTests.cs" />
