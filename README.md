@@ -16,6 +16,8 @@ Available on Nuget, [TSQL.Parser](https://www.nuget.org/packages/TSQL.Parser/).
 
 [![Code Quality](https://sonarcloud.io/api/project_badges/measure?project=tsqlparser&metric=alert_status)](https://sonarcloud.io/dashboard?id=tsqlparser)
 
+[![Coverity](https://scan.coverity.com/projects/9334/badge.svg)](https://scan.coverity.com/projects/bruce-dunwiddie-tsql-parser)
+
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ### Current Features

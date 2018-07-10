@@ -125,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeQuality.bat" />
+    <None Include="CoverityScanBuild.bat" />
     <None Include="Pack.bat" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
