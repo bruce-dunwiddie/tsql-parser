@@ -17,7 +17,7 @@ namespace TSQL.Clauses.Parsers
 
 			if (!tokenizer.Current.IsKeyword(TSQLKeywords.HAVING))
 			{
-				throw new Exception("HAVING expected.");
+				throw new InvalidOperationException("HAVING expected.");
 			}
 
 			having.Tokens.Add(tokenizer.Current);

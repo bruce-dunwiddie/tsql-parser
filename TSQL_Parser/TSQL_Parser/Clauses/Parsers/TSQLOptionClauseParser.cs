@@ -15,7 +15,7 @@ namespace TSQL.Clauses.Parsers
 
 			if (!tokenizer.Current.IsKeyword(TSQLKeywords.OPTION))
 			{
-				throw new Exception("OPTION expected.");
+				throw new InvalidOperationException("OPTION expected.");
 			}
 
 			option.Tokens.Add(tokenizer.Current);

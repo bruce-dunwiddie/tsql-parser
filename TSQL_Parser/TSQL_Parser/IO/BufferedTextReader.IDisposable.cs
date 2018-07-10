@@ -31,10 +31,10 @@ namespace TSQL.IO
 			if (!disposed)
 			{
 				// managed resource releases
-				if (disposing)
-				{
+				//if (disposing)
+				//{
 
-				}
+				//}
 
 				// unmanaged resource releases
 				try

@@ -93,19 +93,6 @@ namespace TSQL
 			TSQLVariables a,
 			TSQLVariables b)
 		{
-			if (Object.ReferenceEquals(a, null))
-			{
-				if (Object.ReferenceEquals(b, null))
-				{
-					// null == null = true.
-					return true;
-				}
-
-				// Only the left side is null.
-				return false;
-			}
-
-			// Equals handles case of null on right side.
 			return a.Equals(b);
 		}
 
@@ -118,25 +105,6 @@ namespace TSQL
 
 		public bool Equals(TSQLVariables obj)
 		{
-			// If parameter is null, return false.
-			if (Object.ReferenceEquals(obj, null))
-			{
-				return false;
-			}
-
-			// Optimization for a common success case.
-			if (Object.ReferenceEquals(this, obj))
-			{
-				return true;
-			}
-
-			// If run-time types are not exactly the same, return false.
-			if (this.GetType() != obj.GetType())
-				return false;
-
-			// Return true if the fields match.
-			// Note that the base class is not invoked because it is
-			// System.Object, which defines Equals as reference equality.
 			return Variable == obj.Variable;
 		}
 

@@ -46,5 +46,21 @@ namespace Tests.Clauses
 				Assert.AreEqual(TSQLKeywords.FROM, tokenizer.Current.AsKeyword.Keyword);
 			}
 		}
+
+		[Test]
+		public void SelectClause_SanityCheck()
+		{
+			using (StringReader reader = new StringReader(
+				@"bogus"))
+			using (ITSQLTokenizer tokenizer = new TSQLTokenizer(reader))
+			{
+				Assert.IsTrue(tokenizer.MoveNext());
+				Exception ex = Assert.Throws<InvalidOperationException>(
+					delegate
+					{
+						TSQLSelectClause select = new TSQLSelectClauseParser().Parse(tokenizer);
+					});
+			}
+		}
 	}
 }

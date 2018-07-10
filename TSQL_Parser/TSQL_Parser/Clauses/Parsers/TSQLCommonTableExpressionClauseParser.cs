@@ -15,7 +15,7 @@ namespace TSQL.Clauses.Parsers
 
 			if (tokenizer.Current.Type != Tokens.TSQLTokenType.Identifier)
 			{
-				throw new ApplicationException("Identifier expected.");
+				throw new InvalidOperationException("Identifier expected.");
 			}
 
 			cte.Name = tokenizer.Current.AsIdentifier.Name;

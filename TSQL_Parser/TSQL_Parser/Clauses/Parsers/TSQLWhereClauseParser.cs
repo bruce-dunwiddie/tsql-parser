@@ -15,15 +15,15 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLWhereClause where = new TSQLWhereClause();
 
-            if (!tokenizer.Current.IsKeyword(TSQLKeywords.WHERE))
-            {
-                throw new Exception("WHERE expected.");
-            }
+			if (!tokenizer.Current.IsKeyword(TSQLKeywords.WHERE))
+			{
+				throw new InvalidOperationException("WHERE expected.");
+			}
 
-            where.Tokens.Add(tokenizer.Current);
+			where.Tokens.Add(tokenizer.Current);
 
-            // subqueries
-            int nestedLevel = 0;
+			// subqueries
+			int nestedLevel = 0;
 
 			while (
 				tokenizer.MoveNext() &&

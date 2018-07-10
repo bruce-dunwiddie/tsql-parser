@@ -14,7 +14,7 @@ namespace TSQL.Tokens
 				beginPostion,
 				text)
 		{
-
+			Variable = TSQLVariables.Parse(text);
 		}
 
 #pragma warning disable 1591

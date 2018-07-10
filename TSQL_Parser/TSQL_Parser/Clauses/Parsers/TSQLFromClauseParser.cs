@@ -15,16 +15,16 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLFromClause from = new TSQLFromClause();
 
-            if (!tokenizer.Current.IsKeyword(TSQLKeywords.FROM))
-            {
-                throw new Exception("FROM expected.");
-            }
+			if (!tokenizer.Current.IsKeyword(TSQLKeywords.FROM))
+			{
+				throw new InvalidOperationException("FROM expected.");
+			}
 
-            from.Tokens.Add(tokenizer.Current);
+			from.Tokens.Add(tokenizer.Current);
 
-            // derived tables
-            // TVF
-            int nestedLevel = 0;
+			// derived tables
+			// TVF
+			int nestedLevel = 0;
 
 			while (
 				tokenizer.MoveNext() &&
