@@ -28,10 +28,10 @@ namespace TSQL
 			if (!_disposed)
 			{
 				// managed resource releases
-				if (disposing)
-				{
+				//if (disposing)
+				//{
 
-				}
+				//}
 
 				// unmanaged resource releases
 				try

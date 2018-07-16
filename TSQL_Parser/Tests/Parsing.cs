@@ -49,7 +49,10 @@ namespace Tests
 			using (StringReader reader = new StringReader(Resources.AdventureWorks2014_dbo_uspSearchCandidateResumes))
 			using (TSQLTokenizer lexer = new TSQLTokenizer(reader))
 			{
-				TokenComparisons.CompareStreamStartToList(
+                Assert.IsFalse(lexer.IncludeWhitespace);
+                Assert.IsFalse(lexer.UseQuotedIdentifiers);
+
+                TokenComparisons.CompareStreamStartToList(
 					GetuspSearchCandidateResumesTokens()
 						.Where(t => !(t is TSQLWhitespace)).ToList(),
 					lexer);
@@ -112,6 +115,8 @@ namespace Tests
 			using (StringReader reader = new StringReader(Resources.AdventureWorks2014_dbo_uspSearchCandidateResumes))
 			using (TSQLTokenizer lexer = new TSQLTokenizer(reader) { IncludeWhitespace = true })
 			{
+                Assert.IsTrue(lexer.IncludeWhitespace);
+
 				TokenComparisons.CompareStreamStartToList(
 					GetuspSearchCandidateResumesTokens(),
 					lexer);

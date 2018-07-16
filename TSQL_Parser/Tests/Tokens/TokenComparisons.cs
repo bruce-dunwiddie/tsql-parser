@@ -54,6 +54,7 @@ namespace Tests.Tokens
 			Assert.AreEqual(expected.BeginPostion, actual.BeginPostion, "Token begin position does not match.");
 			Assert.AreEqual(expected.EndPosition, actual.EndPosition, "Token end position does not match.");
 			Assert.AreEqual(expected.Text, actual.Text, "Token text does not match.");
+            Assert.AreEqual(expected.GetType(), actual.GetType());
 		}
 	}
 }
