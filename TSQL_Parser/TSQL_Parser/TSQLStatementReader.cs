@@ -17,20 +17,16 @@ namespace TSQL
 		private TSQLStatement _current = null;
 
 		public TSQLStatementReader(
-			string tsqlText)
-		{
-			_tokenizer = new TSQLTokenizer(tsqlText);
+			string tsqlText) :
+                this(new StringReader(tsqlText))
+        {
+			
 		}
 
 		public TSQLStatementReader(
 			TextReader tsqlStream)
 		{
 			_tokenizer = new TSQLTokenizer(tsqlStream);
-		}
-
-		public TSQLStatementReader(TSQLTokenizer tokenizer)
-		{
-			_tokenizer = tokenizer;
 		}
 
 		public bool UseQuotedIdentifiers
@@ -65,21 +61,23 @@ namespace TSQL
 
 			if (_hasMore)
 			{
-				while (
-					_tokenizer.MoveNext() &&
-					(
-						_tokenizer.Current.Type == TSQLTokenType.SingleLineComment ||
-						_tokenizer.Current.Type == TSQLTokenType.MultilineComment ||
-						_tokenizer.Current.Type == TSQLTokenType.Whitespace ||
-						(
-							_tokenizer.Current.Type == TSQLTokenType.Character &&
-							_tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
-						)
-					))
+                // push the tokenizer to the next token
 
-				{
+                // eat up any tokens inbetween statements until we get to something that might start a new statement
+                // which should be a keyword if the batch is valid
 
-				}
+                // if the last statement parser did not swallow the final semicolon, or there were multiple semicolons, we will swallow it also
+                while (
+                    _tokenizer.MoveNext() &&
+                    (
+                        _tokenizer.Current.Type == TSQLTokenType.SingleLineComment ||
+                        _tokenizer.Current.Type == TSQLTokenType.MultilineComment ||
+                        _tokenizer.Current.Type == TSQLTokenType.Whitespace ||
+                        (
+                            _tokenizer.Current.Type == TSQLTokenType.Character &&
+                            _tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
+                        )
+                    ));
 
 				if (_tokenizer.Current == null)
 				{
