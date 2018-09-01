@@ -7,7 +7,7 @@ namespace TSQL
 	public struct TSQLKeywords
 	{
 		private static Dictionary<string, TSQLKeywords> keywordLookup =
-			new Dictionary<string, TSQLKeywords>(StringComparer.InvariantCultureIgnoreCase);
+			new Dictionary<string, TSQLKeywords>(StringComparer.OrdinalIgnoreCase);
 
 		public static readonly TSQLKeywords None = new TSQLKeywords("");
 
@@ -216,15 +216,15 @@ namespace TSQL
 			{
 				keywordLookup[keyword] = this;
 
-				if (keyword.Equals("EXECUTE", StringComparison.InvariantCultureIgnoreCase))
+				if (keyword.Equals("EXECUTE", StringComparison.OrdinalIgnoreCase))
 				{
 					keywordLookup["EXEC"] = this;
 				}
-				else if (keyword.Equals("TRANSACTION", StringComparison.InvariantCultureIgnoreCase))
+				else if (keyword.Equals("TRANSACTION", StringComparison.OrdinalIgnoreCase))
 				{
 					keywordLookup["TRAN"] = this;
 				}
-				else if (keyword.Equals("PROCEDURE", StringComparison.InvariantCultureIgnoreCase))
+				else if (keyword.Equals("PROCEDURE", StringComparison.OrdinalIgnoreCase))
 				{
 					keywordLookup["PROC"] = this;
 				}

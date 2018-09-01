@@ -8,7 +8,7 @@ namespace TSQL
 	public struct TSQLIdentifiers
 	{
 		private static Dictionary<string, TSQLIdentifiers> identifierLookup =
-			new Dictionary<string, TSQLIdentifiers>(StringComparer.InvariantCultureIgnoreCase);
+			new Dictionary<string, TSQLIdentifiers>(StringComparer.OrdinalIgnoreCase);
 
 		public static readonly TSQLIdentifiers None = new TSQLIdentifiers("");
 

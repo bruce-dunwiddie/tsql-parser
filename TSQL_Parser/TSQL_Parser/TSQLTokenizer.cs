@@ -934,7 +934,7 @@ namespace TSQL
 						startPosition,
 						tokenValue);
 			}
-			else if (tokenValue.StartsWith("0x", StringComparison.InvariantCultureIgnoreCase))
+			else if (tokenValue.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
 			{
 				return
 					new TSQLBinaryLiteral(
