@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\Debug\net40\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -28,7 +28,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\Release\net40\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -68,9 +68,9 @@
     <Compile Include="Clauses\TSQLWhereClause.cs" />
     <Compile Include="Clauses\TSQLWithClause.cs" />
     <Compile Include="IO\BufferedTextReader.cs" />
-		<Compile Include="IO\BufferedTextReader.IDisposable.cs">
-			<DependentUpon>BufferedTextReader.cs</DependentUpon>
-		</Compile>
+    <Compile Include="IO\BufferedTextReader.IDisposable.cs">
+      <DependentUpon>BufferedTextReader.cs</DependentUpon>
+    </Compile>
     <Compile Include="IO\ICharacterReader.cs" />
     <Compile Include="IO\TSQLCharacterReader.cs" />
     <Compile Include="IO\TSQLCharacterReader.IDisposable.cs">
@@ -122,15 +122,6 @@
       <DependentUpon>TSQLTokenizer.cs</DependentUpon>
     </Compile>
     <Compile Include="TSQLVariables.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="CodeQuality.bat" />
-    <None Include="CoverityScanBuild.bat" />
-    <None Include="Pack.bat" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="TSQL_Parser.nuspec" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
