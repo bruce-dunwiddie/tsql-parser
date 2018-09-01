@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSQL_Parser", "TSQL_Parser\TSQL_Parser.csproj", "{2E85041A-D8FE-452B-831E-8DEF3CFC4A17}"
 EndProject
@@ -11,6 +11,8 @@ Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "SandcastleDocs", "Sandcastl
 	ProjectSection(ProjectDependencies) = postProject
 		{2E85041A-D8FE-452B-831E-8DEF3CFC4A17} = {2E85041A-D8FE-452B-831E-8DEF3CFC4A17}
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TSQL_Parser_NetStandard", "TSQL_Parser\TSQL_Parser_NetStandard.csproj", "{A0F922BA-078D-4DE1-BCEC-CFD7AE9A98A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,8 +30,15 @@ Global
 		{E8E59503-18E4-4990-AFDF-07994F068F48}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8D47C966-333B-4349-AC54-8F935E215F40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8D47C966-333B-4349-AC54-8F935E215F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0F922BA-078D-4DE1-BCEC-CFD7AE9A98A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0F922BA-078D-4DE1-BCEC-CFD7AE9A98A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0F922BA-078D-4DE1-BCEC-CFD7AE9A98A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0F922BA-078D-4DE1-BCEC-CFD7AE9A98A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {98F72436-81AE-4AC7-8CFE-5E35711EDF67}
 	EndGlobalSection
 EndGlobal

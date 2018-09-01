@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>TSQL_Parser</AssemblyName>
+    <RootNamespace>TSQL_Parser</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>bin\Debug\netstandard2.0\TSQL_Parser.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\TSQL_Parser.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+    <Compile Remove="Statements\Parsers\TSQLDeleteStatementParser.cs" />
+    <Compile Remove="Statements\Parsers\TSQLExecuteStatementParser.cs" />
+    <Compile Remove="Statements\Parsers\TSQLInsertStatementParser.cs" />
+    <Compile Remove="Statements\Parsers\TSQLMergeStatementParser.cs" />
+    <Compile Remove="Statements\Parsers\TSQLUpdateStatementParser.cs" />
+    <Compile Remove="Statements\Parsers\TSQLWithStatementParser.cs" />
+    <Compile Remove="Statements\TSQLDeleteStatement.cs" />
+    <Compile Remove="Statements\TSQLExecuteStatement.cs" />
+    <Compile Remove="Statements\TSQLInsertStatement.cs" />
+    <Compile Remove="Statements\TSQLMergeStatement.cs" />
+    <Compile Remove="Statements\TSQLUpdateStatement.cs" />
+    <Compile Remove="Statements\TSQLWithStatement.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="CodeQuality.bat" />
+    <None Remove="CoverityScanBuild.bat" />
+    <None Remove="Pack.bat" />
+    <None Remove="project.json" />
+    <None Remove="TSQL.Parser.1.1.1.nupkg" />
+    <None Remove="TSQL.Parser.1.1.2.nupkg" />
+    <None Remove="TSQL.Parser.1.1.2.symbols.nupkg" />
+    <None Remove="TSQL_Parser.nuspec" />
+    <None Remove="TSQL_Parser.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>

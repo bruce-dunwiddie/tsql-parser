@@ -1,2 +1,2 @@
-nuget pack TSQL_Parser.csproj -Build -Prop Configuration=Release
+nuget pack TSQL_Parser.nuspec -Symbols
 pause
