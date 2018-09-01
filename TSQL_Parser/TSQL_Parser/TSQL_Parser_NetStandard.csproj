@@ -37,10 +37,8 @@
     <None Remove="CodeQuality.bat" />
     <None Remove="CoverityScanBuild.bat" />
     <None Remove="Pack.bat" />
+    <None Remove="packages.config" />
     <None Remove="project.json" />
-    <None Remove="TSQL.Parser.1.1.1.nupkg" />
-    <None Remove="TSQL.Parser.1.1.2.nupkg" />
-    <None Remove="TSQL.Parser.1.1.2.symbols.nupkg" />
     <None Remove="TSQL_Parser.nuspec" />
     <None Remove="TSQL_Parser.xml" />
   </ItemGroup>

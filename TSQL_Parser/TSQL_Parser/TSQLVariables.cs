@@ -8,7 +8,7 @@ namespace TSQL
 	public struct TSQLVariables
 	{
 		private static Dictionary<string, TSQLVariables> variableLookup =
-			new Dictionary<string, TSQLVariables>(StringComparer.InvariantCultureIgnoreCase);
+			new Dictionary<string, TSQLVariables>(StringComparer.OrdinalIgnoreCase);
 
 		public static readonly TSQLVariables None = new TSQLVariables("");
 

@@ -7,7 +7,7 @@ namespace TSQL
 	public struct TSQLCharacters
 	{
 		private static Dictionary<string, TSQLCharacters> characterLookup =
-			new Dictionary<string, TSQLCharacters>(StringComparer.InvariantCultureIgnoreCase);
+			new Dictionary<string, TSQLCharacters>(StringComparer.OrdinalIgnoreCase);
 
 		public static readonly TSQLCharacters None = new TSQLCharacters(string.Empty);
 
