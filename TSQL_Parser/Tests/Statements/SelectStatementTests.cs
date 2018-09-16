@@ -213,5 +213,14 @@ namespace Tests.Statements
 
 			Assert.AreEqual(6, select.From.Tokens.Count);
 		}
+
+		[Test]
+		public void SelectStatement_MultiLevelParens()
+		{
+			string query = "SELECT ((A/B)-1) FROM SomeTable";
+			var statements = TSQLStatementReader.ParseStatements(query);
+			Assert.AreEqual(1, statements.Count);
+			Assert.AreEqual(12, statements[0].Tokens.Count);
+		}
 	}
 }

@@ -105,6 +105,12 @@ namespace TSQL.Clauses.Parsers
 								nestedLevel--;
 								from.Tokens.Add(tokenizer.Current);
 							}
+							else if (tokenizer.Current.IsCharacter(
+								TSQLCharacters.OpenParentheses))
+							{
+								nestedLevel++;
+								from.Tokens.Add(tokenizer.Current);
+							}
 							else
 							{
 								from.Tokens.Add(tokenizer.Current);
