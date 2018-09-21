@@ -26,7 +26,7 @@ Available on Nuget, [TSQL.Parser](https://www.nuget.org/packages/TSQL.Parser/).
 - Returns tokens of type characters, comments, identifiers, keywords, literals, variables, and operators.
 - Handles both single line and multi line comments.
 - Select statement parser.
-- .Net Framework 4.0+ and .Net Core 2.0+ compatible
+- .Net Framework 4.0+ and .Net Core 2.0+ compatible.
 
 ### Some Possible Current Uses
 - Parsing comments.
