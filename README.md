@@ -37,5 +37,5 @@ Available on Nuget, [TSQL.Parser](https://www.nuget.org/packages/TSQL.Parser/).
 - More statement parsers built on top of tokenizer.
 
 ### Code Samples
-- See [wiki](<https://github.com/bruce-dunwiddie/tsql-parser/wiki>) for simple code example and output.
+- See [wiki](<https://github.com/bruce-dunwiddie/tsql-parser/wiki/TSQL-Parser-Code-Samples>) for simple code examples and output.
 - See test cases in project.
