@@ -29,6 +29,7 @@ Available on Nuget, [TSQL.Parser](https://www.nuget.org/packages/TSQL.Parser/).
 - .Net Framework 4.0+ and .Net Core 2.0+ compatible.
 
 ### Some Possible Current Uses
+- [Colorization](<https://github.com/bruce-dunwiddie/tsql-color>)
 - Parsing comments.
 - Find and replace.
 - Script validation.
