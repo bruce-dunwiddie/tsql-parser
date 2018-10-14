@@ -5,6 +5,7 @@ environment:
 branches:
   only:
   - master
+configuration: Debug
 before_build:
 - cmd: nuget restore TSQL_Parser/TSQL_Parser.sln
 build:
