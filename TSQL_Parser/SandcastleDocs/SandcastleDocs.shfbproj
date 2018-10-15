@@ -29,7 +29,7 @@
       <Argument Key="maxVersionParts" Value="" xmlns="" />
     </TransformComponentArguments>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\TSQL_Parser\TSQL_Parser.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\TSQL_Parser\TSQL_Parser.csproj" />
     </DocumentationSources>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
     <HelpFileFormat>Website</HelpFileFormat>
