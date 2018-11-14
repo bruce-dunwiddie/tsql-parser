@@ -5,10 +5,10 @@ namespace TSQL.Tokens
 	public class TSQLOperator : TSQLToken
 	{
 		internal TSQLOperator(
-			int beginPostion,
+			int beginPosition,
 			string text) :
 			base(
-				beginPostion,
+				beginPosition,
 				text)
 		{
 

@@ -8,10 +8,10 @@ namespace TSQL.Tokens
 	public class TSQLMoneyLiteral : TSQLLiteral
 	{
 		internal TSQLMoneyLiteral(
-			int beginPostion,
+			int beginPosition,
 			string text) :
 			base(
-				beginPostion,
+				beginPosition,
 				text)
 		{
 

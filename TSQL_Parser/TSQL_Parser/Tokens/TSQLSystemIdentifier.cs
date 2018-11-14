@@ -8,10 +8,10 @@ namespace TSQL.Tokens
 	public class TSQLSystemIdentifier : TSQLIdentifier
 	{
 		internal TSQLSystemIdentifier(
-			int beginPostion,
+			int beginPosition,
 			string text) :
 			base(
-				beginPostion,
+				beginPosition,
 				text)
 		{
 			Identifier = TSQLIdentifiers.Parse(text);

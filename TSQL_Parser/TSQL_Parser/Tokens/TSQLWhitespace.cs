@@ -5,10 +5,10 @@ namespace TSQL.Tokens
 	public class TSQLWhitespace : TSQLToken
 	{
 		internal TSQLWhitespace(
-			int beginPostion,
+			int beginPosition,
 			string text) :
 			base(
-				beginPostion,
+				beginPosition,
 				text)
 		{
 

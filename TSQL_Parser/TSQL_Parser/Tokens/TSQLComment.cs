@@ -5,10 +5,10 @@ namespace TSQL.Tokens
 	public abstract class TSQLComment : TSQLToken
 	{
 		internal protected TSQLComment(
-			int beginPostion,
+			int beginPosition,
 			string text) :
 			base(
-				beginPostion,
+				beginPosition,
 				text)
 		{
 

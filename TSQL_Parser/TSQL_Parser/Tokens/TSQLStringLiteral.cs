@@ -5,10 +5,10 @@ namespace TSQL.Tokens
 	public class TSQLStringLiteral : TSQLLiteral
 	{
 		internal TSQLStringLiteral(
-			int beginPostion,
+			int beginPosition,
 			string text) :
 			base(
-				beginPostion,
+				beginPosition,
 				text)
 		{
 			// need to find unescaped value insides quote characters
