@@ -5,10 +5,10 @@ namespace TSQL.Tokens
 	public class TSQLCharacter : TSQLToken
 	{
 		internal TSQLCharacter(
-			int beginPostion,
+			int beginPosition,
 			string text) :
 			base(
-				beginPostion,
+				beginPosition,
 				text)
 		{
 			Character = TSQLCharacters.Parse(text);

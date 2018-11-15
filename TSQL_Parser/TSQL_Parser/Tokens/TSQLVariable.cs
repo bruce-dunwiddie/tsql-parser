@@ -5,10 +5,10 @@ namespace TSQL.Tokens
 	public class TSQLVariable : TSQLToken
 	{
 		internal TSQLVariable(
-			int beginPostion,
+			int beginPosition,
 			string text) :
 			base(
-				beginPostion,
+				beginPosition,
 				text)
 		{
 

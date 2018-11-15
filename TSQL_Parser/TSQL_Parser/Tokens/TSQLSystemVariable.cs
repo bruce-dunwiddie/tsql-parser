@@ -8,10 +8,10 @@ namespace TSQL.Tokens
 	public class TSQLSystemVariable : TSQLVariable
 	{
 		internal TSQLSystemVariable(
-			int beginPostion,
+			int beginPosition,
 			string text) :
 			base(
-				beginPostion,
+				beginPosition,
 				text)
 		{
 			Variable = TSQLVariables.Parse(text);

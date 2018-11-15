@@ -5,10 +5,10 @@ namespace TSQL.Tokens
 	public abstract class TSQLToken
 	{
 		internal protected TSQLToken(
-			int beginPostion,
+			int beginPosition,
 			string text)
 		{
-			BeginPostion = beginPostion;
+			BeginPosition = beginPosition;
 			if (text == null)
 			{
 				throw new ArgumentNullException("text");
@@ -16,7 +16,7 @@ namespace TSQL.Tokens
 			Text = text;
 		}
 
-		public int BeginPostion
+		public int BeginPosition
 		{
 			get;
 			private set;
@@ -26,7 +26,7 @@ namespace TSQL.Tokens
 		{
 			get
 			{
-				return BeginPostion + Length - 1;
+				return BeginPosition + Length - 1;
 			}
 		}
 

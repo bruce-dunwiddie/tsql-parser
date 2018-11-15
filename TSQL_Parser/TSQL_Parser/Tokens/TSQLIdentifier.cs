@@ -5,10 +5,10 @@ namespace TSQL.Tokens
 	public class TSQLIdentifier : TSQLToken
 	{
 		internal TSQLIdentifier(
-			int beginPostion,
+			int beginPosition,
 			string text) :
 			base(
-				beginPostion,
+				beginPosition,
 				text)
 		{
 			if (Text.StartsWith("["))
