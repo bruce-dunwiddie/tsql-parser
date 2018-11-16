@@ -5,10 +5,10 @@ namespace TSQL.Tokens
 	public abstract class TSQLLiteral : TSQLToken
 	{
 		internal protected TSQLLiteral(
-			int beginPostion,
+			int beginPosition,
 			string text) :
 			base(
-				beginPostion,
+				beginPosition,
 				text)
 		{
 

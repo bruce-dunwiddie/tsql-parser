@@ -5,10 +5,10 @@ namespace TSQL.Tokens
 	public class TSQLSingleLineComment : TSQLComment
 	{
 		internal TSQLSingleLineComment(
-			int beginPostion,
+			int beginPosition,
 			string text) :
 			base(
-				beginPostion,
+				beginPosition,
 				text)
 		{
 			Comment = Text.Substring(2);

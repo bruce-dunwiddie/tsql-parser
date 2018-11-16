@@ -5,10 +5,10 @@ namespace TSQL.Tokens
 	public class TSQLKeyword : TSQLToken
 	{
 		internal TSQLKeyword(
-			int beginPostion,
+			int beginPosition,
 			string text) :
 			base(
-				beginPostion,
+				beginPosition,
 				text)
 		{
 			Keyword = TSQLKeywords.Parse(text);

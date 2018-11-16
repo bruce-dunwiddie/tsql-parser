@@ -26,8 +26,10 @@ Available on Nuget, [TSQL.Parser](https://www.nuget.org/packages/TSQL.Parser/).
 - Returns tokens of type characters, comments, identifiers, keywords, literals, variables, and operators.
 - Handles both single line and multi line comments.
 - Select statement parser.
+- .Net Framework 4.0+ and .Net Core 2.0+ compatible.
 
 ### Some Possible Current Uses
+- [Colorization](<https://github.com/bruce-dunwiddie/tsql-color>)
 - Parsing comments.
 - Find and replace.
 - Script validation.
@@ -36,5 +38,5 @@ Available on Nuget, [TSQL.Parser](https://www.nuget.org/packages/TSQL.Parser/).
 - More statement parsers built on top of tokenizer.
 
 ### Code Samples
-- See [wiki](<https://github.com/bruce-dunwiddie/tsql-parser/wiki>) for simple code example and output.
+- See [wiki](<https://github.com/bruce-dunwiddie/tsql-parser/wiki/TSQL-Parser-Code-Samples>) for simple code examples and output.
 - See test cases in project.
