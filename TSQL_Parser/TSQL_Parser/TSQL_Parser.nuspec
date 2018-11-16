@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>TSQL.Parser</id>
-		<version>1.2.3</version>
+		<version>1.2.4</version>
 		<title>TSQL.Parser</title>
 		<authors>Bruce Dunwiddie</authors>
 		<owners>shriop</owners>
@@ -10,7 +10,7 @@
 		<projectUrl>https://github.com/bruce-dunwiddie/tsql-parser</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Library for Parsing SQL Server T-SQL Scripts</description>
-		<releaseNotes>Added Net Standard 2.0 compatibility.</releaseNotes>
+		<releaseNotes>Fixed small typo on naming of public member TSQLToken.BeginPosition.</releaseNotes>
 		<copyright>Copyright © 2018</copyright>
 		<tags>sql parser sql-server tsql</tags>
 	</metadata>
