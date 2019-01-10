@@ -222,5 +222,55 @@ namespace Tests.Statements
 			Assert.AreEqual(1, statements.Count);
 			Assert.AreEqual(12, statements[0].Tokens.Count);
 		}
+
+		[Test]
+		public void SelectStatement_CaseInJoin()
+		{
+			string query = @"SELECT a.*
+				FROM SomeTable a JOIN SomeTable b
+					ON CASE WHEN a.Value = 1 THEN 'One' ELSE 'Other' END = 'One'";
+
+			var statements = TSQLStatementReader.ParseStatements(query, includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+
+			TSQLSelectStatement select = statements[0] as TSQLSelectStatement;
+
+			Assert.AreEqual(4, select.Select.Tokens.Count);
+			Assert.AreEqual(21, select.From.Tokens.Count);
+			Assert.IsNull(select.Where);
+		}
+
+		[Test]
+		public void SelectStatement_CaseInSelect()
+		{
+			string query = "SELECT Value, CASE WHEN Value = 1 THEN 'One' ELSE 'Other' END AS Cased FROM SomeTable";
+
+			var statements = TSQLStatementReader.ParseStatements(query, includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+
+			TSQLSelectStatement select = statements[0] as TSQLSelectStatement;
+
+			Assert.AreEqual(15, select.Select.Tokens.Count);
+			Assert.AreEqual(2, select.From.Tokens.Count);
+		}
+
+
+		[Test]
+		public void SelectStatement_CaseInWhere()
+		{
+			string query = "SELECT Value FROM SomeTable WHERE (CASE WHEN Value = 1 THEN 'One' ELSE 'Other' END) = 'One'";
+
+			var statements = TSQLStatementReader.ParseStatements(query, includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+
+			TSQLSelectStatement select = statements[0] as TSQLSelectStatement;
+
+			Assert.AreEqual(2, select.Select.Tokens.Count);
+			Assert.AreEqual(2, select.From.Tokens.Count);
+			Assert.AreEqual(15, select.Where.Tokens.Count);
+		}
 	}
 }

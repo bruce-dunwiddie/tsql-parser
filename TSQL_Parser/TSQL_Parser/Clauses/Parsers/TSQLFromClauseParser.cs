@@ -64,7 +64,12 @@ namespace TSQL.Clauses.Parsers
 							TSQLKeywords.AND,
 							TSQLKeywords.IN,
 							TSQLKeywords.REPEATABLE,
-							TSQLKeywords.ALL
+							TSQLKeywords.ALL,
+							TSQLKeywords.CASE,
+							TSQLKeywords.WHEN,
+							TSQLKeywords.THEN,
+							TSQLKeywords.ELSE,
+							TSQLKeywords.END
 						)
 					)
 				))
