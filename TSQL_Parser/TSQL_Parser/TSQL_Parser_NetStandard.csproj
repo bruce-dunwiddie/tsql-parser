@@ -26,6 +26,7 @@
     <DocumentationFile>bin\Release\netstandard2.0\TSQL_Parser.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
