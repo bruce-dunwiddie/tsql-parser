@@ -4,11 +4,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>TSQL_Parser</AssemblyName>
     <RootNamespace>TSQL_Parser</RootNamespace>
-    <Version>1.2.4.0</Version>
-    <AssemblyVersion>1.2.4.0</AssemblyVersion>
-    <FileVersion>1.2.4.0</FileVersion>
+    <Version>1.2.5.0</Version>
+    <AssemblyVersion>1.2.5.0</AssemblyVersion>
+    <FileVersion>1.2.5.0</FileVersion>
     <Description>Library for Parsing SQL Server TSQL Scripts</Description>
-    <Copyright>Copyright © 2018</Copyright>
+    <Copyright>Copyright © 2019</Copyright>
     <Company />
     <RepositoryUrl></RepositoryUrl>
     <PackageProjectUrl>https://github.com/bruce-dunwiddie/tsql-parser</PackageProjectUrl>
@@ -26,6 +26,7 @@
     <DocumentationFile>bin\Release\netstandard2.0\TSQL_Parser.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
