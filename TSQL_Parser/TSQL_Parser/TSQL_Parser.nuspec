@@ -6,7 +6,7 @@
 		<title>TSQL.Parser</title>
 		<authors>Bruce Dunwiddie</authors>
 		<owners>shriop</owners>
-		<licenseUrl>https://github.com/bruce-dunwiddie/tsql-parser/blob/master/LICENSE</licenseUrl>
+		<license type="expression">Apache-2.0</license>
 		<projectUrl>https://github.com/bruce-dunwiddie/tsql-parser</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Library for Parsing SQL Server T-SQL Scripts</description>
