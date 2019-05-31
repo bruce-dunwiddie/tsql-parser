@@ -806,6 +806,7 @@ namespace TSQL
 									case '=':
 									case '/':
 									case '<':
+									case '>':
 									case '!':
 									case '%':
 									case '^':
