@@ -815,6 +815,41 @@ namespace TSQL
 									case '~':
 									case ':':
 									case '[':
+									// Backslash (Line Continuation)
+									case '\\':
+									case '£':
+									case '¢':
+									case '¤':
+									case '¥':
+									case '€':
+									case '₡':
+									case '₱':
+									case '﷼':
+									case '₩':
+									case '₮':
+									case '₨':
+									case '₫':
+									case '฿':
+									case '៛':
+									case '₪':
+									case '₭':
+									case '₦':
+									case '৲':
+									case '৳':
+									case '﹩':
+									case '₠':
+									case '₢':
+									case '₣':
+									case '₤':
+									case '₥':
+									case '₧':
+									case '₯':
+									case '₰':
+									case '＄':
+									case '￠':
+									case '￡':
+									case '￥':
+									case '￦':
 										{
 											foundEnd = true;
 

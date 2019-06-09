@@ -19,27 +19,6 @@ namespace TSQL.Statements.Parsers
 				{
 					return new TSQLSelectStatementParser();
 				}
-				// not fully implemented yet
-				//else if (keyword == TSQLKeywords.INSERT)
-				//{
-				//	return new TSQLInsertStatementParser();
-				//}
-				//else if (keyword == TSQLKeywords.UPDATE)
-				//{
-				//	return new TSQLUpdateStatementParser();
-				//}
-				//else if (keyword == TSQLKeywords.DELETE)
-				//{
-				//	return new TSQLDeleteStatementParser();
-				//}
-				//else if (keyword == TSQLKeywords.MERGE)
-				//{
-				//	return new TSQLMergeStatementParser();
-				//}
-				//else if (keyword == TSQLKeywords.WITH)
-				//{
-				//	return new TSQLWithStatementParser();
-				//}
 				else
 				{
 					return new TSQLUnknownStatementParser();
@@ -49,8 +28,7 @@ namespace TSQL.Statements.Parsers
 			{
 				return new TSQLUnknownStatementParser();
 
-				// not fully implemented yet
-				//return new TSQLExecuteStatementParser();
+				// TODO: check for an EXEC without the keyword
 			}
 		}
 	}

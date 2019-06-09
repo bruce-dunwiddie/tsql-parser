@@ -256,7 +256,6 @@ namespace Tests.Statements
 			Assert.AreEqual(2, select.From.Tokens.Count);
 		}
 
-
 		[Test]
 		public void SelectStatement_CaseInWhere()
 		{
@@ -271,6 +270,26 @@ namespace Tests.Statements
 			Assert.AreEqual(2, select.Select.Tokens.Count);
 			Assert.AreEqual(2, select.From.Tokens.Count);
 			Assert.AreEqual(15, select.Where.Tokens.Count);
+		}
+
+		[Test]
+		public void SelectStatement_TableHint()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT *
+				FROM
+					Sales.SalesOrderHeader oh WITH (NOLOCK)
+				ORDER BY
+					oh.OrderDate;",
+				includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
+
+			TSQLSelectStatement select = statements[0] as TSQLSelectStatement;
+
+			Assert.AreEqual(16, select.Tokens.Count);
+			Assert.AreEqual("OrderDate", select.Tokens[15].Text);
 		}
 	}
 }

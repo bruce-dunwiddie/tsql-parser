@@ -72,7 +72,6 @@
     <Compile Include="Clauses\TSQLOrderByClause.cs" />
     <Compile Include="Clauses\TSQLSelectClause.cs" />
     <Compile Include="Clauses\TSQLWhereClause.cs" />
-    <Compile Include="Clauses\TSQLWithClause.cs" />
     <Compile Include="IO\BufferedTextReader.cs" />
     <Compile Include="IO\BufferedTextReader.IDisposable.cs">
       <DependentUpon>BufferedTextReader.cs</DependentUpon>
