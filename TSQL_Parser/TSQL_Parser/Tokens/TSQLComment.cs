@@ -20,5 +20,13 @@ namespace TSQL.Tokens
 
 			protected set;
 		}
+
+		public override bool IsComplete
+		{
+			get
+			{
+				return true;
+			}
+		}
 	}
 }

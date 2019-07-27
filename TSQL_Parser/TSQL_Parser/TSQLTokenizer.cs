@@ -348,12 +348,6 @@ namespace TSQL
 
 									goto case '\'';
 								}
-								else if (_charReader.Current == '\"')
-								{
-									characterHolder.Append(_charReader.Current);
-
-									goto case '\"';
-								}
 								else
 								{
 									_charReader.Putback();
@@ -920,26 +914,60 @@ namespace TSQL
 			}
 			else if (tokenValue.StartsWith("/*"))
 			{
-				return
-					new TSQLMultilineComment(
-						startPosition,
-						tokenValue);
+				if (tokenValue.EndsWith("*/"))
+				{
+					return
+						new TSQLMultilineComment(
+							startPosition,
+							tokenValue);
+				}
+				else
+				{
+					return
+						new TSQLIncompleteCommentToken(
+							startPosition,
+							tokenValue);
+				}
 			}
 			else if (
-				tokenValue.StartsWith("\'") ||
-				tokenValue.StartsWith("N\'") ||
-				(
-					!UseQuotedIdentifiers &&
-					(
-						tokenValue.StartsWith("\"") ||
-						tokenValue.StartsWith("N\"")
-					)
-				))
+				tokenValue.StartsWith("'") ||
+				tokenValue.StartsWith("N'"))
 			{
-				return
-					new TSQLStringLiteral(
-						startPosition,
-						tokenValue);
+				// make sure there's an even number of quotes so that it's closed properly
+				if ((tokenValue.Split('\'').Length - 1) % 2 == 0)
+				{
+					return
+						new TSQLStringLiteral(
+							startPosition,
+							tokenValue);
+				}
+				else
+				{
+					return
+						new TSQLIncompleteStringToken(
+							startPosition,
+							tokenValue);
+				}
+			}
+			else if (
+				!UseQuotedIdentifiers &&
+				tokenValue.StartsWith("\""))
+			{
+				// make sure there's an even number of quotes so that it's closed properly
+				if ((tokenValue.Split('\"').Length - 1) % 2 == 0)
+				{
+					return
+						new TSQLStringLiteral(
+							startPosition,
+							tokenValue);
+				}
+				else
+				{
+					return
+						new TSQLIncompleteStringToken(
+							startPosition,
+							tokenValue);
+				}
 			}
 			else if (
 				tokenValue[0] == '$')
@@ -1034,10 +1062,30 @@ namespace TSQL
 			}
 			else
 			{
-				return
-					new TSQLIdentifier(
-						startPosition,
-						tokenValue);
+				if (
+					(
+						tokenValue.StartsWith("[") &&
+						!tokenValue.EndsWith("]")
+					)	||
+					(
+						UseQuotedIdentifiers &&
+						tokenValue.StartsWith("\"") &&
+						// see if there's an odd number of quotes
+						(tokenValue.Split('\"').Length - 1) % 2 == 1
+					))
+				{
+					return
+						new TSQLIncompleteIdentifierToken(
+							startPosition,
+							tokenValue);
+				}
+				else
+				{
+					return
+						new TSQLIdentifier(
+							startPosition,
+							tokenValue);
+				}
 			}
 		}
 

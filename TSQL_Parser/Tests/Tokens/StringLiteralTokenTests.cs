@@ -80,19 +80,6 @@ namespace Tests.Tokens
 		}
 
 		[Test]
-		public void StringLiteralToken_DoubleQuoteUnicode()
-		{
-			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("N\"name\" ", useQuotedIdentifiers: false, includeWhitespace: true);
-			TokenComparisons.CompareTokenLists(
-				new List<TSQLToken>()
-					{
-						new TSQLStringLiteral(0, "N\"name\""),
-						new TSQLWhitespace(7, " ")
-					},
-				tokens);
-		}
-
-		[Test]
 		public void StringLiteralToken_SingleQuoteValue()
 		{
 			TSQLStringLiteral token = new TSQLStringLiteral(0, "'name'");

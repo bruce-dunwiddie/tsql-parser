@@ -31,5 +31,13 @@ namespace TSQL.Tokens
 			get;
 			private set;
 		}
+
+		public override bool IsComplete
+		{
+			get
+			{
+				return true;
+			}
+		}
 	}
 }

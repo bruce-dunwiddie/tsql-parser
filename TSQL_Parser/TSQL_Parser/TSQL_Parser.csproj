@@ -89,6 +89,10 @@
     <Compile Include="Statements\Parsers\TSQLUnknownStatementParser.cs" />
     <Compile Include="Statements\TSQLSelectStatement.cs" />
     <Compile Include="Statements\TSQLStatement.cs" />
+    <Compile Include="Tokens\TSQLIncompleteCommentToken.cs" />
+    <Compile Include="Tokens\TSQLIncompleteIdentifierToken.cs" />
+    <Compile Include="Tokens\TSQLIncompleteStringToken.cs" />
+    <Compile Include="Tokens\TSQLIncompleteToken.cs" />
     <Compile Include="Tokens\TSQLSystemIdentifier.cs" />
     <Compile Include="Tokens\TSQLSystemVariable.cs" />
     <Compile Include="Tokens\TSQLBinaryLiteral.cs" />

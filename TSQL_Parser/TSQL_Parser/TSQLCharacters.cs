@@ -17,10 +17,6 @@ namespace TSQL
 		public static readonly TSQLCharacters Semicolon = new TSQLCharacters(";");
 		public static readonly TSQLCharacters OpenParentheses = new TSQLCharacters("(");
 		public static readonly TSQLCharacters CloseParentheses = new TSQLCharacters(")");
-		public static readonly TSQLCharacters Space = new TSQLCharacters(" ");
-		public static readonly TSQLCharacters Tab = new TSQLCharacters("\t");
-		public static readonly TSQLCharacters CarriageReturn = new TSQLCharacters("\r");
-		public static readonly TSQLCharacters LineFeed = new TSQLCharacters("\n");
 		public static readonly TSQLCharacters Period = new TSQLCharacters(".");
 
 #pragma warning restore 1591
