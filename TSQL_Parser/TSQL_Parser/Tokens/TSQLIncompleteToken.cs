@@ -2,13 +2,13 @@
 
 namespace TSQL.Tokens
 {
-	public abstract class TSQLLiteral : TSQLToken
+	public abstract class TSQLIncompleteToken : TSQLToken
 	{
-		internal protected TSQLLiteral(
+		internal protected TSQLIncompleteToken(
 			int beginPosition,
 			string text) :
 			base(
-				beginPosition,
+				beginPosition, 
 				text)
 		{
 
@@ -18,7 +18,7 @@ namespace TSQL.Tokens
 		{
 			get
 			{
-				return true;
+				return false;
 			}
 		}
 	}

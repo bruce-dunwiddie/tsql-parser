@@ -49,6 +49,11 @@ namespace TSQL.Tokens
 			get;
 		}
 
+		public abstract bool IsComplete
+		{
+			get;
+		}
+
 		/// <summary>
 		///		Fluent convenience shortcut for casting object
 		///		as <see cref="TSQL.Tokens.TSQLCharacter"/>.

@@ -2,9 +2,9 @@
 
 namespace TSQL.Tokens
 {
-	public class TSQLOperator : TSQLToken
+	public class TSQLIncompleteCommentToken : TSQLIncompleteToken
 	{
-		internal TSQLOperator(
+		internal TSQLIncompleteCommentToken(
 			int beginPosition,
 			string text) :
 			base(
@@ -20,18 +20,10 @@ namespace TSQL.Tokens
 		{
 			get
 			{
-				return TSQLTokenType.Operator;
+				return TSQLTokenType.IncompleteComment;
 			}
 		}
 
 #pragma warning restore 1591
-
-		public override bool IsComplete
-		{
-			get
-			{
-				return true;
-			}
-		}
 	}
 }

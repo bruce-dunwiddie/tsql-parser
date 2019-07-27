@@ -86,6 +86,24 @@ namespace TSQL.Tokens
 		///		Binary value serialized as hexadecimal and starting with 0x,
 		///		e.g. 0x69048AEFDD010E.
 		/// </summary>
-		BinaryLiteral
+		BinaryLiteral,
+
+		/// <summary>
+		///		The beginning of a multi-line comment,
+		///		e.g. /* something to comment.
+		/// </summary>
+		IncompleteComment,
+
+		/// <summary>
+		///		The beginning of a bracketed identifier,
+		///		e.g. [dbo.
+		/// </summary>
+		IncompleteIdentifier,
+
+		/// <summary>
+		///		The beginning of a string literal,
+		///		e.g. 'Cincinnat.
+		/// </summary>
+		IncompleteString
 	}
 }

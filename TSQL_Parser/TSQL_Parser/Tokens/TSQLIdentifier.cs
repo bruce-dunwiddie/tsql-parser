@@ -48,6 +48,14 @@ namespace TSQL.Tokens
 
 #pragma warning restore 1591
 
+		public override bool IsComplete
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		/// <summary>
 		///		Unescaped value for the name of the identifier.
 		/// </summary>

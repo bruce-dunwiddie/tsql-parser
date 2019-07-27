@@ -25,5 +25,13 @@ namespace TSQL.Tokens
 		}
 
 #pragma warning restore 1591
+
+		public override bool IsComplete
+		{
+			get
+			{
+				return true;
+			}
+		}
 	}
 }
