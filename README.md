@@ -40,3 +40,6 @@ Available on Nuget, [TSQL.Parser](https://www.nuget.org/packages/TSQL.Parser/).
 ### Code Samples
 - See [wiki](<https://github.com/bruce-dunwiddie/tsql-parser/wiki/TSQL-Parser-Code-Samples>) for simple code examples and output.
 - See test cases in project.
+
+### Class Documentation
+- [bruce-dunwiddie.github.io/tsql-parser/](<http://bruce-dunwiddie.github.io/tsql-parser/>)
