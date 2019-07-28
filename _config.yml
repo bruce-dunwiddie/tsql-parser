@@ -1,8 +1,0 @@
-title: TSQL Parser
-description: Library For Parsing SQL Server TSQL Scripts
-google_analytics: UA-197836-4
-show_downloads: true
-theme: jekyll-theme-hacker
-
-gems:
-  - jekyll-mentions

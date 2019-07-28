@@ -1,0 +1,534 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpTOC>
+
+  <HelpTOCNode Id="ac03cce5-ff50-4106-b0bc-56a0fe8d42ec" Title="TSQL Parser" Url="html/R_Project_TSQL_Parser.htm">
+    <HelpTOCNode Id="d07f85c6-c71a-47f5-81b4-65ac4a31bda8" Title="TSQL" Url="html/N_TSQL.htm">
+      <HelpTOCNode Id="081de047-3f71-42af-9a73-e8e178196d17" Title="TSQLCharacters Structure" Url="html/T_TSQL_TSQLCharacters.htm">
+        <HelpTOCNode Id="89a2f331-1f22-4181-9a23-7dd053feadee" Title="TSQLCharacters Methods" Url="html/Methods_T_TSQL_TSQLCharacters.htm">
+          <HelpTOCNode Id="cd24d207-3aab-4a4f-a0a5-487b82b46dbf" Title="Equals Method " Url="html/Overload_TSQL_TSQLCharacters_Equals.htm">
+            <HelpTOCNode Title="Equals Method (Object)" Url="html/M_TSQL_TSQLCharacters_Equals.htm" />
+            <HelpTOCNode Title="Equals Method (TSQLCharacters)" Url="html/M_TSQL_TSQLCharacters_Equals_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="GetHashCode Method " Url="html/M_TSQL_TSQLCharacters_GetHashCode.htm" />
+          <HelpTOCNode Title="In Method " Url="html/M_TSQL_TSQLCharacters_In.htm" />
+          <HelpTOCNode Title="IsCharacter Method " Url="html/M_TSQL_TSQLCharacters_IsCharacter.htm" />
+          <HelpTOCNode Title="Parse Method " Url="html/M_TSQL_TSQLCharacters_Parse.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="1d8f53a9-924d-4fb5-8597-2a9840518317" Title="TSQLCharacters Operators" Url="html/Operators_T_TSQL_TSQLCharacters.htm">
+          <HelpTOCNode Title="Equality Operator " Url="html/M_TSQL_TSQLCharacters_op_Equality.htm" />
+          <HelpTOCNode Title="Inequality Operator " Url="html/M_TSQL_TSQLCharacters_op_Inequality.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="8f6c6ba8-c4e2-4b9c-83e7-3e265aedfa4f" Title="TSQLCharacters Fields" Url="html/Fields_T_TSQL_TSQLCharacters.htm">
+          <HelpTOCNode Title="CloseParentheses Field" Url="html/F_TSQL_TSQLCharacters_CloseParentheses.htm" />
+          <HelpTOCNode Title="Comma Field" Url="html/F_TSQL_TSQLCharacters_Comma.htm" />
+          <HelpTOCNode Title="None Field" Url="html/F_TSQL_TSQLCharacters_None.htm" />
+          <HelpTOCNode Title="OpenParentheses Field" Url="html/F_TSQL_TSQLCharacters_OpenParentheses.htm" />
+          <HelpTOCNode Title="Period Field" Url="html/F_TSQL_TSQLCharacters_Period.htm" />
+          <HelpTOCNode Title="Semicolon Field" Url="html/F_TSQL_TSQLCharacters_Semicolon.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="98821002-576b-4873-b198-a6fe96a62176" Title="TSQLIdentifiers Structure" Url="html/T_TSQL_TSQLIdentifiers.htm">
+        <HelpTOCNode Id="2caef1c3-befc-479a-aedb-df93c04b5bd6" Title="TSQLIdentifiers Methods" Url="html/Methods_T_TSQL_TSQLIdentifiers.htm">
+          <HelpTOCNode Id="adb8ea1d-57d9-4052-9ed8-063e6328d400" Title="Equals Method " Url="html/Overload_TSQL_TSQLIdentifiers_Equals.htm">
+            <HelpTOCNode Title="Equals Method (Object)" Url="html/M_TSQL_TSQLIdentifiers_Equals.htm" />
+            <HelpTOCNode Title="Equals Method (TSQLIdentifiers)" Url="html/M_TSQL_TSQLIdentifiers_Equals_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="GetHashCode Method " Url="html/M_TSQL_TSQLIdentifiers_GetHashCode.htm" />
+          <HelpTOCNode Title="In Method " Url="html/M_TSQL_TSQLIdentifiers_In.htm" />
+          <HelpTOCNode Title="IsIdentifier Method " Url="html/M_TSQL_TSQLIdentifiers_IsIdentifier.htm" />
+          <HelpTOCNode Title="Parse Method " Url="html/M_TSQL_TSQLIdentifiers_Parse.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="1a719ffa-5468-4431-8245-50599ee8867a" Title="TSQLIdentifiers Operators" Url="html/Operators_T_TSQL_TSQLIdentifiers.htm">
+          <HelpTOCNode Title="Equality Operator " Url="html/M_TSQL_TSQLIdentifiers_op_Equality.htm" />
+          <HelpTOCNode Title="Inequality Operator " Url="html/M_TSQL_TSQLIdentifiers_op_Inequality.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="e0f24747-bf91-4a61-afca-dce12fffdf5b" Title="TSQLIdentifiers Fields" Url="html/Fields_T_TSQL_TSQLIdentifiers.htm">
+          <HelpTOCNode Title="COALESCE Field" Url="html/F_TSQL_TSQLIdentifiers_COALESCE.htm" />
+          <HelpTOCNode Title="CONTAINS Field" Url="html/F_TSQL_TSQLIdentifiers_CONTAINS.htm" />
+          <HelpTOCNode Title="CONTAINSTABLE Field" Url="html/F_TSQL_TSQLIdentifiers_CONTAINSTABLE.htm" />
+          <HelpTOCNode Title="CONVERT Field" Url="html/F_TSQL_TSQLIdentifiers_CONVERT.htm" />
+          <HelpTOCNode Title="CURRENT_DATE Field" Url="html/F_TSQL_TSQLIdentifiers_CURRENT_DATE.htm" />
+          <HelpTOCNode Title="CURRENT_TIME Field" Url="html/F_TSQL_TSQLIdentifiers_CURRENT_TIME.htm" />
+          <HelpTOCNode Title="CURRENT_TIMESTAMP Field" Url="html/F_TSQL_TSQLIdentifiers_CURRENT_TIMESTAMP.htm" />
+          <HelpTOCNode Title="CURRENT_USER Field" Url="html/F_TSQL_TSQLIdentifiers_CURRENT_USER.htm" />
+          <HelpTOCNode Title="FREETEXT Field" Url="html/F_TSQL_TSQLIdentifiers_FREETEXT.htm" />
+          <HelpTOCNode Title="FREETEXTTABLE Field" Url="html/F_TSQL_TSQLIdentifiers_FREETEXTTABLE.htm" />
+          <HelpTOCNode Title="None Field" Url="html/F_TSQL_TSQLIdentifiers_None.htm" />
+          <HelpTOCNode Title="NULLIF Field" Url="html/F_TSQL_TSQLIdentifiers_NULLIF.htm" />
+          <HelpTOCNode Title="OPENDATASOURCE Field" Url="html/F_TSQL_TSQLIdentifiers_OPENDATASOURCE.htm" />
+          <HelpTOCNode Title="OPENQUERY Field" Url="html/F_TSQL_TSQLIdentifiers_OPENQUERY.htm" />
+          <HelpTOCNode Title="OPENROWSET Field" Url="html/F_TSQL_TSQLIdentifiers_OPENROWSET.htm" />
+          <HelpTOCNode Title="OPENXML Field" Url="html/F_TSQL_TSQLIdentifiers_OPENXML.htm" />
+          <HelpTOCNode Title="RAISERROR Field" Url="html/F_TSQL_TSQLIdentifiers_RAISERROR.htm" />
+          <HelpTOCNode Title="SEMANTICKEYPHRASETABLE Field" Url="html/F_TSQL_TSQLIdentifiers_SEMANTICKEYPHRASETABLE.htm" />
+          <HelpTOCNode Title="SEMANTICSIMILARITYDETAILSTABLE Field" Url="html/F_TSQL_TSQLIdentifiers_SEMANTICSIMILARITYDETAILSTABLE.htm" />
+          <HelpTOCNode Title="SEMANTICSIMILARITYTABLE Field" Url="html/F_TSQL_TSQLIdentifiers_SEMANTICSIMILARITYTABLE.htm" />
+          <HelpTOCNode Title="SESSION_USER Field" Url="html/F_TSQL_TSQLIdentifiers_SESSION_USER.htm" />
+          <HelpTOCNode Title="SYSTEM_USER Field" Url="html/F_TSQL_TSQLIdentifiers_SYSTEM_USER.htm" />
+          <HelpTOCNode Title="TRY_CONVERT Field" Url="html/F_TSQL_TSQLIdentifiers_TRY_CONVERT.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="83515c83-e1cc-4506-b703-1358077769e0" Title="TSQLKeywords Structure" Url="html/T_TSQL_TSQLKeywords.htm">
+        <HelpTOCNode Id="d436cf9f-e25a-49a3-b398-96db49329aab" Title="TSQLKeywords Methods" Url="html/Methods_T_TSQL_TSQLKeywords.htm">
+          <HelpTOCNode Title="Equals Method " Url="html/M_TSQL_TSQLKeywords_Equals.htm" />
+          <HelpTOCNode Title="GetHashCode Method " Url="html/M_TSQL_TSQLKeywords_GetHashCode.htm" />
+          <HelpTOCNode Title="In Method " Url="html/M_TSQL_TSQLKeywords_In.htm" />
+          <HelpTOCNode Title="IsKeyword Method " Url="html/M_TSQL_TSQLKeywords_IsKeyword.htm" />
+          <HelpTOCNode Title="Parse Method " Url="html/M_TSQL_TSQLKeywords_Parse.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="d4effd91-ca69-4a6b-9a92-9c94dbe872da" Title="TSQLKeywords Operators" Url="html/Operators_T_TSQL_TSQLKeywords.htm">
+          <HelpTOCNode Title="Equality Operator " Url="html/M_TSQL_TSQLKeywords_op_Equality.htm" />
+          <HelpTOCNode Title="Inequality Operator " Url="html/M_TSQL_TSQLKeywords_op_Inequality.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="4cd00ba1-5342-4112-b097-46fa3ecda337" Title="TSQLKeywords Fields" Url="html/Fields_T_TSQL_TSQLKeywords.htm">
+          <HelpTOCNode Title="ADD Field" Url="html/F_TSQL_TSQLKeywords_ADD.htm" />
+          <HelpTOCNode Title="ALL Field" Url="html/F_TSQL_TSQLKeywords_ALL.htm" />
+          <HelpTOCNode Title="ALTER Field" Url="html/F_TSQL_TSQLKeywords_ALTER.htm" />
+          <HelpTOCNode Title="AND Field" Url="html/F_TSQL_TSQLKeywords_AND.htm" />
+          <HelpTOCNode Title="ANY Field" Url="html/F_TSQL_TSQLKeywords_ANY.htm" />
+          <HelpTOCNode Title="AS Field" Url="html/F_TSQL_TSQLKeywords_AS.htm" />
+          <HelpTOCNode Title="ASC Field" Url="html/F_TSQL_TSQLKeywords_ASC.htm" />
+          <HelpTOCNode Title="AUTHORIZATION Field" Url="html/F_TSQL_TSQLKeywords_AUTHORIZATION.htm" />
+          <HelpTOCNode Title="BACKUP Field" Url="html/F_TSQL_TSQLKeywords_BACKUP.htm" />
+          <HelpTOCNode Title="BEGIN Field" Url="html/F_TSQL_TSQLKeywords_BEGIN.htm" />
+          <HelpTOCNode Title="BETWEEN Field" Url="html/F_TSQL_TSQLKeywords_BETWEEN.htm" />
+          <HelpTOCNode Title="BREAK Field" Url="html/F_TSQL_TSQLKeywords_BREAK.htm" />
+          <HelpTOCNode Title="BROWSE Field" Url="html/F_TSQL_TSQLKeywords_BROWSE.htm" />
+          <HelpTOCNode Title="BULK Field" Url="html/F_TSQL_TSQLKeywords_BULK.htm" />
+          <HelpTOCNode Title="BY Field" Url="html/F_TSQL_TSQLKeywords_BY.htm" />
+          <HelpTOCNode Title="CASCADE Field" Url="html/F_TSQL_TSQLKeywords_CASCADE.htm" />
+          <HelpTOCNode Title="CASE Field" Url="html/F_TSQL_TSQLKeywords_CASE.htm" />
+          <HelpTOCNode Title="CHECK Field" Url="html/F_TSQL_TSQLKeywords_CHECK.htm" />
+          <HelpTOCNode Title="CHECKPOINT Field" Url="html/F_TSQL_TSQLKeywords_CHECKPOINT.htm" />
+          <HelpTOCNode Title="CLOSE Field" Url="html/F_TSQL_TSQLKeywords_CLOSE.htm" />
+          <HelpTOCNode Title="CLUSTERED Field" Url="html/F_TSQL_TSQLKeywords_CLUSTERED.htm" />
+          <HelpTOCNode Title="COLLATE Field" Url="html/F_TSQL_TSQLKeywords_COLLATE.htm" />
+          <HelpTOCNode Title="COLUMN Field" Url="html/F_TSQL_TSQLKeywords_COLUMN.htm" />
+          <HelpTOCNode Title="COMMIT Field" Url="html/F_TSQL_TSQLKeywords_COMMIT.htm" />
+          <HelpTOCNode Title="COMMITTED Field" Url="html/F_TSQL_TSQLKeywords_COMMITTED.htm" />
+          <HelpTOCNode Title="COMPUTE Field" Url="html/F_TSQL_TSQLKeywords_COMPUTE.htm" />
+          <HelpTOCNode Title="CONSTRAINT Field" Url="html/F_TSQL_TSQLKeywords_CONSTRAINT.htm" />
+          <HelpTOCNode Title="CONTINUE Field" Url="html/F_TSQL_TSQLKeywords_CONTINUE.htm" />
+          <HelpTOCNode Title="CREATE Field" Url="html/F_TSQL_TSQLKeywords_CREATE.htm" />
+          <HelpTOCNode Title="CROSS Field" Url="html/F_TSQL_TSQLKeywords_CROSS.htm" />
+          <HelpTOCNode Title="CURRENT Field" Url="html/F_TSQL_TSQLKeywords_CURRENT.htm" />
+          <HelpTOCNode Title="CURSOR Field" Url="html/F_TSQL_TSQLKeywords_CURSOR.htm" />
+          <HelpTOCNode Title="DATABASE Field" Url="html/F_TSQL_TSQLKeywords_DATABASE.htm" />
+          <HelpTOCNode Title="DBCC Field" Url="html/F_TSQL_TSQLKeywords_DBCC.htm" />
+          <HelpTOCNode Title="DEALLOCATE Field" Url="html/F_TSQL_TSQLKeywords_DEALLOCATE.htm" />
+          <HelpTOCNode Title="DECLARE Field" Url="html/F_TSQL_TSQLKeywords_DECLARE.htm" />
+          <HelpTOCNode Title="DEFAULT Field" Url="html/F_TSQL_TSQLKeywords_DEFAULT.htm" />
+          <HelpTOCNode Title="DELETE Field" Url="html/F_TSQL_TSQLKeywords_DELETE.htm" />
+          <HelpTOCNode Title="DENY Field" Url="html/F_TSQL_TSQLKeywords_DENY.htm" />
+          <HelpTOCNode Title="DESC Field" Url="html/F_TSQL_TSQLKeywords_DESC.htm" />
+          <HelpTOCNode Title="DISABLE Field" Url="html/F_TSQL_TSQLKeywords_DISABLE.htm" />
+          <HelpTOCNode Title="DISK Field" Url="html/F_TSQL_TSQLKeywords_DISK.htm" />
+          <HelpTOCNode Title="DISTINCT Field" Url="html/F_TSQL_TSQLKeywords_DISTINCT.htm" />
+          <HelpTOCNode Title="DISTRIBUTED Field" Url="html/F_TSQL_TSQLKeywords_DISTRIBUTED.htm" />
+          <HelpTOCNode Title="DOUBLE Field" Url="html/F_TSQL_TSQLKeywords_DOUBLE.htm" />
+          <HelpTOCNode Title="DROP Field" Url="html/F_TSQL_TSQLKeywords_DROP.htm" />
+          <HelpTOCNode Title="DUMP Field" Url="html/F_TSQL_TSQLKeywords_DUMP.htm" />
+          <HelpTOCNode Title="ELSE Field" Url="html/F_TSQL_TSQLKeywords_ELSE.htm" />
+          <HelpTOCNode Title="ENABLE Field" Url="html/F_TSQL_TSQLKeywords_ENABLE.htm" />
+          <HelpTOCNode Title="END Field" Url="html/F_TSQL_TSQLKeywords_END.htm" />
+          <HelpTOCNode Title="ESCAPE Field" Url="html/F_TSQL_TSQLKeywords_ESCAPE.htm" />
+          <HelpTOCNode Title="EXCEPT Field" Url="html/F_TSQL_TSQLKeywords_EXCEPT.htm" />
+          <HelpTOCNode Title="EXECUTE Field" Url="html/F_TSQL_TSQLKeywords_EXECUTE.htm" />
+          <HelpTOCNode Title="EXISTS Field" Url="html/F_TSQL_TSQLKeywords_EXISTS.htm" />
+          <HelpTOCNode Title="EXTERNAL Field" Url="html/F_TSQL_TSQLKeywords_EXTERNAL.htm" />
+          <HelpTOCNode Title="FETCH Field" Url="html/F_TSQL_TSQLKeywords_FETCH.htm" />
+          <HelpTOCNode Title="FILE Field" Url="html/F_TSQL_TSQLKeywords_FILE.htm" />
+          <HelpTOCNode Title="FILLFACTOR Field" Url="html/F_TSQL_TSQLKeywords_FILLFACTOR.htm" />
+          <HelpTOCNode Title="FOR Field" Url="html/F_TSQL_TSQLKeywords_FOR.htm" />
+          <HelpTOCNode Title="FOREIGN Field" Url="html/F_TSQL_TSQLKeywords_FOREIGN.htm" />
+          <HelpTOCNode Title="FROM Field" Url="html/F_TSQL_TSQLKeywords_FROM.htm" />
+          <HelpTOCNode Title="FULL Field" Url="html/F_TSQL_TSQLKeywords_FULL.htm" />
+          <HelpTOCNode Title="FUNCTION Field" Url="html/F_TSQL_TSQLKeywords_FUNCTION.htm" />
+          <HelpTOCNode Title="GET Field" Url="html/F_TSQL_TSQLKeywords_GET.htm" />
+          <HelpTOCNode Title="GO Field" Url="html/F_TSQL_TSQLKeywords_GO.htm" />
+          <HelpTOCNode Title="GOTO Field" Url="html/F_TSQL_TSQLKeywords_GOTO.htm" />
+          <HelpTOCNode Title="GRANT Field" Url="html/F_TSQL_TSQLKeywords_GRANT.htm" />
+          <HelpTOCNode Title="GROUP Field" Url="html/F_TSQL_TSQLKeywords_GROUP.htm" />
+          <HelpTOCNode Title="HAVING Field" Url="html/F_TSQL_TSQLKeywords_HAVING.htm" />
+          <HelpTOCNode Title="HOLDLOCK Field" Url="html/F_TSQL_TSQLKeywords_HOLDLOCK.htm" />
+          <HelpTOCNode Title="IDENTITY Field" Url="html/F_TSQL_TSQLKeywords_IDENTITY.htm" />
+          <HelpTOCNode Title="IDENTITY_INSERT Field" Url="html/F_TSQL_TSQLKeywords_IDENTITY_INSERT.htm" />
+          <HelpTOCNode Title="IDENTITYCOL Field" Url="html/F_TSQL_TSQLKeywords_IDENTITYCOL.htm" />
+          <HelpTOCNode Title="IF Field" Url="html/F_TSQL_TSQLKeywords_IF.htm" />
+          <HelpTOCNode Title="IN Field" Url="html/F_TSQL_TSQLKeywords_IN.htm" />
+          <HelpTOCNode Title="INDEX Field" Url="html/F_TSQL_TSQLKeywords_INDEX.htm" />
+          <HelpTOCNode Title="INNER Field" Url="html/F_TSQL_TSQLKeywords_INNER.htm" />
+          <HelpTOCNode Title="INSERT Field" Url="html/F_TSQL_TSQLKeywords_INSERT.htm" />
+          <HelpTOCNode Title="INTERSECT Field" Url="html/F_TSQL_TSQLKeywords_INTERSECT.htm" />
+          <HelpTOCNode Title="INTO Field" Url="html/F_TSQL_TSQLKeywords_INTO.htm" />
+          <HelpTOCNode Title="IS Field" Url="html/F_TSQL_TSQLKeywords_IS.htm" />
+          <HelpTOCNode Title="JOIN Field" Url="html/F_TSQL_TSQLKeywords_JOIN.htm" />
+          <HelpTOCNode Title="KEY Field" Url="html/F_TSQL_TSQLKeywords_KEY.htm" />
+          <HelpTOCNode Title="KILL Field" Url="html/F_TSQL_TSQLKeywords_KILL.htm" />
+          <HelpTOCNode Title="LEFT Field" Url="html/F_TSQL_TSQLKeywords_LEFT.htm" />
+          <HelpTOCNode Title="LIKE Field" Url="html/F_TSQL_TSQLKeywords_LIKE.htm" />
+          <HelpTOCNode Title="LINENO Field" Url="html/F_TSQL_TSQLKeywords_LINENO.htm" />
+          <HelpTOCNode Title="LOAD Field" Url="html/F_TSQL_TSQLKeywords_LOAD.htm" />
+          <HelpTOCNode Title="MERGE Field" Url="html/F_TSQL_TSQLKeywords_MERGE.htm" />
+          <HelpTOCNode Title="MOVE Field" Url="html/F_TSQL_TSQLKeywords_MOVE.htm" />
+          <HelpTOCNode Title="NOCHECK Field" Url="html/F_TSQL_TSQLKeywords_NOCHECK.htm" />
+          <HelpTOCNode Title="NONCLUSTERED Field" Url="html/F_TSQL_TSQLKeywords_NONCLUSTERED.htm" />
+          <HelpTOCNode Title="None Field" Url="html/F_TSQL_TSQLKeywords_None.htm" />
+          <HelpTOCNode Title="NOT Field" Url="html/F_TSQL_TSQLKeywords_NOT.htm" />
+          <HelpTOCNode Title="NULL Field" Url="html/F_TSQL_TSQLKeywords_NULL.htm" />
+          <HelpTOCNode Title="OFF Field" Url="html/F_TSQL_TSQLKeywords_OFF.htm" />
+          <HelpTOCNode Title="OFFSETS Field" Url="html/F_TSQL_TSQLKeywords_OFFSETS.htm" />
+          <HelpTOCNode Title="ON Field" Url="html/F_TSQL_TSQLKeywords_ON.htm" />
+          <HelpTOCNode Title="OPEN Field" Url="html/F_TSQL_TSQLKeywords_OPEN.htm" />
+          <HelpTOCNode Title="OPTION Field" Url="html/F_TSQL_TSQLKeywords_OPTION.htm" />
+          <HelpTOCNode Title="OR Field" Url="html/F_TSQL_TSQLKeywords_OR.htm" />
+          <HelpTOCNode Title="ORDER Field" Url="html/F_TSQL_TSQLKeywords_ORDER.htm" />
+          <HelpTOCNode Title="OUTER Field" Url="html/F_TSQL_TSQLKeywords_OUTER.htm" />
+          <HelpTOCNode Title="OVER Field" Url="html/F_TSQL_TSQLKeywords_OVER.htm" />
+          <HelpTOCNode Title="PERCENT Field" Url="html/F_TSQL_TSQLKeywords_PERCENT.htm" />
+          <HelpTOCNode Title="PIVOT Field" Url="html/F_TSQL_TSQLKeywords_PIVOT.htm" />
+          <HelpTOCNode Title="PLAN Field" Url="html/F_TSQL_TSQLKeywords_PLAN.htm" />
+          <HelpTOCNode Title="PRECISION Field" Url="html/F_TSQL_TSQLKeywords_PRECISION.htm" />
+          <HelpTOCNode Title="PRIMARY Field" Url="html/F_TSQL_TSQLKeywords_PRIMARY.htm" />
+          <HelpTOCNode Title="PRINT Field" Url="html/F_TSQL_TSQLKeywords_PRINT.htm" />
+          <HelpTOCNode Title="PROCEDURE Field" Url="html/F_TSQL_TSQLKeywords_PROCEDURE.htm" />
+          <HelpTOCNode Title="PUBLIC Field" Url="html/F_TSQL_TSQLKeywords_PUBLIC.htm" />
+          <HelpTOCNode Title="READ Field" Url="html/F_TSQL_TSQLKeywords_READ.htm" />
+          <HelpTOCNode Title="READTEXT Field" Url="html/F_TSQL_TSQLKeywords_READTEXT.htm" />
+          <HelpTOCNode Title="RECEIVE Field" Url="html/F_TSQL_TSQLKeywords_RECEIVE.htm" />
+          <HelpTOCNode Title="RECONFIGURE Field" Url="html/F_TSQL_TSQLKeywords_RECONFIGURE.htm" />
+          <HelpTOCNode Title="REFERENCES Field" Url="html/F_TSQL_TSQLKeywords_REFERENCES.htm" />
+          <HelpTOCNode Title="REPEATABLE Field" Url="html/F_TSQL_TSQLKeywords_REPEATABLE.htm" />
+          <HelpTOCNode Title="REPLICATION Field" Url="html/F_TSQL_TSQLKeywords_REPLICATION.htm" />
+          <HelpTOCNode Title="RESTORE Field" Url="html/F_TSQL_TSQLKeywords_RESTORE.htm" />
+          <HelpTOCNode Title="RETURN Field" Url="html/F_TSQL_TSQLKeywords_RETURN.htm" />
+          <HelpTOCNode Title="RETURNS Field" Url="html/F_TSQL_TSQLKeywords_RETURNS.htm" />
+          <HelpTOCNode Title="REVERT Field" Url="html/F_TSQL_TSQLKeywords_REVERT.htm" />
+          <HelpTOCNode Title="REVOKE Field" Url="html/F_TSQL_TSQLKeywords_REVOKE.htm" />
+          <HelpTOCNode Title="RIGHT Field" Url="html/F_TSQL_TSQLKeywords_RIGHT.htm" />
+          <HelpTOCNode Title="ROLLBACK Field" Url="html/F_TSQL_TSQLKeywords_ROLLBACK.htm" />
+          <HelpTOCNode Title="ROWCOUNT Field" Url="html/F_TSQL_TSQLKeywords_ROWCOUNT.htm" />
+          <HelpTOCNode Title="ROWGUIDCOL Field" Url="html/F_TSQL_TSQLKeywords_ROWGUIDCOL.htm" />
+          <HelpTOCNode Title="RULE Field" Url="html/F_TSQL_TSQLKeywords_RULE.htm" />
+          <HelpTOCNode Title="SAVE Field" Url="html/F_TSQL_TSQLKeywords_SAVE.htm" />
+          <HelpTOCNode Title="SCHEMA Field" Url="html/F_TSQL_TSQLKeywords_SCHEMA.htm" />
+          <HelpTOCNode Title="SELECT Field" Url="html/F_TSQL_TSQLKeywords_SELECT.htm" />
+          <HelpTOCNode Title="SEND Field" Url="html/F_TSQL_TSQLKeywords_SEND.htm" />
+          <HelpTOCNode Title="SET Field" Url="html/F_TSQL_TSQLKeywords_SET.htm" />
+          <HelpTOCNode Title="SETUSER Field" Url="html/F_TSQL_TSQLKeywords_SETUSER.htm" />
+          <HelpTOCNode Title="SHUTDOWN Field" Url="html/F_TSQL_TSQLKeywords_SHUTDOWN.htm" />
+          <HelpTOCNode Title="SOME Field" Url="html/F_TSQL_TSQLKeywords_SOME.htm" />
+          <HelpTOCNode Title="STATISTICS Field" Url="html/F_TSQL_TSQLKeywords_STATISTICS.htm" />
+          <HelpTOCNode Title="TABLE Field" Url="html/F_TSQL_TSQLKeywords_TABLE.htm" />
+          <HelpTOCNode Title="TABLESAMPLE Field" Url="html/F_TSQL_TSQLKeywords_TABLESAMPLE.htm" />
+          <HelpTOCNode Title="TEXTSIZE Field" Url="html/F_TSQL_TSQLKeywords_TEXTSIZE.htm" />
+          <HelpTOCNode Title="THEN Field" Url="html/F_TSQL_TSQLKeywords_THEN.htm" />
+          <HelpTOCNode Title="TOP Field" Url="html/F_TSQL_TSQLKeywords_TOP.htm" />
+          <HelpTOCNode Title="TRANSACTION Field" Url="html/F_TSQL_TSQLKeywords_TRANSACTION.htm" />
+          <HelpTOCNode Title="TRIGGER Field" Url="html/F_TSQL_TSQLKeywords_TRIGGER.htm" />
+          <HelpTOCNode Title="TRUNCATE Field" Url="html/F_TSQL_TSQLKeywords_TRUNCATE.htm" />
+          <HelpTOCNode Title="UNION Field" Url="html/F_TSQL_TSQLKeywords_UNION.htm" />
+          <HelpTOCNode Title="UNIQUE Field" Url="html/F_TSQL_TSQLKeywords_UNIQUE.htm" />
+          <HelpTOCNode Title="UNPIVOT Field" Url="html/F_TSQL_TSQLKeywords_UNPIVOT.htm" />
+          <HelpTOCNode Title="UPDATE Field" Url="html/F_TSQL_TSQLKeywords_UPDATE.htm" />
+          <HelpTOCNode Title="UPDATETEXT Field" Url="html/F_TSQL_TSQLKeywords_UPDATETEXT.htm" />
+          <HelpTOCNode Title="USE Field" Url="html/F_TSQL_TSQLKeywords_USE.htm" />
+          <HelpTOCNode Title="VALUES Field" Url="html/F_TSQL_TSQLKeywords_VALUES.htm" />
+          <HelpTOCNode Title="VARYING Field" Url="html/F_TSQL_TSQLKeywords_VARYING.htm" />
+          <HelpTOCNode Title="VIEW Field" Url="html/F_TSQL_TSQLKeywords_VIEW.htm" />
+          <HelpTOCNode Title="WAITFOR Field" Url="html/F_TSQL_TSQLKeywords_WAITFOR.htm" />
+          <HelpTOCNode Title="WHEN Field" Url="html/F_TSQL_TSQLKeywords_WHEN.htm" />
+          <HelpTOCNode Title="WHERE Field" Url="html/F_TSQL_TSQLKeywords_WHERE.htm" />
+          <HelpTOCNode Title="WHILE Field" Url="html/F_TSQL_TSQLKeywords_WHILE.htm" />
+          <HelpTOCNode Title="WITH Field" Url="html/F_TSQL_TSQLKeywords_WITH.htm" />
+          <HelpTOCNode Title="WITHIN Field" Url="html/F_TSQL_TSQLKeywords_WITHIN.htm" />
+          <HelpTOCNode Title="WRITETEXT Field" Url="html/F_TSQL_TSQLKeywords_WRITETEXT.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="9b01f914-52be-4ad9-85dd-c9e80067fa65" Title="TSQLStatementReader Class" Url="html/T_TSQL_TSQLStatementReader.htm">
+        <HelpTOCNode Id="f37b078c-a66d-4e54-aec5-4365759ac5c9" Title="TSQLStatementReader Constructor " Url="html/Overload_TSQL_TSQLStatementReader__ctor.htm">
+          <HelpTOCNode Title="TSQLStatementReader Constructor (TextReader)" Url="html/M_TSQL_TSQLStatementReader__ctor.htm" />
+          <HelpTOCNode Title="TSQLStatementReader Constructor (String)" Url="html/M_TSQL_TSQLStatementReader__ctor_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="49e3c878-b216-4a0e-aa58-4c00378d3c44" Title="TSQLStatementReader Properties" Url="html/Properties_T_TSQL_TSQLStatementReader.htm">
+          <HelpTOCNode Title="Current Property " Url="html/P_TSQL_TSQLStatementReader_Current.htm" />
+          <HelpTOCNode Title="IncludeWhitespace Property " Url="html/P_TSQL_TSQLStatementReader_IncludeWhitespace.htm" />
+          <HelpTOCNode Title="UseQuotedIdentifiers Property " Url="html/P_TSQL_TSQLStatementReader_UseQuotedIdentifiers.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="ba57633d-054a-4cc2-8950-4c685d684d32" Title="TSQLStatementReader Methods" Url="html/Methods_T_TSQL_TSQLStatementReader.htm">
+          <HelpTOCNode Title="MoveNext Method " Url="html/M_TSQL_TSQLStatementReader_MoveNext.htm" />
+          <HelpTOCNode Title="ParseStatements Method " Url="html/M_TSQL_TSQLStatementReader_ParseStatements.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="b09d8d51-cc7d-4142-a2b8-a7100cca4365" Title="TSQLTokenizer Class" Url="html/T_TSQL_TSQLTokenizer.htm">
+        <HelpTOCNode Id="b2c0905e-c28d-456a-b270-646297b2da26" Title="TSQLTokenizer Constructor " Url="html/Overload_TSQL_TSQLTokenizer__ctor.htm">
+          <HelpTOCNode Title="TSQLTokenizer Constructor (TextReader)" Url="html/M_TSQL_TSQLTokenizer__ctor.htm" />
+          <HelpTOCNode Title="TSQLTokenizer Constructor (String)" Url="html/M_TSQL_TSQLTokenizer__ctor_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="c7baaa21-6244-461d-b01d-c281a1475ada" Title="TSQLTokenizer Properties" Url="html/Properties_T_TSQL_TSQLTokenizer.htm">
+          <HelpTOCNode Title="Current Property " Url="html/P_TSQL_TSQLTokenizer_Current.htm" />
+          <HelpTOCNode Title="IncludeWhitespace Property " Url="html/P_TSQL_TSQLTokenizer_IncludeWhitespace.htm" />
+          <HelpTOCNode Title="UseQuotedIdentifiers Property " Url="html/P_TSQL_TSQLTokenizer_UseQuotedIdentifiers.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="8d5be5f4-68d1-44bd-baac-2c9b63096120" Title="TSQLTokenizer Methods" Url="html/Methods_T_TSQL_TSQLTokenizer.htm">
+          <HelpTOCNode Title="MoveNext Method " Url="html/M_TSQL_TSQLTokenizer_MoveNext.htm" />
+          <HelpTOCNode Title="ParseTokens Method " Url="html/M_TSQL_TSQLTokenizer_ParseTokens.htm" />
+          <HelpTOCNode Title="Putback Method " Url="html/M_TSQL_TSQLTokenizer_Putback.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="9f6586c3-2a8c-4b8e-a202-79a8ec273c95" Title="TSQLVariables Structure" Url="html/T_TSQL_TSQLVariables.htm">
+        <HelpTOCNode Id="5acb832e-c716-4a80-b007-705ba39ce753" Title="TSQLVariables Methods" Url="html/Methods_T_TSQL_TSQLVariables.htm">
+          <HelpTOCNode Id="675bf88b-2fc3-4932-8c53-f69735359276" Title="Equals Method " Url="html/Overload_TSQL_TSQLVariables_Equals.htm">
+            <HelpTOCNode Title="Equals Method (Object)" Url="html/M_TSQL_TSQLVariables_Equals.htm" />
+            <HelpTOCNode Title="Equals Method (TSQLVariables)" Url="html/M_TSQL_TSQLVariables_Equals_1.htm" />
+          </HelpTOCNode>
+          <HelpTOCNode Title="GetHashCode Method " Url="html/M_TSQL_TSQLVariables_GetHashCode.htm" />
+          <HelpTOCNode Title="In Method " Url="html/M_TSQL_TSQLVariables_In.htm" />
+          <HelpTOCNode Title="IsVariable Method " Url="html/M_TSQL_TSQLVariables_IsVariable.htm" />
+          <HelpTOCNode Title="Parse Method " Url="html/M_TSQL_TSQLVariables_Parse.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="c468a51e-4e3c-4426-b5d2-37eb55f991ce" Title="TSQLVariables Operators" Url="html/Operators_T_TSQL_TSQLVariables.htm">
+          <HelpTOCNode Title="Equality Operator " Url="html/M_TSQL_TSQLVariables_op_Equality.htm" />
+          <HelpTOCNode Title="Inequality Operator " Url="html/M_TSQL_TSQLVariables_op_Inequality.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="0c06b377-8ac9-4942-8b54-9916136ceb83" Title="TSQLVariables Fields" Url="html/Fields_T_TSQL_TSQLVariables.htm">
+          <HelpTOCNode Title="CONNECTIONS Field" Url="html/F_TSQL_TSQLVariables_CONNECTIONS.htm" />
+          <HelpTOCNode Title="CPU_BUSY Field" Url="html/F_TSQL_TSQLVariables_CPU_BUSY.htm" />
+          <HelpTOCNode Title="ERROR Field" Url="html/F_TSQL_TSQLVariables_ERROR.htm" />
+          <HelpTOCNode Title="IDENTITY Field" Url="html/F_TSQL_TSQLVariables_IDENTITY.htm" />
+          <HelpTOCNode Title="IDLE Field" Url="html/F_TSQL_TSQLVariables_IDLE.htm" />
+          <HelpTOCNode Title="IO_BUSY Field" Url="html/F_TSQL_TSQLVariables_IO_BUSY.htm" />
+          <HelpTOCNode Title="LANGID Field" Url="html/F_TSQL_TSQLVariables_LANGID.htm" />
+          <HelpTOCNode Title="LANGUAGE Field" Url="html/F_TSQL_TSQLVariables_LANGUAGE.htm" />
+          <HelpTOCNode Title="MAX_CONNECTIONS Field" Url="html/F_TSQL_TSQLVariables_MAX_CONNECTIONS.htm" />
+          <HelpTOCNode Title="MAXCHARLEN Field" Url="html/F_TSQL_TSQLVariables_MAXCHARLEN.htm" />
+          <HelpTOCNode Title="None Field" Url="html/F_TSQL_TSQLVariables_None.htm" />
+          <HelpTOCNode Title="PACK_RECEIVED Field" Url="html/F_TSQL_TSQLVariables_PACK_RECEIVED.htm" />
+          <HelpTOCNode Title="PACK_SENT Field" Url="html/F_TSQL_TSQLVariables_PACK_SENT.htm" />
+          <HelpTOCNode Title="PACKET_ERRORS Field" Url="html/F_TSQL_TSQLVariables_PACKET_ERRORS.htm" />
+          <HelpTOCNode Title="ROWCOUNT Field" Url="html/F_TSQL_TSQLVariables_ROWCOUNT.htm" />
+          <HelpTOCNode Title="SERVERNAME Field" Url="html/F_TSQL_TSQLVariables_SERVERNAME.htm" />
+          <HelpTOCNode Title="SPID Field" Url="html/F_TSQL_TSQLVariables_SPID.htm" />
+          <HelpTOCNode Title="TEXTSIZE Field" Url="html/F_TSQL_TSQLVariables_TEXTSIZE.htm" />
+          <HelpTOCNode Title="TIMETICKS Field" Url="html/F_TSQL_TSQLVariables_TIMETICKS.htm" />
+          <HelpTOCNode Title="TOTAL_ERRORS Field" Url="html/F_TSQL_TSQLVariables_TOTAL_ERRORS.htm" />
+          <HelpTOCNode Title="TOTAL_READ Field" Url="html/F_TSQL_TSQLVariables_TOTAL_READ.htm" />
+          <HelpTOCNode Title="TOTAL_WRITE Field" Url="html/F_TSQL_TSQLVariables_TOTAL_WRITE.htm" />
+          <HelpTOCNode Title="TRANCOUNT Field" Url="html/F_TSQL_TSQLVariables_TRANCOUNT.htm" />
+          <HelpTOCNode Title="VERSION Field" Url="html/F_TSQL_TSQLVariables_VERSION.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="2b148e7f-59d5-48a5-9fa3-9f600109a96a" Title="TSQL.Clauses" Url="html/N_TSQL_Clauses.htm">
+      <HelpTOCNode Id="c9caed38-bab3-49cd-83bf-a09c78badeaa" Title="TSQLClause Class" Url="html/T_TSQL_Clauses_TSQLClause.htm">
+        <HelpTOCNode Id="3e7ec6a0-cc14-452b-965a-df0336909477" Title="TSQLClause Properties" Url="html/Properties_T_TSQL_Clauses_TSQLClause.htm">
+          <HelpTOCNode Title="Tokens Property " Url="html/P_TSQL_Clauses_TSQLClause_Tokens.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Title="TSQLFromClause Class" Url="html/T_TSQL_Clauses_TSQLFromClause.htm" />
+      <HelpTOCNode Title="TSQLGroupByClause Class" Url="html/T_TSQL_Clauses_TSQLGroupByClause.htm" />
+      <HelpTOCNode Title="TSQLHavingClause Class" Url="html/T_TSQL_Clauses_TSQLHavingClause.htm" />
+      <HelpTOCNode Title="TSQLIntoClause Class" Url="html/T_TSQL_Clauses_TSQLIntoClause.htm" />
+      <HelpTOCNode Title="TSQLOptionClause Class" Url="html/T_TSQL_Clauses_TSQLOptionClause.htm" />
+      <HelpTOCNode Title="TSQLOrderByClause Class" Url="html/T_TSQL_Clauses_TSQLOrderByClause.htm" />
+      <HelpTOCNode Title="TSQLSelectClause Class" Url="html/T_TSQL_Clauses_TSQLSelectClause.htm" />
+      <HelpTOCNode Title="TSQLWhereClause Class" Url="html/T_TSQL_Clauses_TSQLWhereClause.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="03d395d9-6957-480f-85c5-861a9e758e7d" Title="TSQL.Statements" Url="html/N_TSQL_Statements.htm">
+      <HelpTOCNode Id="dfaa85c5-4644-4b8d-a2da-085a8df22351" Title="TSQLSelectStatement Class" Url="html/T_TSQL_Statements_TSQLSelectStatement.htm">
+        <HelpTOCNode Id="b327df6b-1d66-4820-adfd-d16593679949" Title="TSQLSelectStatement Properties" Url="html/Properties_T_TSQL_Statements_TSQLSelectStatement.htm">
+          <HelpTOCNode Title="From Property " Url="html/P_TSQL_Statements_TSQLSelectStatement_From.htm" />
+          <HelpTOCNode Title="GroupBy Property " Url="html/P_TSQL_Statements_TSQLSelectStatement_GroupBy.htm" />
+          <HelpTOCNode Title="Having Property " Url="html/P_TSQL_Statements_TSQLSelectStatement_Having.htm" />
+          <HelpTOCNode Title="Into Property " Url="html/P_TSQL_Statements_TSQLSelectStatement_Into.htm" />
+          <HelpTOCNode Title="Option Property " Url="html/P_TSQL_Statements_TSQLSelectStatement_Option.htm" />
+          <HelpTOCNode Title="OrderBy Property " Url="html/P_TSQL_Statements_TSQLSelectStatement_OrderBy.htm" />
+          <HelpTOCNode Title="Select Property " Url="html/P_TSQL_Statements_TSQLSelectStatement_Select.htm" />
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Statements_TSQLSelectStatement_Type.htm" />
+          <HelpTOCNode Title="Where Property " Url="html/P_TSQL_Statements_TSQLSelectStatement_Where.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="5835aaee-22d5-434c-bf65-10bf7d000ebf" Title="TSQLStatement Class" Url="html/T_TSQL_Statements_TSQLStatement.htm">
+        <HelpTOCNode Id="8d69aeee-28d8-47d0-b222-f47cba295866" Title="TSQLStatement Properties" Url="html/Properties_T_TSQL_Statements_TSQLStatement.htm">
+          <HelpTOCNode Title="Tokens Property " Url="html/P_TSQL_Statements_TSQLStatement_Tokens.htm" />
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Statements_TSQLStatement_Type.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Title="TSQLStatementType Enumeration" Url="html/T_TSQL_Statements_TSQLStatementType.htm" />
+      <HelpTOCNode Id="99ab7a37-fedf-4bf4-ac7f-749f3e5e583f" Title="TSQLUnknownStatement Class" Url="html/T_TSQL_Statements_TSQLUnknownStatement.htm">
+        <HelpTOCNode Id="8c05144a-144c-4e02-a521-5523f64c8b3d" Title="TSQLUnknownStatement Properties" Url="html/Properties_T_TSQL_Statements_TSQLUnknownStatement.htm">
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Statements_TSQLUnknownStatement_Type.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="ff188c4b-4718-4cac-b2f6-9508d2b5a8cf" Title="TSQL.Tokens" Url="html/N_TSQL_Tokens.htm">
+      <HelpTOCNode Id="313a18f0-0d0d-4ec8-bd5e-69b9ffa6b3e6" Title="TSQLBinaryLiteral Class" Url="html/T_TSQL_Tokens_TSQLBinaryLiteral.htm">
+        <HelpTOCNode Id="66208bd8-8298-41c6-889a-3a0fd0717ab1" Title="TSQLBinaryLiteral Properties" Url="html/Properties_T_TSQL_Tokens_TSQLBinaryLiteral.htm">
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLBinaryLiteral_Type.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLBinaryLiteral Methods" Url="html/Methods_T_TSQL_Tokens_TSQLBinaryLiteral.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="10a0ed70-09a7-4b46-b6d7-ab2e08041752" Title="TSQLCharacter Class" Url="html/T_TSQL_Tokens_TSQLCharacter.htm">
+        <HelpTOCNode Id="f5295cd1-b9cb-4818-8f00-cbd7923bfba2" Title="TSQLCharacter Properties" Url="html/Properties_T_TSQL_Tokens_TSQLCharacter.htm">
+          <HelpTOCNode Title="Character Property " Url="html/P_TSQL_Tokens_TSQLCharacter_Character.htm" />
+          <HelpTOCNode Title="IsComplete Property " Url="html/P_TSQL_Tokens_TSQLCharacter_IsComplete.htm" />
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLCharacter_Type.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLCharacter Methods" Url="html/Methods_T_TSQL_Tokens_TSQLCharacter.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="eeb55761-f0a3-4f5a-9879-81c699e5274e" Title="TSQLComment Class" Url="html/T_TSQL_Tokens_TSQLComment.htm">
+        <HelpTOCNode Id="b6de14a1-f9da-442f-980e-66cffc85ae67" Title="TSQLComment Properties" Url="html/Properties_T_TSQL_Tokens_TSQLComment.htm">
+          <HelpTOCNode Title="Comment Property " Url="html/P_TSQL_Tokens_TSQLComment_Comment.htm" />
+          <HelpTOCNode Title="IsComplete Property " Url="html/P_TSQL_Tokens_TSQLComment_IsComplete.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLComment Methods" Url="html/Methods_T_TSQL_Tokens_TSQLComment.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="b32a8e07-b8f8-4628-8d57-41bf32a99535" Title="TSQLIdentifier Class" Url="html/T_TSQL_Tokens_TSQLIdentifier.htm">
+        <HelpTOCNode Id="066e349d-f89a-4ac2-b87b-bd48969af5ad" Title="TSQLIdentifier Properties" Url="html/Properties_T_TSQL_Tokens_TSQLIdentifier.htm">
+          <HelpTOCNode Title="IsComplete Property " Url="html/P_TSQL_Tokens_TSQLIdentifier_IsComplete.htm" />
+          <HelpTOCNode Title="Name Property " Url="html/P_TSQL_Tokens_TSQLIdentifier_Name.htm" />
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLIdentifier_Type.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLIdentifier Methods" Url="html/Methods_T_TSQL_Tokens_TSQLIdentifier.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="6420d630-4d9f-4c99-8b6c-75824939c850" Title="TSQLIncompleteCommentToken Class" Url="html/T_TSQL_Tokens_TSQLIncompleteCommentToken.htm">
+        <HelpTOCNode Id="396c26e6-658a-4661-9853-de417985d65e" Title="TSQLIncompleteCommentToken Properties" Url="html/Properties_T_TSQL_Tokens_TSQLIncompleteCommentToken.htm">
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLIncompleteCommentToken_Type.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLIncompleteCommentToken Methods" Url="html/Methods_T_TSQL_Tokens_TSQLIncompleteCommentToken.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="4cbdaf39-57c2-426a-929d-dbfbf4b85d70" Title="TSQLIncompleteIdentifierToken Class" Url="html/T_TSQL_Tokens_TSQLIncompleteIdentifierToken.htm">
+        <HelpTOCNode Id="1c3787ef-7733-409a-af1e-091b6a182af8" Title="TSQLIncompleteIdentifierToken Properties" Url="html/Properties_T_TSQL_Tokens_TSQLIncompleteIdentifierToken.htm">
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLIncompleteIdentifierToken_Type.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLIncompleteIdentifierToken Methods" Url="html/Methods_T_TSQL_Tokens_TSQLIncompleteIdentifierToken.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="48dfbb74-fcdd-48c5-af77-c69d841f3890" Title="TSQLIncompleteStringToken Class" Url="html/T_TSQL_Tokens_TSQLIncompleteStringToken.htm">
+        <HelpTOCNode Id="dd74770f-69fb-48f0-9a12-500db766f433" Title="TSQLIncompleteStringToken Properties" Url="html/Properties_T_TSQL_Tokens_TSQLIncompleteStringToken.htm">
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLIncompleteStringToken_Type.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLIncompleteStringToken Methods" Url="html/Methods_T_TSQL_Tokens_TSQLIncompleteStringToken.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="f745af98-9753-48be-a791-9949be8e04ed" Title="TSQLIncompleteToken Class" Url="html/T_TSQL_Tokens_TSQLIncompleteToken.htm">
+        <HelpTOCNode Id="9a3d3134-3130-405b-9141-b19a2b4c0be1" Title="TSQLIncompleteToken Properties" Url="html/Properties_T_TSQL_Tokens_TSQLIncompleteToken.htm">
+          <HelpTOCNode Title="IsComplete Property " Url="html/P_TSQL_Tokens_TSQLIncompleteToken_IsComplete.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLIncompleteToken Methods" Url="html/Methods_T_TSQL_Tokens_TSQLIncompleteToken.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="0623457d-de84-43a3-b490-57a4251b06f0" Title="TSQLKeyword Class" Url="html/T_TSQL_Tokens_TSQLKeyword.htm">
+        <HelpTOCNode Id="618fe2f6-fb88-4202-9cbd-f5c463ffe15c" Title="TSQLKeyword Properties" Url="html/Properties_T_TSQL_Tokens_TSQLKeyword.htm">
+          <HelpTOCNode Title="IsComplete Property " Url="html/P_TSQL_Tokens_TSQLKeyword_IsComplete.htm" />
+          <HelpTOCNode Title="Keyword Property " Url="html/P_TSQL_Tokens_TSQLKeyword_Keyword.htm" />
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLKeyword_Type.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLKeyword Methods" Url="html/Methods_T_TSQL_Tokens_TSQLKeyword.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="6d4a23a0-9b12-42ab-b125-fd17f64d6a9d" Title="TSQLLiteral Class" Url="html/T_TSQL_Tokens_TSQLLiteral.htm">
+        <HelpTOCNode Id="aa2f766d-51c3-4d5b-b62e-8fc1afed205f" Title="TSQLLiteral Properties" Url="html/Properties_T_TSQL_Tokens_TSQLLiteral.htm">
+          <HelpTOCNode Title="IsComplete Property " Url="html/P_TSQL_Tokens_TSQLLiteral_IsComplete.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLLiteral Methods" Url="html/Methods_T_TSQL_Tokens_TSQLLiteral.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="abf2e2b0-0b49-4654-a99d-69955465f013" Title="TSQLMoneyLiteral Class" Url="html/T_TSQL_Tokens_TSQLMoneyLiteral.htm">
+        <HelpTOCNode Id="fbeb657d-01cd-43da-bd91-e21e92652794" Title="TSQLMoneyLiteral Properties" Url="html/Properties_T_TSQL_Tokens_TSQLMoneyLiteral.htm">
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLMoneyLiteral_Type.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLMoneyLiteral Methods" Url="html/Methods_T_TSQL_Tokens_TSQLMoneyLiteral.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="2958bef2-9d5f-4242-b82c-3a15ba923e90" Title="TSQLMultilineComment Class" Url="html/T_TSQL_Tokens_TSQLMultilineComment.htm">
+        <HelpTOCNode Id="cf3c02ad-fa54-4675-b1e4-747e4fbbda68" Title="TSQLMultilineComment Properties" Url="html/Properties_T_TSQL_Tokens_TSQLMultilineComment.htm">
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLMultilineComment_Type.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLMultilineComment Methods" Url="html/Methods_T_TSQL_Tokens_TSQLMultilineComment.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="3abf051c-3e2c-4495-b9f1-995546f7aafe" Title="TSQLNumericLiteral Class" Url="html/T_TSQL_Tokens_TSQLNumericLiteral.htm">
+        <HelpTOCNode Id="39da5407-0bc5-4bf0-8239-54af42e2720f" Title="TSQLNumericLiteral Properties" Url="html/Properties_T_TSQL_Tokens_TSQLNumericLiteral.htm">
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLNumericLiteral_Type.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLNumericLiteral Methods" Url="html/Methods_T_TSQL_Tokens_TSQLNumericLiteral.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="4e37cecb-b1e5-4452-ace9-1bef9a88a7e0" Title="TSQLOperator Class" Url="html/T_TSQL_Tokens_TSQLOperator.htm">
+        <HelpTOCNode Id="ee5f31d9-0894-45b7-a433-cae61a1446d0" Title="TSQLOperator Properties" Url="html/Properties_T_TSQL_Tokens_TSQLOperator.htm">
+          <HelpTOCNode Title="IsComplete Property " Url="html/P_TSQL_Tokens_TSQLOperator_IsComplete.htm" />
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLOperator_Type.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLOperator Methods" Url="html/Methods_T_TSQL_Tokens_TSQLOperator.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="b18b1529-a28b-4d94-b6a3-16b598bf4450" Title="TSQLSingleLineComment Class" Url="html/T_TSQL_Tokens_TSQLSingleLineComment.htm">
+        <HelpTOCNode Id="94bf8f53-e61a-4aa7-a1bd-61d31fff52c6" Title="TSQLSingleLineComment Properties" Url="html/Properties_T_TSQL_Tokens_TSQLSingleLineComment.htm">
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLSingleLineComment_Type.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLSingleLineComment Methods" Url="html/Methods_T_TSQL_Tokens_TSQLSingleLineComment.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="149c1731-795e-4c38-855f-34b902d95d44" Title="TSQLStringLiteral Class" Url="html/T_TSQL_Tokens_TSQLStringLiteral.htm">
+        <HelpTOCNode Id="ce13a51b-186e-4218-a44b-7132de6f5b40" Title="TSQLStringLiteral Properties" Url="html/Properties_T_TSQL_Tokens_TSQLStringLiteral.htm">
+          <HelpTOCNode Title="IsUnicode Property " Url="html/P_TSQL_Tokens_TSQLStringLiteral_IsUnicode.htm" />
+          <HelpTOCNode Title="QuoteCharacter Property " Url="html/P_TSQL_Tokens_TSQLStringLiteral_QuoteCharacter.htm" />
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLStringLiteral_Type.htm" />
+          <HelpTOCNode Title="Value Property " Url="html/P_TSQL_Tokens_TSQLStringLiteral_Value.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLStringLiteral Methods" Url="html/Methods_T_TSQL_Tokens_TSQLStringLiteral.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="24987f41-454f-4979-a86e-ca5ee34cc42f" Title="TSQLSystemIdentifier Class" Url="html/T_TSQL_Tokens_TSQLSystemIdentifier.htm">
+        <HelpTOCNode Id="faec87c3-8c90-47af-8f17-9f8f29080a3c" Title="TSQLSystemIdentifier Properties" Url="html/Properties_T_TSQL_Tokens_TSQLSystemIdentifier.htm">
+          <HelpTOCNode Title="Identifier Property " Url="html/P_TSQL_Tokens_TSQLSystemIdentifier_Identifier.htm" />
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLSystemIdentifier_Type.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLSystemIdentifier Methods" Url="html/Methods_T_TSQL_Tokens_TSQLSystemIdentifier.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="a6b4270d-1c18-4143-bdcc-0333ccc53301" Title="TSQLSystemVariable Class" Url="html/T_TSQL_Tokens_TSQLSystemVariable.htm">
+        <HelpTOCNode Id="239bb10d-b53e-42b8-b257-7c4b08cf5fa3" Title="TSQLSystemVariable Properties" Url="html/Properties_T_TSQL_Tokens_TSQLSystemVariable.htm">
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLSystemVariable_Type.htm" />
+          <HelpTOCNode Title="Variable Property " Url="html/P_TSQL_Tokens_TSQLSystemVariable_Variable.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLSystemVariable Methods" Url="html/Methods_T_TSQL_Tokens_TSQLSystemVariable.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="5b6da329-f80a-4fb7-a4f0-8abd7fa9198b" Title="TSQLToken Class" Url="html/T_TSQL_Tokens_TSQLToken.htm">
+        <HelpTOCNode Id="64206328-4762-45cb-b46a-b4160f0a990a" Title="TSQLToken Properties" Url="html/Properties_T_TSQL_Tokens_TSQLToken.htm">
+          <HelpTOCNode Title="AsCharacter Property " Url="html/P_TSQL_Tokens_TSQLToken_AsCharacter.htm" />
+          <HelpTOCNode Title="AsComment Property " Url="html/P_TSQL_Tokens_TSQLToken_AsComment.htm" />
+          <HelpTOCNode Title="AsIdentifier Property " Url="html/P_TSQL_Tokens_TSQLToken_AsIdentifier.htm" />
+          <HelpTOCNode Title="AsKeyword Property " Url="html/P_TSQL_Tokens_TSQLToken_AsKeyword.htm" />
+          <HelpTOCNode Title="AsLiteral Property " Url="html/P_TSQL_Tokens_TSQLToken_AsLiteral.htm" />
+          <HelpTOCNode Title="AsMultilineComment Property " Url="html/P_TSQL_Tokens_TSQLToken_AsMultilineComment.htm" />
+          <HelpTOCNode Title="AsNumericLiteral Property " Url="html/P_TSQL_Tokens_TSQLToken_AsNumericLiteral.htm" />
+          <HelpTOCNode Title="AsOperator Property " Url="html/P_TSQL_Tokens_TSQLToken_AsOperator.htm" />
+          <HelpTOCNode Title="AsSingleLineComment Property " Url="html/P_TSQL_Tokens_TSQLToken_AsSingleLineComment.htm" />
+          <HelpTOCNode Title="AsStringLiteral Property " Url="html/P_TSQL_Tokens_TSQLToken_AsStringLiteral.htm" />
+          <HelpTOCNode Title="AsSystemIdentifier Property " Url="html/P_TSQL_Tokens_TSQLToken_AsSystemIdentifier.htm" />
+          <HelpTOCNode Title="AsSystemVariable Property " Url="html/P_TSQL_Tokens_TSQLToken_AsSystemVariable.htm" />
+          <HelpTOCNode Title="AsVariable Property " Url="html/P_TSQL_Tokens_TSQLToken_AsVariable.htm" />
+          <HelpTOCNode Title="AsWhitespace Property " Url="html/P_TSQL_Tokens_TSQLToken_AsWhitespace.htm" />
+          <HelpTOCNode Title="BeginPosition Property " Url="html/P_TSQL_Tokens_TSQLToken_BeginPosition.htm" />
+          <HelpTOCNode Title="EndPosition Property " Url="html/P_TSQL_Tokens_TSQLToken_EndPosition.htm" />
+          <HelpTOCNode Title="IsComplete Property " Url="html/P_TSQL_Tokens_TSQLToken_IsComplete.htm" />
+          <HelpTOCNode Title="Length Property " Url="html/P_TSQL_Tokens_TSQLToken_Length.htm" />
+          <HelpTOCNode Title="Text Property " Url="html/P_TSQL_Tokens_TSQLToken_Text.htm" />
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLToken_Type.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLToken Methods" Url="html/Methods_T_TSQL_Tokens_TSQLToken.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="02371c82-04d1-42be-a3e3-9f351a1b5d07" Title="TSQLTokenExtensions Class" Url="html/T_TSQL_Tokens_TSQLTokenExtensions.htm">
+        <HelpTOCNode Id="9478ec63-2de3-4647-9108-93d6614d2db9" Title="TSQLTokenExtensions Methods" Url="html/Methods_T_TSQL_Tokens_TSQLTokenExtensions.htm">
+          <HelpTOCNode Title="IsCharacter Method " Url="html/M_TSQL_Tokens_TSQLTokenExtensions_IsCharacter.htm" />
+          <HelpTOCNode Title="IsKeyword Method " Url="html/M_TSQL_Tokens_TSQLTokenExtensions_IsKeyword.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Title="TSQLTokenType Enumeration" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+      <HelpTOCNode Id="e573ab87-e796-49d6-bf8e-75e139192fb8" Title="TSQLVariable Class" Url="html/T_TSQL_Tokens_TSQLVariable.htm">
+        <HelpTOCNode Id="ed628a28-29af-4db8-b9b2-eee499c1aea3" Title="TSQLVariable Properties" Url="html/Properties_T_TSQL_Tokens_TSQLVariable.htm">
+          <HelpTOCNode Title="IsComplete Property " Url="html/P_TSQL_Tokens_TSQLVariable_IsComplete.htm" />
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLVariable_Type.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLVariable Methods" Url="html/Methods_T_TSQL_Tokens_TSQLVariable.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="cbd78a9a-02c8-4039-8f62-efec8f27e2ce" Title="TSQLWhitespace Class" Url="html/T_TSQL_Tokens_TSQLWhitespace.htm">
+        <HelpTOCNode Id="f1868831-3989-43ce-9a0c-ed9c1d2cdefb" Title="TSQLWhitespace Properties" Url="html/Properties_T_TSQL_Tokens_TSQLWhitespace.htm">
+          <HelpTOCNode Title="IsComplete Property " Url="html/P_TSQL_Tokens_TSQLWhitespace_IsComplete.htm" />
+          <HelpTOCNode Title="Type Property " Url="html/P_TSQL_Tokens_TSQLWhitespace_Type.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="TSQLWhitespace Methods" Url="html/Methods_T_TSQL_Tokens_TSQLWhitespace.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+</HelpTOC>

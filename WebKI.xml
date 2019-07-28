@@ -1,0 +1,927 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title="ADD field" Url="html/F_TSQL_TSQLKeywords_ADD.htm" />
+  <HelpKINode Title="ALL field" Url="html/F_TSQL_TSQLKeywords_ALL.htm" />
+  <HelpKINode Title="ALTER field" Url="html/F_TSQL_TSQLKeywords_ALTER.htm" />
+  <HelpKINode Title="AND field" Url="html/F_TSQL_TSQLKeywords_AND.htm" />
+  <HelpKINode Title="ANY field" Url="html/F_TSQL_TSQLKeywords_ANY.htm" />
+  <HelpKINode Title="AS field" Url="html/F_TSQL_TSQLKeywords_AS.htm" />
+  <HelpKINode Title="ASC field" Url="html/F_TSQL_TSQLKeywords_ASC.htm" />
+  <HelpKINode Title="AsCharacter property" Url="html/P_TSQL_Tokens_TSQLToken_AsCharacter.htm" />
+  <HelpKINode Title="AsComment property" Url="html/P_TSQL_Tokens_TSQLToken_AsComment.htm" />
+  <HelpKINode Title="AsIdentifier property" Url="html/P_TSQL_Tokens_TSQLToken_AsIdentifier.htm" />
+  <HelpKINode Title="AsKeyword property" Url="html/P_TSQL_Tokens_TSQLToken_AsKeyword.htm" />
+  <HelpKINode Title="AsLiteral property" Url="html/P_TSQL_Tokens_TSQLToken_AsLiteral.htm" />
+  <HelpKINode Title="AsMultilineComment property" Url="html/P_TSQL_Tokens_TSQLToken_AsMultilineComment.htm" />
+  <HelpKINode Title="AsNumericLiteral property" Url="html/P_TSQL_Tokens_TSQLToken_AsNumericLiteral.htm" />
+  <HelpKINode Title="AsOperator property" Url="html/P_TSQL_Tokens_TSQLToken_AsOperator.htm" />
+  <HelpKINode Title="AsSingleLineComment property" Url="html/P_TSQL_Tokens_TSQLToken_AsSingleLineComment.htm" />
+  <HelpKINode Title="AsStringLiteral property" Url="html/P_TSQL_Tokens_TSQLToken_AsStringLiteral.htm" />
+  <HelpKINode Title="AsSystemIdentifier property" Url="html/P_TSQL_Tokens_TSQLToken_AsSystemIdentifier.htm" />
+  <HelpKINode Title="AsSystemVariable property" Url="html/P_TSQL_Tokens_TSQLToken_AsSystemVariable.htm" />
+  <HelpKINode Title="AsVariable property" Url="html/P_TSQL_Tokens_TSQLToken_AsVariable.htm" />
+  <HelpKINode Title="AsWhitespace property" Url="html/P_TSQL_Tokens_TSQLToken_AsWhitespace.htm" />
+  <HelpKINode Title="AUTHORIZATION field" Url="html/F_TSQL_TSQLKeywords_AUTHORIZATION.htm" />
+  <HelpKINode Title="BACKUP field" Url="html/F_TSQL_TSQLKeywords_BACKUP.htm" />
+  <HelpKINode Title="BEGIN field" Url="html/F_TSQL_TSQLKeywords_BEGIN.htm" />
+  <HelpKINode Title="BeginPosition property" Url="html/P_TSQL_Tokens_TSQLToken_BeginPosition.htm" />
+  <HelpKINode Title="BETWEEN field" Url="html/F_TSQL_TSQLKeywords_BETWEEN.htm" />
+  <HelpKINode Title="BinaryLiteral enumeration member" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="BREAK field" Url="html/F_TSQL_TSQLKeywords_BREAK.htm" />
+  <HelpKINode Title="BROWSE field" Url="html/F_TSQL_TSQLKeywords_BROWSE.htm" />
+  <HelpKINode Title="BULK field" Url="html/F_TSQL_TSQLKeywords_BULK.htm" />
+  <HelpKINode Title="BY field" Url="html/F_TSQL_TSQLKeywords_BY.htm" />
+  <HelpKINode Title="CASCADE field" Url="html/F_TSQL_TSQLKeywords_CASCADE.htm" />
+  <HelpKINode Title="CASE field" Url="html/F_TSQL_TSQLKeywords_CASE.htm" />
+  <HelpKINode Title="Character enumeration member" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="Character property" Url="html/P_TSQL_Tokens_TSQLCharacter_Character.htm" />
+  <HelpKINode Title="CHECK field" Url="html/F_TSQL_TSQLKeywords_CHECK.htm" />
+  <HelpKINode Title="CHECKPOINT field" Url="html/F_TSQL_TSQLKeywords_CHECKPOINT.htm" />
+  <HelpKINode Title="CLOSE field" Url="html/F_TSQL_TSQLKeywords_CLOSE.htm" />
+  <HelpKINode Title="CloseParentheses field" Url="html/F_TSQL_TSQLCharacters_CloseParentheses.htm" />
+  <HelpKINode Title="CLUSTERED field" Url="html/F_TSQL_TSQLKeywords_CLUSTERED.htm" />
+  <HelpKINode Title="COALESCE field" Url="html/F_TSQL_TSQLIdentifiers_COALESCE.htm" />
+  <HelpKINode Title="COLLATE field" Url="html/F_TSQL_TSQLKeywords_COLLATE.htm" />
+  <HelpKINode Title="COLUMN field" Url="html/F_TSQL_TSQLKeywords_COLUMN.htm" />
+  <HelpKINode Title="Comma field" Url="html/F_TSQL_TSQLCharacters_Comma.htm" />
+  <HelpKINode Title="Comment property" Url="html/P_TSQL_Tokens_TSQLComment_Comment.htm" />
+  <HelpKINode Title="COMMIT field" Url="html/F_TSQL_TSQLKeywords_COMMIT.htm" />
+  <HelpKINode Title="COMMITTED field" Url="html/F_TSQL_TSQLKeywords_COMMITTED.htm" />
+  <HelpKINode Title="COMPUTE field" Url="html/F_TSQL_TSQLKeywords_COMPUTE.htm" />
+  <HelpKINode Title="CONNECTIONS field" Url="html/F_TSQL_TSQLVariables_CONNECTIONS.htm" />
+  <HelpKINode Title="CONSTRAINT field" Url="html/F_TSQL_TSQLKeywords_CONSTRAINT.htm" />
+  <HelpKINode Title="CONTAINS field" Url="html/F_TSQL_TSQLIdentifiers_CONTAINS.htm" />
+  <HelpKINode Title="CONTAINSTABLE field" Url="html/F_TSQL_TSQLIdentifiers_CONTAINSTABLE.htm" />
+  <HelpKINode Title="CONTINUE field" Url="html/F_TSQL_TSQLKeywords_CONTINUE.htm" />
+  <HelpKINode Title="CONVERT field" Url="html/F_TSQL_TSQLIdentifiers_CONVERT.htm" />
+  <HelpKINode Title="CPU_BUSY field" Url="html/F_TSQL_TSQLVariables_CPU_BUSY.htm" />
+  <HelpKINode Title="CREATE field" Url="html/F_TSQL_TSQLKeywords_CREATE.htm" />
+  <HelpKINode Title="CROSS field" Url="html/F_TSQL_TSQLKeywords_CROSS.htm" />
+  <HelpKINode Title="CURRENT field" Url="html/F_TSQL_TSQLKeywords_CURRENT.htm" />
+  <HelpKINode Title="Current property">
+    <HelpKINode Title="TSQLStatementReader.Current Property " Url="html/P_TSQL_TSQLStatementReader_Current.htm" />
+    <HelpKINode Title="TSQLTokenizer.Current Property " Url="html/P_TSQL_TSQLTokenizer_Current.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CURRENT_DATE field" Url="html/F_TSQL_TSQLIdentifiers_CURRENT_DATE.htm" />
+  <HelpKINode Title="CURRENT_TIME field" Url="html/F_TSQL_TSQLIdentifiers_CURRENT_TIME.htm" />
+  <HelpKINode Title="CURRENT_TIMESTAMP field" Url="html/F_TSQL_TSQLIdentifiers_CURRENT_TIMESTAMP.htm" />
+  <HelpKINode Title="CURRENT_USER field" Url="html/F_TSQL_TSQLIdentifiers_CURRENT_USER.htm" />
+  <HelpKINode Title="CURSOR field" Url="html/F_TSQL_TSQLKeywords_CURSOR.htm" />
+  <HelpKINode Title="DATABASE field" Url="html/F_TSQL_TSQLKeywords_DATABASE.htm" />
+  <HelpKINode Title="DBCC field" Url="html/F_TSQL_TSQLKeywords_DBCC.htm" />
+  <HelpKINode Title="DEALLOCATE field" Url="html/F_TSQL_TSQLKeywords_DEALLOCATE.htm" />
+  <HelpKINode Title="DECLARE field" Url="html/F_TSQL_TSQLKeywords_DECLARE.htm" />
+  <HelpKINode Title="DEFAULT field" Url="html/F_TSQL_TSQLKeywords_DEFAULT.htm" />
+  <HelpKINode Title="DELETE field" Url="html/F_TSQL_TSQLKeywords_DELETE.htm" />
+  <HelpKINode Title="DENY field" Url="html/F_TSQL_TSQLKeywords_DENY.htm" />
+  <HelpKINode Title="DESC field" Url="html/F_TSQL_TSQLKeywords_DESC.htm" />
+  <HelpKINode Title="DISABLE field" Url="html/F_TSQL_TSQLKeywords_DISABLE.htm" />
+  <HelpKINode Title="DISK field" Url="html/F_TSQL_TSQLKeywords_DISK.htm" />
+  <HelpKINode Title="DISTINCT field" Url="html/F_TSQL_TSQLKeywords_DISTINCT.htm" />
+  <HelpKINode Title="DISTRIBUTED field" Url="html/F_TSQL_TSQLKeywords_DISTRIBUTED.htm" />
+  <HelpKINode Title="DOUBLE field" Url="html/F_TSQL_TSQLKeywords_DOUBLE.htm" />
+  <HelpKINode Title="DROP field" Url="html/F_TSQL_TSQLKeywords_DROP.htm" />
+  <HelpKINode Title="DUMP field" Url="html/F_TSQL_TSQLKeywords_DUMP.htm" />
+  <HelpKINode Title="ELSE field" Url="html/F_TSQL_TSQLKeywords_ELSE.htm" />
+  <HelpKINode Title="ENABLE field" Url="html/F_TSQL_TSQLKeywords_ENABLE.htm" />
+  <HelpKINode Title="END field" Url="html/F_TSQL_TSQLKeywords_END.htm" />
+  <HelpKINode Title="EndPosition property" Url="html/P_TSQL_Tokens_TSQLToken_EndPosition.htm" />
+  <HelpKINode Title="Equality operator">
+    <HelpKINode Title="TSQLCharacters.Equality Operator " Url="html/M_TSQL_TSQLCharacters_op_Equality.htm" />
+    <HelpKINode Title="TSQLIdentifiers.Equality Operator " Url="html/M_TSQL_TSQLIdentifiers_op_Equality.htm" />
+    <HelpKINode Title="TSQLKeywords.Equality Operator " Url="html/M_TSQL_TSQLKeywords_op_Equality.htm" />
+    <HelpKINode Title="TSQLVariables.Equality Operator " Url="html/M_TSQL_TSQLVariables_op_Equality.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Equals method">
+    <HelpKINode Title="TSQLCharacters.Equals Method " Url="html/Overload_TSQL_TSQLCharacters_Equals.htm" />
+    <HelpKINode Title="TSQLIdentifiers.Equals Method " Url="html/Overload_TSQL_TSQLIdentifiers_Equals.htm" />
+    <HelpKINode Title="TSQLKeywords.Equals Method " Url="html/M_TSQL_TSQLKeywords_Equals.htm" />
+    <HelpKINode Title="TSQLVariables.Equals Method " Url="html/Overload_TSQL_TSQLVariables_Equals.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ERROR field" Url="html/F_TSQL_TSQLVariables_ERROR.htm" />
+  <HelpKINode Title="ESCAPE field" Url="html/F_TSQL_TSQLKeywords_ESCAPE.htm" />
+  <HelpKINode Title="EXCEPT field" Url="html/F_TSQL_TSQLKeywords_EXCEPT.htm" />
+  <HelpKINode Title="EXECUTE field" Url="html/F_TSQL_TSQLKeywords_EXECUTE.htm" />
+  <HelpKINode Title="EXISTS field" Url="html/F_TSQL_TSQLKeywords_EXISTS.htm" />
+  <HelpKINode Title="EXTERNAL field" Url="html/F_TSQL_TSQLKeywords_EXTERNAL.htm" />
+  <HelpKINode Title="FETCH field" Url="html/F_TSQL_TSQLKeywords_FETCH.htm" />
+  <HelpKINode Title="FILE field" Url="html/F_TSQL_TSQLKeywords_FILE.htm" />
+  <HelpKINode Title="FILLFACTOR field" Url="html/F_TSQL_TSQLKeywords_FILLFACTOR.htm" />
+  <HelpKINode Title="FOR field" Url="html/F_TSQL_TSQLKeywords_FOR.htm" />
+  <HelpKINode Title="FOREIGN field" Url="html/F_TSQL_TSQLKeywords_FOREIGN.htm" />
+  <HelpKINode Title="FREETEXT field" Url="html/F_TSQL_TSQLIdentifiers_FREETEXT.htm" />
+  <HelpKINode Title="FREETEXTTABLE field" Url="html/F_TSQL_TSQLIdentifiers_FREETEXTTABLE.htm" />
+  <HelpKINode Title="FROM field" Url="html/F_TSQL_TSQLKeywords_FROM.htm" />
+  <HelpKINode Title="From property" Url="html/P_TSQL_Statements_TSQLSelectStatement_From.htm" />
+  <HelpKINode Title="FULL field" Url="html/F_TSQL_TSQLKeywords_FULL.htm" />
+  <HelpKINode Title="FUNCTION field" Url="html/F_TSQL_TSQLKeywords_FUNCTION.htm" />
+  <HelpKINode Title="GET field" Url="html/F_TSQL_TSQLKeywords_GET.htm" />
+  <HelpKINode Title="GetHashCode method">
+    <HelpKINode Title="TSQLCharacters.GetHashCode Method " Url="html/M_TSQL_TSQLCharacters_GetHashCode.htm" />
+    <HelpKINode Title="TSQLIdentifiers.GetHashCode Method " Url="html/M_TSQL_TSQLIdentifiers_GetHashCode.htm" />
+    <HelpKINode Title="TSQLKeywords.GetHashCode Method " Url="html/M_TSQL_TSQLKeywords_GetHashCode.htm" />
+    <HelpKINode Title="TSQLVariables.GetHashCode Method " Url="html/M_TSQL_TSQLVariables_GetHashCode.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GO field" Url="html/F_TSQL_TSQLKeywords_GO.htm" />
+  <HelpKINode Title="GOTO field" Url="html/F_TSQL_TSQLKeywords_GOTO.htm" />
+  <HelpKINode Title="GRANT field" Url="html/F_TSQL_TSQLKeywords_GRANT.htm" />
+  <HelpKINode Title="GROUP field" Url="html/F_TSQL_TSQLKeywords_GROUP.htm" />
+  <HelpKINode Title="GroupBy property" Url="html/P_TSQL_Statements_TSQLSelectStatement_GroupBy.htm" />
+  <HelpKINode Title="HAVING field" Url="html/F_TSQL_TSQLKeywords_HAVING.htm" />
+  <HelpKINode Title="Having property" Url="html/P_TSQL_Statements_TSQLSelectStatement_Having.htm" />
+  <HelpKINode Title="HOLDLOCK field" Url="html/F_TSQL_TSQLKeywords_HOLDLOCK.htm" />
+  <HelpKINode Title="Identifier enumeration member" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="Identifier property" Url="html/P_TSQL_Tokens_TSQLSystemIdentifier_Identifier.htm" />
+  <HelpKINode Title="IDENTITY field">
+    <HelpKINode Title="TSQLKeywords.IDENTITY Field" Url="html/F_TSQL_TSQLKeywords_IDENTITY.htm" />
+    <HelpKINode Title="TSQLVariables.IDENTITY Field" Url="html/F_TSQL_TSQLVariables_IDENTITY.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IDENTITYCOL field" Url="html/F_TSQL_TSQLKeywords_IDENTITYCOL.htm" />
+  <HelpKINode Title="IDENTITY_INSERT field" Url="html/F_TSQL_TSQLKeywords_IDENTITY_INSERT.htm" />
+  <HelpKINode Title="IDLE field" Url="html/F_TSQL_TSQLVariables_IDLE.htm" />
+  <HelpKINode Title="IF field" Url="html/F_TSQL_TSQLKeywords_IF.htm" />
+  <HelpKINode Title="IN field" Url="html/F_TSQL_TSQLKeywords_IN.htm" />
+  <HelpKINode Title="In method">
+    <HelpKINode Title="TSQLCharacters.In Method " Url="html/M_TSQL_TSQLCharacters_In.htm" />
+    <HelpKINode Title="TSQLIdentifiers.In Method " Url="html/M_TSQL_TSQLIdentifiers_In.htm" />
+    <HelpKINode Title="TSQLKeywords.In Method " Url="html/M_TSQL_TSQLKeywords_In.htm" />
+    <HelpKINode Title="TSQLVariables.In Method " Url="html/M_TSQL_TSQLVariables_In.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IncludeWhitespace property">
+    <HelpKINode Title="TSQLStatementReader.IncludeWhitespace Property " Url="html/P_TSQL_TSQLStatementReader_IncludeWhitespace.htm" />
+    <HelpKINode Title="TSQLTokenizer.IncludeWhitespace Property " Url="html/P_TSQL_TSQLTokenizer_IncludeWhitespace.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IncompleteComment enumeration member" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="IncompleteIdentifier enumeration member" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="IncompleteString enumeration member" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="INDEX field" Url="html/F_TSQL_TSQLKeywords_INDEX.htm" />
+  <HelpKINode Title="Inequality operator">
+    <HelpKINode Title="TSQLCharacters.Inequality Operator " Url="html/M_TSQL_TSQLCharacters_op_Inequality.htm" />
+    <HelpKINode Title="TSQLIdentifiers.Inequality Operator " Url="html/M_TSQL_TSQLIdentifiers_op_Inequality.htm" />
+    <HelpKINode Title="TSQLKeywords.Inequality Operator " Url="html/M_TSQL_TSQLKeywords_op_Inequality.htm" />
+    <HelpKINode Title="TSQLVariables.Inequality Operator " Url="html/M_TSQL_TSQLVariables_op_Inequality.htm" />
+  </HelpKINode>
+  <HelpKINode Title="INNER field" Url="html/F_TSQL_TSQLKeywords_INNER.htm" />
+  <HelpKINode Title="INSERT field" Url="html/F_TSQL_TSQLKeywords_INSERT.htm" />
+  <HelpKINode Title="INTERSECT field" Url="html/F_TSQL_TSQLKeywords_INTERSECT.htm" />
+  <HelpKINode Title="INTO field" Url="html/F_TSQL_TSQLKeywords_INTO.htm" />
+  <HelpKINode Title="Into property" Url="html/P_TSQL_Statements_TSQLSelectStatement_Into.htm" />
+  <HelpKINode Title="IO_BUSY field" Url="html/F_TSQL_TSQLVariables_IO_BUSY.htm" />
+  <HelpKINode Title="IS field" Url="html/F_TSQL_TSQLKeywords_IS.htm" />
+  <HelpKINode Title="IsCharacter method">
+    <HelpKINode Title="TSQLCharacters.IsCharacter Method " Url="html/M_TSQL_TSQLCharacters_IsCharacter.htm" />
+    <HelpKINode Title="TSQLTokenExtensions.IsCharacter Method " Url="html/M_TSQL_Tokens_TSQLTokenExtensions_IsCharacter.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsComplete property">
+    <HelpKINode Title="TSQLCharacter.IsComplete Property " Url="html/P_TSQL_Tokens_TSQLCharacter_IsComplete.htm" />
+    <HelpKINode Title="TSQLComment.IsComplete Property " Url="html/P_TSQL_Tokens_TSQLComment_IsComplete.htm" />
+    <HelpKINode Title="TSQLIdentifier.IsComplete Property " Url="html/P_TSQL_Tokens_TSQLIdentifier_IsComplete.htm" />
+    <HelpKINode Title="TSQLIncompleteToken.IsComplete Property " Url="html/P_TSQL_Tokens_TSQLIncompleteToken_IsComplete.htm" />
+    <HelpKINode Title="TSQLKeyword.IsComplete Property " Url="html/P_TSQL_Tokens_TSQLKeyword_IsComplete.htm" />
+    <HelpKINode Title="TSQLLiteral.IsComplete Property " Url="html/P_TSQL_Tokens_TSQLLiteral_IsComplete.htm" />
+    <HelpKINode Title="TSQLOperator.IsComplete Property " Url="html/P_TSQL_Tokens_TSQLOperator_IsComplete.htm" />
+    <HelpKINode Title="TSQLToken.IsComplete Property " Url="html/P_TSQL_Tokens_TSQLToken_IsComplete.htm" />
+    <HelpKINode Title="TSQLVariable.IsComplete Property " Url="html/P_TSQL_Tokens_TSQLVariable_IsComplete.htm" />
+    <HelpKINode Title="TSQLWhitespace.IsComplete Property " Url="html/P_TSQL_Tokens_TSQLWhitespace_IsComplete.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsIdentifier method" Url="html/M_TSQL_TSQLIdentifiers_IsIdentifier.htm" />
+  <HelpKINode Title="IsKeyword method">
+    <HelpKINode Title="TSQLKeywords.IsKeyword Method " Url="html/M_TSQL_TSQLKeywords_IsKeyword.htm" />
+    <HelpKINode Title="TSQLTokenExtensions.IsKeyword Method " Url="html/M_TSQL_Tokens_TSQLTokenExtensions_IsKeyword.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsUnicode property" Url="html/P_TSQL_Tokens_TSQLStringLiteral_IsUnicode.htm" />
+  <HelpKINode Title="IsVariable method" Url="html/M_TSQL_TSQLVariables_IsVariable.htm" />
+  <HelpKINode Title="JOIN field" Url="html/F_TSQL_TSQLKeywords_JOIN.htm" />
+  <HelpKINode Title="KEY field" Url="html/F_TSQL_TSQLKeywords_KEY.htm" />
+  <HelpKINode Title="Keyword enumeration member" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="Keyword property" Url="html/P_TSQL_Tokens_TSQLKeyword_Keyword.htm" />
+  <HelpKINode Title="KILL field" Url="html/F_TSQL_TSQLKeywords_KILL.htm" />
+  <HelpKINode Title="LANGID field" Url="html/F_TSQL_TSQLVariables_LANGID.htm" />
+  <HelpKINode Title="LANGUAGE field" Url="html/F_TSQL_TSQLVariables_LANGUAGE.htm" />
+  <HelpKINode Title="LEFT field" Url="html/F_TSQL_TSQLKeywords_LEFT.htm" />
+  <HelpKINode Title="Length property" Url="html/P_TSQL_Tokens_TSQLToken_Length.htm" />
+  <HelpKINode Title="LIKE field" Url="html/F_TSQL_TSQLKeywords_LIKE.htm" />
+  <HelpKINode Title="LINENO field" Url="html/F_TSQL_TSQLKeywords_LINENO.htm" />
+  <HelpKINode Title="LOAD field" Url="html/F_TSQL_TSQLKeywords_LOAD.htm" />
+  <HelpKINode Title="MAXCHARLEN field" Url="html/F_TSQL_TSQLVariables_MAXCHARLEN.htm" />
+  <HelpKINode Title="MAX_CONNECTIONS field" Url="html/F_TSQL_TSQLVariables_MAX_CONNECTIONS.htm" />
+  <HelpKINode Title="MERGE field" Url="html/F_TSQL_TSQLKeywords_MERGE.htm" />
+  <HelpKINode Title="MoneyLiteral enumeration member" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="MOVE field" Url="html/F_TSQL_TSQLKeywords_MOVE.htm" />
+  <HelpKINode Title="MoveNext method">
+    <HelpKINode Title="TSQLStatementReader.MoveNext Method " Url="html/M_TSQL_TSQLStatementReader_MoveNext.htm" />
+    <HelpKINode Title="TSQLTokenizer.MoveNext Method " Url="html/M_TSQL_TSQLTokenizer_MoveNext.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MultilineComment enumeration member" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="Name property" Url="html/P_TSQL_Tokens_TSQLIdentifier_Name.htm" />
+  <HelpKINode Title="NOCHECK field" Url="html/F_TSQL_TSQLKeywords_NOCHECK.htm" />
+  <HelpKINode Title="NONCLUSTERED field" Url="html/F_TSQL_TSQLKeywords_NONCLUSTERED.htm" />
+  <HelpKINode Title="None field">
+    <HelpKINode Title="TSQLCharacters.None Field" Url="html/F_TSQL_TSQLCharacters_None.htm" />
+    <HelpKINode Title="TSQLIdentifiers.None Field" Url="html/F_TSQL_TSQLIdentifiers_None.htm" />
+    <HelpKINode Title="TSQLKeywords.None Field" Url="html/F_TSQL_TSQLKeywords_None.htm" />
+    <HelpKINode Title="TSQLVariables.None Field" Url="html/F_TSQL_TSQLVariables_None.htm" />
+  </HelpKINode>
+  <HelpKINode Title="NOT field" Url="html/F_TSQL_TSQLKeywords_NOT.htm" />
+  <HelpKINode Title="NULL field" Url="html/F_TSQL_TSQLKeywords_NULL.htm" />
+  <HelpKINode Title="NULLIF field" Url="html/F_TSQL_TSQLIdentifiers_NULLIF.htm" />
+  <HelpKINode Title="NumericLiteral enumeration member" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="OFF field" Url="html/F_TSQL_TSQLKeywords_OFF.htm" />
+  <HelpKINode Title="OFFSETS field" Url="html/F_TSQL_TSQLKeywords_OFFSETS.htm" />
+  <HelpKINode Title="ON field" Url="html/F_TSQL_TSQLKeywords_ON.htm" />
+  <HelpKINode Title="OPEN field" Url="html/F_TSQL_TSQLKeywords_OPEN.htm" />
+  <HelpKINode Title="OPENDATASOURCE field" Url="html/F_TSQL_TSQLIdentifiers_OPENDATASOURCE.htm" />
+  <HelpKINode Title="OpenParentheses field" Url="html/F_TSQL_TSQLCharacters_OpenParentheses.htm" />
+  <HelpKINode Title="OPENQUERY field" Url="html/F_TSQL_TSQLIdentifiers_OPENQUERY.htm" />
+  <HelpKINode Title="OPENROWSET field" Url="html/F_TSQL_TSQLIdentifiers_OPENROWSET.htm" />
+  <HelpKINode Title="OPENXML field" Url="html/F_TSQL_TSQLIdentifiers_OPENXML.htm" />
+  <HelpKINode Title="Operator enumeration member" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="OPTION field" Url="html/F_TSQL_TSQLKeywords_OPTION.htm" />
+  <HelpKINode Title="Option property" Url="html/P_TSQL_Statements_TSQLSelectStatement_Option.htm" />
+  <HelpKINode Title="OR field" Url="html/F_TSQL_TSQLKeywords_OR.htm" />
+  <HelpKINode Title="ORDER field" Url="html/F_TSQL_TSQLKeywords_ORDER.htm" />
+  <HelpKINode Title="OrderBy property" Url="html/P_TSQL_Statements_TSQLSelectStatement_OrderBy.htm" />
+  <HelpKINode Title="OUTER field" Url="html/F_TSQL_TSQLKeywords_OUTER.htm" />
+  <HelpKINode Title="OVER field" Url="html/F_TSQL_TSQLKeywords_OVER.htm" />
+  <HelpKINode Title="PACKET_ERRORS field" Url="html/F_TSQL_TSQLVariables_PACKET_ERRORS.htm" />
+  <HelpKINode Title="PACK_RECEIVED field" Url="html/F_TSQL_TSQLVariables_PACK_RECEIVED.htm" />
+  <HelpKINode Title="PACK_SENT field" Url="html/F_TSQL_TSQLVariables_PACK_SENT.htm" />
+  <HelpKINode Title="Parse method">
+    <HelpKINode Title="TSQLCharacters.Parse Method " Url="html/M_TSQL_TSQLCharacters_Parse.htm" />
+    <HelpKINode Title="TSQLIdentifiers.Parse Method " Url="html/M_TSQL_TSQLIdentifiers_Parse.htm" />
+    <HelpKINode Title="TSQLKeywords.Parse Method " Url="html/M_TSQL_TSQLKeywords_Parse.htm" />
+    <HelpKINode Title="TSQLVariables.Parse Method " Url="html/M_TSQL_TSQLVariables_Parse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ParseStatements method" Url="html/M_TSQL_TSQLStatementReader_ParseStatements.htm" />
+  <HelpKINode Title="ParseTokens method" Url="html/M_TSQL_TSQLTokenizer_ParseTokens.htm" />
+  <HelpKINode Title="PERCENT field" Url="html/F_TSQL_TSQLKeywords_PERCENT.htm" />
+  <HelpKINode Title="Period field" Url="html/F_TSQL_TSQLCharacters_Period.htm" />
+  <HelpKINode Title="PIVOT field" Url="html/F_TSQL_TSQLKeywords_PIVOT.htm" />
+  <HelpKINode Title="PLAN field" Url="html/F_TSQL_TSQLKeywords_PLAN.htm" />
+  <HelpKINode Title="PRECISION field" Url="html/F_TSQL_TSQLKeywords_PRECISION.htm" />
+  <HelpKINode Title="PRIMARY field" Url="html/F_TSQL_TSQLKeywords_PRIMARY.htm" />
+  <HelpKINode Title="PRINT field" Url="html/F_TSQL_TSQLKeywords_PRINT.htm" />
+  <HelpKINode Title="PROCEDURE field" Url="html/F_TSQL_TSQLKeywords_PROCEDURE.htm" />
+  <HelpKINode Title="PUBLIC field" Url="html/F_TSQL_TSQLKeywords_PUBLIC.htm" />
+  <HelpKINode Title="Putback method" Url="html/M_TSQL_TSQLTokenizer_Putback.htm" />
+  <HelpKINode Title="QuoteCharacter property" Url="html/P_TSQL_Tokens_TSQLStringLiteral_QuoteCharacter.htm" />
+  <HelpKINode Title="RAISERROR field" Url="html/F_TSQL_TSQLIdentifiers_RAISERROR.htm" />
+  <HelpKINode Title="READ field" Url="html/F_TSQL_TSQLKeywords_READ.htm" />
+  <HelpKINode Title="READTEXT field" Url="html/F_TSQL_TSQLKeywords_READTEXT.htm" />
+  <HelpKINode Title="RECEIVE field" Url="html/F_TSQL_TSQLKeywords_RECEIVE.htm" />
+  <HelpKINode Title="RECONFIGURE field" Url="html/F_TSQL_TSQLKeywords_RECONFIGURE.htm" />
+  <HelpKINode Title="REFERENCES field" Url="html/F_TSQL_TSQLKeywords_REFERENCES.htm" />
+  <HelpKINode Title="REPEATABLE field" Url="html/F_TSQL_TSQLKeywords_REPEATABLE.htm" />
+  <HelpKINode Title="REPLICATION field" Url="html/F_TSQL_TSQLKeywords_REPLICATION.htm" />
+  <HelpKINode Title="RESTORE field" Url="html/F_TSQL_TSQLKeywords_RESTORE.htm" />
+  <HelpKINode Title="RETURN field" Url="html/F_TSQL_TSQLKeywords_RETURN.htm" />
+  <HelpKINode Title="RETURNS field" Url="html/F_TSQL_TSQLKeywords_RETURNS.htm" />
+  <HelpKINode Title="REVERT field" Url="html/F_TSQL_TSQLKeywords_REVERT.htm" />
+  <HelpKINode Title="REVOKE field" Url="html/F_TSQL_TSQLKeywords_REVOKE.htm" />
+  <HelpKINode Title="RIGHT field" Url="html/F_TSQL_TSQLKeywords_RIGHT.htm" />
+  <HelpKINode Title="ROLLBACK field" Url="html/F_TSQL_TSQLKeywords_ROLLBACK.htm" />
+  <HelpKINode Title="ROWCOUNT field">
+    <HelpKINode Title="TSQLKeywords.ROWCOUNT Field" Url="html/F_TSQL_TSQLKeywords_ROWCOUNT.htm" />
+    <HelpKINode Title="TSQLVariables.ROWCOUNT Field" Url="html/F_TSQL_TSQLVariables_ROWCOUNT.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ROWGUIDCOL field" Url="html/F_TSQL_TSQLKeywords_ROWGUIDCOL.htm" />
+  <HelpKINode Title="RULE field" Url="html/F_TSQL_TSQLKeywords_RULE.htm" />
+  <HelpKINode Title="SAVE field" Url="html/F_TSQL_TSQLKeywords_SAVE.htm" />
+  <HelpKINode Title="SCHEMA field" Url="html/F_TSQL_TSQLKeywords_SCHEMA.htm" />
+  <HelpKINode Title="Select enumeration member" Url="html/T_TSQL_Statements_TSQLStatementType.htm" />
+  <HelpKINode Title="SELECT field" Url="html/F_TSQL_TSQLKeywords_SELECT.htm" />
+  <HelpKINode Title="Select property" Url="html/P_TSQL_Statements_TSQLSelectStatement_Select.htm" />
+  <HelpKINode Title="SEMANTICKEYPHRASETABLE field" Url="html/F_TSQL_TSQLIdentifiers_SEMANTICKEYPHRASETABLE.htm" />
+  <HelpKINode Title="SEMANTICSIMILARITYDETAILSTABLE field" Url="html/F_TSQL_TSQLIdentifiers_SEMANTICSIMILARITYDETAILSTABLE.htm" />
+  <HelpKINode Title="SEMANTICSIMILARITYTABLE field" Url="html/F_TSQL_TSQLIdentifiers_SEMANTICSIMILARITYTABLE.htm" />
+  <HelpKINode Title="Semicolon field" Url="html/F_TSQL_TSQLCharacters_Semicolon.htm" />
+  <HelpKINode Title="SEND field" Url="html/F_TSQL_TSQLKeywords_SEND.htm" />
+  <HelpKINode Title="SERVERNAME field" Url="html/F_TSQL_TSQLVariables_SERVERNAME.htm" />
+  <HelpKINode Title="SESSION_USER field" Url="html/F_TSQL_TSQLIdentifiers_SESSION_USER.htm" />
+  <HelpKINode Title="SET field" Url="html/F_TSQL_TSQLKeywords_SET.htm" />
+  <HelpKINode Title="SETUSER field" Url="html/F_TSQL_TSQLKeywords_SETUSER.htm" />
+  <HelpKINode Title="SHUTDOWN field" Url="html/F_TSQL_TSQLKeywords_SHUTDOWN.htm" />
+  <HelpKINode Title="SingleLineComment enumeration member" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="SOME field" Url="html/F_TSQL_TSQLKeywords_SOME.htm" />
+  <HelpKINode Title="SPID field" Url="html/F_TSQL_TSQLVariables_SPID.htm" />
+  <HelpKINode Title="STATISTICS field" Url="html/F_TSQL_TSQLKeywords_STATISTICS.htm" />
+  <HelpKINode Title="StringLiteral enumeration member" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="SystemIdentifier enumeration member" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="SystemVariable enumeration member" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="SYSTEM_USER field" Url="html/F_TSQL_TSQLIdentifiers_SYSTEM_USER.htm" />
+  <HelpKINode Title="TABLE field" Url="html/F_TSQL_TSQLKeywords_TABLE.htm" />
+  <HelpKINode Title="TABLESAMPLE field" Url="html/F_TSQL_TSQLKeywords_TABLESAMPLE.htm" />
+  <HelpKINode Title="Text property" Url="html/P_TSQL_Tokens_TSQLToken_Text.htm" />
+  <HelpKINode Title="TEXTSIZE field">
+    <HelpKINode Title="TSQLKeywords.TEXTSIZE Field" Url="html/F_TSQL_TSQLKeywords_TEXTSIZE.htm" />
+    <HelpKINode Title="TSQLVariables.TEXTSIZE Field" Url="html/F_TSQL_TSQLVariables_TEXTSIZE.htm" />
+  </HelpKINode>
+  <HelpKINode Title="THEN field" Url="html/F_TSQL_TSQLKeywords_THEN.htm" />
+  <HelpKINode Title="TIMETICKS field" Url="html/F_TSQL_TSQLVariables_TIMETICKS.htm" />
+  <HelpKINode Title="Tokens property">
+    <HelpKINode Title="TSQLClause.Tokens Property " Url="html/P_TSQL_Clauses_TSQLClause_Tokens.htm" />
+    <HelpKINode Title="TSQLStatement.Tokens Property " Url="html/P_TSQL_Statements_TSQLStatement_Tokens.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TOP field" Url="html/F_TSQL_TSQLKeywords_TOP.htm" />
+  <HelpKINode Title="TOTAL_ERRORS field" Url="html/F_TSQL_TSQLVariables_TOTAL_ERRORS.htm" />
+  <HelpKINode Title="TOTAL_READ field" Url="html/F_TSQL_TSQLVariables_TOTAL_READ.htm" />
+  <HelpKINode Title="TOTAL_WRITE field" Url="html/F_TSQL_TSQLVariables_TOTAL_WRITE.htm" />
+  <HelpKINode Title="TRANCOUNT field" Url="html/F_TSQL_TSQLVariables_TRANCOUNT.htm" />
+  <HelpKINode Title="TRANSACTION field" Url="html/F_TSQL_TSQLKeywords_TRANSACTION.htm" />
+  <HelpKINode Title="TRIGGER field" Url="html/F_TSQL_TSQLKeywords_TRIGGER.htm" />
+  <HelpKINode Title="TRUNCATE field" Url="html/F_TSQL_TSQLKeywords_TRUNCATE.htm" />
+  <HelpKINode Title="TRY_CONVERT field" Url="html/F_TSQL_TSQLIdentifiers_TRY_CONVERT.htm" />
+  <HelpKINode Title="TSQL namespace" Url="html/N_TSQL.htm" />
+  <HelpKINode Title="TSQL.Clauses namespace" Url="html/N_TSQL_Clauses.htm" />
+  <HelpKINode Title="TSQL.Clauses.TSQLClause class" Url="html/T_TSQL_Clauses_TSQLClause.htm" />
+  <HelpKINode Title="TSQL.Clauses.TSQLFromClause class" Url="html/T_TSQL_Clauses_TSQLFromClause.htm" />
+  <HelpKINode Title="TSQL.Clauses.TSQLGroupByClause class" Url="html/T_TSQL_Clauses_TSQLGroupByClause.htm" />
+  <HelpKINode Title="TSQL.Clauses.TSQLHavingClause class" Url="html/T_TSQL_Clauses_TSQLHavingClause.htm" />
+  <HelpKINode Title="TSQL.Clauses.TSQLIntoClause class" Url="html/T_TSQL_Clauses_TSQLIntoClause.htm" />
+  <HelpKINode Title="TSQL.Clauses.TSQLOptionClause class" Url="html/T_TSQL_Clauses_TSQLOptionClause.htm" />
+  <HelpKINode Title="TSQL.Clauses.TSQLOrderByClause class" Url="html/T_TSQL_Clauses_TSQLOrderByClause.htm" />
+  <HelpKINode Title="TSQL.Clauses.TSQLSelectClause class" Url="html/T_TSQL_Clauses_TSQLSelectClause.htm" />
+  <HelpKINode Title="TSQL.Clauses.TSQLWhereClause class" Url="html/T_TSQL_Clauses_TSQLWhereClause.htm" />
+  <HelpKINode Title="TSQL.Statements namespace" Url="html/N_TSQL_Statements.htm" />
+  <HelpKINode Title="TSQL.Statements.TSQLSelectStatement class" Url="html/T_TSQL_Statements_TSQLSelectStatement.htm" />
+  <HelpKINode Title="TSQL.Statements.TSQLStatement class" Url="html/T_TSQL_Statements_TSQLStatement.htm" />
+  <HelpKINode Title="TSQL.Statements.TSQLStatementType enumeration" Url="html/T_TSQL_Statements_TSQLStatementType.htm" />
+  <HelpKINode Title="TSQL.Statements.TSQLUnknownStatement class" Url="html/T_TSQL_Statements_TSQLUnknownStatement.htm" />
+  <HelpKINode Title="TSQL.Tokens namespace" Url="html/N_TSQL_Tokens.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLBinaryLiteral class" Url="html/T_TSQL_Tokens_TSQLBinaryLiteral.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLCharacter class" Url="html/T_TSQL_Tokens_TSQLCharacter.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLComment class" Url="html/T_TSQL_Tokens_TSQLComment.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLIdentifier class" Url="html/T_TSQL_Tokens_TSQLIdentifier.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLIncompleteCommentToken class" Url="html/T_TSQL_Tokens_TSQLIncompleteCommentToken.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLIncompleteIdentifierToken class" Url="html/T_TSQL_Tokens_TSQLIncompleteIdentifierToken.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLIncompleteStringToken class" Url="html/T_TSQL_Tokens_TSQLIncompleteStringToken.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLIncompleteToken class" Url="html/T_TSQL_Tokens_TSQLIncompleteToken.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLKeyword class" Url="html/T_TSQL_Tokens_TSQLKeyword.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLLiteral class" Url="html/T_TSQL_Tokens_TSQLLiteral.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLMoneyLiteral class" Url="html/T_TSQL_Tokens_TSQLMoneyLiteral.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLMultilineComment class" Url="html/T_TSQL_Tokens_TSQLMultilineComment.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLNumericLiteral class" Url="html/T_TSQL_Tokens_TSQLNumericLiteral.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLOperator class" Url="html/T_TSQL_Tokens_TSQLOperator.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLSingleLineComment class" Url="html/T_TSQL_Tokens_TSQLSingleLineComment.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLStringLiteral class" Url="html/T_TSQL_Tokens_TSQLStringLiteral.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLSystemIdentifier class" Url="html/T_TSQL_Tokens_TSQLSystemIdentifier.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLSystemVariable class" Url="html/T_TSQL_Tokens_TSQLSystemVariable.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLToken class" Url="html/T_TSQL_Tokens_TSQLToken.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLTokenExtensions class" Url="html/T_TSQL_Tokens_TSQLTokenExtensions.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLTokenType enumeration" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLVariable class" Url="html/T_TSQL_Tokens_TSQLVariable.htm" />
+  <HelpKINode Title="TSQL.Tokens.TSQLWhitespace class" Url="html/T_TSQL_Tokens_TSQLWhitespace.htm" />
+  <HelpKINode Title="TSQL.TSQLCharacters structure" Url="html/T_TSQL_TSQLCharacters.htm" />
+  <HelpKINode Title="TSQL.TSQLIdentifiers structure" Url="html/T_TSQL_TSQLIdentifiers.htm" />
+  <HelpKINode Title="TSQL.TSQLKeywords structure" Url="html/T_TSQL_TSQLKeywords.htm" />
+  <HelpKINode Title="TSQL.TSQLStatementReader class" Url="html/T_TSQL_TSQLStatementReader.htm" />
+  <HelpKINode Title="TSQL.TSQLTokenizer class" Url="html/T_TSQL_TSQLTokenizer.htm" />
+  <HelpKINode Title="TSQL.TSQLVariables structure" Url="html/T_TSQL_TSQLVariables.htm" />
+  <HelpKINode Title="TSQLBinaryLiteral class">
+    <HelpKINode Title="TSQLBinaryLiteral Class" Url="html/T_TSQL_Tokens_TSQLBinaryLiteral.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLBinaryLiteral.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLBinaryLiteral.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLBinaryLiteral.Type property" Url="html/P_TSQL_Tokens_TSQLBinaryLiteral_Type.htm" />
+  <HelpKINode Title="TSQLCharacter class">
+    <HelpKINode Title="TSQLCharacter Class" Url="html/T_TSQL_Tokens_TSQLCharacter.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLCharacter.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLCharacter.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLCharacter.Character property" Url="html/P_TSQL_Tokens_TSQLCharacter_Character.htm" />
+  <HelpKINode Title="TSQLCharacter.IsComplete property" Url="html/P_TSQL_Tokens_TSQLCharacter_IsComplete.htm" />
+  <HelpKINode Title="TSQLCharacter.Type property" Url="html/P_TSQL_Tokens_TSQLCharacter_Type.htm" />
+  <HelpKINode Title="TSQLCharacters structure">
+    <HelpKINode Title="TSQLCharacters Structure" Url="html/T_TSQL_TSQLCharacters.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_TSQL_TSQLCharacters.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_TSQLCharacters.htm" />
+    <HelpKINode Title="operators" Url="html/Operators_T_TSQL_TSQLCharacters.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLCharacters.CloseParentheses field" Url="html/F_TSQL_TSQLCharacters_CloseParentheses.htm" />
+  <HelpKINode Title="TSQLCharacters.Comma field" Url="html/F_TSQL_TSQLCharacters_Comma.htm" />
+  <HelpKINode Title="TSQLCharacters.Equality operator" Url="html/M_TSQL_TSQLCharacters_op_Equality.htm" />
+  <HelpKINode Title="TSQLCharacters.Equals method" Url="html/Overload_TSQL_TSQLCharacters_Equals.htm" />
+  <HelpKINode Title="TSQLCharacters.GetHashCode method" Url="html/M_TSQL_TSQLCharacters_GetHashCode.htm" />
+  <HelpKINode Title="TSQLCharacters.In method" Url="html/M_TSQL_TSQLCharacters_In.htm" />
+  <HelpKINode Title="TSQLCharacters.Inequality operator" Url="html/M_TSQL_TSQLCharacters_op_Inequality.htm" />
+  <HelpKINode Title="TSQLCharacters.IsCharacter method" Url="html/M_TSQL_TSQLCharacters_IsCharacter.htm" />
+  <HelpKINode Title="TSQLCharacters.None field" Url="html/F_TSQL_TSQLCharacters_None.htm" />
+  <HelpKINode Title="TSQLCharacters.OpenParentheses field" Url="html/F_TSQL_TSQLCharacters_OpenParentheses.htm" />
+  <HelpKINode Title="TSQLCharacters.Parse method" Url="html/M_TSQL_TSQLCharacters_Parse.htm" />
+  <HelpKINode Title="TSQLCharacters.Period field" Url="html/F_TSQL_TSQLCharacters_Period.htm" />
+  <HelpKINode Title="TSQLCharacters.Semicolon field" Url="html/F_TSQL_TSQLCharacters_Semicolon.htm" />
+  <HelpKINode Title="TSQLClause class">
+    <HelpKINode Title="TSQLClause Class" Url="html/T_TSQL_Clauses_TSQLClause.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Clauses_TSQLClause.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLClause.Tokens property" Url="html/P_TSQL_Clauses_TSQLClause_Tokens.htm" />
+  <HelpKINode Title="TSQLComment class">
+    <HelpKINode Title="TSQLComment Class" Url="html/T_TSQL_Tokens_TSQLComment.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLComment.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLComment.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLComment.Comment property" Url="html/P_TSQL_Tokens_TSQLComment_Comment.htm" />
+  <HelpKINode Title="TSQLComment.IsComplete property" Url="html/P_TSQL_Tokens_TSQLComment_IsComplete.htm" />
+  <HelpKINode Title="TSQLFromClause class" Url="html/T_TSQL_Clauses_TSQLFromClause.htm" />
+  <HelpKINode Title="TSQLGroupByClause class" Url="html/T_TSQL_Clauses_TSQLGroupByClause.htm" />
+  <HelpKINode Title="TSQLHavingClause class" Url="html/T_TSQL_Clauses_TSQLHavingClause.htm" />
+  <HelpKINode Title="TSQLIdentifier class">
+    <HelpKINode Title="TSQLIdentifier Class" Url="html/T_TSQL_Tokens_TSQLIdentifier.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLIdentifier.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLIdentifier.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLIdentifier.IsComplete property" Url="html/P_TSQL_Tokens_TSQLIdentifier_IsComplete.htm" />
+  <HelpKINode Title="TSQLIdentifier.Name property" Url="html/P_TSQL_Tokens_TSQLIdentifier_Name.htm" />
+  <HelpKINode Title="TSQLIdentifier.Type property" Url="html/P_TSQL_Tokens_TSQLIdentifier_Type.htm" />
+  <HelpKINode Title="TSQLIdentifiers structure">
+    <HelpKINode Title="TSQLIdentifiers Structure" Url="html/T_TSQL_TSQLIdentifiers.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_TSQL_TSQLIdentifiers.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_TSQLIdentifiers.htm" />
+    <HelpKINode Title="operators" Url="html/Operators_T_TSQL_TSQLIdentifiers.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLIdentifiers.COALESCE field" Url="html/F_TSQL_TSQLIdentifiers_COALESCE.htm" />
+  <HelpKINode Title="TSQLIdentifiers.CONTAINS field" Url="html/F_TSQL_TSQLIdentifiers_CONTAINS.htm" />
+  <HelpKINode Title="TSQLIdentifiers.CONTAINSTABLE field" Url="html/F_TSQL_TSQLIdentifiers_CONTAINSTABLE.htm" />
+  <HelpKINode Title="TSQLIdentifiers.CONVERT field" Url="html/F_TSQL_TSQLIdentifiers_CONVERT.htm" />
+  <HelpKINode Title="TSQLIdentifiers.CURRENT_DATE field" Url="html/F_TSQL_TSQLIdentifiers_CURRENT_DATE.htm" />
+  <HelpKINode Title="TSQLIdentifiers.CURRENT_TIME field" Url="html/F_TSQL_TSQLIdentifiers_CURRENT_TIME.htm" />
+  <HelpKINode Title="TSQLIdentifiers.CURRENT_TIMESTAMP field" Url="html/F_TSQL_TSQLIdentifiers_CURRENT_TIMESTAMP.htm" />
+  <HelpKINode Title="TSQLIdentifiers.CURRENT_USER field" Url="html/F_TSQL_TSQLIdentifiers_CURRENT_USER.htm" />
+  <HelpKINode Title="TSQLIdentifiers.Equality operator" Url="html/M_TSQL_TSQLIdentifiers_op_Equality.htm" />
+  <HelpKINode Title="TSQLIdentifiers.Equals method" Url="html/Overload_TSQL_TSQLIdentifiers_Equals.htm" />
+  <HelpKINode Title="TSQLIdentifiers.FREETEXT field" Url="html/F_TSQL_TSQLIdentifiers_FREETEXT.htm" />
+  <HelpKINode Title="TSQLIdentifiers.FREETEXTTABLE field" Url="html/F_TSQL_TSQLIdentifiers_FREETEXTTABLE.htm" />
+  <HelpKINode Title="TSQLIdentifiers.GetHashCode method" Url="html/M_TSQL_TSQLIdentifiers_GetHashCode.htm" />
+  <HelpKINode Title="TSQLIdentifiers.In method" Url="html/M_TSQL_TSQLIdentifiers_In.htm" />
+  <HelpKINode Title="TSQLIdentifiers.Inequality operator" Url="html/M_TSQL_TSQLIdentifiers_op_Inequality.htm" />
+  <HelpKINode Title="TSQLIdentifiers.IsIdentifier method" Url="html/M_TSQL_TSQLIdentifiers_IsIdentifier.htm" />
+  <HelpKINode Title="TSQLIdentifiers.None field" Url="html/F_TSQL_TSQLIdentifiers_None.htm" />
+  <HelpKINode Title="TSQLIdentifiers.NULLIF field" Url="html/F_TSQL_TSQLIdentifiers_NULLIF.htm" />
+  <HelpKINode Title="TSQLIdentifiers.OPENDATASOURCE field" Url="html/F_TSQL_TSQLIdentifiers_OPENDATASOURCE.htm" />
+  <HelpKINode Title="TSQLIdentifiers.OPENQUERY field" Url="html/F_TSQL_TSQLIdentifiers_OPENQUERY.htm" />
+  <HelpKINode Title="TSQLIdentifiers.OPENROWSET field" Url="html/F_TSQL_TSQLIdentifiers_OPENROWSET.htm" />
+  <HelpKINode Title="TSQLIdentifiers.OPENXML field" Url="html/F_TSQL_TSQLIdentifiers_OPENXML.htm" />
+  <HelpKINode Title="TSQLIdentifiers.Parse method" Url="html/M_TSQL_TSQLIdentifiers_Parse.htm" />
+  <HelpKINode Title="TSQLIdentifiers.RAISERROR field" Url="html/F_TSQL_TSQLIdentifiers_RAISERROR.htm" />
+  <HelpKINode Title="TSQLIdentifiers.SEMANTICKEYPHRASETABLE field" Url="html/F_TSQL_TSQLIdentifiers_SEMANTICKEYPHRASETABLE.htm" />
+  <HelpKINode Title="TSQLIdentifiers.SEMANTICSIMILARITYDETAILSTABLE field" Url="html/F_TSQL_TSQLIdentifiers_SEMANTICSIMILARITYDETAILSTABLE.htm" />
+  <HelpKINode Title="TSQLIdentifiers.SEMANTICSIMILARITYTABLE field" Url="html/F_TSQL_TSQLIdentifiers_SEMANTICSIMILARITYTABLE.htm" />
+  <HelpKINode Title="TSQLIdentifiers.SESSION_USER field" Url="html/F_TSQL_TSQLIdentifiers_SESSION_USER.htm" />
+  <HelpKINode Title="TSQLIdentifiers.SYSTEM_USER field" Url="html/F_TSQL_TSQLIdentifiers_SYSTEM_USER.htm" />
+  <HelpKINode Title="TSQLIdentifiers.TRY_CONVERT field" Url="html/F_TSQL_TSQLIdentifiers_TRY_CONVERT.htm" />
+  <HelpKINode Title="TSQLIncompleteCommentToken class">
+    <HelpKINode Title="TSQLIncompleteCommentToken Class" Url="html/T_TSQL_Tokens_TSQLIncompleteCommentToken.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLIncompleteCommentToken.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLIncompleteCommentToken.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLIncompleteCommentToken.Type property" Url="html/P_TSQL_Tokens_TSQLIncompleteCommentToken_Type.htm" />
+  <HelpKINode Title="TSQLIncompleteIdentifierToken class">
+    <HelpKINode Title="TSQLIncompleteIdentifierToken Class" Url="html/T_TSQL_Tokens_TSQLIncompleteIdentifierToken.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLIncompleteIdentifierToken.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLIncompleteIdentifierToken.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLIncompleteIdentifierToken.Type property" Url="html/P_TSQL_Tokens_TSQLIncompleteIdentifierToken_Type.htm" />
+  <HelpKINode Title="TSQLIncompleteStringToken class">
+    <HelpKINode Title="TSQLIncompleteStringToken Class" Url="html/T_TSQL_Tokens_TSQLIncompleteStringToken.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLIncompleteStringToken.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLIncompleteStringToken.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLIncompleteStringToken.Type property" Url="html/P_TSQL_Tokens_TSQLIncompleteStringToken_Type.htm" />
+  <HelpKINode Title="TSQLIncompleteToken class">
+    <HelpKINode Title="TSQLIncompleteToken Class" Url="html/T_TSQL_Tokens_TSQLIncompleteToken.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLIncompleteToken.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLIncompleteToken.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLIncompleteToken.IsComplete property" Url="html/P_TSQL_Tokens_TSQLIncompleteToken_IsComplete.htm" />
+  <HelpKINode Title="TSQLIntoClause class" Url="html/T_TSQL_Clauses_TSQLIntoClause.htm" />
+  <HelpKINode Title="TSQLKeyword class">
+    <HelpKINode Title="TSQLKeyword Class" Url="html/T_TSQL_Tokens_TSQLKeyword.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLKeyword.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLKeyword.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLKeyword.IsComplete property" Url="html/P_TSQL_Tokens_TSQLKeyword_IsComplete.htm" />
+  <HelpKINode Title="TSQLKeyword.Keyword property" Url="html/P_TSQL_Tokens_TSQLKeyword_Keyword.htm" />
+  <HelpKINode Title="TSQLKeyword.Type property" Url="html/P_TSQL_Tokens_TSQLKeyword_Type.htm" />
+  <HelpKINode Title="TSQLKeywords structure">
+    <HelpKINode Title="TSQLKeywords Structure" Url="html/T_TSQL_TSQLKeywords.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_TSQL_TSQLKeywords.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_TSQLKeywords.htm" />
+    <HelpKINode Title="operators" Url="html/Operators_T_TSQL_TSQLKeywords.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLKeywords.ADD field" Url="html/F_TSQL_TSQLKeywords_ADD.htm" />
+  <HelpKINode Title="TSQLKeywords.ALL field" Url="html/F_TSQL_TSQLKeywords_ALL.htm" />
+  <HelpKINode Title="TSQLKeywords.ALTER field" Url="html/F_TSQL_TSQLKeywords_ALTER.htm" />
+  <HelpKINode Title="TSQLKeywords.AND field" Url="html/F_TSQL_TSQLKeywords_AND.htm" />
+  <HelpKINode Title="TSQLKeywords.ANY field" Url="html/F_TSQL_TSQLKeywords_ANY.htm" />
+  <HelpKINode Title="TSQLKeywords.AS field" Url="html/F_TSQL_TSQLKeywords_AS.htm" />
+  <HelpKINode Title="TSQLKeywords.ASC field" Url="html/F_TSQL_TSQLKeywords_ASC.htm" />
+  <HelpKINode Title="TSQLKeywords.AUTHORIZATION field" Url="html/F_TSQL_TSQLKeywords_AUTHORIZATION.htm" />
+  <HelpKINode Title="TSQLKeywords.BACKUP field" Url="html/F_TSQL_TSQLKeywords_BACKUP.htm" />
+  <HelpKINode Title="TSQLKeywords.BEGIN field" Url="html/F_TSQL_TSQLKeywords_BEGIN.htm" />
+  <HelpKINode Title="TSQLKeywords.BETWEEN field" Url="html/F_TSQL_TSQLKeywords_BETWEEN.htm" />
+  <HelpKINode Title="TSQLKeywords.BREAK field" Url="html/F_TSQL_TSQLKeywords_BREAK.htm" />
+  <HelpKINode Title="TSQLKeywords.BROWSE field" Url="html/F_TSQL_TSQLKeywords_BROWSE.htm" />
+  <HelpKINode Title="TSQLKeywords.BULK field" Url="html/F_TSQL_TSQLKeywords_BULK.htm" />
+  <HelpKINode Title="TSQLKeywords.BY field" Url="html/F_TSQL_TSQLKeywords_BY.htm" />
+  <HelpKINode Title="TSQLKeywords.CASCADE field" Url="html/F_TSQL_TSQLKeywords_CASCADE.htm" />
+  <HelpKINode Title="TSQLKeywords.CASE field" Url="html/F_TSQL_TSQLKeywords_CASE.htm" />
+  <HelpKINode Title="TSQLKeywords.CHECK field" Url="html/F_TSQL_TSQLKeywords_CHECK.htm" />
+  <HelpKINode Title="TSQLKeywords.CHECKPOINT field" Url="html/F_TSQL_TSQLKeywords_CHECKPOINT.htm" />
+  <HelpKINode Title="TSQLKeywords.CLOSE field" Url="html/F_TSQL_TSQLKeywords_CLOSE.htm" />
+  <HelpKINode Title="TSQLKeywords.CLUSTERED field" Url="html/F_TSQL_TSQLKeywords_CLUSTERED.htm" />
+  <HelpKINode Title="TSQLKeywords.COLLATE field" Url="html/F_TSQL_TSQLKeywords_COLLATE.htm" />
+  <HelpKINode Title="TSQLKeywords.COLUMN field" Url="html/F_TSQL_TSQLKeywords_COLUMN.htm" />
+  <HelpKINode Title="TSQLKeywords.COMMIT field" Url="html/F_TSQL_TSQLKeywords_COMMIT.htm" />
+  <HelpKINode Title="TSQLKeywords.COMMITTED field" Url="html/F_TSQL_TSQLKeywords_COMMITTED.htm" />
+  <HelpKINode Title="TSQLKeywords.COMPUTE field" Url="html/F_TSQL_TSQLKeywords_COMPUTE.htm" />
+  <HelpKINode Title="TSQLKeywords.CONSTRAINT field" Url="html/F_TSQL_TSQLKeywords_CONSTRAINT.htm" />
+  <HelpKINode Title="TSQLKeywords.CONTINUE field" Url="html/F_TSQL_TSQLKeywords_CONTINUE.htm" />
+  <HelpKINode Title="TSQLKeywords.CREATE field" Url="html/F_TSQL_TSQLKeywords_CREATE.htm" />
+  <HelpKINode Title="TSQLKeywords.CROSS field" Url="html/F_TSQL_TSQLKeywords_CROSS.htm" />
+  <HelpKINode Title="TSQLKeywords.CURRENT field" Url="html/F_TSQL_TSQLKeywords_CURRENT.htm" />
+  <HelpKINode Title="TSQLKeywords.CURSOR field" Url="html/F_TSQL_TSQLKeywords_CURSOR.htm" />
+  <HelpKINode Title="TSQLKeywords.DATABASE field" Url="html/F_TSQL_TSQLKeywords_DATABASE.htm" />
+  <HelpKINode Title="TSQLKeywords.DBCC field" Url="html/F_TSQL_TSQLKeywords_DBCC.htm" />
+  <HelpKINode Title="TSQLKeywords.DEALLOCATE field" Url="html/F_TSQL_TSQLKeywords_DEALLOCATE.htm" />
+  <HelpKINode Title="TSQLKeywords.DECLARE field" Url="html/F_TSQL_TSQLKeywords_DECLARE.htm" />
+  <HelpKINode Title="TSQLKeywords.DEFAULT field" Url="html/F_TSQL_TSQLKeywords_DEFAULT.htm" />
+  <HelpKINode Title="TSQLKeywords.DELETE field" Url="html/F_TSQL_TSQLKeywords_DELETE.htm" />
+  <HelpKINode Title="TSQLKeywords.DENY field" Url="html/F_TSQL_TSQLKeywords_DENY.htm" />
+  <HelpKINode Title="TSQLKeywords.DESC field" Url="html/F_TSQL_TSQLKeywords_DESC.htm" />
+  <HelpKINode Title="TSQLKeywords.DISABLE field" Url="html/F_TSQL_TSQLKeywords_DISABLE.htm" />
+  <HelpKINode Title="TSQLKeywords.DISK field" Url="html/F_TSQL_TSQLKeywords_DISK.htm" />
+  <HelpKINode Title="TSQLKeywords.DISTINCT field" Url="html/F_TSQL_TSQLKeywords_DISTINCT.htm" />
+  <HelpKINode Title="TSQLKeywords.DISTRIBUTED field" Url="html/F_TSQL_TSQLKeywords_DISTRIBUTED.htm" />
+  <HelpKINode Title="TSQLKeywords.DOUBLE field" Url="html/F_TSQL_TSQLKeywords_DOUBLE.htm" />
+  <HelpKINode Title="TSQLKeywords.DROP field" Url="html/F_TSQL_TSQLKeywords_DROP.htm" />
+  <HelpKINode Title="TSQLKeywords.DUMP field" Url="html/F_TSQL_TSQLKeywords_DUMP.htm" />
+  <HelpKINode Title="TSQLKeywords.ELSE field" Url="html/F_TSQL_TSQLKeywords_ELSE.htm" />
+  <HelpKINode Title="TSQLKeywords.ENABLE field" Url="html/F_TSQL_TSQLKeywords_ENABLE.htm" />
+  <HelpKINode Title="TSQLKeywords.END field" Url="html/F_TSQL_TSQLKeywords_END.htm" />
+  <HelpKINode Title="TSQLKeywords.Equality operator" Url="html/M_TSQL_TSQLKeywords_op_Equality.htm" />
+  <HelpKINode Title="TSQLKeywords.Equals method" Url="html/M_TSQL_TSQLKeywords_Equals.htm" />
+  <HelpKINode Title="TSQLKeywords.ESCAPE field" Url="html/F_TSQL_TSQLKeywords_ESCAPE.htm" />
+  <HelpKINode Title="TSQLKeywords.EXCEPT field" Url="html/F_TSQL_TSQLKeywords_EXCEPT.htm" />
+  <HelpKINode Title="TSQLKeywords.EXECUTE field" Url="html/F_TSQL_TSQLKeywords_EXECUTE.htm" />
+  <HelpKINode Title="TSQLKeywords.EXISTS field" Url="html/F_TSQL_TSQLKeywords_EXISTS.htm" />
+  <HelpKINode Title="TSQLKeywords.EXTERNAL field" Url="html/F_TSQL_TSQLKeywords_EXTERNAL.htm" />
+  <HelpKINode Title="TSQLKeywords.FETCH field" Url="html/F_TSQL_TSQLKeywords_FETCH.htm" />
+  <HelpKINode Title="TSQLKeywords.FILE field" Url="html/F_TSQL_TSQLKeywords_FILE.htm" />
+  <HelpKINode Title="TSQLKeywords.FILLFACTOR field" Url="html/F_TSQL_TSQLKeywords_FILLFACTOR.htm" />
+  <HelpKINode Title="TSQLKeywords.FOR field" Url="html/F_TSQL_TSQLKeywords_FOR.htm" />
+  <HelpKINode Title="TSQLKeywords.FOREIGN field" Url="html/F_TSQL_TSQLKeywords_FOREIGN.htm" />
+  <HelpKINode Title="TSQLKeywords.FROM field" Url="html/F_TSQL_TSQLKeywords_FROM.htm" />
+  <HelpKINode Title="TSQLKeywords.FULL field" Url="html/F_TSQL_TSQLKeywords_FULL.htm" />
+  <HelpKINode Title="TSQLKeywords.FUNCTION field" Url="html/F_TSQL_TSQLKeywords_FUNCTION.htm" />
+  <HelpKINode Title="TSQLKeywords.GET field" Url="html/F_TSQL_TSQLKeywords_GET.htm" />
+  <HelpKINode Title="TSQLKeywords.GetHashCode method" Url="html/M_TSQL_TSQLKeywords_GetHashCode.htm" />
+  <HelpKINode Title="TSQLKeywords.GO field" Url="html/F_TSQL_TSQLKeywords_GO.htm" />
+  <HelpKINode Title="TSQLKeywords.GOTO field" Url="html/F_TSQL_TSQLKeywords_GOTO.htm" />
+  <HelpKINode Title="TSQLKeywords.GRANT field" Url="html/F_TSQL_TSQLKeywords_GRANT.htm" />
+  <HelpKINode Title="TSQLKeywords.GROUP field" Url="html/F_TSQL_TSQLKeywords_GROUP.htm" />
+  <HelpKINode Title="TSQLKeywords.HAVING field" Url="html/F_TSQL_TSQLKeywords_HAVING.htm" />
+  <HelpKINode Title="TSQLKeywords.HOLDLOCK field" Url="html/F_TSQL_TSQLKeywords_HOLDLOCK.htm" />
+  <HelpKINode Title="TSQLKeywords.IDENTITY field" Url="html/F_TSQL_TSQLKeywords_IDENTITY.htm" />
+  <HelpKINode Title="TSQLKeywords.IDENTITYCOL field" Url="html/F_TSQL_TSQLKeywords_IDENTITYCOL.htm" />
+  <HelpKINode Title="TSQLKeywords.IDENTITY_INSERT field" Url="html/F_TSQL_TSQLKeywords_IDENTITY_INSERT.htm" />
+  <HelpKINode Title="TSQLKeywords.IF field" Url="html/F_TSQL_TSQLKeywords_IF.htm" />
+  <HelpKINode Title="TSQLKeywords.IN field" Url="html/F_TSQL_TSQLKeywords_IN.htm" />
+  <HelpKINode Title="TSQLKeywords.In method" Url="html/M_TSQL_TSQLKeywords_In.htm" />
+  <HelpKINode Title="TSQLKeywords.INDEX field" Url="html/F_TSQL_TSQLKeywords_INDEX.htm" />
+  <HelpKINode Title="TSQLKeywords.Inequality operator" Url="html/M_TSQL_TSQLKeywords_op_Inequality.htm" />
+  <HelpKINode Title="TSQLKeywords.INNER field" Url="html/F_TSQL_TSQLKeywords_INNER.htm" />
+  <HelpKINode Title="TSQLKeywords.INSERT field" Url="html/F_TSQL_TSQLKeywords_INSERT.htm" />
+  <HelpKINode Title="TSQLKeywords.INTERSECT field" Url="html/F_TSQL_TSQLKeywords_INTERSECT.htm" />
+  <HelpKINode Title="TSQLKeywords.INTO field" Url="html/F_TSQL_TSQLKeywords_INTO.htm" />
+  <HelpKINode Title="TSQLKeywords.IS field" Url="html/F_TSQL_TSQLKeywords_IS.htm" />
+  <HelpKINode Title="TSQLKeywords.IsKeyword method" Url="html/M_TSQL_TSQLKeywords_IsKeyword.htm" />
+  <HelpKINode Title="TSQLKeywords.JOIN field" Url="html/F_TSQL_TSQLKeywords_JOIN.htm" />
+  <HelpKINode Title="TSQLKeywords.KEY field" Url="html/F_TSQL_TSQLKeywords_KEY.htm" />
+  <HelpKINode Title="TSQLKeywords.KILL field" Url="html/F_TSQL_TSQLKeywords_KILL.htm" />
+  <HelpKINode Title="TSQLKeywords.LEFT field" Url="html/F_TSQL_TSQLKeywords_LEFT.htm" />
+  <HelpKINode Title="TSQLKeywords.LIKE field" Url="html/F_TSQL_TSQLKeywords_LIKE.htm" />
+  <HelpKINode Title="TSQLKeywords.LINENO field" Url="html/F_TSQL_TSQLKeywords_LINENO.htm" />
+  <HelpKINode Title="TSQLKeywords.LOAD field" Url="html/F_TSQL_TSQLKeywords_LOAD.htm" />
+  <HelpKINode Title="TSQLKeywords.MERGE field" Url="html/F_TSQL_TSQLKeywords_MERGE.htm" />
+  <HelpKINode Title="TSQLKeywords.MOVE field" Url="html/F_TSQL_TSQLKeywords_MOVE.htm" />
+  <HelpKINode Title="TSQLKeywords.NOCHECK field" Url="html/F_TSQL_TSQLKeywords_NOCHECK.htm" />
+  <HelpKINode Title="TSQLKeywords.NONCLUSTERED field" Url="html/F_TSQL_TSQLKeywords_NONCLUSTERED.htm" />
+  <HelpKINode Title="TSQLKeywords.None field" Url="html/F_TSQL_TSQLKeywords_None.htm" />
+  <HelpKINode Title="TSQLKeywords.NOT field" Url="html/F_TSQL_TSQLKeywords_NOT.htm" />
+  <HelpKINode Title="TSQLKeywords.NULL field" Url="html/F_TSQL_TSQLKeywords_NULL.htm" />
+  <HelpKINode Title="TSQLKeywords.OFF field" Url="html/F_TSQL_TSQLKeywords_OFF.htm" />
+  <HelpKINode Title="TSQLKeywords.OFFSETS field" Url="html/F_TSQL_TSQLKeywords_OFFSETS.htm" />
+  <HelpKINode Title="TSQLKeywords.ON field" Url="html/F_TSQL_TSQLKeywords_ON.htm" />
+  <HelpKINode Title="TSQLKeywords.OPEN field" Url="html/F_TSQL_TSQLKeywords_OPEN.htm" />
+  <HelpKINode Title="TSQLKeywords.OPTION field" Url="html/F_TSQL_TSQLKeywords_OPTION.htm" />
+  <HelpKINode Title="TSQLKeywords.OR field" Url="html/F_TSQL_TSQLKeywords_OR.htm" />
+  <HelpKINode Title="TSQLKeywords.ORDER field" Url="html/F_TSQL_TSQLKeywords_ORDER.htm" />
+  <HelpKINode Title="TSQLKeywords.OUTER field" Url="html/F_TSQL_TSQLKeywords_OUTER.htm" />
+  <HelpKINode Title="TSQLKeywords.OVER field" Url="html/F_TSQL_TSQLKeywords_OVER.htm" />
+  <HelpKINode Title="TSQLKeywords.Parse method" Url="html/M_TSQL_TSQLKeywords_Parse.htm" />
+  <HelpKINode Title="TSQLKeywords.PERCENT field" Url="html/F_TSQL_TSQLKeywords_PERCENT.htm" />
+  <HelpKINode Title="TSQLKeywords.PIVOT field" Url="html/F_TSQL_TSQLKeywords_PIVOT.htm" />
+  <HelpKINode Title="TSQLKeywords.PLAN field" Url="html/F_TSQL_TSQLKeywords_PLAN.htm" />
+  <HelpKINode Title="TSQLKeywords.PRECISION field" Url="html/F_TSQL_TSQLKeywords_PRECISION.htm" />
+  <HelpKINode Title="TSQLKeywords.PRIMARY field" Url="html/F_TSQL_TSQLKeywords_PRIMARY.htm" />
+  <HelpKINode Title="TSQLKeywords.PRINT field" Url="html/F_TSQL_TSQLKeywords_PRINT.htm" />
+  <HelpKINode Title="TSQLKeywords.PROCEDURE field" Url="html/F_TSQL_TSQLKeywords_PROCEDURE.htm" />
+  <HelpKINode Title="TSQLKeywords.PUBLIC field" Url="html/F_TSQL_TSQLKeywords_PUBLIC.htm" />
+  <HelpKINode Title="TSQLKeywords.READ field" Url="html/F_TSQL_TSQLKeywords_READ.htm" />
+  <HelpKINode Title="TSQLKeywords.READTEXT field" Url="html/F_TSQL_TSQLKeywords_READTEXT.htm" />
+  <HelpKINode Title="TSQLKeywords.RECEIVE field" Url="html/F_TSQL_TSQLKeywords_RECEIVE.htm" />
+  <HelpKINode Title="TSQLKeywords.RECONFIGURE field" Url="html/F_TSQL_TSQLKeywords_RECONFIGURE.htm" />
+  <HelpKINode Title="TSQLKeywords.REFERENCES field" Url="html/F_TSQL_TSQLKeywords_REFERENCES.htm" />
+  <HelpKINode Title="TSQLKeywords.REPEATABLE field" Url="html/F_TSQL_TSQLKeywords_REPEATABLE.htm" />
+  <HelpKINode Title="TSQLKeywords.REPLICATION field" Url="html/F_TSQL_TSQLKeywords_REPLICATION.htm" />
+  <HelpKINode Title="TSQLKeywords.RESTORE field" Url="html/F_TSQL_TSQLKeywords_RESTORE.htm" />
+  <HelpKINode Title="TSQLKeywords.RETURN field" Url="html/F_TSQL_TSQLKeywords_RETURN.htm" />
+  <HelpKINode Title="TSQLKeywords.RETURNS field" Url="html/F_TSQL_TSQLKeywords_RETURNS.htm" />
+  <HelpKINode Title="TSQLKeywords.REVERT field" Url="html/F_TSQL_TSQLKeywords_REVERT.htm" />
+  <HelpKINode Title="TSQLKeywords.REVOKE field" Url="html/F_TSQL_TSQLKeywords_REVOKE.htm" />
+  <HelpKINode Title="TSQLKeywords.RIGHT field" Url="html/F_TSQL_TSQLKeywords_RIGHT.htm" />
+  <HelpKINode Title="TSQLKeywords.ROLLBACK field" Url="html/F_TSQL_TSQLKeywords_ROLLBACK.htm" />
+  <HelpKINode Title="TSQLKeywords.ROWCOUNT field" Url="html/F_TSQL_TSQLKeywords_ROWCOUNT.htm" />
+  <HelpKINode Title="TSQLKeywords.ROWGUIDCOL field" Url="html/F_TSQL_TSQLKeywords_ROWGUIDCOL.htm" />
+  <HelpKINode Title="TSQLKeywords.RULE field" Url="html/F_TSQL_TSQLKeywords_RULE.htm" />
+  <HelpKINode Title="TSQLKeywords.SAVE field" Url="html/F_TSQL_TSQLKeywords_SAVE.htm" />
+  <HelpKINode Title="TSQLKeywords.SCHEMA field" Url="html/F_TSQL_TSQLKeywords_SCHEMA.htm" />
+  <HelpKINode Title="TSQLKeywords.SELECT field" Url="html/F_TSQL_TSQLKeywords_SELECT.htm" />
+  <HelpKINode Title="TSQLKeywords.SEND field" Url="html/F_TSQL_TSQLKeywords_SEND.htm" />
+  <HelpKINode Title="TSQLKeywords.SET field" Url="html/F_TSQL_TSQLKeywords_SET.htm" />
+  <HelpKINode Title="TSQLKeywords.SETUSER field" Url="html/F_TSQL_TSQLKeywords_SETUSER.htm" />
+  <HelpKINode Title="TSQLKeywords.SHUTDOWN field" Url="html/F_TSQL_TSQLKeywords_SHUTDOWN.htm" />
+  <HelpKINode Title="TSQLKeywords.SOME field" Url="html/F_TSQL_TSQLKeywords_SOME.htm" />
+  <HelpKINode Title="TSQLKeywords.STATISTICS field" Url="html/F_TSQL_TSQLKeywords_STATISTICS.htm" />
+  <HelpKINode Title="TSQLKeywords.TABLE field" Url="html/F_TSQL_TSQLKeywords_TABLE.htm" />
+  <HelpKINode Title="TSQLKeywords.TABLESAMPLE field" Url="html/F_TSQL_TSQLKeywords_TABLESAMPLE.htm" />
+  <HelpKINode Title="TSQLKeywords.TEXTSIZE field" Url="html/F_TSQL_TSQLKeywords_TEXTSIZE.htm" />
+  <HelpKINode Title="TSQLKeywords.THEN field" Url="html/F_TSQL_TSQLKeywords_THEN.htm" />
+  <HelpKINode Title="TSQLKeywords.TOP field" Url="html/F_TSQL_TSQLKeywords_TOP.htm" />
+  <HelpKINode Title="TSQLKeywords.TRANSACTION field" Url="html/F_TSQL_TSQLKeywords_TRANSACTION.htm" />
+  <HelpKINode Title="TSQLKeywords.TRIGGER field" Url="html/F_TSQL_TSQLKeywords_TRIGGER.htm" />
+  <HelpKINode Title="TSQLKeywords.TRUNCATE field" Url="html/F_TSQL_TSQLKeywords_TRUNCATE.htm" />
+  <HelpKINode Title="TSQLKeywords.UNION field" Url="html/F_TSQL_TSQLKeywords_UNION.htm" />
+  <HelpKINode Title="TSQLKeywords.UNIQUE field" Url="html/F_TSQL_TSQLKeywords_UNIQUE.htm" />
+  <HelpKINode Title="TSQLKeywords.UNPIVOT field" Url="html/F_TSQL_TSQLKeywords_UNPIVOT.htm" />
+  <HelpKINode Title="TSQLKeywords.UPDATE field" Url="html/F_TSQL_TSQLKeywords_UPDATE.htm" />
+  <HelpKINode Title="TSQLKeywords.UPDATETEXT field" Url="html/F_TSQL_TSQLKeywords_UPDATETEXT.htm" />
+  <HelpKINode Title="TSQLKeywords.USE field" Url="html/F_TSQL_TSQLKeywords_USE.htm" />
+  <HelpKINode Title="TSQLKeywords.VALUES field" Url="html/F_TSQL_TSQLKeywords_VALUES.htm" />
+  <HelpKINode Title="TSQLKeywords.VARYING field" Url="html/F_TSQL_TSQLKeywords_VARYING.htm" />
+  <HelpKINode Title="TSQLKeywords.VIEW field" Url="html/F_TSQL_TSQLKeywords_VIEW.htm" />
+  <HelpKINode Title="TSQLKeywords.WAITFOR field" Url="html/F_TSQL_TSQLKeywords_WAITFOR.htm" />
+  <HelpKINode Title="TSQLKeywords.WHEN field" Url="html/F_TSQL_TSQLKeywords_WHEN.htm" />
+  <HelpKINode Title="TSQLKeywords.WHERE field" Url="html/F_TSQL_TSQLKeywords_WHERE.htm" />
+  <HelpKINode Title="TSQLKeywords.WHILE field" Url="html/F_TSQL_TSQLKeywords_WHILE.htm" />
+  <HelpKINode Title="TSQLKeywords.WITH field" Url="html/F_TSQL_TSQLKeywords_WITH.htm" />
+  <HelpKINode Title="TSQLKeywords.WITHIN field" Url="html/F_TSQL_TSQLKeywords_WITHIN.htm" />
+  <HelpKINode Title="TSQLKeywords.WRITETEXT field" Url="html/F_TSQL_TSQLKeywords_WRITETEXT.htm" />
+  <HelpKINode Title="TSQLLiteral class">
+    <HelpKINode Title="TSQLLiteral Class" Url="html/T_TSQL_Tokens_TSQLLiteral.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLLiteral.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLLiteral.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLLiteral.IsComplete property" Url="html/P_TSQL_Tokens_TSQLLiteral_IsComplete.htm" />
+  <HelpKINode Title="TSQLMoneyLiteral class">
+    <HelpKINode Title="TSQLMoneyLiteral Class" Url="html/T_TSQL_Tokens_TSQLMoneyLiteral.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLMoneyLiteral.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLMoneyLiteral.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLMoneyLiteral.Type property" Url="html/P_TSQL_Tokens_TSQLMoneyLiteral_Type.htm" />
+  <HelpKINode Title="TSQLMultilineComment class">
+    <HelpKINode Title="TSQLMultilineComment Class" Url="html/T_TSQL_Tokens_TSQLMultilineComment.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLMultilineComment.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLMultilineComment.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLMultilineComment.Type property" Url="html/P_TSQL_Tokens_TSQLMultilineComment_Type.htm" />
+  <HelpKINode Title="TSQLNumericLiteral class">
+    <HelpKINode Title="TSQLNumericLiteral Class" Url="html/T_TSQL_Tokens_TSQLNumericLiteral.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLNumericLiteral.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLNumericLiteral.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLNumericLiteral.Type property" Url="html/P_TSQL_Tokens_TSQLNumericLiteral_Type.htm" />
+  <HelpKINode Title="TSQLOperator class">
+    <HelpKINode Title="TSQLOperator Class" Url="html/T_TSQL_Tokens_TSQLOperator.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLOperator.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLOperator.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLOperator.IsComplete property" Url="html/P_TSQL_Tokens_TSQLOperator_IsComplete.htm" />
+  <HelpKINode Title="TSQLOperator.Type property" Url="html/P_TSQL_Tokens_TSQLOperator_Type.htm" />
+  <HelpKINode Title="TSQLOptionClause class" Url="html/T_TSQL_Clauses_TSQLOptionClause.htm" />
+  <HelpKINode Title="TSQLOrderByClause class" Url="html/T_TSQL_Clauses_TSQLOrderByClause.htm" />
+  <HelpKINode Title="TSQLSelectClause class" Url="html/T_TSQL_Clauses_TSQLSelectClause.htm" />
+  <HelpKINode Title="TSQLSelectStatement class">
+    <HelpKINode Title="TSQLSelectStatement Class" Url="html/T_TSQL_Statements_TSQLSelectStatement.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Statements_TSQLSelectStatement.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLSelectStatement.From property" Url="html/P_TSQL_Statements_TSQLSelectStatement_From.htm" />
+  <HelpKINode Title="TSQLSelectStatement.GroupBy property" Url="html/P_TSQL_Statements_TSQLSelectStatement_GroupBy.htm" />
+  <HelpKINode Title="TSQLSelectStatement.Having property" Url="html/P_TSQL_Statements_TSQLSelectStatement_Having.htm" />
+  <HelpKINode Title="TSQLSelectStatement.Into property" Url="html/P_TSQL_Statements_TSQLSelectStatement_Into.htm" />
+  <HelpKINode Title="TSQLSelectStatement.Option property" Url="html/P_TSQL_Statements_TSQLSelectStatement_Option.htm" />
+  <HelpKINode Title="TSQLSelectStatement.OrderBy property" Url="html/P_TSQL_Statements_TSQLSelectStatement_OrderBy.htm" />
+  <HelpKINode Title="TSQLSelectStatement.Select property" Url="html/P_TSQL_Statements_TSQLSelectStatement_Select.htm" />
+  <HelpKINode Title="TSQLSelectStatement.Type property" Url="html/P_TSQL_Statements_TSQLSelectStatement_Type.htm" />
+  <HelpKINode Title="TSQLSelectStatement.Where property" Url="html/P_TSQL_Statements_TSQLSelectStatement_Where.htm" />
+  <HelpKINode Title="TSQLSingleLineComment class">
+    <HelpKINode Title="TSQLSingleLineComment Class" Url="html/T_TSQL_Tokens_TSQLSingleLineComment.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLSingleLineComment.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLSingleLineComment.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLSingleLineComment.Type property" Url="html/P_TSQL_Tokens_TSQLSingleLineComment_Type.htm" />
+  <HelpKINode Title="TSQLStatement class">
+    <HelpKINode Title="TSQLStatement Class" Url="html/T_TSQL_Statements_TSQLStatement.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Statements_TSQLStatement.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLStatement.Tokens property" Url="html/P_TSQL_Statements_TSQLStatement_Tokens.htm" />
+  <HelpKINode Title="TSQLStatement.Type property" Url="html/P_TSQL_Statements_TSQLStatement_Type.htm" />
+  <HelpKINode Title="TSQLStatementReader class">
+    <HelpKINode Title="TSQLStatementReader Class" Url="html/T_TSQL_TSQLStatementReader.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_TSQL_TSQLStatementReader__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_TSQLStatementReader.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_TSQLStatementReader.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLStatementReader.Current property" Url="html/P_TSQL_TSQLStatementReader_Current.htm" />
+  <HelpKINode Title="TSQLStatementReader.IncludeWhitespace property" Url="html/P_TSQL_TSQLStatementReader_IncludeWhitespace.htm" />
+  <HelpKINode Title="TSQLStatementReader.MoveNext method" Url="html/M_TSQL_TSQLStatementReader_MoveNext.htm" />
+  <HelpKINode Title="TSQLStatementReader.ParseStatements method" Url="html/M_TSQL_TSQLStatementReader_ParseStatements.htm" />
+  <HelpKINode Title="TSQLStatementReader.TSQLStatementReader constructor" Url="html/Overload_TSQL_TSQLStatementReader__ctor.htm" />
+  <HelpKINode Title="TSQLStatementReader.UseQuotedIdentifiers property" Url="html/P_TSQL_TSQLStatementReader_UseQuotedIdentifiers.htm" />
+  <HelpKINode Title="TSQLStatementType enumeration" Url="html/T_TSQL_Statements_TSQLStatementType.htm" />
+  <HelpKINode Title="TSQLStringLiteral class">
+    <HelpKINode Title="TSQLStringLiteral Class" Url="html/T_TSQL_Tokens_TSQLStringLiteral.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLStringLiteral.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLStringLiteral.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLStringLiteral.IsUnicode property" Url="html/P_TSQL_Tokens_TSQLStringLiteral_IsUnicode.htm" />
+  <HelpKINode Title="TSQLStringLiteral.QuoteCharacter property" Url="html/P_TSQL_Tokens_TSQLStringLiteral_QuoteCharacter.htm" />
+  <HelpKINode Title="TSQLStringLiteral.Type property" Url="html/P_TSQL_Tokens_TSQLStringLiteral_Type.htm" />
+  <HelpKINode Title="TSQLStringLiteral.Value property" Url="html/P_TSQL_Tokens_TSQLStringLiteral_Value.htm" />
+  <HelpKINode Title="TSQLSystemIdentifier class">
+    <HelpKINode Title="TSQLSystemIdentifier Class" Url="html/T_TSQL_Tokens_TSQLSystemIdentifier.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLSystemIdentifier.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLSystemIdentifier.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLSystemIdentifier.Identifier property" Url="html/P_TSQL_Tokens_TSQLSystemIdentifier_Identifier.htm" />
+  <HelpKINode Title="TSQLSystemIdentifier.Type property" Url="html/P_TSQL_Tokens_TSQLSystemIdentifier_Type.htm" />
+  <HelpKINode Title="TSQLSystemVariable class">
+    <HelpKINode Title="TSQLSystemVariable Class" Url="html/T_TSQL_Tokens_TSQLSystemVariable.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLSystemVariable.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLSystemVariable.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLSystemVariable.Type property" Url="html/P_TSQL_Tokens_TSQLSystemVariable_Type.htm" />
+  <HelpKINode Title="TSQLSystemVariable.Variable property" Url="html/P_TSQL_Tokens_TSQLSystemVariable_Variable.htm" />
+  <HelpKINode Title="TSQLToken class">
+    <HelpKINode Title="TSQLToken Class" Url="html/T_TSQL_Tokens_TSQLToken.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLToken.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLToken.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLToken.AsCharacter property" Url="html/P_TSQL_Tokens_TSQLToken_AsCharacter.htm" />
+  <HelpKINode Title="TSQLToken.AsComment property" Url="html/P_TSQL_Tokens_TSQLToken_AsComment.htm" />
+  <HelpKINode Title="TSQLToken.AsIdentifier property" Url="html/P_TSQL_Tokens_TSQLToken_AsIdentifier.htm" />
+  <HelpKINode Title="TSQLToken.AsKeyword property" Url="html/P_TSQL_Tokens_TSQLToken_AsKeyword.htm" />
+  <HelpKINode Title="TSQLToken.AsLiteral property" Url="html/P_TSQL_Tokens_TSQLToken_AsLiteral.htm" />
+  <HelpKINode Title="TSQLToken.AsMultilineComment property" Url="html/P_TSQL_Tokens_TSQLToken_AsMultilineComment.htm" />
+  <HelpKINode Title="TSQLToken.AsNumericLiteral property" Url="html/P_TSQL_Tokens_TSQLToken_AsNumericLiteral.htm" />
+  <HelpKINode Title="TSQLToken.AsOperator property" Url="html/P_TSQL_Tokens_TSQLToken_AsOperator.htm" />
+  <HelpKINode Title="TSQLToken.AsSingleLineComment property" Url="html/P_TSQL_Tokens_TSQLToken_AsSingleLineComment.htm" />
+  <HelpKINode Title="TSQLToken.AsStringLiteral property" Url="html/P_TSQL_Tokens_TSQLToken_AsStringLiteral.htm" />
+  <HelpKINode Title="TSQLToken.AsSystemIdentifier property" Url="html/P_TSQL_Tokens_TSQLToken_AsSystemIdentifier.htm" />
+  <HelpKINode Title="TSQLToken.AsSystemVariable property" Url="html/P_TSQL_Tokens_TSQLToken_AsSystemVariable.htm" />
+  <HelpKINode Title="TSQLToken.AsVariable property" Url="html/P_TSQL_Tokens_TSQLToken_AsVariable.htm" />
+  <HelpKINode Title="TSQLToken.AsWhitespace property" Url="html/P_TSQL_Tokens_TSQLToken_AsWhitespace.htm" />
+  <HelpKINode Title="TSQLToken.BeginPosition property" Url="html/P_TSQL_Tokens_TSQLToken_BeginPosition.htm" />
+  <HelpKINode Title="TSQLToken.EndPosition property" Url="html/P_TSQL_Tokens_TSQLToken_EndPosition.htm" />
+  <HelpKINode Title="TSQLToken.IsComplete property" Url="html/P_TSQL_Tokens_TSQLToken_IsComplete.htm" />
+  <HelpKINode Title="TSQLToken.Length property" Url="html/P_TSQL_Tokens_TSQLToken_Length.htm" />
+  <HelpKINode Title="TSQLToken.Text property" Url="html/P_TSQL_Tokens_TSQLToken_Text.htm" />
+  <HelpKINode Title="TSQLToken.Type property" Url="html/P_TSQL_Tokens_TSQLToken_Type.htm" />
+  <HelpKINode Title="TSQLTokenExtensions class">
+    <HelpKINode Title="TSQLTokenExtensions Class" Url="html/T_TSQL_Tokens_TSQLTokenExtensions.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLTokenExtensions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLTokenExtensions.IsCharacter method" Url="html/M_TSQL_Tokens_TSQLTokenExtensions_IsCharacter.htm" />
+  <HelpKINode Title="TSQLTokenExtensions.IsKeyword method" Url="html/M_TSQL_Tokens_TSQLTokenExtensions_IsKeyword.htm" />
+  <HelpKINode Title="TSQLTokenizer class">
+    <HelpKINode Title="TSQLTokenizer Class" Url="html/T_TSQL_TSQLTokenizer.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_TSQL_TSQLTokenizer__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_TSQLTokenizer.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_TSQLTokenizer.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLTokenizer.Current property" Url="html/P_TSQL_TSQLTokenizer_Current.htm" />
+  <HelpKINode Title="TSQLTokenizer.IncludeWhitespace property" Url="html/P_TSQL_TSQLTokenizer_IncludeWhitespace.htm" />
+  <HelpKINode Title="TSQLTokenizer.MoveNext method" Url="html/M_TSQL_TSQLTokenizer_MoveNext.htm" />
+  <HelpKINode Title="TSQLTokenizer.ParseTokens method" Url="html/M_TSQL_TSQLTokenizer_ParseTokens.htm" />
+  <HelpKINode Title="TSQLTokenizer.Putback method" Url="html/M_TSQL_TSQLTokenizer_Putback.htm" />
+  <HelpKINode Title="TSQLTokenizer.TSQLTokenizer constructor" Url="html/Overload_TSQL_TSQLTokenizer__ctor.htm" />
+  <HelpKINode Title="TSQLTokenizer.UseQuotedIdentifiers property" Url="html/P_TSQL_TSQLTokenizer_UseQuotedIdentifiers.htm" />
+  <HelpKINode Title="TSQLTokenType enumeration" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="TSQLUnknownStatement class">
+    <HelpKINode Title="TSQLUnknownStatement Class" Url="html/T_TSQL_Statements_TSQLUnknownStatement.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Statements_TSQLUnknownStatement.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLUnknownStatement.Type property" Url="html/P_TSQL_Statements_TSQLUnknownStatement_Type.htm" />
+  <HelpKINode Title="TSQLVariable class">
+    <HelpKINode Title="TSQLVariable Class" Url="html/T_TSQL_Tokens_TSQLVariable.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLVariable.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLVariable.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLVariable.IsComplete property" Url="html/P_TSQL_Tokens_TSQLVariable_IsComplete.htm" />
+  <HelpKINode Title="TSQLVariable.Type property" Url="html/P_TSQL_Tokens_TSQLVariable_Type.htm" />
+  <HelpKINode Title="TSQLVariables structure">
+    <HelpKINode Title="TSQLVariables Structure" Url="html/T_TSQL_TSQLVariables.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_TSQL_TSQLVariables.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_TSQLVariables.htm" />
+    <HelpKINode Title="operators" Url="html/Operators_T_TSQL_TSQLVariables.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLVariables.CONNECTIONS field" Url="html/F_TSQL_TSQLVariables_CONNECTIONS.htm" />
+  <HelpKINode Title="TSQLVariables.CPU_BUSY field" Url="html/F_TSQL_TSQLVariables_CPU_BUSY.htm" />
+  <HelpKINode Title="TSQLVariables.Equality operator" Url="html/M_TSQL_TSQLVariables_op_Equality.htm" />
+  <HelpKINode Title="TSQLVariables.Equals method" Url="html/Overload_TSQL_TSQLVariables_Equals.htm" />
+  <HelpKINode Title="TSQLVariables.ERROR field" Url="html/F_TSQL_TSQLVariables_ERROR.htm" />
+  <HelpKINode Title="TSQLVariables.GetHashCode method" Url="html/M_TSQL_TSQLVariables_GetHashCode.htm" />
+  <HelpKINode Title="TSQLVariables.IDENTITY field" Url="html/F_TSQL_TSQLVariables_IDENTITY.htm" />
+  <HelpKINode Title="TSQLVariables.IDLE field" Url="html/F_TSQL_TSQLVariables_IDLE.htm" />
+  <HelpKINode Title="TSQLVariables.In method" Url="html/M_TSQL_TSQLVariables_In.htm" />
+  <HelpKINode Title="TSQLVariables.Inequality operator" Url="html/M_TSQL_TSQLVariables_op_Inequality.htm" />
+  <HelpKINode Title="TSQLVariables.IO_BUSY field" Url="html/F_TSQL_TSQLVariables_IO_BUSY.htm" />
+  <HelpKINode Title="TSQLVariables.IsVariable method" Url="html/M_TSQL_TSQLVariables_IsVariable.htm" />
+  <HelpKINode Title="TSQLVariables.LANGID field" Url="html/F_TSQL_TSQLVariables_LANGID.htm" />
+  <HelpKINode Title="TSQLVariables.LANGUAGE field" Url="html/F_TSQL_TSQLVariables_LANGUAGE.htm" />
+  <HelpKINode Title="TSQLVariables.MAXCHARLEN field" Url="html/F_TSQL_TSQLVariables_MAXCHARLEN.htm" />
+  <HelpKINode Title="TSQLVariables.MAX_CONNECTIONS field" Url="html/F_TSQL_TSQLVariables_MAX_CONNECTIONS.htm" />
+  <HelpKINode Title="TSQLVariables.None field" Url="html/F_TSQL_TSQLVariables_None.htm" />
+  <HelpKINode Title="TSQLVariables.PACKET_ERRORS field" Url="html/F_TSQL_TSQLVariables_PACKET_ERRORS.htm" />
+  <HelpKINode Title="TSQLVariables.PACK_RECEIVED field" Url="html/F_TSQL_TSQLVariables_PACK_RECEIVED.htm" />
+  <HelpKINode Title="TSQLVariables.PACK_SENT field" Url="html/F_TSQL_TSQLVariables_PACK_SENT.htm" />
+  <HelpKINode Title="TSQLVariables.Parse method" Url="html/M_TSQL_TSQLVariables_Parse.htm" />
+  <HelpKINode Title="TSQLVariables.ROWCOUNT field" Url="html/F_TSQL_TSQLVariables_ROWCOUNT.htm" />
+  <HelpKINode Title="TSQLVariables.SERVERNAME field" Url="html/F_TSQL_TSQLVariables_SERVERNAME.htm" />
+  <HelpKINode Title="TSQLVariables.SPID field" Url="html/F_TSQL_TSQLVariables_SPID.htm" />
+  <HelpKINode Title="TSQLVariables.TEXTSIZE field" Url="html/F_TSQL_TSQLVariables_TEXTSIZE.htm" />
+  <HelpKINode Title="TSQLVariables.TIMETICKS field" Url="html/F_TSQL_TSQLVariables_TIMETICKS.htm" />
+  <HelpKINode Title="TSQLVariables.TOTAL_ERRORS field" Url="html/F_TSQL_TSQLVariables_TOTAL_ERRORS.htm" />
+  <HelpKINode Title="TSQLVariables.TOTAL_READ field" Url="html/F_TSQL_TSQLVariables_TOTAL_READ.htm" />
+  <HelpKINode Title="TSQLVariables.TOTAL_WRITE field" Url="html/F_TSQL_TSQLVariables_TOTAL_WRITE.htm" />
+  <HelpKINode Title="TSQLVariables.TRANCOUNT field" Url="html/F_TSQL_TSQLVariables_TRANCOUNT.htm" />
+  <HelpKINode Title="TSQLVariables.VERSION field" Url="html/F_TSQL_TSQLVariables_VERSION.htm" />
+  <HelpKINode Title="TSQLWhereClause class" Url="html/T_TSQL_Clauses_TSQLWhereClause.htm" />
+  <HelpKINode Title="TSQLWhitespace class">
+    <HelpKINode Title="TSQLWhitespace Class" Url="html/T_TSQL_Tokens_TSQLWhitespace.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_TSQL_Tokens_TSQLWhitespace.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_TSQL_Tokens_TSQLWhitespace.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TSQLWhitespace.IsComplete property" Url="html/P_TSQL_Tokens_TSQLWhitespace_IsComplete.htm" />
+  <HelpKINode Title="TSQLWhitespace.Type property" Url="html/P_TSQL_Tokens_TSQLWhitespace_Type.htm" />
+  <HelpKINode Title="Type property">
+    <HelpKINode Title="TSQLBinaryLiteral.Type Property " Url="html/P_TSQL_Tokens_TSQLBinaryLiteral_Type.htm" />
+    <HelpKINode Title="TSQLCharacter.Type Property " Url="html/P_TSQL_Tokens_TSQLCharacter_Type.htm" />
+    <HelpKINode Title="TSQLIdentifier.Type Property " Url="html/P_TSQL_Tokens_TSQLIdentifier_Type.htm" />
+    <HelpKINode Title="TSQLIncompleteCommentToken.Type Property " Url="html/P_TSQL_Tokens_TSQLIncompleteCommentToken_Type.htm" />
+    <HelpKINode Title="TSQLIncompleteIdentifierToken.Type Property " Url="html/P_TSQL_Tokens_TSQLIncompleteIdentifierToken_Type.htm" />
+    <HelpKINode Title="TSQLIncompleteStringToken.Type Property " Url="html/P_TSQL_Tokens_TSQLIncompleteStringToken_Type.htm" />
+    <HelpKINode Title="TSQLKeyword.Type Property " Url="html/P_TSQL_Tokens_TSQLKeyword_Type.htm" />
+    <HelpKINode Title="TSQLMoneyLiteral.Type Property " Url="html/P_TSQL_Tokens_TSQLMoneyLiteral_Type.htm" />
+    <HelpKINode Title="TSQLMultilineComment.Type Property " Url="html/P_TSQL_Tokens_TSQLMultilineComment_Type.htm" />
+    <HelpKINode Title="TSQLNumericLiteral.Type Property " Url="html/P_TSQL_Tokens_TSQLNumericLiteral_Type.htm" />
+    <HelpKINode Title="TSQLOperator.Type Property " Url="html/P_TSQL_Tokens_TSQLOperator_Type.htm" />
+    <HelpKINode Title="TSQLSelectStatement.Type Property " Url="html/P_TSQL_Statements_TSQLSelectStatement_Type.htm" />
+    <HelpKINode Title="TSQLSingleLineComment.Type Property " Url="html/P_TSQL_Tokens_TSQLSingleLineComment_Type.htm" />
+    <HelpKINode Title="TSQLStatement.Type Property " Url="html/P_TSQL_Statements_TSQLStatement_Type.htm" />
+    <HelpKINode Title="TSQLStringLiteral.Type Property " Url="html/P_TSQL_Tokens_TSQLStringLiteral_Type.htm" />
+    <HelpKINode Title="TSQLSystemIdentifier.Type Property " Url="html/P_TSQL_Tokens_TSQLSystemIdentifier_Type.htm" />
+    <HelpKINode Title="TSQLSystemVariable.Type Property " Url="html/P_TSQL_Tokens_TSQLSystemVariable_Type.htm" />
+    <HelpKINode Title="TSQLToken.Type Property " Url="html/P_TSQL_Tokens_TSQLToken_Type.htm" />
+    <HelpKINode Title="TSQLUnknownStatement.Type Property " Url="html/P_TSQL_Statements_TSQLUnknownStatement_Type.htm" />
+    <HelpKINode Title="TSQLVariable.Type Property " Url="html/P_TSQL_Tokens_TSQLVariable_Type.htm" />
+    <HelpKINode Title="TSQLWhitespace.Type Property " Url="html/P_TSQL_Tokens_TSQLWhitespace_Type.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UNION field" Url="html/F_TSQL_TSQLKeywords_UNION.htm" />
+  <HelpKINode Title="UNIQUE field" Url="html/F_TSQL_TSQLKeywords_UNIQUE.htm" />
+  <HelpKINode Title="Unknown enumeration member" Url="html/T_TSQL_Statements_TSQLStatementType.htm" />
+  <HelpKINode Title="UNPIVOT field" Url="html/F_TSQL_TSQLKeywords_UNPIVOT.htm" />
+  <HelpKINode Title="UPDATE field" Url="html/F_TSQL_TSQLKeywords_UPDATE.htm" />
+  <HelpKINode Title="UPDATETEXT field" Url="html/F_TSQL_TSQLKeywords_UPDATETEXT.htm" />
+  <HelpKINode Title="USE field" Url="html/F_TSQL_TSQLKeywords_USE.htm" />
+  <HelpKINode Title="UseQuotedIdentifiers property">
+    <HelpKINode Title="TSQLStatementReader.UseQuotedIdentifiers Property " Url="html/P_TSQL_TSQLStatementReader_UseQuotedIdentifiers.htm" />
+    <HelpKINode Title="TSQLTokenizer.UseQuotedIdentifiers Property " Url="html/P_TSQL_TSQLTokenizer_UseQuotedIdentifiers.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Value property" Url="html/P_TSQL_Tokens_TSQLStringLiteral_Value.htm" />
+  <HelpKINode Title="VALUES field" Url="html/F_TSQL_TSQLKeywords_VALUES.htm" />
+  <HelpKINode Title="Variable enumeration member" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="Variable property" Url="html/P_TSQL_Tokens_TSQLSystemVariable_Variable.htm" />
+  <HelpKINode Title="VARYING field" Url="html/F_TSQL_TSQLKeywords_VARYING.htm" />
+  <HelpKINode Title="VERSION field" Url="html/F_TSQL_TSQLVariables_VERSION.htm" />
+  <HelpKINode Title="VIEW field" Url="html/F_TSQL_TSQLKeywords_VIEW.htm" />
+  <HelpKINode Title="WAITFOR field" Url="html/F_TSQL_TSQLKeywords_WAITFOR.htm" />
+  <HelpKINode Title="WHEN field" Url="html/F_TSQL_TSQLKeywords_WHEN.htm" />
+  <HelpKINode Title="WHERE field" Url="html/F_TSQL_TSQLKeywords_WHERE.htm" />
+  <HelpKINode Title="Where property" Url="html/P_TSQL_Statements_TSQLSelectStatement_Where.htm" />
+  <HelpKINode Title="WHILE field" Url="html/F_TSQL_TSQLKeywords_WHILE.htm" />
+  <HelpKINode Title="Whitespace enumeration member" Url="html/T_TSQL_Tokens_TSQLTokenType.htm" />
+  <HelpKINode Title="WITH field" Url="html/F_TSQL_TSQLKeywords_WITH.htm" />
+  <HelpKINode Title="WITHIN field" Url="html/F_TSQL_TSQLKeywords_WITHIN.htm" />
+  <HelpKINode Title="WRITETEXT field" Url="html/F_TSQL_TSQLKeywords_WRITETEXT.htm" />
+</HelpKI>
