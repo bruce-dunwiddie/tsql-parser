@@ -404,7 +404,7 @@ namespace TSQL
 									_charReader.Current != escapeChar)
 								{
 									characterHolder.Append(_charReader.Current);
-								};
+								}
 
 								if (!_charReader.EOF)
 								{

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TSQL.IO
 {
-	partial class BufferedTextReader : IDisposable
+	partial class BufferedTextReader
 	{
 		#region IDisposable pattern
 
