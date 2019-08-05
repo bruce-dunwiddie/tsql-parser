@@ -43,3 +43,4 @@ Available on Nuget, [TSQL.Parser](https://www.nuget.org/packages/TSQL.Parser/).
 
 ### Class Documentation
 - [bruce-dunwiddie.github.io/tsql-parser/](<http://bruce-dunwiddie.github.io/tsql-parser/>)
+
