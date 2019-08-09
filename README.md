@@ -12,7 +12,7 @@ Available on Nuget, [TSQL.Parser](https://www.nuget.org/packages/TSQL.Parser/).
 
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/lcfjc4jox76dia8q?svg=true)](https://ci.appveyor.com/project/bruce-dunwiddie/tsql-parser)
 
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=tsqlparser&metric=coverage)](https://sonarcloud.io/dashboard?id=tsqlparser)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=tsqlparser&metric=coverage)](https://sonarcloud.io/component_measures?id=tsqlparser&metric=coverage)
 
 [![Code Quality](https://sonarcloud.io/api/project_badges/measure?project=tsqlparser&metric=alert_status)](https://sonarcloud.io/dashboard?id=tsqlparser)
 
