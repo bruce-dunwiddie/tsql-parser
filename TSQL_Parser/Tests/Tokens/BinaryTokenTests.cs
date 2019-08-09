@@ -69,5 +69,20 @@ namespace Tests.Tokens
 					},
 				tokens);
 		}
+
+		[Test]
+		public void BinaryToken_EmbeddedLineContinuation()
+		{
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("0xabc\\\r\ndef ", includeWhitespace: true);
+
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLBinaryLiteral(0, "0xabc\\\r\ndef"),
+						new TSQLWhitespace(11, " ")
+					},
+				tokens);
+			Assert.AreEqual("0xABCDEF", tokens[0].AsBinaryLiteral.Value);
+		}
 	}
 }

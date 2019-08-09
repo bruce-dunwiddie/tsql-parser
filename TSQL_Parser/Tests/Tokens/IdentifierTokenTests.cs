@@ -67,6 +67,20 @@ namespace Tests.Tokens
 		}
 
 		[Test]
+		public void IdentifierToken_BracketedMultiLine()
+		{
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("[a\r\nb] ", useQuotedIdentifiers: false, includeWhitespace: true);
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLIdentifier(0, "[a\r\nb]"),
+						new TSQLWhitespace(6, " ")
+					},
+				tokens);
+			Assert.AreEqual("a\r\nb", tokens[0].AsIdentifier.Name);
+		}
+
+		[Test]
 		public void IdentifierToken_StartWithN()
 		{
 			// unicode string literals are a special case that start with N

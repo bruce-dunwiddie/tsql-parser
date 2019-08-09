@@ -56,6 +56,18 @@ namespace TSQL.Tokens
 
 		/// <summary>
 		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLBinaryLiteral"/>.
+		/// </summary>
+		public TSQLBinaryLiteral AsBinaryLiteral
+		{
+			get
+			{
+				return this as TSQLBinaryLiteral;
+			}
+		}
+
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
 		///		as <see cref="TSQL.Tokens.TSQLCharacter"/>.
 		/// </summary>
 		public TSQLCharacter AsCharacter

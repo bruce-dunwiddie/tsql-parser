@@ -32,9 +32,16 @@ namespace TSQL.Tokens
 			// now we can find which quote character we're using
 			QuoteCharacter = text[quotePosition];
 
+			// trim off the leading and trailing quotes
+			Value = text.Substring(quotePosition + 1, length);
+
 			// now unescape doubled up quote characters
-			Value = text.Substring(quotePosition + 1, length)
-				.Replace(new string(QuoteCharacter, 2), QuoteCharacter.ToString());
+			Value = Value.Replace(new string(QuoteCharacter, 2), QuoteCharacter.ToString());
+
+			// remove line continuation backslash
+			// https://docs.microsoft.com/en-us/sql/t-sql/language-elements/sql-server-utilities-statements-backslash?view=sql-server-2017
+			Value = Value.Replace("\\\r\n", "");
+			Value = Value.Replace("\\\n", "");
 		}
 
 #pragma warning disable 1591
