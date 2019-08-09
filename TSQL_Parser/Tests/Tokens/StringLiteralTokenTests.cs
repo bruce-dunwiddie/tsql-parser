@@ -80,6 +80,34 @@ namespace Tests.Tokens
 		}
 
 		[Test]
+		public void StringLiteralToken_MultiLine()
+		{
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("'a\r\nb' ", useQuotedIdentifiers: false, includeWhitespace: true);
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLStringLiteral(0, "'a\r\nb'"),
+						new TSQLWhitespace(6, " ")
+					},
+				tokens);
+			Assert.AreEqual("a\r\nb", tokens[0].AsStringLiteral.Value);
+		}
+
+		[Test]
+		public void StringLiteralToken_LineContinuation()
+		{
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("'a\\\r\nb' ", useQuotedIdentifiers: false, includeWhitespace: true);
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLStringLiteral(0, "'a\\\r\nb'"),
+						new TSQLWhitespace(7, " ")
+					},
+				tokens);
+			Assert.AreEqual("ab", tokens[0].AsStringLiteral.Value);
+		}
+
+		[Test]
 		public void StringLiteralToken_SingleQuoteValue()
 		{
 			TSQLStringLiteral token = new TSQLStringLiteral(0, "'name'");

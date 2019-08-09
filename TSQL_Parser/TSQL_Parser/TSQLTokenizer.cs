@@ -477,6 +477,33 @@ namespace TSQL
 
 													break;
 												}
+											// backslash line continuation
+											// https://docs.microsoft.com/en-us/sql/t-sql/language-elements/sql-server-utilities-statements-backslash?view=sql-server-2017
+											case '\\':
+												{
+													characterHolder.Append(_charReader.Current);
+
+													if (
+														!foundEnd &&
+														_charReader.Read())
+													{
+														// should be \r or \n
+														characterHolder.Append(_charReader.Current);
+
+														if (_charReader.Current == '\r')
+														{
+															if (
+																!foundEnd &&
+																_charReader.Read())
+															{
+																// should be \n
+																characterHolder.Append(_charReader.Current);
+															}
+														}
+													}
+
+													break;
+												}
 											default:
 												{
 													foundEnd = true;
