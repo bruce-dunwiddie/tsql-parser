@@ -5,7 +5,7 @@ using System.IO;
 
 namespace TSQL.IO
 {
-	internal partial class BufferedTextReader : ICharacterReader
+	internal sealed partial class BufferedTextReader : ICharacterReader
 	{
 		private TextReader _inputStream = null;
 		private readonly char[] _buffer = new char[1024];

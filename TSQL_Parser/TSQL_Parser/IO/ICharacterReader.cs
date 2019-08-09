@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TSQL.IO
 {
-	internal interface ICharacterReader : IDisposable, IEnumerator, IEnumerable, IEnumerator<char>, IEnumerable<char>
+	internal interface ICharacterReader : IDisposable, IEnumerator<char>, IEnumerable<char>
 	{
 		
     }
