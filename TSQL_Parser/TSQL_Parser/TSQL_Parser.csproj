@@ -54,16 +54,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clauses\Parsers\TSQLForClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLOptionClauseParser.cs" />
-    <Compile Include="Clauses\Parsers\ITSQLClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLFromClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLGroupByClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLHavingClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLIntoClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLOrderByClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLSelectClauseParser.cs" />
+    <Compile Include="Clauses\Parsers\TSQLSubqueryHelper.cs" />
     <Compile Include="Clauses\Parsers\TSQLWhereClauseParser.cs" />
     <Compile Include="Clauses\TSQLClause.cs" />
+    <Compile Include="Clauses\TSQLForClause.cs" />
     <Compile Include="Clauses\TSQLFromClause.cs" />
     <Compile Include="Clauses\TSQLGroupByClause.cs" />
     <Compile Include="Clauses\TSQLHavingClause.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Statements\Parsers\TSQLSelectStatementParser.cs" />
     <Compile Include="Statements\Parsers\TSQLStatementParserFactory.cs" />
     <Compile Include="Statements\Parsers\TSQLUnknownStatementParser.cs" />
+    <Compile Include="Statements\TSQLKeywordStatementExtensions.cs" />
     <Compile Include="Statements\TSQLSelectStatement.cs" />
     <Compile Include="Statements\TSQLStatement.cs" />
     <Compile Include="Tokens\TSQLIncompleteCommentToken.cs" />

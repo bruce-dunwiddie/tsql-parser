@@ -40,6 +40,8 @@ namespace TSQL.Statements
 
 		public TSQLOrderByClause OrderBy { get; set; }
 
+		public TSQLForClause For { get; set; }
+
 		public TSQLOptionClause Option { get; set; }
 	}
 }

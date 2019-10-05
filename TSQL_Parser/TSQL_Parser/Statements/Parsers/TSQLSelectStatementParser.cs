@@ -75,13 +75,28 @@ namespace TSQL.Statements.Parsers
 				select.Tokens.AddRange(orderByClause.Tokens);
 			}
 
-			if (tokenizer.Current.IsKeyword(TSQLKeywords.OPTION))
+			// order for OPTION and FOR doesn't seem to matter
+			while (
+				tokenizer.Current.IsKeyword(TSQLKeywords.FOR) ||
+				tokenizer.Current.IsKeyword(TSQLKeywords.OPTION))
 			{
-				TSQLOptionClause optionClause = new TSQLOptionClauseParser().Parse(tokenizer);
+				if (tokenizer.Current.IsKeyword(TSQLKeywords.FOR))
+				{
+					TSQLForClause forClause = new TSQLForClauseParser().Parse(tokenizer);
 
-				select.Option = optionClause;
+					select.For = forClause;
 
-				select.Tokens.AddRange(optionClause.Tokens);
+					select.Tokens.AddRange(forClause.Tokens);
+				}
+
+				if (tokenizer.Current.IsKeyword(TSQLKeywords.OPTION))
+				{
+					TSQLOptionClause optionClause = new TSQLOptionClauseParser().Parse(tokenizer);
+
+					select.Option = optionClause;
+
+					select.Tokens.AddRange(optionClause.Tokens);
+				}
 			}
 
 			if (
