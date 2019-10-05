@@ -17,12 +17,20 @@ namespace TSQL.Statements
 				TSQLKeywords.INSERT,
 				TSQLKeywords.UPDATE,
 				TSQLKeywords.DELETE,
+				TSQLKeywords.MERGE,
+				TSQLKeywords.DECLARE,
+				TSQLKeywords.SET,
 				TSQLKeywords.CREATE,
 				TSQLKeywords.ALTER,
 				TSQLKeywords.EXECUTE,
 				TSQLKeywords.IF,
 				TSQLKeywords.WHILE,
-				TSQLKeywords.BEGIN
+				TSQLKeywords.BEGIN,
+				TSQLKeywords.GO,
+				TSQLKeywords.DROP,
+				TSQLKeywords.TRUNCATE,
+				TSQLKeywords.ENABLE,
+				TSQLKeywords.DISABLE
 			};
 
 		public static bool IsStatementStart(this TSQLKeywords keyword)
