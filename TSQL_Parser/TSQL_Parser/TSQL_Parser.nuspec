@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>TSQL.Parser</id>
-		<version>1.2.7</version>
+		<version>1.2.8</version>
 		<title>TSQL.Parser</title>
 		<authors>Bruce Dunwiddie</authors>
 		<owners>shriop</owners>
@@ -10,7 +10,7 @@
 		<projectUrl>https://github.com/bruce-dunwiddie/tsql-parser</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Library for Parsing SQL Server T-SQL Scripts</description>
-		<releaseNotes>Added incomplete token handling for incomplete strings, literals, and multiline comments.</releaseNotes>
+		<releaseNotes>Added backslash line continuation functionality.</releaseNotes>
 		<copyright>Copyright © 2019</copyright>
 		<tags>sql parser sql-server tsql</tags>
 	</metadata>

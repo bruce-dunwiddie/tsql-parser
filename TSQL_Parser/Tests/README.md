@@ -4,6 +4,6 @@
 
 ![Tests Summary](https://raw.githubusercontent.com/bruce-dunwiddie/tsql-parser/master/TSQL_Parser/Tests/images/tests.jpg)
 
-[![Coverage Status](https://coveralls.io/repos/github/bruce-dunwiddie/tsql-parser/badge.svg?branch=master)](https://coveralls.io/github/bruce-dunwiddie/tsql-parser?branch=master)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=tsqlparser&metric=coverage)](https://sonarcloud.io/component_measures?id=tsqlparser&metric=coverage)
 
 ![Code Coverage Summary](https://raw.githubusercontent.com/bruce-dunwiddie/tsql-parser/master/TSQL_Parser/Tests/images/coverage.jpg)
