@@ -9,36 +9,49 @@ namespace TSQL.Statements.Parsers
 {
 	internal class TSQLUnknownStatementParser : ITSQLStatementParser
 	{
-		public TSQLUnknownStatement Parse(ITSQLTokenizer tokenizer)
+		public TSQLUnknownStatementParser(ITSQLTokenizer tokenizer)
 		{
-			TSQLUnknownStatement statement = new TSQLUnknownStatement();
+			Tokenizer = tokenizer;
+		}
 
-			statement.Tokens.Add(tokenizer.Current);
+		public TSQLUnknownStatementParser(List<TSQLToken> startTokens, ITSQLTokenizer tokenizer) :
+			this(tokenizer)
+		{
+			Statement.Tokens.AddRange(startTokens);
+		}
+
+		private TSQLUnknownStatement Statement { get; } = new TSQLUnknownStatement();
+
+		private ITSQLTokenizer Tokenizer { get; set; }
+
+		public TSQLUnknownStatement Parse()
+		{
+			Statement.Tokens.Add(Tokenizer.Current);
 
 			while (
-				tokenizer.MoveNext() &&
+				Tokenizer.MoveNext() &&
 				!(
-					tokenizer.Current is TSQLCharacter &&
-					tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
+					Tokenizer.Current is TSQLCharacter &&
+					Tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
 				))
 			{
-				statement.Tokens.Add(tokenizer.Current);
+				Statement.Tokens.Add(Tokenizer.Current);
 			}
 
 			if (
-				tokenizer.Current != null &&
-				tokenizer.Current is TSQLCharacter &&
-				tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon)
+				Tokenizer.Current != null &&
+				Tokenizer.Current is TSQLCharacter &&
+				Tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon)
 			{
-				statement.Tokens.Add(tokenizer.Current);
+				Statement.Tokens.Add(Tokenizer.Current);
 			}
 
-			return statement;
+			return Statement;
 		}
 
-		TSQLStatement ITSQLStatementParser.Parse(ITSQLTokenizer tokenizer)
+		TSQLStatement ITSQLStatementParser.Parse()
 		{
-			return Parse(tokenizer);
+			return Parse();
 		}
 	}
 }

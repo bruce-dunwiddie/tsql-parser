@@ -64,6 +64,7 @@
     <Compile Include="Clauses\Parsers\TSQLSelectClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLSubqueryHelper.cs" />
     <Compile Include="Clauses\Parsers\TSQLWhereClauseParser.cs" />
+    <Compile Include="Clauses\Parsers\TSQLWithClauseParser.cs" />
     <Compile Include="Clauses\TSQLClause.cs" />
     <Compile Include="Clauses\TSQLForClause.cs" />
     <Compile Include="Clauses\TSQLFromClause.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Clauses\TSQLOrderByClause.cs" />
     <Compile Include="Clauses\TSQLSelectClause.cs" />
     <Compile Include="Clauses\TSQLWhereClause.cs" />
+    <Compile Include="Clauses\TSQLWithClause.cs" />
     <Compile Include="IO\BufferedTextReader.cs" />
     <Compile Include="IO\BufferedTextReader.IDisposable.cs">
       <DependentUpon>BufferedTextReader.cs</DependentUpon>
@@ -89,6 +91,7 @@
     <Compile Include="Statements\Parsers\TSQLSelectStatementParser.cs" />
     <Compile Include="Statements\Parsers\TSQLStatementParserFactory.cs" />
     <Compile Include="Statements\Parsers\TSQLUnknownStatementParser.cs" />
+    <Compile Include="Statements\Parsers\TSQLWithClauseStatementParser.cs" />
     <Compile Include="Statements\TSQLKeywordStatementExtensions.cs" />
     <Compile Include="Statements\TSQLSelectStatement.cs" />
     <Compile Include="Statements\TSQLStatement.cs" />

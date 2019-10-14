@@ -23,5 +23,13 @@ namespace TSQL.Statements
 				return _tokens;
 			}
 		}
+
+		public TSQLSelectStatement AsSelect
+		{
+			get
+			{
+				return this as TSQLSelectStatement;
+			}
+		}
 	}
 }

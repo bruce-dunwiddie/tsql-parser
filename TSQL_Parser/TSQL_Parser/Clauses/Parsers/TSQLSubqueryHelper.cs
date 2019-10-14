@@ -33,7 +33,7 @@ namespace TSQL.Clauses.Parsers
 						if (tokenizer.Current.IsKeyword(
 							TSQLKeywords.SELECT))
 						{
-							TSQLSelectStatement selectStatement = new TSQLSelectStatementParser().Parse(tokenizer);
+							TSQLSelectStatement selectStatement = new TSQLSelectStatementParser(tokenizer).Parse();
 
 							clause.Tokens.AddRange(selectStatement.Tokens);
 
