@@ -76,6 +76,9 @@
     <Compile Include="Clauses\TSQLSelectClause.cs" />
     <Compile Include="Clauses\TSQLWhereClause.cs" />
     <Compile Include="Clauses\TSQLWithClause.cs" />
+    <Compile Include="Expressions\TSQLCaseExpression.cs" />
+    <Compile Include="Expressions\Parsers\TSQLCaseExpressionParser.cs" />
+    <Compile Include="Expressions\TSQLExpression.cs" />
     <Compile Include="IO\BufferedTextReader.cs" />
     <Compile Include="IO\BufferedTextReader.IDisposable.cs">
       <DependentUpon>BufferedTextReader.cs</DependentUpon>
@@ -141,6 +144,7 @@
   <ItemGroup>
     <None Include="TSQL_Parser.snk" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using TSQL.Expressions;
+using TSQL.Expressions.Parsers;
 using TSQL.Statements;
 using TSQL.Statements.Parsers;
 using TSQL.Tokens;
@@ -14,10 +16,10 @@ namespace TSQL.Clauses.Parsers
 	{
 		public static void RecurseParens(
 			ITSQLTokenizer tokenizer,
-			TSQLClause clause,
+			TSQLExpression expression,
 			ref int nestedLevel)
 		{
-			clause.Tokens.Add(tokenizer.Current);
+			expression.Tokens.Add(tokenizer.Current);
 
 			if (tokenizer.Current.Type == TSQLTokenType.Character)
 			{
@@ -35,30 +37,30 @@ namespace TSQL.Clauses.Parsers
 						{
 							TSQLSelectStatement selectStatement = new TSQLSelectStatementParser(tokenizer).Parse();
 
-							clause.Tokens.AddRange(selectStatement.Tokens);
+							expression.Tokens.AddRange(selectStatement.Tokens);
 
 							if (tokenizer.Current.IsCharacter(
 								TSQLCharacters.CloseParentheses))
 							{
 								nestedLevel--;
-								clause.Tokens.Add(tokenizer.Current);
+								expression.Tokens.Add(tokenizer.Current);
 							}
 						}
 						else if (tokenizer.Current.IsCharacter(
 							TSQLCharacters.CloseParentheses))
 						{
 							nestedLevel--;
-							clause.Tokens.Add(tokenizer.Current);
+							expression.Tokens.Add(tokenizer.Current);
 						}
 						else if (tokenizer.Current.IsCharacter(
 							TSQLCharacters.OpenParentheses))
 						{
 							nestedLevel++;
-							clause.Tokens.Add(tokenizer.Current);
+							expression.Tokens.Add(tokenizer.Current);
 						}
 						else
 						{
-							clause.Tokens.Add(tokenizer.Current);
+							expression.Tokens.Add(tokenizer.Current);
 						}
 					}
 				}
@@ -66,6 +68,12 @@ namespace TSQL.Clauses.Parsers
 				{
 					nestedLevel--;
 				}
+			}
+			else if (tokenizer.Current.IsKeyword(TSQLKeywords.CASE))
+			{
+				TSQLCaseExpression caseExpression = new TSQLCaseExpressionParser().Parse(tokenizer);
+
+				expression.Tokens.AddRange(caseExpression.Tokens);
 			}
 		}
 	}

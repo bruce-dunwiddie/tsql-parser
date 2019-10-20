@@ -115,8 +115,8 @@ namespace TSQL.Statements.Parsers
 			}
 
 			if (
-				Tokenizer.Current != null &&
-				Tokenizer.Current.Type == TSQLTokenType.Keyword)
+				Tokenizer.Current?.AsKeyword != null &&
+				Tokenizer.Current.AsKeyword.Keyword.IsStatementStart())
 			{
 				Tokenizer.Putback();
 			}

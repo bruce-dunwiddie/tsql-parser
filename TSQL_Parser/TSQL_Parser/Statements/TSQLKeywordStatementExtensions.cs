@@ -64,7 +64,9 @@ namespace TSQL.Statements
 				TSQLKeywords.USE,
 				TSQLKeywords.SHUTDOWN,
 				TSQLKeywords.RETURN,
-				TSQLKeywords.REVERT
+				TSQLKeywords.REVERT,
+				// END isn't exactly a statement start, but it acts like one
+				TSQLKeywords.END
 			};
 
 		public static bool IsStatementStart(this TSQLKeywords keyword)

@@ -67,6 +67,7 @@
     <Compile Include="Clauses\OrderByClauseTests.cs" />
     <Compile Include="Clauses\IntoClauseTests.cs" />
     <Compile Include="Clauses\SelectClauseTests.cs" />
+    <Compile Include="Expressions\CaseExpressionTests.cs" />
     <Compile Include="IdentifiersTests.cs" />
     <Compile Include="Parsing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

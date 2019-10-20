@@ -3,20 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using TSQL.Expressions;
 using TSQL.Tokens;
 
 namespace TSQL.Clauses
 {
-	public abstract class TSQLClause
+	public abstract class TSQLClause : TSQLExpression
 	{
-		private readonly List<TSQLToken> _tokens = new List<TSQLToken>();
 
-		public List<TSQLToken> Tokens
-		{
-			get
-			{
-				return _tokens;
-			}
-		}
 	}
 }

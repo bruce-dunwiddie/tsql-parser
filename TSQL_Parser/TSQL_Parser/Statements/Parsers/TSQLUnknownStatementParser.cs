@@ -28,22 +28,67 @@ namespace TSQL.Statements.Parsers
 		{
 			Statement.Tokens.Add(Tokenizer.Current);
 
+			int nestedLevel = 0;
+
 			while (
 				Tokenizer.MoveNext() &&
+				!Tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
 				!(
-					Tokenizer.Current is TSQLCharacter &&
-					Tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
+					nestedLevel == 0 &&
+					Tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
+				) &&
+				(
+					nestedLevel > 0 ||
+					Tokenizer.Current.Type != TSQLTokenType.Keyword ||
+					(
+						Tokenizer.Current.Type == TSQLTokenType.Keyword &&
+						!Tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
+					)
 				))
 			{
 				Statement.Tokens.Add(Tokenizer.Current);
+
+				if (Tokenizer.Current.Type == TSQLTokenType.Character)
+				{
+					TSQLCharacters character = Tokenizer.Current.AsCharacter.Character;
+
+					if (character == TSQLCharacters.OpenParentheses)
+					{
+						// should we recurse for correlated subqueries?
+						nestedLevel++;
+
+						if (Tokenizer.MoveNext())
+						{
+							if (Tokenizer.Current.IsCharacter(
+								TSQLCharacters.CloseParentheses))
+							{
+								nestedLevel--;
+								Statement.Tokens.Add(Tokenizer.Current);
+							}
+							else if (Tokenizer.Current.IsCharacter(
+								TSQLCharacters.OpenParentheses))
+							{
+								nestedLevel++;
+								Statement.Tokens.Add(Tokenizer.Current);
+							}
+							else
+							{
+								Statement.Tokens.Add(Tokenizer.Current);
+							}
+						}
+					}
+					else if (character == TSQLCharacters.CloseParentheses)
+					{
+						nestedLevel--;
+					}
+				}
 			}
 
 			if (
-				Tokenizer.Current != null &&
-				Tokenizer.Current is TSQLCharacter &&
-				Tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon)
+				Tokenizer.Current?.AsKeyword != null &&
+				Tokenizer.Current.AsKeyword.Keyword.IsStatementStart())
 			{
-				Statement.Tokens.Add(Tokenizer.Current);
+				Tokenizer.Putback();
 			}
 
 			return Statement;
