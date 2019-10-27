@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-using TSQL.Expressions;
-using TSQL.Tokens;
+using System.Threading.Tasks;
 
 namespace TSQL.Clauses
 {
-	public abstract class TSQLClause : TSQLExpression
+	public class TSQLUnionClause : TSQLSetOperatorClause
 	{
+		internal TSQLUnionClause()
+		{
 
+		}
 	}
 }

@@ -11,6 +11,6 @@ namespace TSQL.Statements.Parsers
 {
 	internal interface ITSQLStatementParser
 	{
-		TSQLStatement Parse(ITSQLTokenizer tokenizer);
+		TSQLStatement Parse();
 	}
 }

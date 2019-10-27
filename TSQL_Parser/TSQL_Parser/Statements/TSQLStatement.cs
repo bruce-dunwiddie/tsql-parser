@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using TSQL.Expressions;
 using TSQL.Tokens;
 
 namespace TSQL.Statements
 {
-	public abstract class TSQLStatement
+	public abstract class TSQLStatement : TSQLExpression
 	{
-		private List<TSQLToken> _tokens = new List<TSQLToken>();
-
 		public abstract TSQLStatementType Type
 		{
 			get;
 		}
 
-		public List<TSQLToken> Tokens
+		public TSQLSelectStatement AsSelect
 		{
 			get
 			{
-				return _tokens;
+				return this as TSQLSelectStatement;
 			}
 		}
 	}

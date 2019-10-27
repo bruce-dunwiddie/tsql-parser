@@ -9,36 +9,94 @@ namespace TSQL.Statements.Parsers
 {
 	internal class TSQLUnknownStatementParser : ITSQLStatementParser
 	{
-		public TSQLUnknownStatement Parse(ITSQLTokenizer tokenizer)
+		public TSQLUnknownStatementParser(ITSQLTokenizer tokenizer)
 		{
-			TSQLUnknownStatement statement = new TSQLUnknownStatement();
+			Tokenizer = tokenizer;
+		}
 
-			statement.Tokens.Add(tokenizer.Current);
+		public TSQLUnknownStatementParser(List<TSQLToken> startTokens, ITSQLTokenizer tokenizer) :
+			this(tokenizer)
+		{
+			Statement.Tokens.AddRange(startTokens);
+		}
+
+		private TSQLUnknownStatement Statement { get; } = new TSQLUnknownStatement();
+
+		private ITSQLTokenizer Tokenizer { get; set; }
+
+		public TSQLUnknownStatement Parse()
+		{
+			Statement.Tokens.Add(Tokenizer.Current);
+
+			int nestedLevel = 0;
 
 			while (
-				tokenizer.MoveNext() &&
+				Tokenizer.MoveNext() &&
+				!Tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
 				!(
-					tokenizer.Current is TSQLCharacter &&
-					tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
+					nestedLevel == 0 &&
+					Tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
+				) &&
+				(
+					nestedLevel > 0 ||
+					Tokenizer.Current.Type != TSQLTokenType.Keyword ||
+					(
+						Tokenizer.Current.Type == TSQLTokenType.Keyword &&
+						!Tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
+					)
 				))
 			{
-				statement.Tokens.Add(tokenizer.Current);
+				Statement.Tokens.Add(Tokenizer.Current);
+
+				if (Tokenizer.Current.Type == TSQLTokenType.Character)
+				{
+					TSQLCharacters character = Tokenizer.Current.AsCharacter.Character;
+
+					if (character == TSQLCharacters.OpenParentheses)
+					{
+						// should we recurse for correlated subqueries?
+						nestedLevel++;
+
+						if (Tokenizer.MoveNext())
+						{
+							if (Tokenizer.Current.IsCharacter(
+								TSQLCharacters.CloseParentheses))
+							{
+								nestedLevel--;
+								Statement.Tokens.Add(Tokenizer.Current);
+							}
+							else if (Tokenizer.Current.IsCharacter(
+								TSQLCharacters.OpenParentheses))
+							{
+								nestedLevel++;
+								Statement.Tokens.Add(Tokenizer.Current);
+							}
+							else
+							{
+								Statement.Tokens.Add(Tokenizer.Current);
+							}
+						}
+					}
+					else if (character == TSQLCharacters.CloseParentheses)
+					{
+						nestedLevel--;
+					}
+				}
 			}
 
 			if (
-				tokenizer.Current != null &&
-				tokenizer.Current is TSQLCharacter &&
-				tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon)
+				Tokenizer.Current?.AsKeyword != null &&
+				Tokenizer.Current.AsKeyword.Keyword.IsStatementStart())
 			{
-				statement.Tokens.Add(tokenizer.Current);
+				Tokenizer.Putback();
 			}
 
-			return statement;
+			return Statement;
 		}
 
-		TSQLStatement ITSQLStatementParser.Parse(ITSQLTokenizer tokenizer)
+		TSQLStatement ITSQLStatementParser.Parse()
 		{
-			return Parse(tokenizer);
+			return Parse();
 		}
 	}
 }

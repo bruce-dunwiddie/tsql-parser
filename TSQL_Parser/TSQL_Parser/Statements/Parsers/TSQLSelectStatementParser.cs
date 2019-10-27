@@ -11,92 +11,135 @@ namespace TSQL.Statements.Parsers
 {
 	internal class TSQLSelectStatementParser : ITSQLStatementParser
 	{
-		public TSQLSelectStatement Parse(ITSQLTokenizer tokenizer)
+		public TSQLSelectStatementParser(ITSQLTokenizer tokenizer)
 		{
-			TSQLSelectStatement select = new TSQLSelectStatement();
+			Tokenizer = tokenizer;
+		}
 
-			TSQLSelectClause selectClause = new TSQLSelectClauseParser().Parse(tokenizer);
+		public TSQLSelectStatementParser(TSQLWithClause with, ITSQLTokenizer tokenizer) :
+			this(tokenizer)
+		{
+			Statement.With = with;
 
-			select.Select = selectClause;
+			Statement.Tokens.AddRange(with.Tokens);
+		}
 
-			select.Tokens.AddRange(selectClause.Tokens);
+		private TSQLSelectStatement Statement { get; } = new TSQLSelectStatement();
 
-			if (tokenizer.Current.IsKeyword(TSQLKeywords.INTO))
+		private ITSQLTokenizer Tokenizer { get; set; }
+
+		public TSQLSelectStatement Parse()
+		{
+			TSQLSelectClause selectClause = new TSQLSelectClauseParser().Parse(Tokenizer);
+
+			Statement.Select = selectClause;
+
+			Statement.Tokens.AddRange(selectClause.Tokens);
+
+			if (Tokenizer.Current.IsKeyword(TSQLKeywords.INTO))
 			{
-				TSQLIntoClause intoClause = new TSQLIntoClauseParser().Parse(tokenizer);
+				TSQLIntoClause intoClause = new TSQLIntoClauseParser().Parse(Tokenizer);
 
-				select.Into = intoClause;
+				Statement.Into = intoClause;
 
-				select.Tokens.AddRange(intoClause.Tokens);
+				Statement.Tokens.AddRange(intoClause.Tokens);
 			}
 
-			if (tokenizer.Current.IsKeyword(TSQLKeywords.FROM))
+			if (Tokenizer.Current.IsKeyword(TSQLKeywords.FROM))
 			{
-				TSQLFromClause fromClause = new TSQLFromClauseParser().Parse(tokenizer);
+				TSQLFromClause fromClause = new TSQLFromClauseParser().Parse(Tokenizer);
 
-				select.From = fromClause;
+				Statement.From = fromClause;
 
-				select.Tokens.AddRange(fromClause.Tokens);
+				Statement.Tokens.AddRange(fromClause.Tokens);
 			}
 
-			if (tokenizer.Current.IsKeyword(TSQLKeywords.WHERE))
+			if (Tokenizer.Current.IsKeyword(TSQLKeywords.WHERE))
 			{
-				TSQLWhereClause whereClause = new TSQLWhereClauseParser().Parse(tokenizer);
+				TSQLWhereClause whereClause = new TSQLWhereClauseParser().Parse(Tokenizer);
 
-				select.Where = whereClause;
+				Statement.Where = whereClause;
 
-				select.Tokens.AddRange(whereClause.Tokens);
+				Statement.Tokens.AddRange(whereClause.Tokens);
 			}
 
-			if (tokenizer.Current.IsKeyword(TSQLKeywords.GROUP))
+			if (Tokenizer.Current.IsKeyword(TSQLKeywords.GROUP))
 			{
-				TSQLGroupByClause groupByClause = new TSQLGroupByClauseParser().Parse(tokenizer);
+				TSQLGroupByClause groupByClause = new TSQLGroupByClauseParser().Parse(Tokenizer);
 
-				select.GroupBy = groupByClause;
+				Statement.GroupBy = groupByClause;
 
-				select.Tokens.AddRange(groupByClause.Tokens);
+				Statement.Tokens.AddRange(groupByClause.Tokens);
 			}
 
-			if (tokenizer.Current.IsKeyword(TSQLKeywords.HAVING))
+			if (Tokenizer.Current.IsKeyword(TSQLKeywords.HAVING))
 			{
-				TSQLHavingClause havingClause = new TSQLHavingClauseParser().Parse(tokenizer);
+				TSQLHavingClause havingClause = new TSQLHavingClauseParser().Parse(Tokenizer);
 
-				select.Having = havingClause;
+				Statement.Having = havingClause;
 
-				select.Tokens.AddRange(havingClause.Tokens);
+				Statement.Tokens.AddRange(havingClause.Tokens);
 			}
 
-			if (tokenizer.Current.IsKeyword(TSQLKeywords.ORDER))
+			if (Tokenizer.Current?.AsKeyword != null &&
+				Tokenizer.Current.AsKeyword.Keyword.In(
+				TSQLKeywords.UNION,
+				TSQLKeywords.EXCEPT,
+				TSQLKeywords.INTERSECT))
 			{
-				TSQLOrderByClause orderByClause = new TSQLOrderByClauseParser().Parse(tokenizer);
+				TSQLSetOperatorClause set = new TSQLSetOperatorClauseParser().Parse(Tokenizer);
 
-				select.OrderBy = orderByClause;
+				Statement.SetOperator = set;
 
-				select.Tokens.AddRange(orderByClause.Tokens);
+				Statement.Tokens.AddRange(set.Tokens);
 			}
 
-			if (tokenizer.Current.IsKeyword(TSQLKeywords.OPTION))
+			if (Tokenizer.Current.IsKeyword(TSQLKeywords.ORDER))
 			{
-				TSQLOptionClause optionClause = new TSQLOptionClauseParser().Parse(tokenizer);
+				TSQLOrderByClause orderByClause = new TSQLOrderByClauseParser().Parse(Tokenizer);
 
-				select.Option = optionClause;
+				Statement.OrderBy = orderByClause;
 
-				select.Tokens.AddRange(optionClause.Tokens);
+				Statement.Tokens.AddRange(orderByClause.Tokens);
+			}
+
+			// order for OPTION and FOR doesn't seem to matter
+			while (
+				Tokenizer.Current.IsKeyword(TSQLKeywords.FOR) ||
+				Tokenizer.Current.IsKeyword(TSQLKeywords.OPTION))
+			{
+				if (Tokenizer.Current.IsKeyword(TSQLKeywords.FOR))
+				{
+					TSQLForClause forClause = new TSQLForClauseParser().Parse(Tokenizer);
+
+					Statement.For = forClause;
+
+					Statement.Tokens.AddRange(forClause.Tokens);
+				}
+
+				if (Tokenizer.Current.IsKeyword(TSQLKeywords.OPTION))
+				{
+					TSQLOptionClause optionClause = new TSQLOptionClauseParser().Parse(Tokenizer);
+
+					Statement.Option = optionClause;
+
+					Statement.Tokens.AddRange(optionClause.Tokens);
+				}
 			}
 
 			if (
-				tokenizer.Current != null &&
-				tokenizer.Current.Type == TSQLTokenType.Keyword)
+				Tokenizer.Current?.AsKeyword != null &&
+				Tokenizer.Current.AsKeyword.Keyword.IsStatementStart())
 			{
-				tokenizer.Putback();
+				Tokenizer.Putback();
 			}
 
-			return select;
+			return Statement;
 		}
 
-		TSQLStatement ITSQLStatementParser.Parse(ITSQLTokenizer tokenizer)
+		TSQLStatement ITSQLStatementParser.Parse()
 		{
-			return Parse(tokenizer);
+			return Parse();
 		}
 	}
 }

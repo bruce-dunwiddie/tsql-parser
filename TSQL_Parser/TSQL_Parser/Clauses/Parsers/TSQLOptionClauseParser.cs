@@ -7,7 +7,7 @@ using TSQL.Tokens;
 
 namespace TSQL.Clauses.Parsers
 {
-	internal class TSQLOptionClauseParser : ITSQLClauseParser
+	internal class TSQLOptionClauseParser
 	{
 		public TSQLOptionClause Parse(ITSQLTokenizer tokenizer)
 		{
@@ -44,11 +44,6 @@ namespace TSQL.Clauses.Parsers
 			}
 
 			return option;
-		}
-
-		TSQLClause ITSQLClauseParser.Parse(ITSQLTokenizer tokenizer)
-		{
-			return Parse(tokenizer);
 		}
 	}
 }

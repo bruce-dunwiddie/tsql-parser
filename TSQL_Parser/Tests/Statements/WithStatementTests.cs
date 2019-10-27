@@ -7,6 +7,7 @@ using NUnit.Framework;
 
 using TSQL;
 using TSQL.Statements;
+using TSQL.Tokens;
 
 namespace Tests.Statements
 {
@@ -46,6 +47,11 @@ namespace Tests.Statements
 
 			Assert.AreEqual(1, statements.Count);
 			Assert.IsInstanceOf(typeof(TSQLSelectStatement), statements[0]);
+			Assert.IsNotNull(statements[0].AsSelect.With);
+			Assert.IsTrue(statements[0].AsSelect.With.Tokens[0].IsKeyword(TSQLKeywords.WITH));
+			Assert.AreEqual(
+				" Join back to Employee to return the manager name ",
+				statements[0].AsSelect.With.Tokens.Last().AsSingleLineComment.Comment);
 		}
 	}
 }

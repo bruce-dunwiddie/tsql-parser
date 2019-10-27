@@ -54,24 +54,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clauses\Parsers\TSQLForClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLOptionClauseParser.cs" />
-    <Compile Include="Clauses\Parsers\ITSQLClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLFromClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLGroupByClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLHavingClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLIntoClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLOrderByClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLSelectClauseParser.cs" />
+    <Compile Include="Clauses\Parsers\TSQLSetOperatorClauseParser.cs" />
+    <Compile Include="Clauses\Parsers\TSQLSubqueryHelper.cs" />
     <Compile Include="Clauses\Parsers\TSQLWhereClauseParser.cs" />
+    <Compile Include="Clauses\Parsers\TSQLWithClauseParser.cs" />
     <Compile Include="Clauses\TSQLClause.cs" />
+    <Compile Include="Clauses\TSQLExceptClause.cs" />
+    <Compile Include="Clauses\TSQLForClause.cs" />
     <Compile Include="Clauses\TSQLFromClause.cs" />
     <Compile Include="Clauses\TSQLGroupByClause.cs" />
     <Compile Include="Clauses\TSQLHavingClause.cs" />
+    <Compile Include="Clauses\TSQLIntersectClause.cs" />
     <Compile Include="Clauses\TSQLIntoClause.cs" />
     <Compile Include="Clauses\TSQLOptionClause.cs" />
     <Compile Include="Clauses\TSQLOrderByClause.cs" />
     <Compile Include="Clauses\TSQLSelectClause.cs" />
+    <Compile Include="Clauses\TSQLSetOperatorClause.cs" />
+    <Compile Include="Clauses\TSQLUnionClause.cs" />
     <Compile Include="Clauses\TSQLWhereClause.cs" />
+    <Compile Include="Clauses\TSQLWithClause.cs" />
+    <Compile Include="Expressions\TSQLCaseExpression.cs" />
+    <Compile Include="Expressions\Parsers\TSQLCaseExpressionParser.cs" />
+    <Compile Include="Expressions\TSQLExpression.cs" />
     <Compile Include="IO\BufferedTextReader.cs" />
     <Compile Include="IO\BufferedTextReader.IDisposable.cs">
       <DependentUpon>BufferedTextReader.cs</DependentUpon>
@@ -84,9 +96,12 @@
     <Compile Include="ITSQLTokenizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Statements\Parsers\ITSQLStatementParser.cs" />
+    <Compile Include="Statements\Parsers\TSQLLimitedSelectStatementParser.cs" />
     <Compile Include="Statements\Parsers\TSQLSelectStatementParser.cs" />
     <Compile Include="Statements\Parsers\TSQLStatementParserFactory.cs" />
     <Compile Include="Statements\Parsers\TSQLUnknownStatementParser.cs" />
+    <Compile Include="Statements\Parsers\TSQLWithClauseStatementParser.cs" />
+    <Compile Include="Statements\TSQLKeywordStatementExtensions.cs" />
     <Compile Include="Statements\TSQLSelectStatement.cs" />
     <Compile Include="Statements\TSQLStatement.cs" />
     <Compile Include="Tokens\TSQLIncompleteCommentToken.cs" />
@@ -135,6 +150,7 @@
   <ItemGroup>
     <None Include="TSQL_Parser.snk" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

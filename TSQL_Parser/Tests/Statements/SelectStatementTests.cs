@@ -8,6 +8,7 @@ using NUnit.Framework;
 
 using TSQL;
 using TSQL.Statements;
+using TSQL.Tokens;
 
 namespace Tests.Statements
 {
@@ -290,6 +291,21 @@ namespace Tests.Statements
 
 			Assert.AreEqual(16, select.Tokens.Count);
 			Assert.AreEqual("OrderDate", select.Tokens[15].Text);
+		}
+		public void SelectStatement_Dont_Overrun()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"
+					BEGIN
+						SELECT 1
+					END",
+				includeWhitespace: false);
+
+			Assert.AreEqual(3, statements.Count);
+			Assert.AreEqual(1, statements[0].Tokens.Count);
+			Assert.AreEqual(2, statements[1].Tokens.Count);
+			Assert.AreEqual(1, statements[2].Tokens.Count);
+			Assert.IsTrue(statements[2].Tokens[0].IsKeyword(TSQLKeywords.END));
 		}
 	}
 }

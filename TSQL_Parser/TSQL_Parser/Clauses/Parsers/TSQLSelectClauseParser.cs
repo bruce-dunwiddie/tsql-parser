@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 
 using TSQL.Statements;
-using TSQL.Statements.Parsers;
 using TSQL.Tokens;
 
 namespace TSQL.Clauses.Parsers
 {
-	internal class TSQLSelectClauseParser : ITSQLClauseParser
+	internal class TSQLSelectClauseParser
 	{
 		public TSQLSelectClause Parse(ITSQLTokenizer tokenizer)
 		{
@@ -42,92 +41,31 @@ namespace TSQL.Clauses.Parsers
 					tokenizer.Current.Type != TSQLTokenType.Keyword ||
 					(
 						tokenizer.Current.Type == TSQLTokenType.Keyword &&
-						tokenizer.Current.AsKeyword.Keyword.In
+						!tokenizer.Current.AsKeyword.Keyword.In
 						(
-							TSQLKeywords.ALL,
-							TSQLKeywords.AS,
-							TSQLKeywords.DISTINCT,
-							TSQLKeywords.PERCENT,
-							TSQLKeywords.TOP,
-							TSQLKeywords.WITH,
-							TSQLKeywords.NULL,
-							TSQLKeywords.CASE,
-							TSQLKeywords.WHEN,
-							TSQLKeywords.THEN,
-							TSQLKeywords.ELSE,
-							TSQLKeywords.AND,
-							TSQLKeywords.OR,
-							TSQLKeywords.BETWEEN,
-							TSQLKeywords.EXISTS,
-							TSQLKeywords.END,
-							TSQLKeywords.IN,
-							TSQLKeywords.IS,
-							TSQLKeywords.NOT,
-							TSQLKeywords.OVER,
-							TSQLKeywords.IDENTITY,
-							TSQLKeywords.LIKE
-						)
+							TSQLKeywords.INTO,
+							TSQLKeywords.FROM,
+							TSQLKeywords.WHERE,
+							TSQLKeywords.GROUP,
+							TSQLKeywords.HAVING,
+							TSQLKeywords.ORDER,
+							TSQLKeywords.UNION,
+							TSQLKeywords.EXCEPT,
+							TSQLKeywords.INTERSECT,
+							TSQLKeywords.FOR,
+							TSQLKeywords.OPTION
+						) &&
+						!tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
 					)
 				))
 			{
-				select.Tokens.Add(tokenizer.Current);
-
-				if (tokenizer.Current.Type == TSQLTokenType.Character)
-				{
-					TSQLCharacters character = tokenizer.Current.AsCharacter.Character;
-
-					if (character == TSQLCharacters.OpenParentheses)
-					{
-						// should we recurse for correlated subqueries?
-						nestedLevel++;
-
-						if (tokenizer.MoveNext())
-						{
-							if (tokenizer.Current.IsKeyword(
-								TSQLKeywords.SELECT))
-							{
-								TSQLSelectStatement selectStatement = new TSQLSelectStatementParser().Parse(tokenizer);
-
-								select.Tokens.AddRange(selectStatement.Tokens);
-
-								if (tokenizer.Current.IsCharacter(
-									TSQLCharacters.CloseParentheses))
-								{
-									nestedLevel--;
-									select.Tokens.Add(tokenizer.Current);
-								}
-							}
-							else if (tokenizer.Current.IsCharacter(
-								TSQLCharacters.CloseParentheses))
-							{
-								nestedLevel--;
-								select.Tokens.Add(tokenizer.Current);
-							}
-							else if (tokenizer.Current.IsCharacter(
-								TSQLCharacters.OpenParentheses))
-							{
-								nestedLevel++;
-								select.Tokens.Add(tokenizer.Current);
-							}
-							else
-							{
-								select.Tokens.Add(tokenizer.Current);
-							}
-						}
-					}
-					else if (character == TSQLCharacters.CloseParentheses)
-					{
-						nestedLevel--;
-					}
-				}
+				TSQLSubqueryHelper.RecurseParens(
+					tokenizer,
+					select,
+					ref nestedLevel);
 			}
 
 			return select;
-		}
-
-		TSQLClause ITSQLClauseParser.Parse(ITSQLTokenizer tokenizer)
-		{
-			return Parse(tokenizer);
 		}
 	}
 }

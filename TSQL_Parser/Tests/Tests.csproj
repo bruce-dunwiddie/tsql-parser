@@ -61,12 +61,14 @@
   <ItemGroup>
     <Compile Include="CharactersTests.cs" />
     <Compile Include="Clauses\FromClauseTests.cs" />
+    <Compile Include="Clauses\SetOperatorClauseTests.cs" />
     <Compile Include="Clauses\WhereClauseTests.cs" />
     <Compile Include="Clauses\GroupByClauseTests.cs" />
     <Compile Include="Clauses\HavingClauseTests.cs" />
     <Compile Include="Clauses\OrderByClauseTests.cs" />
     <Compile Include="Clauses\IntoClauseTests.cs" />
     <Compile Include="Clauses\SelectClauseTests.cs" />
+    <Compile Include="Expressions\CaseExpressionTests.cs" />
     <Compile Include="IdentifiersTests.cs" />
     <Compile Include="Parsing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,6 +79,7 @@
     </Compile>
     <Compile Include="Statements\GeneralStatementTests.cs" />
     <Compile Include="Statements\SelectStatementTests.cs" />
+    <Compile Include="Statements\WithStatementTests.cs" />
     <Compile Include="Tokens\BinaryTokenTests.cs" />
     <Compile Include="Tokens\CharacterTokenTests.cs" />
     <Compile Include="Tokens\IncompleteTokenTests.cs" />
