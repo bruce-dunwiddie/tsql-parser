@@ -46,7 +46,12 @@ namespace TSQL.Clauses.Parsers
 							TSQLKeywords.INTO,
 							TSQLKeywords.FROM,
 							TSQLKeywords.WHERE,
+							TSQLKeywords.GROUP,
+							TSQLKeywords.HAVING,
 							TSQLKeywords.ORDER,
+							TSQLKeywords.UNION,
+							TSQLKeywords.EXCEPT,
+							TSQLKeywords.INTERSECT,
 							TSQLKeywords.FOR,
 							TSQLKeywords.OPTION
 						) &&

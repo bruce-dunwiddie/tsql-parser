@@ -44,7 +44,12 @@ namespace TSQL.Clauses.Parsers
 						!tokenizer.Current.AsKeyword.Keyword.In
 						(
 							TSQLKeywords.WHERE,
+							TSQLKeywords.GROUP,
+							TSQLKeywords.HAVING,
 							TSQLKeywords.ORDER,
+							TSQLKeywords.UNION,
+							TSQLKeywords.EXCEPT,
+							TSQLKeywords.INTERSECT,
 							TSQLKeywords.FOR,
 							TSQLKeywords.OPTION
 						) &&

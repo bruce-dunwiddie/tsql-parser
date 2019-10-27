@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="CharactersTests.cs" />
     <Compile Include="Clauses\FromClauseTests.cs" />
+    <Compile Include="Clauses\SetOperatorClauseTests.cs" />
     <Compile Include="Clauses\WhereClauseTests.cs" />
     <Compile Include="Clauses\GroupByClauseTests.cs" />
     <Compile Include="Clauses\HavingClauseTests.cs" />

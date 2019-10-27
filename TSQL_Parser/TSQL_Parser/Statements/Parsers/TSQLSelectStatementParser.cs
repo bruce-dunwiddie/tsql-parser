@@ -81,6 +81,19 @@ namespace TSQL.Statements.Parsers
 				Statement.Tokens.AddRange(havingClause.Tokens);
 			}
 
+			if (Tokenizer.Current?.AsKeyword != null &&
+				Tokenizer.Current.AsKeyword.Keyword.In(
+				TSQLKeywords.UNION,
+				TSQLKeywords.EXCEPT,
+				TSQLKeywords.INTERSECT))
+			{
+				TSQLSetOperatorClause set = new TSQLSetOperatorClauseParser().Parse(Tokenizer);
+
+				Statement.SetOperator = set;
+
+				Statement.Tokens.AddRange(set.Tokens);
+			}
+
 			if (Tokenizer.Current.IsKeyword(TSQLKeywords.ORDER))
 			{
 				TSQLOrderByClause orderByClause = new TSQLOrderByClauseParser().Parse(Tokenizer);
