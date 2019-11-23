@@ -276,5 +276,31 @@ namespace TSQL.Tokens
 
 			return true;
 		}
+
+		public static bool IsWhitespace(this TSQLToken token)
+		{
+			if (token == null)
+			{
+				return false;
+			}
+			else
+			{
+				return token.Type == TSQLTokenType.Whitespace;
+			}
+		}
+
+		public static bool IsComment(this TSQLToken token)
+		{
+			if (token == null)
+			{
+				return false;
+			}
+			else
+			{
+				return token.Type == TSQLTokenType.SingleLineComment ||
+					token.Type == TSQLTokenType.MultilineComment ||
+					token.Type == TSQLTokenType.IncompleteComment;
+			}
+		}
 	}
 }
