@@ -154,6 +154,7 @@ namespace TSQL
 		public static readonly TSQLKeywords OR = new TSQLKeywords("OR");
 		public static readonly TSQLKeywords ORDER = new TSQLKeywords("ORDER");
 		public static readonly TSQLKeywords OUTER = new TSQLKeywords("OUTER");
+		public static readonly TSQLKeywords OUTPUT = new TSQLKeywords("OUTPUT");
 		public static readonly TSQLKeywords OVER = new TSQLKeywords("OVER");
 		public static readonly TSQLKeywords PERCENT = new TSQLKeywords("PERCENT");
 		public static readonly TSQLKeywords PIVOT = new TSQLKeywords("PIVOT");
@@ -194,6 +195,7 @@ namespace TSQL
 		public static readonly TSQLKeywords UNIQUE = new TSQLKeywords("UNIQUE");
 		public static readonly TSQLKeywords UNPIVOT = new TSQLKeywords("UNPIVOT");
 		// public static readonly TSQLKeywords USER = new TSQLKeywords("USER");
+		public static readonly TSQLKeywords USING = new TSQLKeywords("USING");
 		public static readonly TSQLKeywords VALUES = new TSQLKeywords("VALUES");
 		public static readonly TSQLKeywords VARYING = new TSQLKeywords("VARYING");
 		public static readonly TSQLKeywords VIEW = new TSQLKeywords("VIEW");
