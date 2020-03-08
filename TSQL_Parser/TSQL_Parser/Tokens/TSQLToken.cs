@@ -302,5 +302,17 @@ namespace TSQL.Tokens
 					token.Type == TSQLTokenType.IncompleteComment;
 			}
 		}
+
+		//public static bool IsFutureKeyword(this TSQLToken token, TSQLFutureKeywords keyword)
+		//{
+		//	if (token == null)
+		//	{
+		//		return false;
+		//	}
+		//	else
+		//	{
+		//		return TSQLFutureKeywords.Parse(token.Text) == keyword;
+		//	}
+		//}
 	}
 }
