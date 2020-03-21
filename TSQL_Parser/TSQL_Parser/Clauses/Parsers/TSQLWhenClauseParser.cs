@@ -33,11 +33,12 @@ namespace TSQL.Clauses.Parsers
 						tokenizer.Current.Type == TSQLTokenType.Keyword &&
 						!tokenizer.Current.AsKeyword.Keyword.In
 						(
-							TSQLKeywords.WHEN,
-							TSQLKeywords.OUTPUT
+							TSQLKeywords.WHEN
 						)
 					)
-				))
+				) &&
+				!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT)
+				)
 			{
 				TSQLSubqueryHelper.RecurseParens(
 					tokenizer,

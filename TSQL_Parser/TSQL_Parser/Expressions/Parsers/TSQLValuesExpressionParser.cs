@@ -35,11 +35,11 @@ namespace TSQL.Expressions.Parsers
 						!tokenizer.Current.AsKeyword.Keyword.In
 						(
 							TSQLKeywords.ON,
-							TSQLKeywords.WHEN,
-							TSQLKeywords.OUTPUT
+							TSQLKeywords.WHEN
 						)
 					)
-				))
+				) &&
+				!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT))
 			{
 				TSQLSubqueryHelper.RecurseParens(
 					tokenizer,

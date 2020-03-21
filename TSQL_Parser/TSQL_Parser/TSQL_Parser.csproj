@@ -123,10 +123,12 @@
     <Compile Include="Tokens\TSQLIncompleteIdentifierToken.cs" />
     <Compile Include="Tokens\TSQLIncompleteStringToken.cs" />
     <Compile Include="Tokens\TSQLIncompleteToken.cs" />
+    <Compile Include="Tokens\TSQLFutureKeyword.cs" />
     <Compile Include="Tokens\TSQLSystemIdentifier.cs" />
     <Compile Include="Tokens\TSQLSystemVariable.cs" />
     <Compile Include="Tokens\TSQLBinaryLiteral.cs" />
     <Compile Include="Tokens\TSQLMoneyLiteral.cs" />
+    <Compile Include="TSQLFutureKeywords.cs" />
     <Compile Include="TSQLIdentifiers.cs" />
     <Compile Include="TSQLStatementReader.cs" />
     <Compile Include="TSQLStatementReader.IDisposable.cs">

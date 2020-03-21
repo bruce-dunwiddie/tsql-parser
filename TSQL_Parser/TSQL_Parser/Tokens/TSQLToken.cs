@@ -128,6 +128,18 @@ namespace TSQL.Tokens
 
 		/// <summary>
 		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLFutureKeyword"/>.
+		/// </summary>
+		public TSQLFutureKeyword AsFutureKeyword
+		{
+			get
+			{
+				return this as TSQLFutureKeyword;
+			}
+		}
+
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
 		///		as <see cref="TSQL.Tokens.TSQLLiteral"/>.
 		/// </summary>
 		public TSQLLiteral AsLiteral
@@ -303,16 +315,16 @@ namespace TSQL.Tokens
 			}
 		}
 
-		//public static bool IsFutureKeyword(this TSQLToken token, TSQLFutureKeywords keyword)
-		//{
-		//	if (token == null)
-		//	{
-		//		return false;
-		//	}
-		//	else
-		//	{
-		//		return TSQLFutureKeywords.Parse(token.Text) == keyword;
-		//	}
-		//}
+		public static bool IsFutureKeyword(this TSQLToken token, TSQLFutureKeywords keyword)
+		{
+			if (token == null)
+			{
+				return false;
+			}
+			else
+			{
+				return TSQLFutureKeywords.Parse(token.Text) == keyword;
+			}
+		}
 	}
 }

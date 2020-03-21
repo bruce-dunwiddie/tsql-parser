@@ -51,7 +51,7 @@ namespace TSQL.Tokens
 		///		e.g. + or !=.
 		/// </summary>
 		Operator,
-		
+
 		/// <summary>
 		///		Variable starting with @,
 		///		e.g. @id.
@@ -104,6 +104,12 @@ namespace TSQL.Tokens
 		///		The beginning of a string literal,
 		///		e.g. 'Cincinnat.
 		/// </summary>
-		IncompleteString
+		IncompleteString,
+
+		/// <summary>
+		///		Recognized T-SQL keywords that are not yet officially reserved,
+		///		e.g. OUTPUT and USING.
+		/// </summary>
+		FutureKeyword,
 	}
 }

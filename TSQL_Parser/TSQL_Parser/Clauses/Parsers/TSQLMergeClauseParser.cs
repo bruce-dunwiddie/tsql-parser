@@ -42,11 +42,11 @@ namespace TSQL.Clauses.Parsers
 						(
 							TSQLKeywords.INTO,
 							TSQLKeywords.AS,
-							TSQLKeywords.USING,
 							TSQLKeywords.ON,
-							TSQLKeywords.WHEN,
-							TSQLKeywords.OUTPUT
+							TSQLKeywords.WHEN
 						) &&
+						!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.USING) &&
+						!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT) &&
 						!tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
 					)
 				))

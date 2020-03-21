@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using TSQL;
 using TSQL.Statements;
-using TSQL.Tokens;
 
 namespace Tests.Statements
 {
@@ -54,12 +53,54 @@ namespace Tests.Statements
 			Assert.AreEqual(2, merge.Merge.Tokens.Count);
 			Assert.AreEqual(10, merge.Into.Tokens.Count);
 			Assert.AreEqual(33, merge.Using.Tokens.Count);
+			Assert.NotNull(merge.Using.Tokens[0].AsFutureKeyword);
 			Assert.AreEqual(14, merge.On.Tokens.Count);
 			Assert.AreEqual(3, merge.When.Count);
 			Assert.AreEqual(64, merge.When[0].Tokens.Count);
 			Assert.AreEqual(30, merge.When[1].Tokens.Count);
 			Assert.AreEqual(14, merge.When[2].Tokens.Count);
 			Assert.AreEqual(47, merge.Output.Tokens.Count);
+			Assert.NotNull(merge.Output.Tokens[0].AsFutureKeyword);
+		}
+
+		[Test]
+		public void MergeStatement_StandardMerge2()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"
+				Merge into myTargetTable as tab1 
+				using(select * from mySourceTable) as tab2 
+				   on tab1.PrimaryID=tab2.PrimaryID 
+				when matched then 
+				   update set 
+				   tab1.someColumn1=tab2.someColumn1, 
+				   tab1.someColumn2=tab2.someColumn2, 
+				   tab1.someColumn3=tab2.someColumn3, 
+				   tab1.someColumn4=tab2.someColumn4, 
+				   tab1.someColumn5=tab2.someColumn5 
+				when not matched then 
+				   insert values(tab2.PrimaryID,tab2.someColumn1,tab2.someColumn2,tab2.someColumn3,tab2.someColumn4,tab2.someColumn5); ",
+				includeWhitespace: true);
+			TSQLMergeStatement merge = statements[0] as TSQLMergeStatement;
+
+			Assert.IsNotNull(statements);
+			Assert.AreEqual(1, statements.Count);
+			Assert.AreEqual(TSQLStatementType.Merge, merge.Type);
+			Assert.AreEqual(125, merge.Tokens.Count);
+			Assert.AreEqual(TSQLKeywords.MERGE, merge.Tokens[0].AsKeyword.Keyword);
+			Assert.AreEqual(" ", merge.Tokens[1].AsWhitespace.Text);
+			Assert.AreEqual(TSQLKeywords.INTO, merge.Tokens[2].AsKeyword.Keyword);
+			Assert.AreEqual(" ", merge.Tokens[3].AsWhitespace.Text);
+			Assert.AreEqual("myTargetTable", merge.Tokens[4].AsIdentifier.Name);
+			Assert.AreEqual(2, merge.Merge.Tokens.Count);
+			Assert.AreEqual(8, merge.Into.Tokens.Count);
+			Assert.AreEqual(15, merge.Using.Tokens.Count);
+			Assert.NotNull(merge.Using.Tokens[0].AsFutureKeyword);
+			Assert.AreEqual(10, merge.On.Tokens.Count);
+			Assert.AreEqual(2, merge.When.Count);
+			Assert.AreEqual(54, merge.When[0].Tokens.Count);
+			Assert.AreEqual(36, merge.When[1].Tokens.Count);
+			Assert.IsNull(merge.Output);
 		}
 
 		[Test]
@@ -107,12 +148,14 @@ namespace Tests.Statements
 			Assert.AreEqual(2, merge.Merge.Tokens.Count);
 			Assert.AreEqual(10, merge.Into.Tokens.Count);
 			Assert.AreEqual(33, merge.Using.Tokens.Count);
+			Assert.NotNull(merge.Using.Tokens[0].AsFutureKeyword);
 			Assert.AreEqual(14, merge.On.Tokens.Count);
 			Assert.AreEqual(3, merge.When.Count);
 			Assert.AreEqual(64, merge.When[0].Tokens.Count);
 			Assert.AreEqual(26, merge.When[1].Tokens.Count);
 			Assert.AreEqual(14, merge.When[2].Tokens.Count);
 			Assert.AreEqual(47, merge.Output.Tokens.Count);
+			Assert.NotNull(merge.Output.Tokens[0].AsFutureKeyword);
 		}
 
 		[Test]
@@ -159,12 +202,14 @@ namespace Tests.Statements
 			Assert.AreEqual(2, merge.Merge.Tokens.Count);
 			Assert.AreEqual(10, merge.Into.Tokens.Count);
 			Assert.AreEqual(38, merge.Using.Tokens.Count);
+			Assert.NotNull(merge.Using.Tokens[0].AsFutureKeyword);
 			Assert.AreEqual(14, merge.On.Tokens.Count);
 			Assert.AreEqual(3, merge.When.Count);
 			Assert.AreEqual(64, merge.When[0].Tokens.Count);
 			Assert.AreEqual(30, merge.When[1].Tokens.Count);
 			Assert.AreEqual(14, merge.When[2].Tokens.Count);
 			Assert.AreEqual(47, merge.Output.Tokens.Count);
+			Assert.NotNull(merge.Output.Tokens[0].AsFutureKeyword);
 		}
 
 		[Test]
@@ -220,7 +265,7 @@ namespace Tests.Statements
 
 			Assert.IsNotNull(statements);
 			Assert.AreEqual(16, statements.Count);
-			
+
 			Assert.AreEqual(TSQLStatementType.Merge, statements[2].Type);
 			Assert.AreEqual(TSQLStatementType.Select, statements[4].Type);
 			Assert.AreEqual(6, statements[0].Tokens.Count);
@@ -247,12 +292,28 @@ namespace Tests.Statements
 			Assert.AreEqual(2, merge.Merge.Tokens.Count);
 			Assert.AreEqual(10, merge.Into.Tokens.Count);
 			Assert.AreEqual(33, merge.Using.Tokens.Count);
+			Assert.NotNull(merge.Using.Tokens[0].AsFutureKeyword);
 			Assert.AreEqual(14, merge.On.Tokens.Count);
 			Assert.AreEqual(3, merge.When.Count);
 			Assert.AreEqual(64, merge.When[0].Tokens.Count);
 			Assert.AreEqual(30, merge.When[1].Tokens.Count);
 			Assert.AreEqual(13, merge.When[2].Tokens.Count);
 			Assert.IsNull(merge.Output);
+		}
+
+		[Test]
+		public void MergeStatement_NonMergeScriptWithFutureKeywords()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				"create table output (id int); create table using (id int);",
+				includeWhitespace: true);
+
+			Assert.IsNotNull(statements);
+			Assert.AreEqual(2, statements.Count);
+			Assert.AreEqual(TSQLStatementType.Unknown, statements[0].Type);
+			Assert.AreEqual(TSQLStatementType.Unknown, statements[1].Type);
+			Assert.IsNotNull(statements[0].Tokens[4].AsIdentifier);
+			Assert.IsNotNull(statements[1].Tokens[4].AsIdentifier);
 		}
 	}
 }

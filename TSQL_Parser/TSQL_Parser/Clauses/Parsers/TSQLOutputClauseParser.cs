@@ -10,7 +10,7 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLOutputClause output = new TSQLOutputClause();
 
-			if (!tokenizer.Current.IsKeyword(TSQLKeywords.OUTPUT))
+			if (!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT))
 			{
 				throw new InvalidOperationException("OUTPUT expected.");
 			}

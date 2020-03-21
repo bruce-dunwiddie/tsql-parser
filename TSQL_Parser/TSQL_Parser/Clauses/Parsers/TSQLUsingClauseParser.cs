@@ -11,7 +11,7 @@ namespace TSQL.Clauses.Parsers
 		{
 			TSQLUsingClause usingClause = new TSQLUsingClause();
 
-			if (!tokenizer.Current.IsKeyword(TSQLKeywords.USING))
+			if (!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.USING))
 			{
 				throw new InvalidOperationException("USING expected.");
 			}
@@ -26,7 +26,7 @@ namespace TSQL.Clauses.Parsers
 			 *         [ WITH ( table_hint [ [ , ]...n ] ) ]
 			 *   | rowset_function [ [ AS ] table_alias ]
 			 *         [ ( bulk_column_alias [ ,...n ] ) ]
-			 *   | user_defined_function [ [ AS ] table_alias ]  
+			 *   | user_defined_function [ [ AS ] table_alias ]
 			 *   | OPENXML <openxml_clause>
 			 *   | derived_table [ AS ] table_alias [ ( column_alias [ ,...n ] ) ]
 			 *   | <joined_table>
@@ -57,9 +57,9 @@ namespace TSQL.Clauses.Parsers
 						!tokenizer.Current.AsKeyword.Keyword.In
 						(
 							TSQLKeywords.ON,
-							TSQLKeywords.WHEN,
-							TSQLKeywords.OUTPUT
+							TSQLKeywords.WHEN
 						) &&
+						!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT) &&
 						!tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
 					)
 				))

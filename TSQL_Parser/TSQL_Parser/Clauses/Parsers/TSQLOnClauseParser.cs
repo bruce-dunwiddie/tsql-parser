@@ -42,9 +42,9 @@ namespace TSQL.Clauses.Parsers
 							TSQLKeywords.INNER,
 							TSQLKeywords.OUTER,
 							TSQLKeywords.JOIN,
-							TSQLKeywords.WHEN,
-							TSQLKeywords.OUTPUT
+							TSQLKeywords.WHEN
 						) &&
+						!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT) &&
 						!tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
 					)
 				))

@@ -26,7 +26,9 @@ namespace TSQL.Clauses.Parsers
 					tokenizer.Current.Type == TSQLTokenType.SingleLineComment ||
 					tokenizer.Current.Type == TSQLTokenType.MultilineComment ||
 					tokenizer.Current.IsKeyword(TSQLKeywords.AS)
-				))
+				) &&
+				!TSQLFutureKeywords.IsFutureKeyword(tokenizer.Current.Text)
+			)
 			{
 				into.Tokens.Add(tokenizer.Current);
 			}

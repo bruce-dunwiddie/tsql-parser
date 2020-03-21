@@ -39,9 +39,10 @@ namespace TSQL.Statements.Parsers
 				Statement.Tokens.AddRange(intoClause.Tokens);
 			}
 
-			if (Tokenizer.Current.IsKeyword(TSQLKeywords.USING))
+			if (Tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.USING))
 			{
 				TSQLUsingClause usingClause = new TSQLUsingClauseParser().Parse(Tokenizer);
+				usingClause.Tokens[0] = new TSQLFutureKeyword(usingClause.Tokens[0].BeginPosition, usingClause.Tokens[0].Text);
 
 				Statement.Using = usingClause;
 
@@ -66,9 +67,10 @@ namespace TSQL.Statements.Parsers
 				Statement.Tokens.AddRange(whenClause.Tokens);
 			}
 
-			if (Tokenizer.Current.IsKeyword(TSQLKeywords.OUTPUT))
+			if (Tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT))
 			{
 				TSQLOutputClause outputClause = new TSQLOutputClauseParser().Parse(Tokenizer);
+				outputClause.Tokens[0] = new TSQLFutureKeyword(outputClause.Tokens[0].BeginPosition, outputClause.Tokens[0].Text);
 
 				Statement.Output = outputClause;
 
