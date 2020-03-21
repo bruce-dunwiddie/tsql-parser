@@ -22,6 +22,8 @@ namespace TSQL.Statements
 
 #pragma warning restore 1591
 
+		public TSQLWithClause With { get; internal set; }
+
 		public TSQLMergeClause Merge { get; internal set; }
 
 		public TSQLIntoClause Into { get; internal set; }

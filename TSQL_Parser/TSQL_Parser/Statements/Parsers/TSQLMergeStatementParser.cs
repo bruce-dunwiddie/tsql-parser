@@ -12,6 +12,14 @@ namespace TSQL.Statements.Parsers
 			Tokenizer = tokenizer;
 		}
 
+		public TSQLMergeStatementParser(TSQLWithClause with, ITSQLTokenizer tokenizer) :
+			this(tokenizer)
+		{
+			Statement.With = with;
+
+			Statement.Tokens.AddRange(with.Tokens);
+		}
+
 		public TSQLMergeStatementParser(List<TSQLToken> startTokens, ITSQLTokenizer tokenizer) :
 			this(tokenizer)
 		{
