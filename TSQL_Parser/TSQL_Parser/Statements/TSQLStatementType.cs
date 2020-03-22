@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace TSQL.Statements
+﻿namespace TSQL.Statements
 {
 	public enum TSQLStatementType
 	{
@@ -15,7 +10,7 @@ namespace TSQL.Statements
 		//Delete,
 		//With,
 		//Execute,
-		//Merge,
+		Merge,
 
 #pragma warning restore 1591
 

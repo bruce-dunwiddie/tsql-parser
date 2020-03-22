@@ -27,6 +27,10 @@ namespace TSQL.Statements.Parsers
 			{
 				return new TSQLSelectStatementParser(with, Tokenizer).Parse();
 			}
+			else if (Tokenizer.Current.AsKeyword?.Keyword == TSQLKeywords.MERGE)
+			{
+				return new TSQLMergeStatementParser(with, Tokenizer).Parse();
+			}
 			else
 			{
 				return new TSQLUnknownStatementParser(with.Tokens, Tokenizer).Parse();

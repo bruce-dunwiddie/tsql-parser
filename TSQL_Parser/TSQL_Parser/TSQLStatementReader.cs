@@ -18,9 +18,9 @@ namespace TSQL
 
 		public TSQLStatementReader(
 			string tsqlText) :
-                this(new StringReader(tsqlText))
-        {
-			
+				this(new StringReader(tsqlText))
+		{
+
 		}
 
 		public TSQLStatementReader(
@@ -61,23 +61,23 @@ namespace TSQL
 
 			if (_hasMore)
 			{
-                // push the tokenizer to the next token
+				// push the tokenizer to the next token
 
-                // eat up any tokens inbetween statements until we get to something that might start a new statement
-                // which should be a keyword if the batch is valid
+				// eat up any tokens inbetween statements until we get to something that might start a new statement
+				// which should be a keyword if the batch is valid
 
-                // if the last statement parser did not swallow the final semicolon, or there were multiple semicolons, we will swallow it also
-                while (
-                    _tokenizer.MoveNext() &&
-                    (
-                        _tokenizer.Current.Type == TSQLTokenType.SingleLineComment ||
-                        _tokenizer.Current.Type == TSQLTokenType.MultilineComment ||
-                        _tokenizer.Current.Type == TSQLTokenType.Whitespace ||
-                        (
-                            _tokenizer.Current.Type == TSQLTokenType.Character &&
-                            _tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
-                        )
-                    ));
+				// if the last statement parser did not swallow the final semicolon, or there were multiple semicolons, we will swallow it also
+				while (
+					_tokenizer.MoveNext() &&
+					(
+						_tokenizer.Current.Type == TSQLTokenType.SingleLineComment ||
+						_tokenizer.Current.Type == TSQLTokenType.MultilineComment ||
+						_tokenizer.Current.Type == TSQLTokenType.Whitespace ||
+						(
+							_tokenizer.Current.Type == TSQLTokenType.Character &&
+							_tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
+						)
+					));
 
 				if (_tokenizer.Current == null)
 				{

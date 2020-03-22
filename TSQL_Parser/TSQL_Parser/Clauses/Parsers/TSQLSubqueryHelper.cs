@@ -58,6 +58,12 @@ namespace TSQL.Clauses.Parsers
 							nestedLevel++;
 							expression.Tokens.Add(tokenizer.Current);
 						}
+						else if (tokenizer.Current.IsKeyword(TSQLKeywords.VALUES))
+						{
+							TSQLValuesExpression valuesExpression = new TSQLValuesExpressionParser().Parse(tokenizer);
+							nestedLevel--;
+							expression.Tokens.AddRange(valuesExpression.Tokens);
+						}
 						else
 						{
 							expression.Tokens.Add(tokenizer.Current);

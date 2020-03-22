@@ -29,5 +29,20 @@ namespace Tests.Statements
 
 			Assert.IsTrue(statements[0].Tokens[0].IsKeyword(TSQLKeywords.DECLARE));
 		}
+
+		[Test]
+		public void CreateTableStatement_FutureKeywordsAsIdentifier()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				"create table output (id int); create table using (id int);",
+				includeWhitespace: true);
+
+			Assert.IsNotNull(statements);
+			Assert.AreEqual(2, statements.Count);
+			Assert.AreEqual(TSQLStatementType.Unknown, statements[0].Type);
+			Assert.AreEqual(TSQLStatementType.Unknown, statements[1].Type);
+			Assert.IsNotNull(statements[0].Tokens[4].AsIdentifier);
+			Assert.IsNotNull(statements[1].Tokens[4].AsIdentifier);
+		}
 	}
 }
