@@ -104,12 +104,6 @@ namespace TSQL.Tokens
 		///		The beginning of a string literal,
 		///		e.g. 'Cincinnat.
 		/// </summary>
-		IncompleteString,
-
-		/// <summary>
-		///		Recognized T-SQL keywords that are not yet officially reserved,
-		///		e.g. OUTPUT and USING.
-		/// </summary>
-		FutureKeyword,
+		IncompleteString
 	}
 }

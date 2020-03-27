@@ -35,5 +35,7 @@ namespace TSQL.Statements
 		public List<TSQLWhenClause> When { get; } = new List<TSQLWhenClause>();
 
 		public TSQLOutputClause Output { get; internal set; }
+
+		public TSQLOptionClause Option { get; internal set; }
 	}
 }

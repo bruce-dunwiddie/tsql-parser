@@ -20,12 +20,6 @@ namespace TSQL.Statements.Parsers
 			Statement.Tokens.AddRange(with.Tokens);
 		}
 
-		public TSQLMergeStatementParser(List<TSQLToken> startTokens, ITSQLTokenizer tokenizer) :
-			this(tokenizer)
-		{
-			Statement.Tokens.AddRange(startTokens);
-		}
-
 		private TSQLMergeStatement Statement { get; } = new TSQLMergeStatement();
 
 		private ITSQLTokenizer Tokenizer { get; set; }
@@ -50,7 +44,6 @@ namespace TSQL.Statements.Parsers
 			if (Tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.USING))
 			{
 				TSQLUsingClause usingClause = new TSQLUsingClauseParser().Parse(Tokenizer);
-				usingClause.Tokens[0] = new TSQLFutureKeyword(usingClause.Tokens[0].BeginPosition, usingClause.Tokens[0].Text);
 
 				Statement.Using = usingClause;
 
@@ -78,11 +71,19 @@ namespace TSQL.Statements.Parsers
 			if (Tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT))
 			{
 				TSQLOutputClause outputClause = new TSQLOutputClauseParser().Parse(Tokenizer);
-				outputClause.Tokens[0] = new TSQLFutureKeyword(outputClause.Tokens[0].BeginPosition, outputClause.Tokens[0].Text);
 
 				Statement.Output = outputClause;
 
 				Statement.Tokens.AddRange(outputClause.Tokens);
+			}
+
+			if (Tokenizer.Current.IsKeyword(TSQLKeywords.OPTION))
+			{
+				TSQLOptionClause optionClause = new TSQLOptionClauseParser().Parse(Tokenizer);
+
+				Statement.Option = optionClause;
+
+				Statement.Tokens.AddRange(optionClause.Tokens);
 			}
 
 			if (
