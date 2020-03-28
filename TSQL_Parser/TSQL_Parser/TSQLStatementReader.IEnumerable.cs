@@ -30,7 +30,7 @@ namespace TSQL
 
 		void IEnumerator.Reset()
 		{
-            throw new NotSupportedException("Reset is not currently supported by the IEnumerator implementation supplied by " + GetType().FullName + ".");
-        }
+			throw new NotSupportedException("Reset is not currently supported by the IEnumerator implementation supplied by " + GetType().FullName + ".");
+		}
 	}
 }

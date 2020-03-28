@@ -51,7 +51,7 @@ namespace TSQL.Tokens
 		///		e.g. + or !=.
 		/// </summary>
 		Operator,
-		
+
 		/// <summary>
 		///		Variable starting with @,
 		///		e.g. @id.

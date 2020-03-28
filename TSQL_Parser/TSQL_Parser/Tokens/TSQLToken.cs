@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace TSQL.Tokens
 {
@@ -52,6 +53,48 @@ namespace TSQL.Tokens
 		public abstract bool IsComplete
 		{
 			get;
+		}
+
+		public override string ToString()
+		{
+			return $"[Type: {Type}; Text: \"{ToLiteral(Text)}\"; BeginPosition: {BeginPosition: #,##0}; Length: {Length: #,##0}]";
+		}
+
+		// https://stackoverflow.com/a/14087738
+		private static string ToLiteral(string input)
+		{
+			StringBuilder literal = new StringBuilder(input.Length);
+			foreach (var c in input)
+			{
+				switch (c)
+				{
+					case '\'': literal.Append(@"\'"); break;
+					case '\"': literal.Append("\\\""); break;
+					case '\\': literal.Append(@"\\"); break;
+					case '\0': literal.Append(@"\0"); break;
+					case '\a': literal.Append(@"\a"); break;
+					case '\b': literal.Append(@"\b"); break;
+					case '\f': literal.Append(@"\f"); break;
+					case '\n': literal.Append(@"\n"); break;
+					case '\r': literal.Append(@"\r"); break;
+					case '\t': literal.Append(@"\t"); break;
+					case '\v': literal.Append(@"\v"); break;
+					default:
+						// ASCII printable character
+						if (c >= 0x20 && c <= 0x7e)
+						{
+							literal.Append(c);
+							// As UTF16 escaped character
+						}
+						else
+						{
+							literal.Append(@"\u");
+							literal.Append(((int)c).ToString("x4"));
+						}
+						break;
+				}
+			}
+			return literal.ToString();
 		}
 
 		/// <summary>
@@ -275,6 +318,44 @@ namespace TSQL.Tokens
 			}
 
 			return true;
+		}
+
+		public static bool IsWhitespace(this TSQLToken token)
+		{
+			if (token == null)
+			{
+				return false;
+			}
+			else
+			{
+				return token.Type == TSQLTokenType.Whitespace;
+			}
+		}
+
+		public static bool IsComment(this TSQLToken token)
+		{
+			if (token == null)
+			{
+				return false;
+			}
+			else
+			{
+				return token.Type == TSQLTokenType.SingleLineComment ||
+					token.Type == TSQLTokenType.MultilineComment ||
+					token.Type == TSQLTokenType.IncompleteComment;
+			}
+		}
+
+		public static bool IsFutureKeyword(this TSQLToken token, TSQLFutureKeywords keyword)
+		{
+			if (token == null)
+			{
+				return false;
+			}
+			else
+			{
+				return TSQLFutureKeywords.Parse(token.Text) == keyword;
+			}
 		}
 	}
 }

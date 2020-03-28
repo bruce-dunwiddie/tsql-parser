@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using TSQL.Clauses;
-using TSQL.Clauses.Parsers;
-using TSQL.Tokens;
-
-namespace TSQL.Statements.Parsers
+﻿namespace TSQL.Statements.Parsers
 {
 	internal class TSQLStatementParserFactory
 	{
@@ -22,6 +13,10 @@ namespace TSQL.Statements.Parsers
 				// this parser will parse the CTE's from the WITH clause and
 				// then return the correct statement parser, e.g. SELECT, UPDATE, etc
 				return new TSQLWithClauseStatementParser(tokenizer);
+			}
+			else if (tokenizer.Current.AsKeyword?.Keyword == TSQLKeywords.MERGE)
+			{
+				return new TSQLMergeStatementParser(tokenizer);
 			}
 			else
 			{
