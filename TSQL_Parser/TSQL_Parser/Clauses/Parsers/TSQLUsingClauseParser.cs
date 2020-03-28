@@ -56,11 +56,9 @@ namespace TSQL.Clauses.Parsers
 						tokenizer.Current.Type == TSQLTokenType.Keyword &&
 						!tokenizer.Current.AsKeyword.Keyword.In
 						(
-							TSQLKeywords.ON,
-							TSQLKeywords.WHEN
-						) &&
-						!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT) &&
-						!tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
+							// ON is required in MERGE statement after USING
+							TSQLKeywords.ON
+						)
 					)
 				))
 			{
