@@ -63,6 +63,9 @@ namespace TSQL.IO
 			return hasNext;
 		}
 
+		/// <summary>
+		/// Places the current character back so that it can be read again.
+		/// </summary>
 		public void Putback()
 		{
 			_hasExtra = true;

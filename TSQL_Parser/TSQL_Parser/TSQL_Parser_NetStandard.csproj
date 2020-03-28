@@ -31,18 +31,6 @@
 
   <ItemGroup>
     <Compile Remove="Properties\AssemblyInfo.cs" />
-    <Compile Remove="Statements\Parsers\TSQLDeleteStatementParser.cs" />
-    <Compile Remove="Statements\Parsers\TSQLExecuteStatementParser.cs" />
-    <Compile Remove="Statements\Parsers\TSQLInsertStatementParser.cs" />
-    <Compile Remove="Statements\Parsers\TSQLMergeStatementParser.cs" />
-    <Compile Remove="Statements\Parsers\TSQLUpdateStatementParser.cs" />
-    <Compile Remove="Statements\Parsers\TSQLWithStatementParser.cs" />
-    <Compile Remove="Statements\TSQLDeleteStatement.cs" />
-    <Compile Remove="Statements\TSQLExecuteStatement.cs" />
-    <Compile Remove="Statements\TSQLInsertStatement.cs" />
-    <Compile Remove="Statements\TSQLMergeStatement.cs" />
-    <Compile Remove="Statements\TSQLUpdateStatement.cs" />
-    <Compile Remove="Statements\TSQLWithStatement.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -32,21 +32,7 @@ namespace TSQL.Clauses.Parsers
 
 					if (tokenizer.MoveNext())
 					{
-						if (tokenizer.Current.IsKeyword(
-							TSQLKeywords.SELECT))
-						{
-							TSQLSelectStatement selectStatement = new TSQLSelectStatementParser(tokenizer).Parse();
-
-							expression.Tokens.AddRange(selectStatement.Tokens);
-
-							if (tokenizer.Current.IsCharacter(
-								TSQLCharacters.CloseParentheses))
-							{
-								nestedLevel--;
-								expression.Tokens.Add(tokenizer.Current);
-							}
-						}
-						else if (tokenizer.Current.IsCharacter(
+						if (tokenizer.Current.IsCharacter(
 							TSQLCharacters.CloseParentheses))
 						{
 							nestedLevel--;

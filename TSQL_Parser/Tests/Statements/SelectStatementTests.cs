@@ -292,6 +292,8 @@ namespace Tests.Statements
 			Assert.AreEqual(16, select.Tokens.Count);
 			Assert.AreEqual("OrderDate", select.Tokens[15].Text);
 		}
+
+		[Test]
 		public void SelectStatement_Dont_Overrun()
 		{
 			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(

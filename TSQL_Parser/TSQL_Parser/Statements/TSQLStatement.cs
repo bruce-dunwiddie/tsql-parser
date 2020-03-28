@@ -22,5 +22,13 @@ namespace TSQL.Statements
 				return this as TSQLSelectStatement;
 			}
 		}
+
+		public TSQLMergeStatement AsMerge
+		{
+			get
+			{
+				return this as TSQLMergeStatement;
+			}
+		}
 	}
 }
