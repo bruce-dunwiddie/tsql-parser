@@ -5,6 +5,7 @@
 .vs
 /TSQL_Parser/.vs
 /TSQL_Parser/packages
+/TSQL_Parser/Tests/TestResult.xml
 *.user
 /TSQL_Parser/TSQL_Parser/TSQL.Parser.*.nupkg
 /TSQL_Parser/TSQL_Parser/TSQL_Parser.xml
