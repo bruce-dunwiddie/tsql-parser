@@ -2,26 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 using TSQL.Tokens;
 
 namespace TSQL.Clauses.Parsers
 {
-	internal class TSQLWithClauseParser
+	internal class TSQLUpdateClauseParser
 	{
-		public TSQLWithClause Parse(ITSQLTokenizer tokenizer)
+		public TSQLUpdateClause Parse(ITSQLTokenizer tokenizer)
 		{
-			TSQLWithClause with = new TSQLWithClause();
+			TSQLUpdateClause update = new TSQLUpdateClause();
 
-			if (!tokenizer.Current.IsKeyword(TSQLKeywords.WITH))
+			if (!tokenizer.Current.IsKeyword(TSQLKeywords.UPDATE))
 			{
-				throw new InvalidOperationException("WITH expected.");
+				throw new InvalidOperationException("UPDATE expected.");
 			}
 
-			with.Tokens.Add(tokenizer.Current);
+			update.Tokens.Add(tokenizer.Current);
 
-			// subqueries
 			int nestedLevel = 0;
 
 			while (
@@ -38,22 +36,18 @@ namespace TSQL.Clauses.Parsers
 						tokenizer.Current.Type == TSQLTokenType.Keyword &&
 						!tokenizer.Current.AsKeyword.Keyword.In
 						(
-							TSQLKeywords.SELECT,
-							TSQLKeywords.INSERT,
-							TSQLKeywords.UPDATE,
-							TSQLKeywords.DELETE,
-							TSQLKeywords.MERGE
+							TSQLKeywords.SET
 						)
 					)
 				))
 			{
 				TSQLSubqueryHelper.RecurseParens(
 					tokenizer,
-					with,
+					update,
 					ref nestedLevel);
 			}
 
-			return with;
+			return update;
 		}
 	}
 }

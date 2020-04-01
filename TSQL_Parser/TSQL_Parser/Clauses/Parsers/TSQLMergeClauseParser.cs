@@ -35,7 +35,11 @@ namespace TSQL.Clauses.Parsers
 				) &&
 				(
 					nestedLevel > 0 ||
-					tokenizer.Current.Type != TSQLTokenType.Keyword ||
+					(
+						tokenizer.Current.Type != TSQLTokenType.Keyword &&
+						!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT) &&
+						!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.USING)
+					) ||
 					(
 						tokenizer.Current.Type == TSQLTokenType.Keyword &&
 						!tokenizer.Current.AsKeyword.Keyword.In
@@ -45,8 +49,6 @@ namespace TSQL.Clauses.Parsers
 							TSQLKeywords.ON,
 							TSQLKeywords.WHEN
 						) &&
-						!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.USING) &&
-						!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT) &&
 						!tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
 					)
 				))

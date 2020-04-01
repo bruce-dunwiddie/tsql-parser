@@ -65,6 +65,8 @@
     <Compile Include="Clauses\Parsers\TSQLIntoClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLOrderByClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLMergeClauseParser.cs" />
+    <Compile Include="Clauses\Parsers\TSQLSetClauseParser.cs" />
+    <Compile Include="Clauses\Parsers\TSQLUpdateClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLUsingClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLSelectClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLSetOperatorClauseParser.cs" />
@@ -81,6 +83,8 @@
     <Compile Include="Clauses\TSQLIntersectClause.cs" />
     <Compile Include="Clauses\TSQLOutputClause.cs" />
     <Compile Include="Clauses\TSQLOnClause.cs" />
+    <Compile Include="Clauses\TSQLSetClause.cs" />
+    <Compile Include="Clauses\TSQLUpdateClause.cs" />
     <Compile Include="Clauses\TSQLUsingClause.cs" />
     <Compile Include="Clauses\TSQLIntoClause.cs" />
     <Compile Include="Clauses\TSQLOptionClause.cs" />
@@ -114,11 +118,13 @@
     <Compile Include="Statements\Parsers\TSQLStatementParserFactory.cs" />
     <Compile Include="Statements\Parsers\TSQLMergeStatementParser.cs" />
     <Compile Include="Statements\Parsers\TSQLUnknownStatementParser.cs" />
+    <Compile Include="Statements\Parsers\TSQLUpdateStatementParser.cs" />
     <Compile Include="Statements\Parsers\TSQLWithClauseStatementParser.cs" />
     <Compile Include="Statements\TSQLKeywordStatementExtensions.cs" />
     <Compile Include="Statements\TSQLSelectStatement.cs" />
     <Compile Include="Statements\TSQLStatement.cs" />
     <Compile Include="Statements\TSQLMergeStatement.cs" />
+    <Compile Include="Statements\TSQLUpdateStatement.cs" />
     <Compile Include="Tokens\TSQLIncompleteCommentToken.cs" />
     <Compile Include="Tokens\TSQLIncompleteIdentifierToken.cs" />
     <Compile Include="Tokens\TSQLIncompleteStringToken.cs" />

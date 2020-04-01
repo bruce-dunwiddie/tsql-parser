@@ -18,6 +18,10 @@
 			{
 				return new TSQLMergeStatementParser(tokenizer);
 			}
+			else if (tokenizer.Current.AsKeyword?.Keyword == TSQLKeywords.UPDATE)
+			{
+				return new TSQLUpdateStatementParser(tokenizer);
+			}
 			else
 			{
 				return new TSQLUnknownStatementParser(tokenizer);

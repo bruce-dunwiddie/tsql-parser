@@ -27,14 +27,10 @@ namespace TSQL.Clauses.Parsers
 
 			while (
 				tokenizer.MoveNext() &&
-				!(
-					tokenizer.Current.Type == TSQLTokenType.Character &&
-					tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
-				) &&
+				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
 				!(
 					nestedLevel == 0 &&
-					tokenizer.Current.Type == TSQLTokenType.Character &&
-					tokenizer.Current.AsCharacter.Character == TSQLCharacters.CloseParentheses
+					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
 				) &&
 				(
 					nestedLevel > 0 ||

@@ -22,18 +22,18 @@ namespace TSQL.Clauses.Parsers
 
 			while (
 				tokenizer.MoveNext() &&
-				!(
-					tokenizer.Current.Type == TSQLTokenType.Character &&
-					tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
-				) &&
+				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
 				!(
 					nestedLevel == 0 &&
-					tokenizer.Current.Type == TSQLTokenType.Character &&
-					tokenizer.Current.AsCharacter.Character == TSQLCharacters.CloseParentheses
+					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
 				) &&
 				(
 					nestedLevel > 0 ||
-					tokenizer.Current.Type != TSQLTokenType.Keyword ||
+					(
+						tokenizer.Current.Type != TSQLTokenType.Keyword &&
+						!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT) &&
+						!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.USING)
+					) ||
 					(
 						tokenizer.Current.Type == TSQLTokenType.Keyword &&
 						!tokenizer.Current.AsKeyword.Keyword.In
@@ -44,10 +44,10 @@ namespace TSQL.Clauses.Parsers
 							TSQLKeywords.JOIN,
 							TSQLKeywords.WHEN
 						) &&
-						!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT) &&
 						!tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
 					)
-				))
+				) &&
+				!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT))
 			{
 				TSQLSubqueryHelper.RecurseParens(
 					tokenizer,

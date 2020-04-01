@@ -30,5 +30,13 @@ namespace TSQL.Statements
 				return this as TSQLMergeStatement;
 			}
 		}
+
+		public TSQLUpdateStatement AsUpdate
+		{
+			get
+			{
+				return this as TSQLUpdateStatement;
+			}
+		}
 	}
 }

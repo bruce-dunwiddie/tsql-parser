@@ -5,15 +5,14 @@
 #pragma warning disable 1591
 
 		Select,
-		//Insert,
-		//Update,
-		//Delete,
+		Insert,
+		Update,
+		Delete,
 		//With,
 		//Execute,
 		Merge,
+		Unknown
 
 #pragma warning restore 1591
-
-		Unknown
 	}
 }

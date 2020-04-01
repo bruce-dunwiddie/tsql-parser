@@ -39,7 +39,10 @@ namespace TSQL.Clauses.Parsers
 				) &&
 				(
 					nestedLevel > 0 ||
-					tokenizer.Current.Type != TSQLTokenType.Keyword ||
+					(
+						tokenizer.Current.Type != TSQLTokenType.Keyword &&
+						!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT)
+					) ||
 					(
 						tokenizer.Current.Type == TSQLTokenType.Keyword &&
 						!tokenizer.Current.AsKeyword.Keyword.In
@@ -48,9 +51,7 @@ namespace TSQL.Clauses.Parsers
 							TSQLKeywords.OPTION
 						)
 					)
-				) &&
-				!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT)
-				)
+				))
 			{
 				TSQLSubqueryHelper.RecurseParens(
 					tokenizer,
