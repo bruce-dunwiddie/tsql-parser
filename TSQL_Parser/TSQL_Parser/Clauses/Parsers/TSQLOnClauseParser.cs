@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 using TSQL.Statements;
 using TSQL.Tokens;
@@ -18,42 +19,22 @@ namespace TSQL.Clauses.Parsers
 
 			on.Tokens.Add(tokenizer.Current);
 
-			int nestedLevel = 0;
+			// TODO: tighten logic to handle tables named OUTPUT, but still handle ON usage in MERGE
 
-			while (
-				tokenizer.MoveNext() &&
-				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
-				!(
-					nestedLevel == 0 &&
-					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
-				) &&
-				(
-					nestedLevel > 0 ||
-					(
-						tokenizer.Current.Type != TSQLTokenType.Keyword &&
-						!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT) &&
-						!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.USING)
-					) ||
-					(
-						tokenizer.Current.Type == TSQLTokenType.Keyword &&
-						!tokenizer.Current.AsKeyword.Keyword.In
-						(
-
-							TSQLKeywords.INNER,
-							TSQLKeywords.OUTER,
-							TSQLKeywords.JOIN,
-							TSQLKeywords.WHEN
-						) &&
-						!tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
-					)
-				) &&
-				!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT))
-			{
-				TSQLSubqueryHelper.RecurseParens(
-					tokenizer,
-					on,
-					ref nestedLevel);
-			}
+			TSQLSubqueryHelper.ReadUntilStop(
+				tokenizer,
+				on,
+				new List<TSQLFutureKeywords>() {
+					TSQLFutureKeywords.OUTPUT,
+					TSQLFutureKeywords.USING
+				},
+				new List<TSQLKeywords>() {
+					TSQLKeywords.INNER,
+					TSQLKeywords.OUTER,
+					TSQLKeywords.JOIN,
+					TSQLKeywords.WHEN
+				},
+				true);
 
 			return on;
 		}

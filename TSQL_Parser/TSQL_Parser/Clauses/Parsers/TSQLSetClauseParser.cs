@@ -26,6 +26,7 @@ namespace TSQL.Clauses.Parsers
 			// update output
 			// set output.output = 1
 			// output deleted.*
+			// maybe create assignment expression parser?
 
 			int nestedLevel = 0;
 

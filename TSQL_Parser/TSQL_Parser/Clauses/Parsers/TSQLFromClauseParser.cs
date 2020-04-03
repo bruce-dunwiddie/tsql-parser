@@ -23,41 +23,23 @@ namespace TSQL.Clauses.Parsers
 
 			// derived tables
 			// TVF
-			int nestedLevel = 0;
 
-			while (
-				tokenizer.MoveNext() &&
-				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
-				!(
-					nestedLevel == 0 &&
-					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
-				) &&
-				(
-					nestedLevel > 0 ||
-					tokenizer.Current.Type != TSQLTokenType.Keyword ||
-					(
-						tokenizer.Current.Type == TSQLTokenType.Keyword &&
-						!tokenizer.Current.AsKeyword.Keyword.In
-						(
-							TSQLKeywords.WHERE,
-							TSQLKeywords.GROUP,
-							TSQLKeywords.HAVING,
-							TSQLKeywords.ORDER,
-							TSQLKeywords.UNION,
-							TSQLKeywords.EXCEPT,
-							TSQLKeywords.INTERSECT,
-							TSQLKeywords.FOR,
-							TSQLKeywords.OPTION
-						) &&
-						!tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
-					)
-				))
-			{
-				TSQLSubqueryHelper.RecurseParens(
-					tokenizer,
-					from,
-					ref nestedLevel);
-			}
+			TSQLSubqueryHelper.ReadUntilStop(
+				tokenizer,
+				from,
+				new List<TSQLFutureKeywords>() { },
+				new List<TSQLKeywords>() {
+					TSQLKeywords.WHERE,
+					TSQLKeywords.GROUP,
+					TSQLKeywords.HAVING,
+					TSQLKeywords.ORDER,
+					TSQLKeywords.UNION,
+					TSQLKeywords.EXCEPT,
+					TSQLKeywords.INTERSECT,
+					TSQLKeywords.FOR,
+					TSQLKeywords.OPTION
+				},
+				true);
 
 			return from;
 		}

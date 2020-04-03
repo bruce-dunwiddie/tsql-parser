@@ -22,38 +22,20 @@ namespace TSQL.Clauses.Parsers
 			having.Tokens.Add(tokenizer.Current);
 
 			// subqueries
-			int nestedLevel = 0;
 
-			while (
-				tokenizer.MoveNext() &&
-				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
-				!(
-					nestedLevel == 0 &&
-					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
-				) &&
-				(
-					nestedLevel > 0 ||
-					tokenizer.Current.Type != TSQLTokenType.Keyword ||
-					(
-						tokenizer.Current.Type == TSQLTokenType.Keyword &&
-						!tokenizer.Current.AsKeyword.Keyword.In
-						(
-							TSQLKeywords.ORDER,
-							TSQLKeywords.UNION,
-							TSQLKeywords.EXCEPT,
-							TSQLKeywords.INTERSECT,
-							TSQLKeywords.FOR,
-							TSQLKeywords.OPTION
-						) &&
-						!tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
-					)
-				))
-			{
-				TSQLSubqueryHelper.RecurseParens(
-					tokenizer,
-					having,
-					ref nestedLevel);
-			}
+			TSQLSubqueryHelper.ReadUntilStop(
+				tokenizer,
+				having,
+				new List<TSQLFutureKeywords>() { },
+				new List<TSQLKeywords>() {
+					TSQLKeywords.ORDER,
+					TSQLKeywords.UNION,
+					TSQLKeywords.EXCEPT,
+					TSQLKeywords.INTERSECT,
+					TSQLKeywords.FOR,
+					TSQLKeywords.OPTION
+				},
+				true);
 
 			return having;
 		}

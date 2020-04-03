@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using TSQL.Clauses.Parsers;
 using TSQL.Tokens;
@@ -18,36 +19,17 @@ namespace TSQL.Expressions.Parsers
 
 			valuesExpression.Tokens.Add(tokenizer.Current);
 
-			int nestedLevel = 0;
-
-			while (
-				tokenizer.MoveNext() &&
-				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
-				!(
-					nestedLevel == 0 &&
-					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
-				) &&
-				(
-					nestedLevel > 0 ||
-					(
-						tokenizer.Current.Type != TSQLTokenType.Keyword &&
-						!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OUTPUT)
-					) ||
-					(
-						tokenizer.Current.Type == TSQLTokenType.Keyword &&
-						!tokenizer.Current.AsKeyword.Keyword.In
-						(
-							TSQLKeywords.ON,
-							TSQLKeywords.WHEN
-						)
-					)
-				))
-			{
-				TSQLSubqueryHelper.RecurseParens(
-					tokenizer,
-					valuesExpression,
-					ref nestedLevel);
-			}
+			TSQLSubqueryHelper.ReadUntilStop(
+				tokenizer,
+				valuesExpression,
+				new List<TSQLFutureKeywords>() {
+					TSQLFutureKeywords.OUTPUT
+				},
+				new List<TSQLKeywords>() {
+					TSQLKeywords.ON,
+					TSQLKeywords.WHEN
+				},
+				false);
 
 			return valuesExpression;
 		}
