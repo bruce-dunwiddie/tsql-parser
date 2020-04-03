@@ -39,7 +39,7 @@ namespace TSQL.Clauses.Parsers
 					TSQLKeywords.WHEN,
 					TSQLKeywords.OPTION
 				},
-				false);
+				lookForStatementStarts: false);
 
 			return when;
 		}

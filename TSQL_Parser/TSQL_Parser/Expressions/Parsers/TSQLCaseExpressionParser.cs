@@ -30,7 +30,7 @@ namespace TSQL.Expressions.Parsers
 				new List<TSQLKeywords>() {
 					TSQLKeywords.END
 				},
-				false);
+				lookForStatementStarts: false);
 
 			return caseExpression;
 		}

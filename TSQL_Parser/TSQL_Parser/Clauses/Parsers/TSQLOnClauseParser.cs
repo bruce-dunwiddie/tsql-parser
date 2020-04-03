@@ -34,7 +34,7 @@ namespace TSQL.Clauses.Parsers
 					TSQLKeywords.JOIN,
 					TSQLKeywords.WHEN
 				},
-				true);
+				lookForStatementStarts: true);
 
 			return on;
 		}

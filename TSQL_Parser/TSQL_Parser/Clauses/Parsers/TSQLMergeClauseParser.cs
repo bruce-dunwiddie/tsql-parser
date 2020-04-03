@@ -34,7 +34,7 @@ namespace TSQL.Clauses.Parsers
 					TSQLKeywords.ON,
 					TSQLKeywords.WHEN
 				},
-				true);
+				lookForStatementStarts: true);
 
 			return merge;
 		}

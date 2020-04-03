@@ -29,7 +29,7 @@ namespace TSQL.Expressions.Parsers
 					TSQLKeywords.ON,
 					TSQLKeywords.WHEN
 				},
-				false);
+				lookForStatementStarts: false);
 
 			return valuesExpression;
 		}
