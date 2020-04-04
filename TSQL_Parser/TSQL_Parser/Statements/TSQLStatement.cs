@@ -38,5 +38,13 @@ namespace TSQL.Statements
 				return this as TSQLUpdateStatement;
 			}
 		}
+
+		public TSQLDeleteStatement AsDelete
+		{
+			get
+			{
+				return this as TSQLDeleteStatement;
+			}
+		}
 	}
 }

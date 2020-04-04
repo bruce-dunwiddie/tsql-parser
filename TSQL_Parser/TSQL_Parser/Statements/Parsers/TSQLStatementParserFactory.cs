@@ -22,6 +22,10 @@
 			{
 				return new TSQLUpdateStatementParser(tokenizer);
 			}
+			else if (tokenizer.Current.AsKeyword?.Keyword == TSQLKeywords.DELETE)
+			{
+				return new TSQLDeleteStatementParser(tokenizer);
+			}
 			else
 			{
 				return new TSQLUnknownStatementParser(tokenizer);

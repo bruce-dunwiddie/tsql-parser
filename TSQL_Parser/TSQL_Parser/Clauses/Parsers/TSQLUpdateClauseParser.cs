@@ -20,32 +20,14 @@ namespace TSQL.Clauses.Parsers
 
 			update.Tokens.Add(tokenizer.Current);
 
-			int nestedLevel = 0;
-
-			while (
-				tokenizer.MoveNext() &&
-				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
-				!(
-					nestedLevel == 0 &&
-					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
-				) &&
-				(
-					nestedLevel > 0 ||
-					tokenizer.Current.Type != TSQLTokenType.Keyword ||
-					(
-						tokenizer.Current.Type == TSQLTokenType.Keyword &&
-						!tokenizer.Current.AsKeyword.Keyword.In
-						(
-							TSQLKeywords.SET
-						)
-					)
-				))
-			{
-				TSQLSubqueryHelper.RecurseParens(
-					tokenizer,
-					update,
-					ref nestedLevel);
-			}
+			TSQLSubqueryHelper.ReadUntilStop(
+				tokenizer,
+				update,
+				new List<TSQLFutureKeywords>() { },
+				new List<TSQLKeywords>() {
+					TSQLKeywords.SET
+				},
+				lookForStatementStarts: false);
 
 			return update;
 		}
