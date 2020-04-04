@@ -19,5 +19,29 @@ namespace TSQL.Expressions
 				return _tokens;
 			}
 		}
+
+		public int BeginPosition
+		{
+			get
+			{
+				return Tokens.First().BeginPosition;
+			}
+		}
+
+		public int EndPosition
+		{
+			get
+			{
+				return Tokens.Last().EndPosition;
+			}
+		}
+
+		public int Length
+		{
+			get
+			{
+				return EndPosition - BeginPosition + 1;
+			}
+		}
 	}
 }

@@ -255,6 +255,10 @@ namespace Tests.Statements
 
 			Assert.AreEqual(15, select.Select.Tokens.Count);
 			Assert.AreEqual(2, select.From.Tokens.Count);
+			Assert.AreEqual("FROM SomeTable",
+				query.Substring(
+					select.From.BeginPosition, 
+					select.From.Length));
 		}
 
 		[Test]
@@ -270,6 +274,10 @@ namespace Tests.Statements
 
 			Assert.AreEqual(2, select.Select.Tokens.Count);
 			Assert.AreEqual(2, select.From.Tokens.Count);
+			Assert.AreEqual("FROM SomeTable",
+				query.Substring(
+					select.From.BeginPosition,
+					select.From.Length));
 			Assert.AreEqual(15, select.Where.Tokens.Count);
 		}
 
@@ -296,16 +304,22 @@ namespace Tests.Statements
 		[Test]
 		public void SelectStatement_Dont_Overrun()
 		{
+			string sql = @"
+				BEGIN
+					SELECT 1
+				END";
+
 			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
-				@"
-					BEGIN
-						SELECT 1
-					END",
+				sql,
 				includeWhitespace: false);
 
 			Assert.AreEqual(3, statements.Count);
 			Assert.AreEqual(1, statements[0].Tokens.Count);
 			Assert.AreEqual(2, statements[1].Tokens.Count);
+			Assert.AreEqual("SELECT 1",
+				sql.Substring(
+					statements[1].BeginPosition,
+					statements[1].Length));
 			Assert.AreEqual(1, statements[2].Tokens.Count);
 			Assert.IsTrue(statements[2].Tokens[0].IsKeyword(TSQLKeywords.END));
 		}
