@@ -84,5 +84,51 @@ namespace Tests.Tokens
 				tokens);
 			Assert.AreEqual("0xABCDEF", tokens[0].AsBinaryLiteral.Value);
 		}
+
+		[Test]
+		public void BinaryToken_ByteArrayValue()
+		{
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("0x68656C6C6F", includeWhitespace: false);
+
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLBinaryLiteral(0, "0x68656C6C6F")
+					},
+				tokens);
+
+			TestHelpers.CompareArrays(
+				new byte[] {
+					(byte)'h',
+					(byte)'e',
+					(byte)'l',
+					(byte)'l',
+					(byte)'o'
+				},
+				tokens[0].AsBinaryLiteral.Values);
+		}
+
+		[Test]
+		public void BinaryToken_ByteArrayValueLowercase()
+		{
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("0x68656c6c6f", includeWhitespace: false);
+
+			TokenComparisons.CompareTokenLists(
+				new List<TSQLToken>()
+					{
+						new TSQLBinaryLiteral(0, "0x68656c6c6f")
+					},
+				tokens);
+
+			TestHelpers.CompareArrays(
+				new byte[] {
+					(byte)'h',
+					(byte)'e',
+					(byte)'l',
+					(byte)'l',
+					(byte)'o'
+				},
+				tokens[0].AsBinaryLiteral.Values);
+		}
 	}
 }

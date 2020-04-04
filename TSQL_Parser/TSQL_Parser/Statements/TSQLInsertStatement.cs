@@ -40,7 +40,5 @@ namespace TSQL.Statements
 		public TSQLDefaultValuesExpression Default { get; internal set; }
 
 		// TODO: add INSERT INTO ... EXEC
-
-		public TSQLOptionClause Option { get; internal set; }
 	}
 }

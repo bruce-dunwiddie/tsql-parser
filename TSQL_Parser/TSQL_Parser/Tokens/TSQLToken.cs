@@ -276,6 +276,18 @@ namespace TSQL.Tokens
 				return this as TSQLWhitespace;
 			}
 		}
+
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLMoneyLiteral"/>
+		/// </summary>
+		public TSQLMoneyLiteral AsMoneyLiteral
+		{
+			get
+			{
+				return this as TSQLMoneyLiteral;
+			}
+		}
 	}
 
 	public static class TSQLTokenExtensions
