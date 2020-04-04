@@ -31,6 +31,7 @@
 				return new TSQLUnknownStatementParser(tokenizer);
 
 				// TODO: check for an EXEC without the keyword
+				// tokenizer.Current.Type == Tokens.TSQLTokenType.Identifier?
 			}
 		}
 	}

@@ -35,6 +35,10 @@ namespace TSQL.Statements.Parsers
 			{
 				return new TSQLUpdateStatementParser(with, Tokenizer).Parse();
 			}
+			else if (Tokenizer.Current.AsKeyword?.Keyword == TSQLKeywords.DELETE)
+			{
+				return new TSQLDeleteStatementParser(with, Tokenizer).Parse();
+			}
 			else
 			{
 				return new TSQLUnknownStatementParser(with.Tokens, Tokenizer).Parse();
