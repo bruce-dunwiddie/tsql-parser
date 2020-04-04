@@ -14,7 +14,7 @@ namespace TSQL.Tokens
 				beginPosition,
 				text)
 		{
-
+			// TODO: add numeric public property with value
 		}
 
 #pragma warning disable 1591

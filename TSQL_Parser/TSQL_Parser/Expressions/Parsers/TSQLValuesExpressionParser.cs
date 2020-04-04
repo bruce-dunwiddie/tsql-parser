@@ -22,6 +22,7 @@ namespace TSQL.Expressions.Parsers
 			TSQLSubqueryHelper.ReadUntilStop(
 				tokenizer,
 				valuesExpression,
+				// stop words come from usage in MERGE
 				new List<TSQLFutureKeywords>() {
 					TSQLFutureKeywords.OUTPUT
 				},
@@ -29,7 +30,8 @@ namespace TSQL.Expressions.Parsers
 					TSQLKeywords.ON,
 					TSQLKeywords.WHEN
 				},
-				lookForStatementStarts: false);
+				// INSERT INTO ... VALUES ... SELECT
+				lookForStatementStarts: true);
 
 			return valuesExpression;
 		}

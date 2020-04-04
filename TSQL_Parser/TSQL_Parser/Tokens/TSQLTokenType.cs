@@ -104,6 +104,16 @@ namespace TSQL.Tokens
 		///		The beginning of a string literal,
 		///		e.g. 'Cincinnat.
 		/// </summary>
-		IncompleteString
+		IncompleteString,
+
+		// https://docs.microsoft.com/en-us/dotnet/api/microsoft.sqlserver.transactsql.scriptdom.columntype
+		// https://docs.microsoft.com/en-us/sql/t-sql/queries/select-clause-transact-sql
+		// https://docs.microsoft.com/en-us/sql/t-sql/statements/merge-transact-sql
+
+		/// <summary>
+		///		An identifier specifying a system defined column,
+		///		e.g. $IDENTITY, $ROWGUID, $ACTION.
+		/// </summary>
+		SystemColumnIdentifier
 	}
 }

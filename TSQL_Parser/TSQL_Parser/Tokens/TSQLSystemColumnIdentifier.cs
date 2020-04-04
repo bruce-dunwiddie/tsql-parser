@@ -1,17 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace TSQL.Tokens
 {
-	public class TSQLNumericLiteral : TSQLLiteral
+	public class TSQLSystemColumnIdentifier : TSQLIdentifier
 	{
-		internal TSQLNumericLiteral(
+		internal TSQLSystemColumnIdentifier(
 			int beginPosition,
 			string text) :
 			base(
 				beginPosition,
 				text)
 		{
-			// TODO: add numeric public property with value
+			
 		}
 
 #pragma warning disable 1591
@@ -20,7 +23,7 @@ namespace TSQL.Tokens
 		{
 			get
 			{
-				return TSQLTokenType.NumericLiteral;
+				return TSQLTokenType.SystemColumnIdentifier;
 			}
 		}
 

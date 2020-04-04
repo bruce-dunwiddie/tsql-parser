@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TSQL.Expressions
 {
-	public class TSQLCaseExpression : TSQLExpression
+	public class TSQLDefaultValuesExpression : TSQLExpression
 	{
 
 	}

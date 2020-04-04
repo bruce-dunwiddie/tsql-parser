@@ -17,14 +17,13 @@ namespace TSQL.Clauses.Parsers
 
 			output.Tokens.Add(tokenizer.Current);
 
-			// TODO: Add $action per https://docs.microsoft.com/en-us/sql/t-sql/statements/merge-transact-sql
-
 			while (
 				tokenizer.MoveNext() &&
 				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
 				(
 					tokenizer.Current.IsKeyword(TSQLKeywords.AS) ||
 					tokenizer.Current.Type == TSQLTokenType.Identifier ||
+					tokenizer.Current.Type == TSQLTokenType.SystemColumnIdentifier ||
 					tokenizer.Current.IsCharacter(TSQLCharacters.Period) ||
 					tokenizer.Current.IsCharacter(TSQLCharacters.Comma) ||
 					tokenizer.Current.Text == "*" ||

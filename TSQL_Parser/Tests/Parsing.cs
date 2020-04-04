@@ -135,9 +135,9 @@ namespace Tests
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
-						new TSQLIdentifier(0, "$IDENTITY"),
-                        new TSQLIdentifier(10, "$ROWGUID"),
-                        new TSQLIdentifier(19, "$PARTITION")
+						new TSQLSystemColumnIdentifier(0, "$IDENTITY"),
+                        new TSQLSystemColumnIdentifier(10, "$ROWGUID"),
+                        new TSQLSystemColumnIdentifier(19, "$PARTITION")
 					},
 				tokens);
 		}

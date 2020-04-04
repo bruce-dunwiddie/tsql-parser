@@ -21,6 +21,8 @@ namespace TSQL.Tokens
 			// https://docs.microsoft.com/en-us/sql/t-sql/language-elements/sql-server-utilities-statements-backslash?view=sql-server-2017
 			Value = Value.Replace("\\\r\n", "");
 			Value = Value.Replace("\\\n", "");
+
+			// TODO: add byte[] property for accessing value
 		}
 
 #pragma warning disable 1591
