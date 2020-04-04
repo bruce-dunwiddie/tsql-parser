@@ -71,7 +71,15 @@ namespace TSQL.Statements.Parsers
 
 				Statement.Tokens.AddRange(defaultValues.Tokens);
 			}
-			
+			else if (Tokenizer.Current.IsKeyword(TSQLKeywords.EXECUTE))
+			{
+				TSQLExecuteStatement exec = new TSQLExecuteStatementParser(Tokenizer).Parse();
+
+				Statement.Execute = exec;
+
+				Statement.Tokens.AddRange(exec.Tokens);
+			}
+
 			if (
 				Tokenizer.Current?.AsKeyword != null &&
 				Tokenizer.Current.AsKeyword.Keyword.IsStatementStart())

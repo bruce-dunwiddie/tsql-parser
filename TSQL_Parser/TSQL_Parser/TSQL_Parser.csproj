@@ -119,6 +119,7 @@
     <Compile Include="ITSQLTokenizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Statements\Parsers\ITSQLStatementParser.cs" />
+    <Compile Include="Statements\Parsers\TSQLExecuteStatementParser.cs" />
     <Compile Include="Statements\Parsers\TSQLInsertStatementParser.cs" />
     <Compile Include="Statements\Parsers\TSQLLimitedSelectStatementParser.cs" />
     <Compile Include="Statements\Parsers\TSQLSelectStatementParser.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Statements\Parsers\TSQLDeleteStatementParser.cs" />
     <Compile Include="Statements\Parsers\TSQLUpdateStatementParser.cs" />
     <Compile Include="Statements\Parsers\TSQLWithClauseStatementParser.cs" />
+    <Compile Include="Statements\TSQLExecuteStatement.cs" />
     <Compile Include="Statements\TSQLInsertStatement.cs" />
     <Compile Include="Statements\TSQLKeywordStatementExtensions.cs" />
     <Compile Include="Statements\TSQLSelectStatement.cs" />

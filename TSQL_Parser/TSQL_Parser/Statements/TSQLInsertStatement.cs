@@ -37,8 +37,8 @@ namespace TSQL.Statements
 
 		public TSQLSelectStatement Select { get; internal set; }
 
-		public TSQLDefaultValuesExpression Default { get; internal set; }
+		public TSQLExecuteStatement Execute { get; internal set; }
 
-		// TODO: add INSERT INTO ... EXEC
+		public TSQLDefaultValuesExpression Default { get; internal set; }
 	}
 }

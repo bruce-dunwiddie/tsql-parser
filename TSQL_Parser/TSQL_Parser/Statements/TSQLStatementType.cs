@@ -8,7 +8,7 @@
 		Insert,
 		Update,
 		Delete,
-		//Execute,
+		Execute,
 		Merge,
 		Unknown
 

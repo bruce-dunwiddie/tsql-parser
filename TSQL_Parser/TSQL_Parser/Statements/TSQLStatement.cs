@@ -54,5 +54,13 @@ namespace TSQL.Statements
 				return this as TSQLInsertStatement;
 			}
 		}
+
+		public TSQLExecuteStatement AsExecute
+		{
+			get
+			{
+				return this as TSQLExecuteStatement;
+			}
+		}
 	}
 }

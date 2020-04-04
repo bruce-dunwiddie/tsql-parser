@@ -28,6 +28,7 @@ namespace TSQL.Clauses.Parsers
 				},
 				new List<TSQLKeywords>() {
 					TSQLKeywords.SELECT,
+					TSQLKeywords.EXECUTE,
 					TSQLKeywords.VALUES,
 					TSQLKeywords.DEFAULT
 				},

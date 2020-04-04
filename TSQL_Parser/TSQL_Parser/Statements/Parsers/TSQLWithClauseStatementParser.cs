@@ -45,6 +45,7 @@ namespace TSQL.Statements.Parsers
 			}
 			else
 			{
+				// TSQLUnknownStatement doesn't have a With property
 				return new TSQLUnknownStatementParser(with.Tokens, Tokenizer).Parse();
 			}
 		}

@@ -31,6 +31,7 @@ namespace Tests.Statements
 			Assert.IsNull(insert.Output);
 			Assert.IsNull(insert.Select);
 			Assert.IsNull(insert.Default);
+			Assert.IsNull(insert.Execute);
 			Assert.AreEqual(5, insert.Insert.Tokens.Count);
 			Assert.AreEqual(8, insert.Values.Tokens.Count);
 		}
@@ -55,6 +56,7 @@ namespace Tests.Statements
 			Assert.IsNull(insert.Output);
 			Assert.IsNull(insert.Select);
 			Assert.IsNull(insert.Default);
+			Assert.IsNull(insert.Execute);
 			Assert.AreEqual(5, insert.Insert.Tokens.Count);
 			Assert.AreEqual(24, insert.Values.Tokens.Count);
 		}
@@ -77,6 +79,7 @@ namespace Tests.Statements
 			Assert.IsNull(insert.Output);
 			Assert.IsNull(insert.Select);
 			Assert.IsNull(insert.Default);
+			Assert.IsNull(insert.Execute);
 			Assert.AreEqual(12, insert.Insert.Tokens.Count);
 			Assert.AreEqual(10, insert.Values.Tokens.Count);
 		}
@@ -97,6 +100,7 @@ namespace Tests.Statements
 			Assert.IsNull(insert.Output);
 			Assert.IsNull(insert.Select);
 			Assert.IsNull(insert.Values);
+			Assert.IsNull(insert.Execute);
 			Assert.AreEqual(3, insert.Insert.Tokens.Count);
 			Assert.AreEqual(2, insert.Default.Tokens.Count);
 		}
@@ -123,8 +127,31 @@ namespace Tests.Statements
 			Assert.IsNull(insert.Output);
 			Assert.IsNull(insert.Values);
 			Assert.IsNull(insert.Default);
+			Assert.IsNull(insert.Execute);
 			Assert.AreEqual(5, insert.Insert.Tokens.Count);
 			Assert.AreEqual(50, insert.Select.Tokens.Count);
+		}
+
+		[Test]
+		public void InsertStatement_Exec()
+		{
+			string sql = @"
+				INSERT INTO dbo.EmployeeSales
+				EXECUTE dbo.uspGetEmployeeSales;";
+
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				sql,
+				includeWhitespace: false);
+			TSQLInsertStatement insert = statements[0].AsInsert;
+
+			Assert.AreEqual(9, insert.Tokens.Count);
+			Assert.IsNull(insert.With);
+			Assert.IsNull(insert.Output);
+			Assert.IsNull(insert.Select);
+			Assert.IsNull(insert.Default);
+			Assert.IsNull(insert.Values);
+			Assert.AreEqual(5, insert.Insert.Tokens.Count);
+			Assert.AreEqual(4, insert.Execute.Tokens.Count);
 		}
 	}
 }
