@@ -25,7 +25,7 @@ Available on Nuget, [TSQL.Parser](https://www.nuget.org/packages/TSQL.Parser/).
 - Streaming tokenizer for parsing scripts into tokens.
 - Returns tokens of type characters, comments, identifiers, keywords, literals, variables, and operators.
 - Handles both single line and multi line comments.
-- Select statement parser.
+- Select, Insert, Update, Delete, and Merge statement parsers.
 - .Net Framework 4.0+ and .Net Core 2.0+ compatible.
 
 ### Some Possible Current Uses
