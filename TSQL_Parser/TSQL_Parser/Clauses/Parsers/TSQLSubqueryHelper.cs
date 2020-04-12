@@ -14,6 +14,49 @@ namespace TSQL.Clauses.Parsers
 {
 	internal static class TSQLSubqueryHelper
 	{
+		/// <summary>
+		///		This reads recursively through parenthesis and returns when it hits
+		///		one of the stop words outside of any nested parenthesis.
+		/// </summary>
+		public static void ReadUntilStop(
+			ITSQLTokenizer tokenizer,
+			TSQLExpression expression,
+			List<TSQLFutureKeywords> futureKeywords,
+			List<TSQLKeywords> keywords,
+			bool lookForStatementStarts)
+		{
+			int nestedLevel = 0;
+
+			while (
+				tokenizer.MoveNext() &&
+				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
+				!(
+					nestedLevel == 0 &&
+					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
+				) &&
+				(
+					nestedLevel > 0 ||
+					(
+						tokenizer.Current.Type != TSQLTokenType.Keyword &&
+						!futureKeywords.Any(fk => tokenizer.Current.IsFutureKeyword(fk))
+					) ||
+					(
+						tokenizer.Current.Type == TSQLTokenType.Keyword &&
+						!keywords.Any(k => tokenizer.Current.AsKeyword.Keyword == k) &&
+						!(
+							lookForStatementStarts &&
+							tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
+						)
+					)
+				))
+			{
+				TSQLSubqueryHelper.RecurseParens(
+					tokenizer,
+					expression,
+					ref nestedLevel);
+			}
+		}
+
 		public static void RecurseParens(
 			ITSQLTokenizer tokenizer,
 			TSQLExpression expression,
@@ -36,18 +79,14 @@ namespace TSQL.Clauses.Parsers
 							TSQLCharacters.CloseParentheses))
 						{
 							nestedLevel--;
-							expression.Tokens.Add(tokenizer.Current);
 						}
 						else if (tokenizer.Current.IsCharacter(
 							TSQLCharacters.OpenParentheses))
 						{
 							nestedLevel++;
-							expression.Tokens.Add(tokenizer.Current);
 						}
-						else
-						{
-							expression.Tokens.Add(tokenizer.Current);
-						}
+
+						expression.Tokens.Add(tokenizer.Current);
 					}
 				}
 				else if (character == TSQLCharacters.CloseParentheses)
@@ -57,6 +96,10 @@ namespace TSQL.Clauses.Parsers
 			}
 			else if (tokenizer.Current.IsKeyword(TSQLKeywords.CASE))
 			{
+				// CASE is a special situation because it's stop word (END) is part of
+				// the expression itself and needs to be included in it's token list.
+				// all other clauses stop at the beginning of the next clause and do
+				// not include the stop token within their token list.
 				TSQLCaseExpression caseExpression = new TSQLCaseExpressionParser().Parse(tokenizer);
 
 				expression.Tokens.AddRange(caseExpression.Tokens);

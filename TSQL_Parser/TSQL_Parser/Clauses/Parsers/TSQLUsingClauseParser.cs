@@ -36,10 +36,6 @@ namespace TSQL.Clauses.Parsers
 			 * https://docs.microsoft.com/en-us/sql/t-sql/statements/merge-transact-sql?view=sql-server-ver15#syntax
 			 */
 
-			// ends with keyword other than those listed above, when used outside of parens
-
-			// recursively walk down and back up parens
-
 			int nestedLevel = 0;
 
 			while (

@@ -77,10 +77,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Statements\InsertStatementTests.cs" />
     <Compile Include="Statements\GeneralStatementTests.cs" />
     <Compile Include="Statements\MergeStatementTests.cs" />
     <Compile Include="Statements\SelectStatementTests.cs" />
+    <Compile Include="Statements\DeleteStatementTests.cs" />
+    <Compile Include="Statements\ExecuteStatementTests.cs" />
+    <Compile Include="Statements\UpdateStatementTests.cs" />
     <Compile Include="Statements\WithStatementTests.cs" />
+    <Compile Include="TestHelpers.cs" />
     <Compile Include="Tokens\BinaryTokenTests.cs" />
     <Compile Include="Tokens\CharacterTokenTests.cs" />
     <Compile Include="Tokens\IncompleteTokenTests.cs" />

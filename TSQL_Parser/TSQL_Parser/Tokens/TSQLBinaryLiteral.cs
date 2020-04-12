@@ -21,6 +21,22 @@ namespace TSQL.Tokens
 			// https://docs.microsoft.com/en-us/sql/t-sql/language-elements/sql-server-utilities-statements-backslash?view=sql-server-2017
 			Value = Value.Replace("\\\r\n", "");
 			Value = Value.Replace("\\\n", "");
+
+			Values = StringToByteArray(Value);
+		}
+
+		// https://stackoverflow.com/a/311179/3591870
+		private static byte[] StringToByteArray(String hex)
+		{
+			int NumberChars = hex.Length - 2;
+			byte[] bytes = new byte[NumberChars / 2];
+			for (int i = 0; i < NumberChars; i += 2)
+			{
+				// altered the original
+				// adding 2 to i to skip "0x" at the beginning of the string
+				bytes[i / 2] = Convert.ToByte(hex.Substring(i + 2, 2), 16);
+			}
+			return bytes;
 		}
 
 #pragma warning disable 1591
@@ -36,6 +52,13 @@ namespace TSQL.Tokens
 #pragma warning restore 1591
 
 		public string Value
+		{
+			get;
+
+			private set;
+		}
+
+		public byte[] Values
 		{
 			get;
 

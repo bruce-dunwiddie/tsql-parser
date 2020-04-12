@@ -22,39 +22,21 @@ namespace TSQL.Clauses.Parsers
 			groupBy.Tokens.Add(tokenizer.Current);
 
 			// subqueries
-			int nestedLevel = 0;
 
-			while (
-				tokenizer.MoveNext() &&
-				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
-				!(
-					nestedLevel == 0 &&
-					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
-				) &&
-				(
-					nestedLevel > 0 ||
-					tokenizer.Current.Type != TSQLTokenType.Keyword ||
-					(
-						tokenizer.Current.Type == TSQLTokenType.Keyword &&
-						!tokenizer.Current.AsKeyword.Keyword.In
-						(
-							TSQLKeywords.HAVING,
-							TSQLKeywords.UNION,
-							TSQLKeywords.EXCEPT,
-							TSQLKeywords.INTERSECT,
-							TSQLKeywords.ORDER,
-							TSQLKeywords.FOR,
-							TSQLKeywords.OPTION
-						) &&
-						!tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
-					)
-				))
-			{
-				TSQLSubqueryHelper.RecurseParens(
-					tokenizer,
-					groupBy,
-					ref nestedLevel);
-			}
+			TSQLSubqueryHelper.ReadUntilStop(
+				tokenizer,
+				groupBy,
+				new List<TSQLFutureKeywords>() { },
+				new List<TSQLKeywords>() {
+					TSQLKeywords.HAVING,
+					TSQLKeywords.UNION,
+					TSQLKeywords.EXCEPT,
+					TSQLKeywords.INTERSECT,
+					TSQLKeywords.ORDER,
+					TSQLKeywords.FOR,
+					TSQLKeywords.OPTION
+				},
+				lookForStatementStarts: true);
 
 			return groupBy;
 		}

@@ -27,43 +27,24 @@ namespace TSQL.Clauses.Parsers
 
 			// recursively walk down and back up parens
 
-			int nestedLevel = 0;
-
-			while (
-				tokenizer.MoveNext() &&
-				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
-				!(
-					nestedLevel == 0 &&
-					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
-				) &&
-				(
-					nestedLevel > 0 ||
-					tokenizer.Current.Type != TSQLTokenType.Keyword ||
-					(
-						tokenizer.Current.Type == TSQLTokenType.Keyword &&
-						!tokenizer.Current.AsKeyword.Keyword.In
-						(
-							TSQLKeywords.INTO,
-							TSQLKeywords.FROM,
-							TSQLKeywords.WHERE,
-							TSQLKeywords.GROUP,
-							TSQLKeywords.HAVING,
-							TSQLKeywords.ORDER,
-							TSQLKeywords.UNION,
-							TSQLKeywords.EXCEPT,
-							TSQLKeywords.INTERSECT,
-							TSQLKeywords.FOR,
-							TSQLKeywords.OPTION
-						) &&
-						!tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
-					)
-				))
-			{
-				TSQLSubqueryHelper.RecurseParens(
-					tokenizer,
-					select,
-					ref nestedLevel);
-			}
+			TSQLSubqueryHelper.ReadUntilStop(
+				tokenizer,
+				select,
+				new List<TSQLFutureKeywords>() {},
+				new List<TSQLKeywords>() {
+					TSQLKeywords.INTO,
+					TSQLKeywords.FROM,
+					TSQLKeywords.WHERE,
+					TSQLKeywords.GROUP,
+					TSQLKeywords.HAVING,
+					TSQLKeywords.ORDER,
+					TSQLKeywords.UNION,
+					TSQLKeywords.EXCEPT,
+					TSQLKeywords.INTERSECT,
+					TSQLKeywords.FOR,
+					TSQLKeywords.OPTION
+				},
+				lookForStatementStarts: true);
 
 			return select;
 		}

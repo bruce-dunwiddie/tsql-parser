@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TSQL.Expressions
+namespace TSQL.Clauses
 {
-	public class TSQLCaseExpression : TSQLExpression
+	public class TSQLSetClause : TSQLClause
 	{
+		internal TSQLSetClause()
+		{
 
+		}
 	}
 }

@@ -74,6 +74,7 @@ namespace TSQL
 		private void SetCurrent()
 		{
 			characterHolder.Length = 0;
+			// TODO: review Position property viability for situations like network streams
 			int startPosition = _charReader.Position;
 
 			if (
@@ -1005,7 +1006,7 @@ namespace TSQL
 					char.IsLetter(tokenValue[1]))
 				{
 					return
-						new TSQLIdentifier(
+						new TSQLSystemColumnIdentifier(
 							startPosition,
 							tokenValue);
 				}

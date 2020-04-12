@@ -28,6 +28,9 @@ namespace Tests.Tokens
 						new TSQLWhitespace(5, " ")
 					},
 				tokens);
+
+			Assert.AreEqual(2m, tokens[0].AsMoneyLiteral.Value);
+			Assert.AreEqual(1m, tokens[2].AsMoneyLiteral.Value);
 		}
 
 		[Test]
@@ -42,6 +45,8 @@ namespace Tests.Tokens
 						new TSQLWhitespace(3, " ")
 					},
 				tokens);
+
+			Assert.AreEqual(0.1m, tokens[0].AsMoneyLiteral.Value);
 		}
 
 		[Test]
@@ -56,6 +61,8 @@ namespace Tests.Tokens
 						new TSQLWhitespace(4, " ")
 					},
 				tokens);
+
+			Assert.AreEqual(-0.1m, tokens[0].AsMoneyLiteral.Value);
 		}
 
 		[Test]
@@ -70,6 +77,8 @@ namespace Tests.Tokens
 						new TSQLWhitespace(4, " ")
 					},
 				tokens);
+
+			Assert.AreEqual(-0.1m, tokens[0].AsMoneyLiteral.Value);
 		}
 	}
 }

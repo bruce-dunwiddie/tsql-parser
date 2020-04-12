@@ -20,17 +20,29 @@ namespace TSQL.Clauses.Parsers
 
 			into.Tokens.Add(tokenizer.Current);
 
+			int nestedLevel = 0;
+
 			while (
 				tokenizer.MoveNext() &&
+				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
+				!(
+					nestedLevel == 0 &&
+					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
+				) &&
 				(
+					nestedLevel > 0 ||
 					tokenizer.Current.Type == TSQLTokenType.Identifier ||
 					tokenizer.Current.IsCharacter(TSQLCharacters.Period) ||
+					tokenizer.Current.IsCharacter(TSQLCharacters.OpenParentheses) ||
 					tokenizer.Current.Type == TSQLTokenType.Whitespace ||
 					tokenizer.Current.Type == TSQLTokenType.SingleLineComment ||
 					tokenizer.Current.Type == TSQLTokenType.MultilineComment
 				))
 			{
-				into.Tokens.Add(tokenizer.Current);
+				TSQLSubqueryHelper.RecurseParens(
+					tokenizer,
+					into,
+					ref nestedLevel);
 			}
 
 			return into;

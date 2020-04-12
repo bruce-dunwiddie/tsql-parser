@@ -6,5 +6,7 @@
 		{
 
 		}
+
+		public TSQLIntoClause Into { get; internal set; }
 	}
 }

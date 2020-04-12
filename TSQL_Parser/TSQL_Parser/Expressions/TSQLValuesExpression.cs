@@ -1,6 +1,6 @@
 ﻿namespace TSQL.Expressions
 {
-	internal class TSQLValuesExpression : TSQLExpression
+	public class TSQLValuesExpression : TSQLExpression
 	{
 
 	}
