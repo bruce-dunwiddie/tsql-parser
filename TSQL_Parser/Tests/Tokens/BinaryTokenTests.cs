@@ -130,5 +130,20 @@ namespace Tests.Tokens
 				},
 				tokens[0].AsBinaryLiteral.Values);
 		}
+
+		[Test]
+		public void BinaryToken_OddLength()
+		{
+			// SQL Server is implicitly converting this to 0x0100
+			TSQLBinaryLiteral token = new TSQLBinaryLiteral(0, "0x100");
+
+			TestHelpers.CompareArrays(
+				new byte[]
+				{
+					(byte)1,
+					(byte)0
+				},
+				token.Values);
+		}
 	}
 }

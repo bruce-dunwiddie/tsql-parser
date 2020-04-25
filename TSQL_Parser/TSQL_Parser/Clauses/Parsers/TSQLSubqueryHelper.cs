@@ -62,10 +62,10 @@ namespace TSQL.Clauses.Parsers
 			TSQLExpression expression,
 			ref int nestedLevel)
 		{
-			expression.Tokens.Add(tokenizer.Current);
-
 			if (tokenizer.Current.Type == TSQLTokenType.Character)
 			{
+				expression.Tokens.Add(tokenizer.Current);
+
 				TSQLCharacters character = tokenizer.Current.AsCharacter.Character;
 
 				if (character == TSQLCharacters.OpenParentheses)
@@ -96,6 +96,10 @@ namespace TSQL.Clauses.Parsers
 			}
 			else if (tokenizer.Current.IsKeyword(TSQLKeywords.CASE))
 			{
+				// not going to add CASE token directly because it will be contained
+				// within the returned expression and we don't want to double up the
+				// CASE token within the results.
+
 				// CASE is a special situation because it's stop word (END) is part of
 				// the expression itself and needs to be included in it's token list.
 				// all other clauses stop at the beginning of the next clause and do
@@ -103,6 +107,10 @@ namespace TSQL.Clauses.Parsers
 				TSQLCaseExpression caseExpression = new TSQLCaseExpressionParser().Parse(tokenizer);
 
 				expression.Tokens.AddRange(caseExpression.Tokens);
+			}
+			else
+			{
+				expression.Tokens.Add(tokenizer.Current);
 			}
 		}
 	}
