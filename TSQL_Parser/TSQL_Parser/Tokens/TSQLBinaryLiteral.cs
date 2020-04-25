@@ -25,16 +25,17 @@ namespace TSQL.Tokens
 			Values = StringToByteArray(Value);
 		}
 
-		// https://stackoverflow.com/a/311179/3591870
 		private static byte[] StringToByteArray(String hex)
 		{
-			int NumberChars = hex.Length - 2;
-			byte[] bytes = new byte[NumberChars / 2];
-			for (int i = 0; i < NumberChars; i += 2)
+			// for odd number hex, e.g. 0x100, the first charsInByte is only 1
+			int charsInByte = (hex.Length % 2 == 0) ? 2 : 1;
+			byte[] bytes = new byte[(hex.Length - 1) / 2];
+			int i = 0, hexIndex = 2; // adding 2 to i to skip "0x" at the beginning of the string
+			while (i < bytes.Length)
 			{
-				// altered the original
-				// adding 2 to i to skip "0x" at the beginning of the string
-				bytes[i / 2] = Convert.ToByte(hex.Substring(i + 2, 2), 16);
+				bytes[i++] = Convert.ToByte(hex.Substring(hexIndex, charsInByte), 16);
+				hexIndex += charsInByte;
+				charsInByte = 2;
 			}
 			return bytes;
 		}
