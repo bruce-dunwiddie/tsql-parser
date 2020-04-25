@@ -32,6 +32,12 @@ namespace TSQL.Expressions.Parsers
 				},
 				lookForStatementStarts: false);
 
+			// this is different than the other clauses because the
+			// stop word is still part of the expression instead of
+			// being part of the next expression or clause like in
+			// the other parsers
+			caseExpression.Tokens.Add(tokenizer.Current);
+
 			return caseExpression;
 		}
 	}
