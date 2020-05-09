@@ -56,5 +56,37 @@ namespace Tests.Clauses
 			Assert.IsNull(statements[0].AsSelect.SetOperator.Select.OrderBy);
 			Assert.IsNotNull(statements[0].AsSelect.OrderBy);
 		}
+
+		[Test]
+		public void SetOperatorClause_ParensRegression()
+		{
+			// regression test for https://github.com/bruce-dunwiddie/tsql-parser/issues/69
+
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT 1 UNION (SELECT 2)",
+				includeWhitespace: false);
+
+			TSQLSelectStatement select = statements[0].AsSelect;
+
+			Assert.AreEqual(1, statements.Count);
+			Assert.AreEqual(7, select.Tokens.Count);
+			Assert.IsNotNull(select.SetOperator);
+		}
+
+		[Test]
+		public void SetOperatorClause_MultiParens()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT 1 UNION ((SELECT 2)) SELECT 1",
+				includeWhitespace: false);
+
+			TSQLSelectStatement select = statements[0].AsSelect;
+			TSQLSelectStatement select2 = statements[1].AsSelect;
+
+			Assert.AreEqual(2, statements.Count);
+			Assert.AreEqual(9, select.Tokens.Count);
+			Assert.IsNotNull(select.SetOperator);
+			Assert.AreEqual(2, select2.Tokens.Count);
+		}
 	}
 }
