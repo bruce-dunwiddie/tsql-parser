@@ -23,23 +23,24 @@ namespace TSQL.Statements.Parsers
 		{
 			TSQLWithClause with = new TSQLWithClauseParser().Parse(Tokenizer);
 
-			if (Tokenizer.Current.AsKeyword?.Keyword == TSQLKeywords.SELECT)
+			if (Tokenizer.Current.IsKeyword(TSQLKeywords.SELECT) ||
+				Tokenizer.Current.IsCharacter(TSQLCharacters.OpenParentheses))
 			{
 				return new TSQLSelectStatementParser(with, Tokenizer).Parse();
 			}
-			else if (Tokenizer.Current.AsKeyword?.Keyword == TSQLKeywords.MERGE)
+			else if (Tokenizer.Current.IsKeyword(TSQLKeywords.MERGE))
 			{
 				return new TSQLMergeStatementParser(with, Tokenizer).Parse();
 			}
-			else if (Tokenizer.Current.AsKeyword?.Keyword == TSQLKeywords.UPDATE)
+			else if (Tokenizer.Current.IsKeyword(TSQLKeywords.UPDATE))
 			{
 				return new TSQLUpdateStatementParser(with, Tokenizer).Parse();
 			}
-			else if (Tokenizer.Current.AsKeyword?.Keyword == TSQLKeywords.DELETE)
+			else if (Tokenizer.Current.IsKeyword(TSQLKeywords.DELETE))
 			{
 				return new TSQLDeleteStatementParser(with, Tokenizer).Parse();
 			}
-			else if (Tokenizer.Current.AsKeyword?.Keyword == TSQLKeywords.INSERT)
+			else if (Tokenizer.Current.IsKeyword(TSQLKeywords.INSERT))
 			{
 				return new TSQLInsertStatementParser(with, Tokenizer).Parse();
 			}

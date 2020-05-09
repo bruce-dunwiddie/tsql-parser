@@ -30,6 +30,18 @@ namespace TSQL.Statements.Parsers
 
 		public TSQLSelectStatement Parse()
 		{
+			// (SELECT 1)
+			int level = 0;
+
+			while (Tokenizer.Current.IsCharacter(TSQLCharacters.OpenParentheses))
+			{
+				Statement.Tokens.Add(Tokenizer.Current);
+
+				level++;
+
+				Tokenizer.MoveNext();
+			}
+
 			TSQLSelectClause selectClause = new TSQLSelectClauseParser().Parse(Tokenizer);
 
 			Statement.Select = selectClause;
@@ -81,6 +93,15 @@ namespace TSQL.Statements.Parsers
 				Statement.Tokens.AddRange(havingClause.Tokens);
 			}
 
+			while (level > 0 && Tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
+			{
+				Statement.Tokens.Add(Tokenizer.Current);
+
+				level--;
+
+				Tokenizer.MoveNext();
+			}
+
 			if (Tokenizer.Current?.AsKeyword != null &&
 				Tokenizer.Current.AsKeyword.Keyword.In(
 				TSQLKeywords.UNION,
@@ -92,6 +113,15 @@ namespace TSQL.Statements.Parsers
 				Statement.SetOperator = set;
 
 				Statement.Tokens.AddRange(set.Tokens);
+			}
+
+			while (level > 0 && Tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
+			{
+				Statement.Tokens.Add(Tokenizer.Current);
+
+				level--;
+
+				Tokenizer.MoveNext();
 			}
 
 			if (Tokenizer.Current.IsKeyword(TSQLKeywords.ORDER))

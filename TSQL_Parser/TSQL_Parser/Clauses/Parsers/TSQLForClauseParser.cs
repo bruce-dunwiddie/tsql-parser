@@ -13,6 +13,7 @@ namespace TSQL.Clauses.Parsers
 	{
 		public TSQLForClause Parse(ITSQLTokenizer tokenizer)
 		{
+			// FOR XML AUTO
 			TSQLForClause forClause = new TSQLForClause();
 
 			if (!tokenizer.Current.IsKeyword(TSQLKeywords.FOR))

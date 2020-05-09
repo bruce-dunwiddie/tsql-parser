@@ -53,5 +53,25 @@ namespace Tests.Statements
 				" Join back to Employee to return the manager name ",
 				statements[0].AsSelect.With.Tokens.Last().AsSingleLineComment.Comment);
 		}
+
+		[Test]
+		public void WithStatement_SelectInParens()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"with test as
+				(
+					select 1 as value
+				)
+				(
+					select *
+					from
+						test
+				)",
+				includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+			Assert.IsInstanceOf(typeof(TSQLSelectStatement), statements[0]);
+			Assert.AreEqual(15, statements[0].AsSelect.Tokens.Count);
+		}
 	}
 }
