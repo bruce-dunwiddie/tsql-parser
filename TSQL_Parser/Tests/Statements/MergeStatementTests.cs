@@ -117,7 +117,7 @@ namespace Tests.Statements
 				WHEN MATCHED AND (
 					NULLIF([Source].[cteColumn2], [Target].[Val]) IS NOT NULL OR NULLIF([Target].[Val], [Source].[cteColumn2]) IS NOT NULL) THEN
 				 UPDATE SET
-				  [Target].[Val] = [Source].[cteColumn2],
+				  [Target].[Val] = [Source].[cteColumn2]
 				WHEN NOT MATCHED BY TARGET THEN
 				 INSERT([ID],[Val])
 				 VALUES([Source].[cteColumn1],[Source].[cteColumn2])
@@ -135,7 +135,7 @@ namespace Tests.Statements
 			Assert.IsNotNull(statements);
 			Assert.AreEqual(1, statements.Count);
 			Assert.AreEqual(TSQLStatementType.Merge, statements[0].Type);
-			Assert.AreEqual(220, merge.Tokens.Count);
+			Assert.AreEqual(219, merge.Tokens.Count);
 			Assert.AreEqual(TSQLKeywords.WITH, merge.Tokens[0].AsKeyword.Keyword);
 			Assert.AreEqual(TSQLKeywords.MERGE, merge.Tokens[38].AsKeyword.Keyword);
 			Assert.AreEqual(" ", merge.Tokens[39].AsWhitespace.Text);
@@ -148,7 +148,7 @@ namespace Tests.Statements
 			Assert.AreEqual(21, merge.Using.Tokens.Count);
 			Assert.AreEqual(14, merge.On.Tokens.Count);
 			Assert.AreEqual(3, merge.When.Count);
-			Assert.AreEqual(64, merge.When[0].Tokens.Count);
+			Assert.AreEqual(63, merge.When[0].Tokens.Count);
 			Assert.AreEqual(30, merge.When[1].Tokens.Count);
 			Assert.AreEqual(14, merge.When[2].Tokens.Count);
 			Assert.AreEqual(27, merge.Output.Tokens.Count);
