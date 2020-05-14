@@ -72,22 +72,6 @@ namespace TSQL.Clauses.Parsers
 				{
 					// should we recurse for correlated subqueries?
 					nestedLevel++;
-
-					if (tokenizer.MoveNext())
-					{
-						if (tokenizer.Current.IsCharacter(
-							TSQLCharacters.CloseParentheses))
-						{
-							nestedLevel--;
-						}
-						else if (tokenizer.Current.IsCharacter(
-							TSQLCharacters.OpenParentheses))
-						{
-							nestedLevel++;
-						}
-
-						expression.Tokens.Add(tokenizer.Current);
-					}
 				}
 				else if (character == TSQLCharacters.CloseParentheses)
 				{

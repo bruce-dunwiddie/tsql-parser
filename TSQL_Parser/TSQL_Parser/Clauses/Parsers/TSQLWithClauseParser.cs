@@ -21,21 +21,12 @@ namespace TSQL.Clauses.Parsers
 
 			with.Tokens.Add(tokenizer.Current);
 
-			TSQLSubqueryHelper.ReadUntilStop(
-				tokenizer,
-				with,
-				new List<TSQLFutureKeywords>() { },
-				new List<TSQLKeywords>() {
-					TSQLKeywords.SELECT,
-					TSQLKeywords.INSERT,
-					TSQLKeywords.UPDATE,
-					TSQLKeywords.DELETE,
-					TSQLKeywords.MERGE
-				},
-				lookForStatementStarts: false);
-
 			// subqueries
 			int nestedLevel = 0;
+
+			int parenCount = 0;
+			int identifierCount = 0;
+			bool afterAs = false;
 
 			while (
 				tokenizer.MoveNext() &&
@@ -44,7 +35,15 @@ namespace TSQL.Clauses.Parsers
 					nestedLevel == 0 &&
 					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
 				) &&
-				// TODO: only let code enter a new set of parens once
+				!(
+					// only allow a set of parens at root level
+					// if it's following an AS
+					// or if it's the column list between the CTE name and the AS
+					nestedLevel == 0 &&
+					tokenizer.Current.IsCharacter(TSQLCharacters.OpenParentheses) &&
+					afterAs &&
+					parenCount >= identifierCount
+				) &&
 				(
 					nestedLevel > 0 ||
 					tokenizer.Current.Type != TSQLTokenType.Keyword ||
@@ -61,6 +60,23 @@ namespace TSQL.Clauses.Parsers
 					)
 				))
 			{
+				if (nestedLevel == 0)
+				{
+					if (afterAs && tokenizer.Current.IsCharacter(TSQLCharacters.OpenParentheses))
+					{
+						parenCount++;
+					}
+					else if (tokenizer.Current.Type == TSQLTokenType.Identifier)
+					{
+						identifierCount++;
+						afterAs = false;
+					}
+					else if (tokenizer.Current.IsKeyword(TSQLKeywords.AS))
+					{
+						afterAs = true;
+					}
+				}
+
 				TSQLSubqueryHelper.RecurseParens(
 					tokenizer,
 					with,
