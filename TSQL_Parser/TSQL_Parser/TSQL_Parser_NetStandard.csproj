@@ -4,9 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>TSQL_Parser</AssemblyName>
     <RootNamespace>TSQL_Parser</RootNamespace>
-    <Version>1.5.1.0</Version>
-    <AssemblyVersion>1.5.1.0</AssemblyVersion>
-    <FileVersion>1.5.1.0</FileVersion>
+    <Version>1.5.2.0</Version>
+    <AssemblyVersion>1.5.2.0</AssemblyVersion>
+    <FileVersion>1.5.2.0</FileVersion>
     <Description>Library for Parsing SQL Server TSQL Scripts</Description>
     <Copyright>Copyright © 2020</Copyright>
     <Company />
