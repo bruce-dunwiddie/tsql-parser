@@ -24,12 +24,25 @@ namespace TSQL.Clauses.Parsers
 			// subqueries
 			int nestedLevel = 0;
 
+			int parenCount = 0;
+			int identifierCount = 0;
+			bool afterAs = false;
+
 			while (
 				tokenizer.MoveNext() &&
 				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
 				!(
 					nestedLevel == 0 &&
 					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
+				) &&
+				!(
+					// only allow a set of parens at root level
+					// if it's following an AS
+					// or if it's the column list between the CTE name and the AS
+					nestedLevel == 0 &&
+					tokenizer.Current.IsCharacter(TSQLCharacters.OpenParentheses) &&
+					afterAs &&
+					parenCount >= identifierCount
 				) &&
 				(
 					nestedLevel > 0 ||
@@ -47,6 +60,23 @@ namespace TSQL.Clauses.Parsers
 					)
 				))
 			{
+				if (nestedLevel == 0)
+				{
+					if (afterAs && tokenizer.Current.IsCharacter(TSQLCharacters.OpenParentheses))
+					{
+						parenCount++;
+					}
+					else if (tokenizer.Current.Type == TSQLTokenType.Identifier)
+					{
+						identifierCount++;
+						afterAs = false;
+					}
+					else if (tokenizer.Current.IsKeyword(TSQLKeywords.AS))
+					{
+						afterAs = true;
+					}
+				}
+
 				TSQLSubqueryHelper.RecurseParens(
 					tokenizer,
 					with,

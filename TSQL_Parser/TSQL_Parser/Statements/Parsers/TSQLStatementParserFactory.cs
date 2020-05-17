@@ -8,42 +8,36 @@ namespace TSQL.Statements.Parsers
 	{
 		public ITSQLStatementParser Create(ITSQLTokenizer tokenizer)
 		{
-			TSQLKeywords keyword = TSQLKeywords.None;
-			TSQLTokenType type = tokenizer.Current.Type;
-
-			if (type == TSQLTokenType.Keyword)
-			{
-				keyword = tokenizer.Current.AsKeyword.Keyword;
-			}
-
-			if (keyword == TSQLKeywords.SELECT)
+			if (tokenizer.Current.IsKeyword(TSQLKeywords.SELECT) ||
+				// e.g. (SELECT 1)
+				tokenizer.Current.IsCharacter(TSQLCharacters.OpenParentheses))
 			{
 				return new TSQLSelectStatementParser(tokenizer);
 			}
-			else if (keyword == TSQLKeywords.WITH)
+			else if (tokenizer.Current.IsKeyword(TSQLKeywords.WITH))
 			{
 				// this parser will parse the CTE's from the WITH clause and
 				// then return the correct statement parser, e.g. SELECT, UPDATE, etc
 				return new TSQLWithClauseStatementParser(tokenizer);
 			}
-			else if (keyword == TSQLKeywords.MERGE)
+			else if (tokenizer.Current.IsKeyword(TSQLKeywords.MERGE))
 			{
 				return new TSQLMergeStatementParser(tokenizer);
 			}
-			else if (keyword == TSQLKeywords.UPDATE)
+			else if (tokenizer.Current.IsKeyword(TSQLKeywords.UPDATE))
 			{
 				return new TSQLUpdateStatementParser(tokenizer);
 			}
-			else if (keyword == TSQLKeywords.DELETE)
+			else if (tokenizer.Current.IsKeyword(TSQLKeywords.DELETE))
 			{
 				return new TSQLDeleteStatementParser(tokenizer);
 			}
-			else if (keyword == TSQLKeywords.INSERT)
+			else if (tokenizer.Current.IsKeyword(TSQLKeywords.INSERT))
 			{
 				return new TSQLInsertStatementParser(tokenizer);
 			}
-			else if (keyword == TSQLKeywords.EXECUTE ||
-				type == TSQLTokenType.Identifier)
+			else if (tokenizer.Current.IsKeyword(TSQLKeywords.EXECUTE) ||
+				tokenizer.Current.Type == TSQLTokenType.Identifier)
 			{
 				// TODO: create split for EXECUTE AS
 				return new TSQLExecuteStatementParser(tokenizer);

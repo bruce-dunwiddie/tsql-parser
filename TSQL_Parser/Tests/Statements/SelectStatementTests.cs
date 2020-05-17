@@ -323,5 +323,20 @@ namespace Tests.Statements
 			Assert.AreEqual(1, statements[2].Tokens.Count);
 			Assert.IsTrue(statements[2].Tokens[0].IsKeyword(TSQLKeywords.END));
 		}
+
+		[Test]
+		public void SelectStatement_StartWithParens()
+		{
+			string sql = @"(SELECT 1)";
+
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				sql,
+				includeWhitespace: false);
+
+			TSQLSelectStatement select = statements[0].AsSelect;
+
+			Assert.AreEqual(1, statements.Count);
+			Assert.AreEqual(4, select.Tokens.Count);
+		}
 	}
 }

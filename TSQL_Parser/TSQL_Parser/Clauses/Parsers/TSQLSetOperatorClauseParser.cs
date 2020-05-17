@@ -47,11 +47,31 @@ namespace TSQL.Clauses.Parsers
 				tokenizer.MoveNext();
 			}
 
+			int level = 0;
+
+			while (tokenizer.Current.IsCharacter(TSQLCharacters.OpenParentheses))
+			{
+				set.Tokens.Add(tokenizer.Current);
+
+				level++;
+
+				tokenizer.MoveNext();
+			}
+
 			TSQLSelectStatement select = new TSQLLimitedSelectStatementParser(tokenizer).Parse();
 
 			set.Select = select;
 
 			set.Tokens.AddRange(select.Tokens);
+
+			while (level > 0 && tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
+			{
+				set.Tokens.Add(tokenizer.Current);
+
+				level--;
+
+				tokenizer.MoveNext();
+			}
 
 			return set;
 		}
