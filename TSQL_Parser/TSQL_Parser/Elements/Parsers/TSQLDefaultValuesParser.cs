@@ -4,17 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using TSQL.Clauses.Parsers;
-using TSQL.Statements;
 using TSQL.Tokens;
 
-namespace TSQL.Expressions.Parsers
+namespace TSQL.Elements.Parsers
 {
-	internal class TSQLDefaultValuesExpressionParser
+	internal class TSQLDefaultValuesParser
 	{
-		public TSQLDefaultValuesExpression Parse(ITSQLTokenizer tokenizer)
+		public TSQLDefaultValues Parse(ITSQLTokenizer tokenizer)
 		{
-			TSQLDefaultValuesExpression defaultValues = new TSQLDefaultValuesExpression();
+			TSQLDefaultValues defaultValues = new TSQLDefaultValues();
 
 			if (!tokenizer.Current.IsKeyword(TSQLKeywords.DEFAULT))
 			{

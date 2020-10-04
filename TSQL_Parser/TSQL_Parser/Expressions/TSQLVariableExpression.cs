@@ -4,15 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using TSQL.Tokens;
+
 namespace TSQL.Expressions
 {
-	public class TSQLCaseExpression : TSQLExpression
+	public class TSQLVariableExpression : TSQLExpression
 	{
 		public override TSQLExpressionType Type
 		{
 			get
 			{
-				return TSQLExpressionType.Case;
+				return TSQLExpressionType.Variable;
+			}
+		}
+
+		public TSQLVariable Variable
+		{
+			get
+			{
+				return null;
 			}
 		}
 	}

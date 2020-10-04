@@ -39,6 +39,7 @@
     <None Remove="Pack.bat" />
     <None Remove="packages.config" />
     <None Remove="project.json" />
+    <None Remove="project.lock.json" />
     <None Remove="TSQL_Parser.nuspec" />
     <None Remove="TSQL_Parser.xml" />
   </ItemGroup>

@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 using TSQL.Clauses.Parsers;
-using TSQL.Statements;
 using TSQL.Tokens;
 
 namespace TSQL.Expressions.Parsers

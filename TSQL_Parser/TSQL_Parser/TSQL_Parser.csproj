@@ -100,13 +100,26 @@
     <Compile Include="Clauses\TSQLWhereClause.cs" />
     <Compile Include="Clauses\TSQLWhenClause.cs" />
     <Compile Include="Clauses\TSQLWithClause.cs" />
-    <Compile Include="Expressions\Parsers\TSQLDefaultValuesExpressionParser.cs" />
-    <Compile Include="Expressions\Parsers\TSQLValuesExpressionParser.cs" />
-    <Compile Include="Expressions\TSQLDefaultValuesExpression.cs" />
-    <Compile Include="Expressions\TSQLValuesExpression.cs" />
+    <Compile Include="Elements\Parsers\TSQLDefaultValuesParser.cs" />
+    <Compile Include="Elements\Parsers\TSQLSelectColumnParser.cs" />
+    <Compile Include="Elements\TSQLElement.cs" />
+    <Compile Include="Elements\TSQLPredicate.cs" />
+    <Compile Include="Expressions\Parsers\TSQLExpressionFactory.cs" />
+    <Compile Include="Elements\Parsers\TSQLValuesParser.cs" />
+    <Compile Include="Expressions\TSQLColumnExpression.cs" />
+    <Compile Include="Elements\TSQLDefaultValues.cs" />
+    <Compile Include="Expressions\TSQLOperatorExpression.cs" />
+    <Compile Include="Expressions\TSQLExpressionType.cs" />
+    <Compile Include="Expressions\TSQLFunctionExpression.cs" />
+    <Compile Include="Expressions\TSQLGroupedExpression.cs" />
+    <Compile Include="Expressions\TSQLMulticolumnExpression.cs" />
+    <Compile Include="Elements\TSQLSelectColumn.cs" />
+    <Compile Include="Expressions\TSQLSubqueryExpression.cs" />
+    <Compile Include="Elements\TSQLValues.cs" />
     <Compile Include="Expressions\TSQLCaseExpression.cs" />
     <Compile Include="Expressions\Parsers\TSQLCaseExpressionParser.cs" />
     <Compile Include="Expressions\TSQLExpression.cs" />
+    <Compile Include="Expressions\TSQLVariableExpression.cs" />
     <Compile Include="IO\BufferedTextReader.cs" />
     <Compile Include="IO\BufferedTextReader.IDisposable.cs">
       <DependentUpon>BufferedTextReader.cs</DependentUpon>
@@ -136,6 +149,7 @@
     <Compile Include="Statements\TSQLStatement.cs" />
     <Compile Include="Statements\TSQLMergeStatement.cs" />
     <Compile Include="Statements\TSQLDeleteStatement.cs" />
+    <Compile Include="Statements\TSQLUnknownStatement.cs" />
     <Compile Include="Statements\TSQLUpdateStatement.cs" />
     <Compile Include="Tokens\TSQLIncompleteCommentToken.cs" />
     <Compile Include="Tokens\TSQLIncompleteIdentifierToken.cs" />
@@ -156,7 +170,6 @@
       <DependentUpon>TSQLStatementReader.cs</DependentUpon>
     </Compile>
     <Compile Include="Statements\TSQLStatementType.cs" />
-    <Compile Include="Statements\TSQLUnknownStatement.cs" />
     <Compile Include="Tokens\TSQLTokenType.cs" />
     <Compile Include="Tokens\TSQLCharacter.cs" />
     <Compile Include="Tokens\TSQLComment.cs" />

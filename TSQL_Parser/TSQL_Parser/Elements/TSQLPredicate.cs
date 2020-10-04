@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TSQL.Expressions
+namespace TSQL.Elements
 {
-	public class TSQLDefaultValuesExpression : TSQLExpression
+	public class TSQLPredicate : TSQLElement
 	{
 
 	}

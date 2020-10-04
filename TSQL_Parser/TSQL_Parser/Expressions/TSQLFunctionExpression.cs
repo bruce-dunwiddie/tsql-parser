@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace TSQL.Expressions
 {
-	public class TSQLCaseExpression : TSQLExpression
+	public class TSQLFunctionExpression : TSQLExpression
 	{
 		public override TSQLExpressionType Type
 		{
 			get
 			{
-				return TSQLExpressionType.Case;
+				return TSQLExpressionType.Function;
 			}
 		}
 	}

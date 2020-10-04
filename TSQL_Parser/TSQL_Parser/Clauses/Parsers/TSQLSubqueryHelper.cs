@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using TSQL.Elements;
 using TSQL.Expressions;
 using TSQL.Expressions.Parsers;
 using TSQL.Statements;
-using TSQL.Statements.Parsers;
 using TSQL.Tokens;
 
 namespace TSQL.Clauses.Parsers
@@ -20,7 +20,7 @@ namespace TSQL.Clauses.Parsers
 		/// </summary>
 		public static void ReadUntilStop(
 			ITSQLTokenizer tokenizer,
-			TSQLExpression expression,
+			TSQLElement element,
 			List<TSQLFutureKeywords> futureKeywords,
 			List<TSQLKeywords> keywords,
 			bool lookForStatementStarts)
@@ -52,19 +52,19 @@ namespace TSQL.Clauses.Parsers
 			{
 				TSQLSubqueryHelper.RecurseParens(
 					tokenizer,
-					expression,
+					element,
 					ref nestedLevel);
 			}
 		}
 
 		public static void RecurseParens(
 			ITSQLTokenizer tokenizer,
-			TSQLExpression expression,
+			TSQLElement element,
 			ref int nestedLevel)
 		{
 			if (tokenizer.Current.Type == TSQLTokenType.Character)
 			{
-				expression.Tokens.Add(tokenizer.Current);
+				element.Tokens.Add(tokenizer.Current);
 
 				TSQLCharacters character = tokenizer.Current.AsCharacter.Character;
 
@@ -90,11 +90,11 @@ namespace TSQL.Clauses.Parsers
 				// not include the stop token within their token list.
 				TSQLCaseExpression caseExpression = new TSQLCaseExpressionParser().Parse(tokenizer);
 
-				expression.Tokens.AddRange(caseExpression.Tokens);
+				element.Tokens.AddRange(caseExpression.Tokens);
 			}
 			else
 			{
-				expression.Tokens.Add(tokenizer.Current);
+				element.Tokens.Add(tokenizer.Current);
 			}
 		}
 	}

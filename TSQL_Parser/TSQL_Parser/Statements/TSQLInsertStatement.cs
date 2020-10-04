@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using TSQL.Clauses;
-using TSQL.Expressions;
+using TSQL.Elements;
 
 namespace TSQL.Statements
 {
@@ -33,12 +33,12 @@ namespace TSQL.Statements
 
 		public TSQLOutputClause Output { get; internal set; }
 
-		public TSQLValuesExpression Values { get; internal set; }
+		public TSQLValues Values { get; internal set; }
 
 		public TSQLSelectStatement Select { get; internal set; }
 
 		public TSQLExecuteStatement Execute { get; internal set; }
 
-		public TSQLDefaultValuesExpression Default { get; internal set; }
+		public TSQLDefaultValues Default { get; internal set; }
 	}
 }

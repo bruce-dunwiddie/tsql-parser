@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-using TSQL.Elements;
-
-namespace TSQL.Clauses
+namespace TSQL.Elements
 {
-	public abstract class TSQLClause : TSQLElement
+	public class TSQLDefaultValues : TSQLElement
 	{
 
 	}

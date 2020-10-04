@@ -4,44 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using TSQL.Tokens;
+using TSQL.Elements;
 
 namespace TSQL.Expressions
 {
-	public abstract class TSQLExpression
+	public abstract class TSQLExpression : TSQLElement
 	{
-		private readonly List<TSQLToken> _tokens = new List<TSQLToken>();
-
-		public List<TSQLToken> Tokens
+		public abstract TSQLExpressionType Type
 		{
-			get
-			{
-				return _tokens;
-			}
-		}
-
-		public int BeginPosition
-		{
-			get
-			{
-				return Tokens.First().BeginPosition;
-			}
-		}
-
-		public int EndPosition
-		{
-			get
-			{
-				return Tokens.Last().EndPosition;
-			}
-		}
-
-		public int Length
-		{
-			get
-			{
-				return EndPosition - BeginPosition + 1;
-			}
+			get;
 		}
 	}
 }

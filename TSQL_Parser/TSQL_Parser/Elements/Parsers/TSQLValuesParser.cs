@@ -4,24 +4,24 @@ using System.Collections.Generic;
 using TSQL.Clauses.Parsers;
 using TSQL.Tokens;
 
-namespace TSQL.Expressions.Parsers
+namespace TSQL.Elements.Parsers
 {
-	internal class TSQLValuesExpressionParser
+	internal class TSQLValuesParser
 	{
-		public TSQLValuesExpression Parse(ITSQLTokenizer tokenizer)
+		public TSQLValues Parse(ITSQLTokenizer tokenizer)
 		{
-			TSQLValuesExpression valuesExpression = new TSQLValuesExpression();
+			TSQLValues values = new TSQLValues();
 
 			if (!tokenizer.Current.IsKeyword(TSQLKeywords.VALUES))
 			{
 				throw new InvalidOperationException("VALUES expected.");
 			}
 
-			valuesExpression.Tokens.Add(tokenizer.Current);
+			values.Tokens.Add(tokenizer.Current);
 
 			TSQLSubqueryHelper.ReadUntilStop(
 				tokenizer,
-				valuesExpression,
+				values,
 				// stop words come from usage in MERGE
 				new List<TSQLFutureKeywords>() {
 					TSQLFutureKeywords.OUTPUT
@@ -33,7 +33,7 @@ namespace TSQL.Expressions.Parsers
 				// INSERT INTO ... VALUES ... SELECT
 				lookForStatementStarts: true);
 
-			return valuesExpression;
+			return values;
 		}
 	}
 }

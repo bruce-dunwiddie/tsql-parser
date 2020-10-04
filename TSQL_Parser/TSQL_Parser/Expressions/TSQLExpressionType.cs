@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace TSQL.Expressions
 {
-	public class TSQLCaseExpression : TSQLExpression
+	public enum TSQLExpressionType
 	{
-		public override TSQLExpressionType Type
-		{
-			get
-			{
-				return TSQLExpressionType.Case;
-			}
-		}
+		Case,
+		Column,
+		Function,
+		Subquery,
+		Variable,
+		Multicolumn,
+		Operator,
+		Grouped
 	}
 }

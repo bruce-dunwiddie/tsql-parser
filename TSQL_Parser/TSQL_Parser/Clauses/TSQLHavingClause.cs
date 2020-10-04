@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using TSQL.Elements;
+
 namespace TSQL.Clauses
 {
 	public class TSQLHavingClause : TSQLClause
@@ -10,6 +12,14 @@ namespace TSQL.Clauses
 		internal TSQLHavingClause()
 		{
 
+		}
+
+		public List<TSQLPredicate> Predicates
+		{
+			get
+			{
+				return null;
+			}
 		}
 	}
 }
