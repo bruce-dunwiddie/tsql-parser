@@ -104,10 +104,17 @@
     <Compile Include="Elements\Parsers\TSQLSelectColumnParser.cs" />
     <Compile Include="Elements\TSQLElement.cs" />
     <Compile Include="Elements\TSQLPredicate.cs" />
+    <Compile Include="Expressions\Parsers\TSQLArgumentListParser.cs" />
     <Compile Include="Expressions\Parsers\TSQLExpressionFactory.cs" />
     <Compile Include="Elements\Parsers\TSQLValuesParser.cs" />
+    <Compile Include="Expressions\Parsers\TSQLOperatorExpressionParser.cs" />
+    <Compile Include="Expressions\TSQLArgumentList.cs" />
+    <Compile Include="Expressions\TSQLArgumentList.IEnumerable.cs">
+      <DependentUpon>TSQLArgumentList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Expressions\TSQLColumnExpression.cs" />
     <Compile Include="Elements\TSQLDefaultValues.cs" />
+    <Compile Include="Expressions\TSQLConstantExpression.cs" />
     <Compile Include="Expressions\TSQLOperatorExpression.cs" />
     <Compile Include="Expressions\TSQLExpressionType.cs" />
     <Compile Include="Expressions\TSQLFunctionExpression.cs" />
@@ -151,6 +158,7 @@
     <Compile Include="Statements\TSQLDeleteStatement.cs" />
     <Compile Include="Statements\TSQLUnknownStatement.cs" />
     <Compile Include="Statements\TSQLUpdateStatement.cs" />
+    <Compile Include="Tokens\Parsers\TSQLTokenFactory.cs" />
     <Compile Include="Tokens\TSQLIncompleteCommentToken.cs" />
     <Compile Include="Tokens\TSQLIncompleteIdentifierToken.cs" />
     <Compile Include="Tokens\TSQLIncompleteStringToken.cs" />
@@ -160,6 +168,7 @@
     <Compile Include="Tokens\TSQLSystemVariable.cs" />
     <Compile Include="Tokens\TSQLBinaryLiteral.cs" />
     <Compile Include="Tokens\TSQLMoneyLiteral.cs" />
+    <Compile Include="Tokens\TSQLTokenExtensions.cs" />
     <Compile Include="TSQLFutureKeywords.cs" />
     <Compile Include="TSQLIdentifiers.cs" />
     <Compile Include="TSQLStatementReader.cs" />

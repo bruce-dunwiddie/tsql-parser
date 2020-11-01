@@ -16,12 +16,6 @@ namespace TSQL.Expressions
 			}
 		}
 
-		public TSQLExpression InnerExpression
-		{
-			get
-			{
-				return null;
-			}
-		}
+		public TSQLExpression InnerExpression { get; internal set; }
 	}
 }

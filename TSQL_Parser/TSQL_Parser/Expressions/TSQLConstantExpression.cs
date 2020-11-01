@@ -8,16 +8,16 @@ using TSQL.Tokens;
 
 namespace TSQL.Expressions
 {
-	public class TSQLVariableExpression : TSQLExpression
+	public class TSQLConstantExpression : TSQLExpression
 	{
 		public override TSQLExpressionType Type
 		{
 			get
 			{
-				return TSQLExpressionType.Variable;
+				return TSQLExpressionType.Constant;
 			}
 		}
 
-		public TSQLVariable Variable { get; internal set; }
+		public TSQLLiteral Literal { get; internal set; }
 	}
 }

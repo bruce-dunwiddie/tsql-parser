@@ -5,25 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 using TSQL.Expressions;
+using TSQL.Tokens;
 
 namespace TSQL.Elements
 {
 	public class TSQLSelectColumn : TSQLElement
 	{
-		public string Alias
-		{
-			get
-			{
-				return null;
-			}
-		}
+		public TSQLToken Alias { get; internal set; }
 
-		public TSQLExpression Expression
-		{
-			get
-			{
-				return null;
-			}
-		}
+		public TSQLExpression Expression { get; internal set; }
 	}
 }

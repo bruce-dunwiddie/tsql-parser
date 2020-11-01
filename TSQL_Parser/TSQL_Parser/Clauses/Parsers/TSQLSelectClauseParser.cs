@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using TSQL.Elements;
+using TSQL.Elements.Parsers;
 using TSQL.Statements;
 using TSQL.Tokens;
 
@@ -21,16 +23,12 @@ namespace TSQL.Clauses.Parsers
 
 			select.Tokens.Add(tokenizer.Current);
 
-			// can contain ALL, DISTINCT, TOP, PERCENT, WITH TIES, AS
-
-			// ends with FROM, semicolon, or keyword other than those listed above, when used outside of parens
-
-			// recursively walk down and back up parens
+			// need to part TOP, DISTINCT, etc here
 
 			TSQLSubqueryHelper.ReadUntilStop(
 				tokenizer,
 				select,
-				new List<TSQLFutureKeywords>() {},
+				new List<TSQLFutureKeywords>() { },
 				new List<TSQLKeywords>() {
 					TSQLKeywords.INTO,
 					TSQLKeywords.FROM,
@@ -45,6 +43,45 @@ namespace TSQL.Clauses.Parsers
 					TSQLKeywords.OPTION
 				},
 				lookForStatementStarts: true);
+
+			// TODO: switch logic to use below once expression parsers are fully functional
+
+			//while (tokenizer.MoveNext() &&
+			//	!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
+			//	!(
+			//		tokenizer.Current.Type == TSQLTokenType.Keyword &&
+			//		(
+			//			tokenizer.Current.AsKeyword.Keyword.In(
+			//				TSQLKeywords.INTO,
+			//				TSQLKeywords.FROM,
+			//				TSQLKeywords.WHERE,
+			//				TSQLKeywords.GROUP,
+			//				TSQLKeywords.HAVING,
+			//				TSQLKeywords.ORDER,
+			//				TSQLKeywords.UNION,
+			//				TSQLKeywords.EXCEPT,
+			//				TSQLKeywords.INTERSECT,
+			//				TSQLKeywords.FOR,
+			//				TSQLKeywords.OPTION) ||
+			//			tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
+			//		)
+			//	))
+			//{
+			//	if (tokenizer.Current.IsWhitespace() ||
+			//		tokenizer.Current.IsComment() ||
+			//		tokenizer.Current.IsCharacter(TSQLCharacters.Comma))
+			//	{
+			//		select.Tokens.Add(tokenizer.Current);
+			//	}
+			//	else
+			//	{
+			//		TSQLSelectColumn column = new TSQLSelectColumnParser().Parse(tokenizer);
+
+			//		select.Tokens.AddRange(column.Tokens);
+
+			//		select.Columns.Add(column);
+			//	}
+			//};
 
 			return select;
 		}

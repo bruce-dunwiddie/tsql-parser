@@ -48,4 +48,22 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="TSQLTokenizer.*.cs">
+      <DependentUpon>TSQLTokenizer.cs</DependentUpon>
+    </Compile>
+    <Compile Update="TSQLStatementReader.*.cs">
+      <DependentUpon>TSQLStatementReader.cs</DependentUpon>
+    </Compile>
+    <Compile Update="IO\TSQLCharacterReader.*.cs">
+      <DependentUpon>TSQLCharacterReader.cs</DependentUpon>
+    </Compile>
+    <Compile Update="IO\BufferedTextReader.*.cs">
+      <DependentUpon>BufferedTextReader.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Expressions\TSQLArgumentList.*.cs">
+      <DependentUpon>TSQLArgumentList.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

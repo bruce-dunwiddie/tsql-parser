@@ -15,6 +15,7 @@ namespace TSQL.Expressions
 		Variable,
 		Multicolumn,
 		Operator,
-		Grouped
+		Grouped,
+		Constant
 	}
 }

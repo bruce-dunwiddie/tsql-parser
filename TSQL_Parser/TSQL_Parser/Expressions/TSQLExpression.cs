@@ -14,5 +14,78 @@ namespace TSQL.Expressions
 		{
 			get;
 		}
+
+		public TSQLCaseExpression AsCase
+		{
+			get
+			{
+				return this as TSQLCaseExpression;
+			}
+		}
+
+		public TSQLColumnExpression AsColumn
+		{
+			get
+			{
+				return this as TSQLColumnExpression;
+			}
+		}
+
+		public TSQLFunctionExpression AsFunction
+		{
+			get
+			{
+				return this as TSQLFunctionExpression;
+			}
+		}
+
+		public TSQLSubqueryExpression AsSubquery
+		{
+			get
+			{
+				return this as TSQLSubqueryExpression;
+			}
+		}
+
+		public TSQLVariableExpression AsVariable
+		{
+			get
+			{
+				return this as TSQLVariableExpression;
+			}
+		}
+
+		public TSQLMulticolumnExpression AsMulticolumn
+		{
+			get
+			{
+				return this as TSQLMulticolumnExpression;
+			}
+		}
+
+		public TSQLOperatorExpression AsOperator
+		{
+			get
+			{
+				return this as TSQLOperatorExpression;
+			}
+		}
+
+		public TSQLGroupedExpression AsGrouped
+		{
+			get
+			{
+				return this as TSQLGroupedExpression;
+			}
+		}
+
+		public TSQLConstantExpression AsConstant
+		{
+			get
+			{
+				return this as TSQLConstantExpression;
+			}
+		}
+
 	}
 }

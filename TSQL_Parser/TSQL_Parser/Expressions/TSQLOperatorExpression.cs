@@ -18,28 +18,10 @@ namespace TSQL.Expressions
 			}
 		}
 
-		public TSQLExpression LeftSide
-		{
-			get
-			{
-				return null;
-			}
-		}
+		public TSQLExpression LeftSide { get; internal set; }
 
-		public TSQLExpression RightSide
-		{
-			get
-			{
-				return null;
-			}
-		}
+		public TSQLExpression RightSide { get; internal set; }
 
-		public TSQLOperator Operator
-		{
-			get
-			{
-				return null;
-			}
-		}
+		public TSQLOperator Operator { get; internal set; }
 	}
 }

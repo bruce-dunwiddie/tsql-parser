@@ -15,5 +15,9 @@ namespace TSQL.Expressions
 				return TSQLExpressionType.Function;
 			}
 		}
+
+		public string Name { get; internal set; }
+
+		public TSQLArgumentList Arguments { get; internal set; }
 	}
 }

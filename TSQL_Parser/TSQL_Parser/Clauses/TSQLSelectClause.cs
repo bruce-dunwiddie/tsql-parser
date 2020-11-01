@@ -14,12 +14,6 @@ namespace TSQL.Clauses
 
 		}
 
-		public List<TSQLSelectColumn> Columns
-		{
-			get
-			{
-				return null;
-			}
-		}
+		public List<TSQLSelectColumn> Columns { get; } = new List<TSQLSelectColumn>();
 	}
 }
