@@ -16,7 +16,7 @@ namespace TSQL.Tokens
 			// https://docs.microsoft.com/en-us/sql/t-sql/data-types/decimal-and-numeric-transact-sql
 			// can be up to max size of decimal, which is 38 places of precision.
 
-			Value = Double.Parse(Text, NumberStyles.Any);
+			Value = Double.Parse(Text, NumberStyles.Any, new CultureInfo("en-US"));
 		}
 
 #pragma warning disable 1591

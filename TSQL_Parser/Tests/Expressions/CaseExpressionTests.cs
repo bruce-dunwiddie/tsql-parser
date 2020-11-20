@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using NUnit.Framework;
 
 using TSQL;
-using TSQL.Expressions;
 using TSQL.Statements;
 using TSQL.Tokens;
 
@@ -25,7 +21,10 @@ namespace Tests.Expressions
 				@"
 					BEGIN
 						SELECT CASE WHEN 1 = 2 THEN 0 ELSE 1 END
-					END",
+					END"
+					// normalizing line endings to unix format to ensure passing
+					// tests in various environments
+					.Replace("\r", ""),
 				includeWhitespace: false);
 
 			Assert.AreEqual(3, statements.Count);
@@ -34,17 +33,17 @@ namespace Tests.Expressions
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
-						new TSQLKeyword(20, "SELECT"),
-						new TSQLKeyword(27, "CASE"),
-						new TSQLKeyword(32, "WHEN"),
-						new TSQLNumericLiteral(37, "1"),
-						new TSQLOperator(39, "="),
-						new TSQLNumericLiteral(41, "2"),
-						new TSQLKeyword(43, "THEN"),
-						new TSQLNumericLiteral(48, "0"),
-						new TSQLKeyword(50, "ELSE"),
-						new TSQLNumericLiteral(55, "1"),
-						new TSQLKeyword(57, "END")
+						new TSQLKeyword(18, "SELECT"),
+						new TSQLKeyword(25, "CASE"),
+						new TSQLKeyword(30, "WHEN"),
+						new TSQLNumericLiteral(35, "1"),
+						new TSQLOperator(37, "="),
+						new TSQLNumericLiteral(39, "2"),
+						new TSQLKeyword(41, "THEN"),
+						new TSQLNumericLiteral(46, "0"),
+						new TSQLKeyword(48, "ELSE"),
+						new TSQLNumericLiteral(53, "1"),
+						new TSQLKeyword(55, "END")
 					},
 				statements[1].Tokens);
 
