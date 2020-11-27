@@ -80,17 +80,24 @@ namespace TSQL.Clauses.Parsers
 			}
 			else if (tokenizer.Current.IsKeyword(TSQLKeywords.CASE))
 			{
-				// not going to add CASE token directly because it will be contained
-				// within the returned expression and we don't want to double up the
-				// CASE token within the results.
+				// have to handle CASE special, so that we always match up
+				// 1 and only 1 END
 
-				// CASE is a special situation because it's stop word (END) is part of
-				// the expression itself and needs to be included in it's token list.
-				// all other clauses stop at the beginning of the next clause and do
-				// not include the stop token within their token list.
-				TSQLCaseExpression caseExpression = new TSQLCaseExpressionParser().Parse(tokenizer);
+				element.Tokens.Add(tokenizer.Current);
 
-				element.Tokens.AddRange(caseExpression.Tokens);
+				TSQLSubqueryHelper.ReadUntilStop(
+					tokenizer,
+					element,
+					new List<TSQLFutureKeywords>() { },
+					new List<TSQLKeywords>() {
+						TSQLKeywords.END
+					},
+					lookForStatementStarts: false);
+
+				if (tokenizer.Current != null)
+				{
+					element.Tokens.Add(tokenizer.Current);
+				}
 			}
 			else
 			{
