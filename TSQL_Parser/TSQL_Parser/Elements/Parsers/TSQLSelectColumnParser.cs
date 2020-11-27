@@ -22,20 +22,34 @@ namespace TSQL.Elements.Parsers
 
 			column.Tokens.AddRange(columnExpression.Tokens);
 
-			if (tokenizer.Current.IsKeyword(TSQLKeywords.AS))
+			while (
+				tokenizer.Current != null &&
+				(
+					tokenizer.Current.IsWhitespace() ||
+					tokenizer.Current.IsComment())
+				)
 			{
 				column.Tokens.Add(tokenizer.Current);
 
 				tokenizer.MoveNext();
 			}
 
-			while (
-				tokenizer.Current.IsWhitespace() ||
-				tokenizer.Current.IsComment())
+			if (
+				tokenizer.Current != null &&
+				tokenizer.Current.IsKeyword(TSQLKeywords.AS))
 			{
 				column.Tokens.Add(tokenizer.Current);
 
 				tokenizer.MoveNext();
+
+				while (
+					tokenizer.Current.IsWhitespace() ||
+					tokenizer.Current.IsComment())
+				{
+					column.Tokens.Add(tokenizer.Current);
+
+					tokenizer.MoveNext();
+				}
 			}
 
 			if (tokenizer.Current != null &&
@@ -46,9 +60,9 @@ namespace TSQL.Elements.Parsers
 				column.Tokens.Add(tokenizer.Current);
 
 				column.Alias = tokenizer.Current;
-			}
 
-			tokenizer.MoveNext();
+				tokenizer.MoveNext();
+			}
 
 			return column;
 		}

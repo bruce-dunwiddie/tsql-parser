@@ -80,6 +80,8 @@ namespace TSQL.Expressions.Parsers
 					group.Tokens.Add(tokenizer.Current);
 				}
 
+				// TODO: handle subselect starting with SELECT vs an expression
+
 				group.InnerExpression = Parse(tokenizer);
 				group.Tokens.AddRange(group.InnerExpression.Tokens);
 
@@ -166,7 +168,41 @@ namespace TSQL.Expressions.Parsers
 			else if (tokenizer.Current.Type.In(
 				TSQLTokenType.SystemIdentifier))
 			{
-				return new TSQLFunctionExpression();
+				TSQLFunctionExpression function = new TSQLFunctionExpression();
+
+				function.Name = tokenizer.Current.Text;
+
+				function.Tokens.Add(tokenizer.Current);
+
+				if (tokenizer.MoveNext() &&
+					tokenizer.Current.IsCharacter(TSQLCharacters.OpenParentheses))
+				{
+					function.Tokens.Add(tokenizer.Current);
+
+					TSQLArgumentList arguments = new TSQLArgumentListParser().Parse(
+						tokenizer);
+
+					function.Tokens.AddRange(arguments.Tokens);
+
+					function.Arguments = arguments;
+
+					if (tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
+					{
+						function.Tokens.Add(tokenizer.Current);
+					}
+
+					while (
+						tokenizer.MoveNext() &&
+						(
+							tokenizer.Current.IsWhitespace() ||
+							tokenizer.Current.IsComment())
+						)
+					{
+						function.Tokens.Add(tokenizer.Current);
+					}
+				}
+
+				return function;
 			}
 			else if (tokenizer.Current.Type.In(
 				TSQLTokenType.Identifier))
@@ -183,6 +219,8 @@ namespace TSQL.Expressions.Parsers
 				// else column
 
 				// alias would be any tokens prior to last period, removing whitespace, concatenated together as string
+
+				// TODO: handle window functions with multiple parts
 
 				List<TSQLToken> tokens = new List<TSQLToken>();
 
@@ -203,10 +241,98 @@ namespace TSQL.Expressions.Parsers
 						function.Tokens.AddRange(arguments.Tokens);
 
 						function.Arguments = arguments;
+
+						if (tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
+						{
+							function.Tokens.Add(tokenizer.Current);
+						}
+
+						function.Name =
+							String.Join(
+								"",
+								tokens
+									.Where(t => !t.IsComment() && !t.IsWhitespace())
+									.Select(t => t.Text));
+
+						while (
+							tokenizer.MoveNext() &&
+							(
+								tokenizer.Current.IsWhitespace() ||
+								tokenizer.Current.IsComment())
+							)
+						{
+							function.Tokens.Add(tokenizer.Current);
+						}
+
+						return function;
+					}
+					else if (tokenizer.Current.Text == "*")
+					{
+						// e.g. p.*
+
+						TSQLMulticolumnExpression multi = new TSQLMulticolumnExpression();
+
+						multi.Tokens.AddRange(tokens);
+
+						multi.Tokens.Add(tokenizer.Current);
+
+						string alias =
+							String.Join(
+								"",
+								tokens
+									.Where(t => !t.IsComment() && !t.IsWhitespace())
+									.Select(t => t.Text));
+
+						// trim off the last period
+						multi.TableAlias = alias.Substring(0, alias.Length - 1);
+
+						while (
+							tokenizer.MoveNext() &&
+							(
+								tokenizer.Current.IsWhitespace() ||
+								tokenizer.Current.IsComment())
+							)
+						{
+							multi.Tokens.Add(tokenizer.Current);
+						}
+
+						return multi;
+					}
+					else if (
+						tokenizer.Current.IsCharacter(TSQLCharacters.Comma) ||
+						tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses) ||
+						tokenizer.Current.Type == TSQLTokenType.Keyword)
+					{
+						TSQLColumnExpression column = new TSQLColumnExpression();
+
+						column.Tokens.AddRange(tokens);
+
+						string alias =
+							String.Join(
+								"",
+								tokens
+									.Where(t => !t.IsComment() && !t.IsWhitespace())
+									.Select(t => t.Text));
+
+						// trim off the last period
+						column.TableAlias = alias.Substring(0, alias.Length - 1);
+
+						tokens.Reverse();
+
+						column.Column = tokens
+							.Where(t => !t.IsComment() && !t.IsWhitespace())
+							.Select(t => t.Text)
+							.First();
+
+						return column;
+					}
+					else
+					{
+						tokens.Add(tokenizer.Current);
 					}
 				}
 
-				return new TSQLFunctionExpression();
+				return null;
 			}
 			else
 			{

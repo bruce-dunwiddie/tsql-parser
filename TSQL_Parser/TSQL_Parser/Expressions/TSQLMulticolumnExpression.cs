@@ -16,12 +16,6 @@ namespace TSQL.Expressions
 			}
 		}
 
-		public string TableAlias
-		{
-			get
-			{
-				return null;
-			}
-		}
+		public string TableAlias { get; internal set; }
 	}
 }

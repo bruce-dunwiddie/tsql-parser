@@ -80,13 +80,6 @@ namespace TSQL.Statements.Parsers
 				Statement.Tokens.AddRange(exec.Tokens);
 			}
 
-			if (
-				Tokenizer.Current?.AsKeyword != null &&
-				Tokenizer.Current.AsKeyword.Keyword.IsStatementStart())
-			{
-				Tokenizer.Putback();
-			}
-
 			return Statement;
 		}
 

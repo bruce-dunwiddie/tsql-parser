@@ -23,65 +23,70 @@ namespace TSQL.Clauses.Parsers
 
 			select.Tokens.Add(tokenizer.Current);
 
-			// need to part TOP, DISTINCT, etc here
+			tokenizer.MoveNext();
 
-			TSQLSubqueryHelper.ReadUntilStop(
-				tokenizer,
-				select,
-				new List<TSQLFutureKeywords>() { },
-				new List<TSQLKeywords>() {
-					TSQLKeywords.INTO,
-					TSQLKeywords.FROM,
-					TSQLKeywords.WHERE,
-					TSQLKeywords.GROUP,
-					TSQLKeywords.HAVING,
-					TSQLKeywords.ORDER,
-					TSQLKeywords.UNION,
-					TSQLKeywords.EXCEPT,
-					TSQLKeywords.INTERSECT,
-					TSQLKeywords.FOR,
-					TSQLKeywords.OPTION
-				},
-				lookForStatementStarts: true);
+			while (
+				tokenizer.Current != null &&
+				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
+				!tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses) &&
+				!(
+					tokenizer.Current.Type == TSQLTokenType.Keyword &&
+					(
+						tokenizer.Current.AsKeyword.Keyword.In(
+							TSQLKeywords.INTO,
+							TSQLKeywords.FROM,
+							TSQLKeywords.WHERE,
+							TSQLKeywords.GROUP,
+							TSQLKeywords.HAVING,
+							TSQLKeywords.ORDER,
+							TSQLKeywords.UNION,
+							TSQLKeywords.EXCEPT,
+							TSQLKeywords.INTERSECT,
+							TSQLKeywords.FOR,
+							TSQLKeywords.OPTION) ||
+						tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
+					)
+				))
+			{
+				if (tokenizer.Current.IsWhitespace() ||
+					tokenizer.Current.IsComment() ||
+					tokenizer.Current.IsCharacter(TSQLCharacters.Comma))
+				{
+					select.Tokens.Add(tokenizer.Current);
 
-			// TODO: switch logic to use below once expression parsers are fully functional
+					tokenizer.MoveNext();
+				}
+				else if (tokenizer.Current.IsKeyword(TSQLKeywords.DISTINCT))
+				{
+					select.Tokens.Add(tokenizer.Current);
 
-			//while (tokenizer.MoveNext() &&
-			//	!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
-			//	!(
-			//		tokenizer.Current.Type == TSQLTokenType.Keyword &&
-			//		(
-			//			tokenizer.Current.AsKeyword.Keyword.In(
-			//				TSQLKeywords.INTO,
-			//				TSQLKeywords.FROM,
-			//				TSQLKeywords.WHERE,
-			//				TSQLKeywords.GROUP,
-			//				TSQLKeywords.HAVING,
-			//				TSQLKeywords.ORDER,
-			//				TSQLKeywords.UNION,
-			//				TSQLKeywords.EXCEPT,
-			//				TSQLKeywords.INTERSECT,
-			//				TSQLKeywords.FOR,
-			//				TSQLKeywords.OPTION) ||
-			//			tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
-			//		)
-			//	))
-			//{
-			//	if (tokenizer.Current.IsWhitespace() ||
-			//		tokenizer.Current.IsComment() ||
-			//		tokenizer.Current.IsCharacter(TSQLCharacters.Comma))
-			//	{
-			//		select.Tokens.Add(tokenizer.Current);
-			//	}
-			//	else
-			//	{
-			//		TSQLSelectColumn column = new TSQLSelectColumnParser().Parse(tokenizer);
+					tokenizer.MoveNext();
+				}
+				else if (tokenizer.Current.IsKeyword(TSQLKeywords.TOP))
+				{
+					select.Tokens.Add(tokenizer.Current);
 
-			//		select.Tokens.AddRange(column.Tokens);
+					tokenizer.MoveNext();
 
-			//		select.Columns.Add(column);
-			//	}
-			//};
+					//if (tokenizer.MoveNext())
+					//{
+					//	if (tokenizer.Current.Type == TSQLTokenType.NumericLiteral)
+					//	{
+					//		select.Tokens.Add(tokenizer.Current);
+					//	}
+
+					//	// TODO: how to handle TOP N vs TOP(N)
+					//}
+				}
+				else
+				{
+					TSQLSelectColumn column = new TSQLSelectColumnParser().Parse(tokenizer);
+
+					select.Tokens.AddRange(column.Tokens);
+
+					select.Columns.Add(column);
+				}
+			};
 
 			return select;
 		}

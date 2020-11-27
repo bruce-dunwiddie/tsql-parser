@@ -37,6 +37,8 @@ namespace TSQL.Expressions.Parsers
 			// the other parsers
 			caseExpression.Tokens.Add(tokenizer.Current);
 
+			tokenizer.MoveNext();
+
 			return caseExpression;
 		}
 	}

@@ -906,9 +906,12 @@ namespace TSQL
 
 		public void Putback()
 		{
-			_hasExtra = true;
-			_extraToken = _current;
-			_hasMore = true;
+			if (_current != null)
+			{
+				_hasExtra = true;
+				_extraToken = _current;
+				_hasMore = true;
+			}
 		}
 
 		public TSQLToken Current
