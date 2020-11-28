@@ -10,6 +10,6 @@ namespace TSQL
 {
 	internal interface ITSQLTokenizer : IEnumerator, IEnumerable, IEnumerator<TSQLToken>, IEnumerable<TSQLToken>
 	{
-		void Putback();
+		
 	}
 }

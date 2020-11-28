@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using TSQL.Statements;
+using TSQL.Statements.Parsers;
 using TSQL.Tokens;
 
 namespace TSQL.Expressions.Parsers
@@ -66,9 +68,9 @@ namespace TSQL.Expressions.Parsers
 			else if (tokenizer.Current.IsCharacter(
 				TSQLCharacters.OpenParentheses))
 			{
-				TSQLGroupedExpression group = new TSQLGroupedExpression();
+				List<TSQLToken> tokens = new List<TSQLToken>();
 
-				group.Tokens.Add(tokenizer.Current);
+				tokens.Add(tokenizer.Current);
 
 				while (
 					tokenizer.MoveNext() &&
@@ -77,22 +79,48 @@ namespace TSQL.Expressions.Parsers
 						tokenizer.Current.IsComment())
 					)
 				{
-					group.Tokens.Add(tokenizer.Current);
+					tokens.Add(tokenizer.Current);
 				}
 
-				// TODO: handle subselect starting with SELECT vs an expression
-
-				group.InnerExpression = Parse(tokenizer);
-				group.Tokens.AddRange(group.InnerExpression.Tokens);
-
-				if (tokenizer.Current.IsCharacter(
-					TSQLCharacters.CloseParentheses))
+				if (tokenizer.Current.IsKeyword(TSQLKeywords.SELECT))
 				{
-					group.Tokens.Add(tokenizer.Current);
-					tokenizer.MoveNext();
-				}
+					TSQLSubqueryExpression subquery = new TSQLSubqueryExpression();
 
-				return group;
+					subquery.Tokens.AddRange(tokens);
+
+					TSQLSelectStatement select = new TSQLSelectStatementParser(tokenizer).Parse();
+
+					subquery.Select = select;
+
+					subquery.Tokens.AddRange(select.Tokens);
+
+					if (tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
+					{
+						subquery.Tokens.Add(tokenizer.Current);
+
+						tokenizer.MoveNext();
+					}
+
+					return subquery;
+				}
+				else
+				{
+					TSQLGroupedExpression group = new TSQLGroupedExpression();
+
+					group.Tokens.AddRange(tokens);
+
+					group.InnerExpression = Parse(tokenizer);
+					group.Tokens.AddRange(group.InnerExpression.Tokens);
+
+					if (tokenizer.Current.IsCharacter(
+						TSQLCharacters.CloseParentheses))
+					{
+						group.Tokens.Add(tokenizer.Current);
+						tokenizer.MoveNext();
+					}
+
+					return group;
+				}
 			}
 			else if (tokenizer.Current.Type.In(
 				TSQLTokenType.Variable,

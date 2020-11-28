@@ -16,8 +16,6 @@ namespace TSQL
 		private TSQLCharacterReader _charReader = null;
 		private TSQLToken _current = null;
 		private bool _hasMore = true;
-		private bool _hasExtra = false;
-		private TSQLToken _extraToken;
 
 		public TSQLTokenizer(
 			string tsqlText) :
@@ -44,26 +42,18 @@ namespace TSQL
 
 			if (_hasMore)
 			{
-				if (_hasExtra)
+				if (IncludeWhitespace)
 				{
-					_current = _extraToken;
-					_hasExtra = false;
+					_hasMore = _charReader.Read();
 				}
 				else
 				{
-					if (IncludeWhitespace)
-					{
-						_hasMore = _charReader.Read();
-					}
-					else
-					{
-						_hasMore = _charReader.ReadNextNonWhitespace();
-					}
+					_hasMore = _charReader.ReadNextNonWhitespace();
+				}
 
-					if (_hasMore)
-					{
-						SetCurrent();
-					}
+				if (_hasMore)
+				{
+					SetCurrent();
 				}
 			}
 
@@ -902,16 +892,6 @@ namespace TSQL
 				startPosition,
 				startPosition + characterHolder.Length - 1,
 				UseQuotedIdentifiers);
-		}
-
-		public void Putback()
-		{
-			if (_current != null)
-			{
-				_hasExtra = true;
-				_extraToken = _current;
-				_hasMore = true;
-			}
 		}
 
 		public TSQLToken Current

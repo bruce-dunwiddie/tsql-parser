@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using TSQL.Statements;
+
 namespace TSQL.Expressions
 {
 	public class TSQLSubqueryExpression : TSQLExpression
@@ -15,5 +17,7 @@ namespace TSQL.Expressions
 				return TSQLExpressionType.Subquery;
 			}
 		}
+
+		public TSQLSelectStatement Select { get; internal set; }
 	}
 }
