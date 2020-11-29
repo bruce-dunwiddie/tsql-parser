@@ -70,7 +70,8 @@ namespace TSQL
 				while (
 					tokenizer.Current != null &&
 					(
-						tokenizer.Current.Type == TSQLTokenType.Whitespace ||
+						tokenizer.Current.IsWhitespace() ||
+						tokenizer.Current.IsComment() ||
 						(
 							tokenizer.Current.Type == TSQLTokenType.Character &&
 							tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon

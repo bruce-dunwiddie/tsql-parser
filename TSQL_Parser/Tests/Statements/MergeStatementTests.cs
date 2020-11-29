@@ -303,7 +303,7 @@ namespace Tests.Statements
 			TSQLMergeStatement merge = statements[2] as TSQLMergeStatement;
 
 			Assert.IsNotNull(statements);
-			Assert.AreEqual(16, statements.Count);
+			Assert.AreEqual(17, statements.Count);
 
 			Assert.AreEqual(TSQLStatementType.Merge, statements[2].Type);
 			Assert.AreEqual(TSQLStatementType.Select, statements[4].Type);
@@ -315,14 +315,15 @@ namespace Tests.Statements
 			Assert.AreEqual(8, statements[5].Tokens.Count);
 			Assert.AreEqual(2, statements[6].Tokens.Count);
 			Assert.AreEqual(17, statements[7].Tokens.Count);
-			Assert.AreEqual(4, statements[8].Tokens.Count);
+			Assert.AreEqual(2, statements[8].Tokens.Count);
 			Assert.AreEqual(2, statements[9].Tokens.Count);
-			Assert.AreEqual(17, statements[10].Tokens.Count);
-			Assert.AreEqual(2, statements[11].Tokens.Count);
+			Assert.AreEqual(2, statements[10].Tokens.Count);
+			Assert.AreEqual(17, statements[11].Tokens.Count);
 			Assert.AreEqual(2, statements[12].Tokens.Count);
-			Assert.AreEqual(10, statements[13].Tokens.Count);
-			Assert.AreEqual(6, statements[14].Tokens.Count);
-			Assert.AreEqual(1, statements[15].Tokens.Count);
+			Assert.AreEqual(2, statements[13].Tokens.Count);
+			Assert.AreEqual(10, statements[14].Tokens.Count);
+			Assert.AreEqual(6, statements[15].Tokens.Count);
+			Assert.AreEqual(1, statements[16].Tokens.Count);
 			Assert.AreEqual(TSQLKeywords.MERGE, merge.Tokens[0].AsKeyword.Keyword);
 			Assert.AreEqual(" ", merge.Tokens[1].AsWhitespace.Text);
 			Assert.AreEqual(TSQLKeywords.INTO, merge.Tokens[2].AsKeyword.Keyword);

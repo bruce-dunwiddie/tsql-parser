@@ -207,6 +207,8 @@ namespace TSQL.Expressions.Parsers
 				{
 					function.Tokens.Add(tokenizer.Current);
 
+					tokenizer.MoveNext();
+
 					TSQLArgumentList arguments = new TSQLArgumentListParser().Parse(
 						tokenizer);
 
@@ -259,6 +261,8 @@ namespace TSQL.Expressions.Parsers
 					if (tokenizer.Current.IsCharacter(TSQLCharacters.OpenParentheses))
 					{
 						tokens.Add(tokenizer.Current);
+
+						tokenizer.MoveNext();
 
 						TSQLArgumentList arguments = new TSQLArgumentListParser().Parse(
 							tokenizer);
