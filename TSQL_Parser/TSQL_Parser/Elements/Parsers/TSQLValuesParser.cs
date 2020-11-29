@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using TSQL.Clauses.Parsers;
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Elements.Parsers
 {
@@ -19,7 +19,7 @@ namespace TSQL.Elements.Parsers
 
 			values.Tokens.Add(tokenizer.Current);
 
-			TSQLSubqueryHelper.ReadUntilStop(
+			TSQLTokenParserHelper.ReadUntilStop(
 				tokenizer,
 				values,
 				// stop words come from usage in MERGE

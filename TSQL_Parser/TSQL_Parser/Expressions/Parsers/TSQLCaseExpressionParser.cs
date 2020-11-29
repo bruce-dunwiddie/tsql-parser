@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using TSQL.Clauses.Parsers;
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Expressions.Parsers
 {
@@ -22,7 +22,7 @@ namespace TSQL.Expressions.Parsers
 
 			caseExpression.Tokens.Add(tokenizer.Current);
 
-			TSQLSubqueryHelper.ReadUntilStop(
+			TSQLTokenParserHelper.ReadUntilStop(
 				tokenizer,
 				caseExpression,
 				new List<TSQLFutureKeywords>() { },

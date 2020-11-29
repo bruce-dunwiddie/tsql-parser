@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Clauses.Parsers
 {
@@ -77,7 +78,7 @@ namespace TSQL.Clauses.Parsers
 					}
 				}
 
-				TSQLSubqueryHelper.RecurseParens(
+				TSQLTokenParserHelper.RecurseParens(
 					tokenizer,
 					with,
 					ref nestedLevel);

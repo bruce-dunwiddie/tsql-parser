@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Clauses.Parsers
 {
@@ -39,7 +40,7 @@ namespace TSQL.Clauses.Parsers
 					tokenizer.Current.Type == TSQLTokenType.MultilineComment
 				))
 			{
-				TSQLSubqueryHelper.RecurseParens(
+				TSQLTokenParserHelper.RecurseParens(
 					tokenizer,
 					into,
 					ref nestedLevel);

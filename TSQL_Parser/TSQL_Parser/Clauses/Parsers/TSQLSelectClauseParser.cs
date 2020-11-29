@@ -7,6 +7,7 @@ using TSQL.Elements;
 using TSQL.Elements.Parsers;
 using TSQL.Statements;
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Clauses.Parsers
 {
@@ -24,6 +25,104 @@ namespace TSQL.Clauses.Parsers
 			select.Tokens.Add(tokenizer.Current);
 
 			tokenizer.MoveNext();
+
+			TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+				tokenizer,
+				select);
+
+			if (tokenizer.Current.IsKeyword(TSQLKeywords.ALL) ||
+				tokenizer.Current.IsKeyword(TSQLKeywords.DISTINCT))
+			{
+				select.Tokens.Add(tokenizer.Current);
+
+				tokenizer.MoveNext();
+
+				TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+					tokenizer,
+					select);
+			}
+
+			if (tokenizer.Current.IsKeyword(TSQLKeywords.TOP))
+			{
+				select.Tokens.Add(tokenizer.Current);
+
+				tokenizer.MoveNext();
+
+				TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+					tokenizer,
+					select);
+
+				if (tokenizer.Current.IsCharacter(TSQLCharacters.OpenParentheses))
+				{
+					select.Tokens.Add(tokenizer.Current);
+
+					tokenizer.MoveNext();
+
+					TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+						tokenizer,
+						select);
+				}
+
+				if (tokenizer.Current != null &&
+					tokenizer.Current.Type == TSQLTokenType.NumericLiteral)
+				{
+					select.Tokens.Add(tokenizer.Current);
+
+					tokenizer.MoveNext();
+
+					TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+						tokenizer,
+						select);
+				}
+
+				if (tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
+				{
+					select.Tokens.Add(tokenizer.Current);
+
+					tokenizer.MoveNext();
+
+					TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+						tokenizer,
+						select);
+				}
+
+				if (tokenizer.Current.IsKeyword(TSQLKeywords.PERCENT))
+				{
+					select.Tokens.Add(tokenizer.Current);
+
+					tokenizer.MoveNext();
+
+					TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+						tokenizer,
+						select);
+				}
+
+				if (tokenizer.Current.IsKeyword(TSQLKeywords.WITH))
+				{
+					select.Tokens.Add(tokenizer.Current);
+
+					tokenizer.MoveNext();
+
+					TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+						tokenizer,
+						select);
+
+					if (tokenizer.Current != null &&
+						tokenizer.Current.Type == TSQLTokenType.Identifier &&
+						tokenizer.Current.AsIdentifier.Text.Equals(
+							"TIES",
+							StringComparison.InvariantCultureIgnoreCase))
+					{
+						select.Tokens.Add(tokenizer.Current);
+
+						tokenizer.MoveNext();
+
+						TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+							tokenizer,
+							select);
+					}
+				}
+			}
 
 			while (
 				tokenizer.Current != null &&
@@ -48,45 +147,16 @@ namespace TSQL.Clauses.Parsers
 					)
 				))
 			{
-				if (tokenizer.Current.IsWhitespace() ||
-					tokenizer.Current.IsComment() ||
-					tokenizer.Current.IsCharacter(TSQLCharacters.Comma))
-				{
-					select.Tokens.Add(tokenizer.Current);
+				TSQLSelectColumn column = new TSQLSelectColumnParser().Parse(tokenizer);
 
-					tokenizer.MoveNext();
-				}
-				else if (tokenizer.Current.IsKeyword(TSQLKeywords.DISTINCT))
-				{
-					select.Tokens.Add(tokenizer.Current);
+				select.Tokens.AddRange(column.Tokens);
 
-					tokenizer.MoveNext();
-				}
-				else if (tokenizer.Current.IsKeyword(TSQLKeywords.TOP))
-				{
-					select.Tokens.Add(tokenizer.Current);
+				select.Columns.Add(column);
 
-					tokenizer.MoveNext();
-
-					//if (tokenizer.MoveNext())
-					//{
-					//	if (tokenizer.Current.Type == TSQLTokenType.NumericLiteral)
-					//	{
-					//		select.Tokens.Add(tokenizer.Current);
-					//	}
-
-					//	// TODO: how to handle TOP N vs TOP(N)
-					//}
-				}
-				else
-				{
-					TSQLSelectColumn column = new TSQLSelectColumnParser().Parse(tokenizer);
-
-					select.Tokens.AddRange(column.Tokens);
-
-					select.Columns.Add(column);
-				}
-			};
+				TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+					tokenizer,
+					select);
+			}
 
 			return select;
 		}

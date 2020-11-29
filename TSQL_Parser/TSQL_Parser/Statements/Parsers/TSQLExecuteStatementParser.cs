@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using TSQL.Clauses;
-using TSQL.Clauses.Parsers;
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Statements.Parsers
 {
@@ -24,7 +23,7 @@ namespace TSQL.Statements.Parsers
 		{
 			Statement.Tokens.Add(Tokenizer.Current);
 
-			TSQLSubqueryHelper.ReadUntilStop(
+			TSQLTokenParserHelper.ReadUntilStop(
 				Tokenizer,
 				Statement,
 				new List<TSQLFutureKeywords>() { },

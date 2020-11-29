@@ -5,14 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 using TSQL.Elements;
-using TSQL.Expressions;
-using TSQL.Expressions.Parsers;
 using TSQL.Statements;
-using TSQL.Tokens;
 
-namespace TSQL.Clauses.Parsers
+namespace TSQL.Tokens.Parsers
 {
-	internal static class TSQLSubqueryHelper
+	internal static class TSQLTokenParserHelper
 	{
 		/// <summary>
 		///		This reads recursively through parenthesis and returns when it hits
@@ -50,7 +47,7 @@ namespace TSQL.Clauses.Parsers
 					)
 				))
 			{
-				TSQLSubqueryHelper.RecurseParens(
+				RecurseParens(
 					tokenizer,
 					element,
 					ref nestedLevel);
@@ -85,7 +82,7 @@ namespace TSQL.Clauses.Parsers
 
 				element.Tokens.Add(tokenizer.Current);
 
-				TSQLSubqueryHelper.ReadUntilStop(
+				ReadUntilStop(
 					tokenizer,
 					element,
 					new List<TSQLFutureKeywords>() { },
@@ -102,6 +99,20 @@ namespace TSQL.Clauses.Parsers
 			else
 			{
 				element.Tokens.Add(tokenizer.Current);
+			}
+		}
+
+		public static void ReadCommentsAndWhitespace(
+			ITSQLTokenizer tokenizer,
+			TSQLElement element)
+		{
+			while (tokenizer.Current.IsWhitespace() ||
+				tokenizer.Current.IsComment() ||
+				tokenizer.Current.IsCharacter(TSQLCharacters.Comma))
+			{
+				element.Tokens.Add(tokenizer.Current);
+
+				tokenizer.MoveNext();
 			}
 		}
 	}
