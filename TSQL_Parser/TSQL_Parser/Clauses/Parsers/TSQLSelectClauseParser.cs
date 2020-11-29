@@ -156,6 +156,17 @@ namespace TSQL.Clauses.Parsers
 				TSQLTokenParserHelper.ReadCommentsAndWhitespace(
 					tokenizer,
 					select);
+
+				if (tokenizer.Current.IsCharacter(TSQLCharacters.Comma))
+				{
+					select.Tokens.Add(tokenizer.Current);
+
+					tokenizer.MoveNext();
+
+					TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+						tokenizer,
+						select);
+				}
 			}
 
 			return select;

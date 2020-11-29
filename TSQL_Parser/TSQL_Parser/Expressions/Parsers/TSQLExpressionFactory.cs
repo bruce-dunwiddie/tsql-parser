@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TSQL.Statements;
 using TSQL.Statements.Parsers;
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Expressions.Parsers
 {
@@ -286,14 +287,42 @@ namespace TSQL.Expressions.Parsers
 									.Where(t => !t.IsComment() && !t.IsWhitespace())
 									.Select(t => t.Text));
 
-						while (
-							tokenizer.MoveNext() &&
-							(
-								tokenizer.Current.IsWhitespace() ||
-								tokenizer.Current.IsComment())
-							)
+						tokenizer.MoveNext();
+
+						TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+							tokenizer,
+							function);
+
+						if (tokenizer.Current.IsKeyword(TSQLKeywords.OVER))
 						{
 							function.Tokens.Add(tokenizer.Current);
+
+							tokenizer.MoveNext();
+
+							TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+								tokenizer,
+								function);
+
+							if (tokenizer.Current.IsCharacter(TSQLCharacters.OpenParentheses))
+							{
+								function.Tokens.Add(tokenizer.Current);
+
+								// recursively look for final close parens
+								TSQLTokenParserHelper.ReadUntilStop(
+									tokenizer,
+									function,
+									new List<TSQLFutureKeywords> { },
+									new List<TSQLKeywords> { },
+									lookForStatementStarts: false);
+
+								if (tokenizer.Current != null &&
+									tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
+								{
+									function.Tokens.Add(tokenizer.Current);
+
+									tokenizer.MoveNext();
+								}
+							}
 						}
 
 						return function;

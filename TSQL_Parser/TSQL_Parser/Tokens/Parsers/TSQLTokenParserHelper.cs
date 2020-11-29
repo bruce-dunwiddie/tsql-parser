@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using TSQL.Elements;
+using TSQL.Expressions;
+using TSQL.Expressions.Parsers;
 using TSQL.Statements;
 
 namespace TSQL.Tokens.Parsers
@@ -67,7 +69,6 @@ namespace TSQL.Tokens.Parsers
 
 				if (character == TSQLCharacters.OpenParentheses)
 				{
-					// should we recurse for correlated subqueries?
 					nestedLevel++;
 				}
 				else if (character == TSQLCharacters.CloseParentheses)
@@ -80,16 +81,9 @@ namespace TSQL.Tokens.Parsers
 				// have to handle CASE special, so that we always match up
 				// 1 and only 1 END
 
-				element.Tokens.Add(tokenizer.Current);
+				TSQLCaseExpression caseExp = new TSQLCaseExpressionParser().Parse(tokenizer);
 
-				ReadUntilStop(
-					tokenizer,
-					element,
-					new List<TSQLFutureKeywords>() { },
-					new List<TSQLKeywords>() {
-						TSQLKeywords.END
-					},
-					lookForStatementStarts: false);
+				element.Tokens.AddRange(caseExp.Tokens);
 
 				if (tokenizer.Current != null)
 				{
@@ -107,8 +101,7 @@ namespace TSQL.Tokens.Parsers
 			TSQLElement element)
 		{
 			while (tokenizer.Current.IsWhitespace() ||
-				tokenizer.Current.IsComment() ||
-				tokenizer.Current.IsCharacter(TSQLCharacters.Comma))
+				tokenizer.Current.IsComment())
 			{
 				element.Tokens.Add(tokenizer.Current);
 
