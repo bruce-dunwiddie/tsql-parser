@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using TSQL.Statements;
+using TSQL.Statements.Parsers;
 using TSQL.Tokens;
 
 namespace TSQL.Clauses.Parsers
@@ -29,10 +30,17 @@ namespace TSQL.Clauses.Parsers
 				new List<TSQLFutureKeywords>() { },
 				new List<TSQLKeywords>() {
 					TSQLKeywords.FOR,
-					TSQLKeywords.OPTION
+					TSQLKeywords.OPTION,
+					TSQLKeywords.OFFSET
 				},
 				lookForStatementStarts: true);
 
+			if (tokenizer.Current.IsKeyword(TSQLKeywords.OFFSET))
+			{
+				TSQLOffesetClause groupByClause = new TSQLOffsetClauseParser().Parse(tokenizer);
+				orderBy.Tokens.AddRange(groupByClause.Tokens);
+			}
+			
 			return orderBy;
 		}
 	}

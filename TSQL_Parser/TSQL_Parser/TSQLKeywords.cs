@@ -149,6 +149,7 @@ namespace TSQL
 		// public static readonly TSQLKeywords OF = new TSQLKeywords("OF");
 		public static readonly TSQLKeywords OFF = new TSQLKeywords("OFF");
 		public static readonly TSQLKeywords OFFSETS = new TSQLKeywords("OFFSETS");
+		public static readonly TSQLKeywords OFFSET = new TSQLKeywords("OFFSET");
 		public static readonly TSQLKeywords ON = new TSQLKeywords("ON");
 		public static readonly TSQLKeywords OPTION = new TSQLKeywords("OPTION");
 		public static readonly TSQLKeywords OR = new TSQLKeywords("OR");
