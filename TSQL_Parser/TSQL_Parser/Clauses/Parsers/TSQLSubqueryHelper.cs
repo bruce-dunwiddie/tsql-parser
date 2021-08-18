@@ -22,43 +22,34 @@ namespace TSQL.Clauses.Parsers
         {
             int nestedLevel = 0;
 
-            while (GetContinue(tokenizer, nestedLevel, futureKeywords, keywords, lookForStatementStarts))
-                RecurseParens(
+            while (
+                tokenizer.MoveNext() &&
+                !tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
+                !(
+                    nestedLevel == 0 &&
+                    tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
+                ) &&
+                (
+                    nestedLevel > 0 ||
+                    (
+                        tokenizer.Current.Type != TSQLTokenType.Keyword &&
+                        !futureKeywords.Any(fk => tokenizer.Current.IsFutureKeyword(fk))
+                    ) ||
+                    (
+                        tokenizer.Current.Type == TSQLTokenType.Keyword &&
+                        !keywords.Any(k => tokenizer.Current.AsKeyword.Keyword == k) &&
+                        !(
+                            lookForStatementStarts &&
+                            tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
+                        )
+                    )
+                ))
+            {
+                TSQLSubqueryHelper.RecurseParens(
                     tokenizer,
                     expression,
                     ref nestedLevel);
-        }
-
-        private static bool GetContinue(ITSQLTokenizer tokenizer, int nestedLevel, List<TSQLFutureKeywords> futureKeywords, List<TSQLKeywords> keywords, bool lookForStatementStarts)
-        {
-            var result = tokenizer.MoveNext();
-
-            if (result)
-            {
-                result = result && !tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon);
-                result = result && !(nestedLevel == 0 && tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses));
-
-                var nestedLevelGreaterThan0 = nestedLevel > 0;
-                var isFutureKeyword = tokenizer.Current.Type != TSQLTokenType.Keyword &&
-                                      !futureKeywords.Any(fk => tokenizer.Current.IsFutureKeyword(fk));
-
-                var isAKeywordType = tokenizer.Current.Type == TSQLTokenType.Keyword;
-
-                if (isAKeywordType)
-                {
-                    var isInKeywordList = !keywords.Any(k => tokenizer.Current.AsKeyword.Keyword == k);
-                    var isStatementStart = tokenizer.Current.AsKeyword.Keyword.IsStatementStart();
-                    var isKeyword = isAKeywordType && isInKeywordList &&
-                                    !(
-                                        lookForStatementStarts &&
-                                        isStatementStart
-                                    );
-                    
-                    result = result && (nestedLevelGreaterThan0 || isFutureKeyword || isKeyword);
-                }
             }
-
-            return result;
         }
 
         public static void RecurseParens(
