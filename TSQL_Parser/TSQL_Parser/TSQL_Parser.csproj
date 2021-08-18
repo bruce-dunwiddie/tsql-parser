@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clauses\Parsers\TSQLFetchClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLInsertClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLForClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLOffsetClauseParser.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Clauses\Parsers\TSQLWhenClauseParser.cs" />
     <Compile Include="Clauses\Parsers\TSQLWithClauseParser.cs" />
     <Compile Include="Clauses\TSQLClause.cs" />
+    <Compile Include="Clauses\TSQLFetchClause.cs" />
     <Compile Include="Clauses\TSQLInsertClause.cs" />
     <Compile Include="Clauses\TSQLExceptClause.cs" />
     <Compile Include="Clauses\TSQLForClause.cs" />

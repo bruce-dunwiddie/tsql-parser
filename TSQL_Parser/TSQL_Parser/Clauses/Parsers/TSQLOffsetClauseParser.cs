@@ -32,25 +32,12 @@ namespace TSQL.Statements.Parsers
                 },
                 true);
             
-            if (!tokenizer.Current.IsKeyword(TSQLKeywords.FETCH))
+            if (tokenizer.Current.IsKeyword(TSQLKeywords.FETCH))
             {
-                throw new InvalidOperationException("FETCH expected.");
+                TSQLFetchClause fetchClause = new TSQLFetchClauseParser().Parse(tokenizer);
+                offset.Tokens.AddRange(fetchClause.Tokens);
             }
-            
-            offset.Tokens.Add(tokenizer.Current);
-            
-            TSQLSubqueryHelper.ReadUntilStop(
-                tokenizer,
-                offset,
-                new List<TSQLFutureKeywords>
-                {
-                    Capacity = 0
-                },
-                new List<TSQLKeywords>
-                {
-                },
-                true);
-            
+
             return offset;
         }
     }
