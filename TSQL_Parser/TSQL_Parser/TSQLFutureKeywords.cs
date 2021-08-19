@@ -15,6 +15,7 @@ namespace TSQL
 
 		public static readonly TSQLFutureKeywords OUTPUT = new TSQLFutureKeywords("OUTPUT");
 		public static readonly TSQLFutureKeywords USING = new TSQLFutureKeywords("USING");
+		public static readonly TSQLFutureKeywords OFFSET = new TSQLFutureKeywords("OFFSET");
 
 #pragma warning restore 1591
 

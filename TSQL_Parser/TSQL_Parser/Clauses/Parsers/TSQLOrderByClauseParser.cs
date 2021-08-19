@@ -27,15 +27,17 @@ namespace TSQL.Clauses.Parsers
 			TSQLSubqueryHelper.ReadUntilStop(
 				tokenizer,
 				orderBy,
-				new List<TSQLFutureKeywords>() { },
+				new List<TSQLFutureKeywords>()
+				{
+					TSQLFutureKeywords.OFFSET
+				},
 				new List<TSQLKeywords>() {
 					TSQLKeywords.FOR,
-					TSQLKeywords.OPTION,
-					TSQLKeywords.OFFSET
+					TSQLKeywords.OPTION
 				},
 				lookForStatementStarts: true);
 
-			if (tokenizer.Current.IsKeyword(TSQLKeywords.OFFSET))
+			if (tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OFFSET))
 			{
 				TSQLOffsetClause offsetClause = new TSQLOffsetClauseParser().Parse(tokenizer);
 				orderBy.Tokens.AddRange(offsetClause.Tokens);

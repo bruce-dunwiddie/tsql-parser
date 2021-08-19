@@ -12,7 +12,7 @@ namespace TSQL.Statements.Parsers
         {
             TSQLOffsetClause offset = new TSQLOffsetClause();
 
-            if (!tokenizer.Current.IsKeyword(TSQLKeywords.OFFSET))
+            if (!tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OFFSET))
             {
                 throw new InvalidOperationException("OFFSET expected.");
             }
