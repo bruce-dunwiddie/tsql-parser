@@ -14,6 +14,12 @@ namespace TSQL.Elements.Parsers
 	{
 		public TSQLSelectColumn Parse(ITSQLTokenizer tokenizer)
 		{
+			// TODO: check for variable assignment, e.g. @id = p.id
+
+			// should we return a null TSQLSelectColumn object in this case?
+
+			// TODO: check for alternate column aliasing syntax, e.g. product_id = p.id
+
 			TSQLSelectColumn column = new TSQLSelectColumn();
 
 			TSQLExpression columnExpression = new TSQLExpressionFactory().Parse(tokenizer);
