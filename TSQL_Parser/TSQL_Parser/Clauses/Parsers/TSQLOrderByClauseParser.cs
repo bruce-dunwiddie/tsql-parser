@@ -37,8 +37,8 @@ namespace TSQL.Clauses.Parsers
 
 			if (tokenizer.Current.IsKeyword(TSQLKeywords.OFFSET))
 			{
-				TSQLOffesetClause groupByClause = new TSQLOffsetClauseParser().Parse(tokenizer);
-				orderBy.Tokens.AddRange(groupByClause.Tokens);
+				TSQLOffsetClause offsetClause = new TSQLOffsetClauseParser().Parse(tokenizer);
+				orderBy.Tokens.AddRange(offsetClause.Tokens);
 			}
 			
 			return orderBy;

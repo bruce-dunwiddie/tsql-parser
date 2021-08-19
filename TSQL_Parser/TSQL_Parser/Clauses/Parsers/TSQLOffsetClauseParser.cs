@@ -8,9 +8,9 @@ namespace TSQL.Statements.Parsers
 {
     internal class TSQLOffsetClauseParser
     {
-        public TSQLOffesetClause Parse(ITSQLTokenizer tokenizer)
+        public TSQLOffsetClause Parse(ITSQLTokenizer tokenizer)
         {
-            TSQLOffesetClause offset = new TSQLOffesetClause();
+            TSQLOffsetClause offset = new TSQLOffsetClause();
 
             if (!tokenizer.Current.IsKeyword(TSQLKeywords.OFFSET))
             {
@@ -22,10 +22,7 @@ namespace TSQL.Statements.Parsers
             TSQLSubqueryHelper.ReadUntilStop(
                 tokenizer,
                 offset,
-                new List<TSQLFutureKeywords>
-                {
-                    Capacity = 0
-                },
+                new List<TSQLFutureKeywords> { },
                 new List<TSQLKeywords>
                 {
                     TSQLKeywords.FETCH

@@ -1,8 +1,8 @@
 ﻿namespace TSQL.Clauses
 {
-	public class TSQLOffesetClause : TSQLClause
+	public class TSQLOffsetClause : TSQLClause
 	{
-		internal TSQLOffesetClause()
+		internal TSQLOffsetClause()
 		{
 
 		}
