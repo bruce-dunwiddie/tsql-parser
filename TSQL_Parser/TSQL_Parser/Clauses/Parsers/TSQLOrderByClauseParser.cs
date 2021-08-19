@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using TSQL.Statements;
+using TSQL.Statements.Parsers;
 using TSQL.Tokens;
 
 namespace TSQL.Clauses.Parsers
@@ -26,13 +27,22 @@ namespace TSQL.Clauses.Parsers
 			TSQLSubqueryHelper.ReadUntilStop(
 				tokenizer,
 				orderBy,
-				new List<TSQLFutureKeywords>() { },
+				new List<TSQLFutureKeywords>()
+				{
+					TSQLFutureKeywords.OFFSET
+				},
 				new List<TSQLKeywords>() {
 					TSQLKeywords.FOR,
 					TSQLKeywords.OPTION
 				},
 				lookForStatementStarts: true);
 
+			if (tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OFFSET))
+			{
+				TSQLOffsetClause offsetClause = new TSQLOffsetClauseParser().Parse(tokenizer);
+				orderBy.Tokens.AddRange(offsetClause.Tokens);
+			}
+			
 			return orderBy;
 		}
 	}
