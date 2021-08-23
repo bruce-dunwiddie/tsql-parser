@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,7 +64,7 @@ namespace TSQL.Tokens.Parsers
 			{
 				element.Tokens.Add(tokenizer.Current);
 
-				TSQLCharacters character = tokenizer.Current.AsCharacter.Character;
+                TSQLCharacters character = tokenizer.Current.AsCharacter.Character;
 
 				if (character == TSQLCharacters.OpenParentheses)
 				{

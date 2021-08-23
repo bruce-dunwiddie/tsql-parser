@@ -72,7 +72,8 @@ namespace TSQL.Statements
 
 		public static bool IsStatementStart(this TSQLKeywords keyword)
 		{
-			return keyword.In(StatementStarts);
+			var result = keyword.In(StatementStarts);
+			return result;
 		}
 	}
 }
