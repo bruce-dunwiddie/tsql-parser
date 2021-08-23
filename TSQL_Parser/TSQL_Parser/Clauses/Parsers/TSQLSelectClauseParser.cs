@@ -125,6 +125,10 @@ namespace TSQL.Clauses.Parsers
 			}
 
 			// SELECT @ID = 1
+
+			// TODO: put some more work into this branch to handle returning variables as columns.
+			// e.g. SELECT @ID AS ID
+
 			if (tokenizer.Current != null &&
 				tokenizer.Current.Type.In(
 					TSQLTokenType.Variable,
