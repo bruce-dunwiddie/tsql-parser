@@ -8,7 +8,7 @@ Available on Nuget, [TSQL.Parser](https://www.nuget.org/packages/TSQL.Parser/).
 
 [![NuGet](https://img.shields.io/nuget/dt/TSQL.Parser.svg)](https://www.nuget.org/packages/TSQL.Parser/)
 
-[![Travis](https://travis-ci.org/bruce-dunwiddie/tsql-parser.svg)](https://travis-ci.org/bruce-dunwiddie/tsql-parser/)
+[![Travis](https://travis-ci.com/bruce-dunwiddie/tsql-parser.svg)](https://travis-ci.com/bruce-dunwiddie/tsql-parser/)
 
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/lcfjc4jox76dia8q?svg=true)](https://ci.appveyor.com/project/bruce-dunwiddie/tsql-parser)
 
