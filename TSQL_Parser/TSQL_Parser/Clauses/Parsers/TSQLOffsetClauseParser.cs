@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 
-using TSQL.Clauses;
-using TSQL.Clauses.Parsers;
 using TSQL.Tokens;
 using TSQL.Tokens.Parsers;
 
-namespace TSQL.Statements.Parsers
+namespace TSQL.Clauses.Parsers
 {
     internal class TSQLOffsetClauseParser
     {
@@ -29,7 +27,7 @@ namespace TSQL.Statements.Parsers
                 {
                     TSQLKeywords.FETCH
                 },
-                true);
+                lookForStatementStarts: true);
             
             if (tokenizer.Current.IsKeyword(TSQLKeywords.FETCH))
             {
