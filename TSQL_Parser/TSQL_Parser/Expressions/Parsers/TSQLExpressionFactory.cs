@@ -362,7 +362,8 @@ namespace TSQL.Expressions.Parsers
 					else if (
 						tokenizer.Current.IsCharacter(TSQLCharacters.Comma) ||
 						tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses) ||
-						tokenizer.Current.Type == TSQLTokenType.Keyword)
+						tokenizer.Current.Type == TSQLTokenType.Keyword ||
+						tokenizer.Current.Type == TSQLTokenType.Operator)
 					{
 						TSQLColumnExpression column = new TSQLColumnExpression();
 
