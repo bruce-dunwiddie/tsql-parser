@@ -142,7 +142,7 @@ namespace Tests.Statements
 			Assert.AreEqual(11, select.Having.Tokens.Count);
 			Assert.AreEqual(12, select.OrderBy.Tokens.Count);
 			Assert.AreEqual(3, select.Select.Columns.Count);
-			Assert.AreEqual("e", select.Select.Columns[2].Alias.Text);
+			Assert.AreEqual("e", select.Select.Columns[2].ColumnAlias.Text);
 		}
 
 		[Test]

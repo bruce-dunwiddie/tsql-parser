@@ -376,7 +376,10 @@ namespace TSQL.Expressions.Parsers
 									.Select(t => t.Text));
 
 						// trim off the last period
-						column.TableAlias = alias.Substring(0, alias.Length - 1);
+						if (alias.Length > 1)
+						{
+							column.TableAlias = alias.Substring(0, alias.Length - 1);
+						}
 
 						tokens.Reverse();
 

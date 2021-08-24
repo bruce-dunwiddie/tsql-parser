@@ -65,7 +65,7 @@ namespace TSQL.Elements.Parsers
 			{
 				column.Tokens.Add(tokenizer.Current);
 
-				column.Alias = tokenizer.Current;
+				column.ColumnAlias = tokenizer.Current;
 
 				tokenizer.MoveNext();
 			}

@@ -10,6 +10,7 @@ using NUnit.Framework;
 using TSQL;
 using TSQL.Clauses;
 using TSQL.Clauses.Parsers;
+using TSQL.Expressions;
 using TSQL.Tokens;
 
 namespace Tests.Clauses
@@ -27,6 +28,13 @@ namespace Tests.Clauses
 				TSQLSelectClause select = new TSQLSelectClauseParser().Parse(tokenizer);
 				Assert.AreEqual(2, select.Tokens.Count);
 				Assert.AreEqual(TSQLKeywords.FROM, tokenizer.Current.AsKeyword.Keyword);
+
+				Assert.AreEqual(1, select.Columns.Count);
+				Assert.IsNull(select.Columns[0].ColumnAlias);
+				Assert.AreEqual(TSQLExpressionType.Column, select.Columns[0].Expression.Type);
+				var column = select.Columns[0].Expression.AsColumn;
+				Assert.IsNull(column.TableAlias);
+				Assert.AreEqual("a", column.Column);
 			}
 		}
 
@@ -44,6 +52,20 @@ namespace Tests.Clauses
 				TSQLSelectClause select = new TSQLSelectClauseParser().Parse(tokenizer);
 				Assert.AreEqual(11, select.Tokens.Count);
 				Assert.AreEqual(TSQLKeywords.FROM, tokenizer.Current.AsKeyword.Keyword);
+
+				Assert.AreEqual(1, select.Columns.Count);
+				Assert.IsNull(select.Columns[0].ColumnAlias);
+				Assert.AreEqual(TSQLExpressionType.Operator, select.Columns[0].Expression.Type);
+				var operatorExpression = select.Columns[0].Expression.AsOperator;
+				Assert.AreEqual("/", operatorExpression.Operator.Text);
+				Assert.AreEqual(TSQLExpressionType.Column, operatorExpression.LeftSide.Type);
+				var leftSide = operatorExpression.LeftSide.AsColumn;
+				Assert.AreEqual("oh", leftSide.TableAlias);
+				Assert.AreEqual("TaxAmt", leftSide.Column);
+				Assert.AreEqual(TSQLExpressionType.Column, operatorExpression.RightSide.Type);
+				var rightSide = operatorExpression.RightSide.AsColumn;
+				Assert.AreEqual("oh", rightSide.TableAlias);
+				Assert.AreEqual("SubTotal", rightSide.Column);
 			}
 		}
 
