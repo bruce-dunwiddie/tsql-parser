@@ -369,17 +369,16 @@ namespace TSQL.Expressions.Parsers
 
 						column.Tokens.AddRange(tokens);
 
-						string alias =
+						string columnReference =
 							String.Join(
 								"",
 								tokens
 									.Where(t => !t.IsComment() && !t.IsWhitespace())
 									.Select(t => t.Text));
 
-						// trim off the last period
-						if (alias.Length > 1)
+						if (columnReference.IndexOf('.') > -1)
 						{
-							column.TableAlias = alias.Substring(0, alias.Length - 1);
+							column.TableReference = columnReference.Substring(0, columnReference.LastIndexOf('.'));
 						}
 
 						tokens.Reverse();

@@ -18,6 +18,6 @@ namespace TSQL.Expressions
 
 		public string Column { get; internal set; }
 
-		public string TableAlias { get; internal set; }
+		public string TableReference { get; internal set; }
 	}
 }

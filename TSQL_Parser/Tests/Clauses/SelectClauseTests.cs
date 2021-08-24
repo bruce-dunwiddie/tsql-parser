@@ -33,7 +33,7 @@ namespace Tests.Clauses
 				Assert.IsNull(select.Columns[0].ColumnAlias);
 				Assert.AreEqual(TSQLExpressionType.Column, select.Columns[0].Expression.Type);
 				var column = select.Columns[0].Expression.AsColumn;
-				Assert.IsNull(column.TableAlias);
+				Assert.IsNull(column.TableReference);
 				Assert.AreEqual("a", column.Column);
 			}
 		}
@@ -60,11 +60,11 @@ namespace Tests.Clauses
 				Assert.AreEqual("/", operatorExpression.Operator.Text);
 				Assert.AreEqual(TSQLExpressionType.Column, operatorExpression.LeftSide.Type);
 				var leftSide = operatorExpression.LeftSide.AsColumn;
-				Assert.AreEqual("oh", leftSide.TableAlias);
+				Assert.AreEqual("oh", leftSide.TableReference);
 				Assert.AreEqual("TaxAmt", leftSide.Column);
 				Assert.AreEqual(TSQLExpressionType.Column, operatorExpression.RightSide.Type);
 				var rightSide = operatorExpression.RightSide.AsColumn;
-				Assert.AreEqual("oh", rightSide.TableAlias);
+				Assert.AreEqual("oh", rightSide.TableReference);
 				Assert.AreEqual("SubTotal", rightSide.Column);
 			}
 		}
