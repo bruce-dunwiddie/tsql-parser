@@ -11,7 +11,7 @@ namespace TSQL.Elements
 {
 	public class TSQLSelectColumn : TSQLElement
 	{
-		public TSQLToken ColumnAlias { get; internal set; }
+		public TSQLIdentifier ColumnAlias { get; internal set; }
 
 		public TSQLExpression Expression { get; internal set; }
 	}

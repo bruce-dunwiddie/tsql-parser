@@ -178,7 +178,7 @@ namespace TSQL.Expressions.Parsers
 			{
 				TSQLColumnExpression column = new TSQLColumnExpression();
 
-				column.Column = tokenizer.Current.AsSystemColumnIdentifier.Name;
+				column.Column = tokenizer.Current.AsSystemColumnIdentifier;
 
 				column.Tokens.Add(tokenizer.Current);
 
@@ -337,15 +337,22 @@ namespace TSQL.Expressions.Parsers
 
 						multi.Tokens.Add(tokenizer.Current);
 
-						string alias =
-							String.Join(
-								"",
-								tokens
-									.Where(t => !t.IsComment() && !t.IsWhitespace())
-									.Select(t => t.Text));
+						List<TSQLToken> columnReference = tokens
+							.Where(t => !t.IsComment() && !t.IsWhitespace())
+							.ToList();
 
-						// trim off the last period
-						multi.TableAlias = alias.Substring(0, alias.Length - 1);
+						if (columnReference.Count > 0)
+						{
+							// p.* will have the single token p in the final list
+
+							// AdventureWorks..ErrorLog.* will have 4 tokens in the final list
+							// e.g. {AdventureWorks, ., ., ErrorLog}
+
+							multi.TableReference = columnReference
+								.GetRange(0, columnReference
+									.FindLastIndex(t => t.IsCharacter(TSQLCharacters.Period)))
+								.ToList();
+						}
 
 						while (
 							tokenizer.MoveNext() &&
@@ -362,31 +369,57 @@ namespace TSQL.Expressions.Parsers
 					else if (
 						tokenizer.Current.IsCharacter(TSQLCharacters.Comma) ||
 						tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses) ||
-						tokenizer.Current.Type == TSQLTokenType.Keyword ||
-						tokenizer.Current.Type == TSQLTokenType.Operator)
+						tokenizer.Current.Type.In(
+							TSQLTokenType.Keyword, 
+							TSQLTokenType.Operator) ||
+
+						// this will be a nasty check, but I don't want to copy the internal logic elsewhere
+
+						// two identifiers in a row means that the second one is an alias
+						(
+							tokenizer.Current.Type.In(
+								TSQLTokenType.Identifier, 
+								TSQLTokenType.IncompleteIdentifier) &&
+							tokens
+								.Where(t => !t.IsComment() && !t.IsWhitespace())
+								.LastOrDefault()
+								?.Type.In(
+									TSQLTokenType.Identifier,
+									TSQLTokenType.BinaryLiteral,
+									TSQLTokenType.MoneyLiteral,
+									TSQLTokenType.NumericLiteral,
+									TSQLTokenType.StringLiteral,
+									TSQLTokenType.SystemColumnIdentifier,
+									TSQLTokenType.SystemIdentifier,
+									TSQLTokenType.SystemVariable,
+									TSQLTokenType.Variable
+									) == true // Operator '&&' cannot be applied to operands of type 'bool' and 'bool?'
+						))
 					{
 						TSQLColumnExpression column = new TSQLColumnExpression();
 
 						column.Tokens.AddRange(tokens);
 
-						string columnReference =
-							String.Join(
-								"",
-								tokens
-									.Where(t => !t.IsComment() && !t.IsWhitespace())
-									.Select(t => t.Text));
+						List<TSQLToken> columnReference = tokens
+							.Where(t => !t.IsComment() && !t.IsWhitespace())
+							.ToList();
 
-						if (columnReference.IndexOf('.') > -1)
+						if (columnReference.Count > 1)
 						{
-							column.TableReference = columnReference.Substring(0, columnReference.LastIndexOf('.'));
+							// p.ProductID will have the single token p in the final list
+
+							// AdventureWorks..ErrorLog.ErrorLogID will have 4 tokens in the final list
+							// e.g. {AdventureWorks, ., ., ErrorLog}
+
+							column.TableReference = columnReference
+								.GetRange(0, columnReference
+									.FindLastIndex(t => t.IsCharacter(TSQLCharacters.Period)))
+								.ToList();
 						}
 
-						tokens.Reverse();
-
-						column.Column = tokens
-							.Where(t => !t.IsComment() && !t.IsWhitespace())
-							.Select(t => t.Text)
-							.First();
+						column.Column = columnReference
+							.Last()
+							.AsIdentifier;
 
 						return column;
 					}

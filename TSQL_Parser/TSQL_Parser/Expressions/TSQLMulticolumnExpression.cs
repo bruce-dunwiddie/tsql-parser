@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using TSQL.Tokens;
+
 namespace TSQL.Expressions
 {
 	/// <summary>
@@ -19,6 +21,6 @@ namespace TSQL.Expressions
 			}
 		}
 
-		public string TableAlias { get; internal set; }
+		public List<TSQLToken> TableReference { get; internal set; }
 	}
 }

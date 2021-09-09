@@ -11,6 +11,9 @@ using TSQL.Tokens.Parsers;
 
 namespace TSQL.Clauses.Parsers
 {
+	/// <summary>
+	///		This clause handles parsing just the SELECT portion of a larger SELECT statement.
+	/// </summary>
 	internal class TSQLSelectClauseParser
 	{
 		public TSQLSelectClause Parse(ITSQLTokenizer tokenizer)
@@ -62,6 +65,10 @@ namespace TSQL.Clauses.Parsers
 						tokenizer,
 						select);
 				}
+
+				// TODO: add handling for TOP(@RowsToReturn)
+
+				// TODO: can also be used in a CROSS APPLY with an outer reference, e.g. TOP(p.RowCount)
 
 				if (tokenizer.Current != null &&
 					tokenizer.Current.Type == TSQLTokenType.NumericLiteral)
@@ -124,82 +131,48 @@ namespace TSQL.Clauses.Parsers
 				}
 			}
 
-			// SELECT @ID = 1
-
-			// TODO: put some more work into this branch to handle returning variables as columns.
-			// e.g. SELECT @ID AS ID
-
-			if (tokenizer.Current != null &&
-				tokenizer.Current.Type.In(
-					TSQLTokenType.Variable,
-					TSQLTokenType.SystemVariable))
+			while (
+				tokenizer.Current != null &&
+				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
+				!tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses) &&
+				!(
+					tokenizer.Current.Type == TSQLTokenType.Keyword &&
+					(
+						tokenizer.Current.AsKeyword.Keyword.In(
+							TSQLKeywords.INTO,
+							TSQLKeywords.FROM,
+							TSQLKeywords.WHERE,
+							TSQLKeywords.GROUP,
+							TSQLKeywords.HAVING,
+							TSQLKeywords.ORDER,
+							TSQLKeywords.UNION,
+							TSQLKeywords.EXCEPT,
+							TSQLKeywords.INTERSECT,
+							TSQLKeywords.FOR,
+							TSQLKeywords.OPTION) ||
+						tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
+					)
+				))
 			{
-				select.Tokens.Add(tokenizer.Current);
+				TSQLSelectColumn column = new TSQLSelectColumnParser().Parse(tokenizer);
 
-				TSQLTokenParserHelper.ReadUntilStop(
+				select.Tokens.AddRange(column.Tokens);
+
+				select.Columns.Add(column);
+
+				TSQLTokenParserHelper.ReadCommentsAndWhitespace(
 					tokenizer,
-					select,
-					new List<TSQLFutureKeywords>() { },
-					new List<TSQLKeywords>() {
-						TSQLKeywords.INTO,
-						TSQLKeywords.FROM,
-						TSQLKeywords.WHERE,
-						TSQLKeywords.GROUP,
-						TSQLKeywords.HAVING,
-						TSQLKeywords.ORDER,
-						TSQLKeywords.UNION,
-						TSQLKeywords.EXCEPT,
-						TSQLKeywords.INTERSECT,
-						TSQLKeywords.FOR,
-						TSQLKeywords.OPTION
-					},
-					lookForStatementStarts: true);
-			}
-			else
-			{
-				while (
-					tokenizer.Current != null &&
-					!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
-					!tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses) &&
-					!(
-						tokenizer.Current.Type == TSQLTokenType.Keyword &&
-						(
-							tokenizer.Current.AsKeyword.Keyword.In(
-								TSQLKeywords.INTO,
-								TSQLKeywords.FROM,
-								TSQLKeywords.WHERE,
-								TSQLKeywords.GROUP,
-								TSQLKeywords.HAVING,
-								TSQLKeywords.ORDER,
-								TSQLKeywords.UNION,
-								TSQLKeywords.EXCEPT,
-								TSQLKeywords.INTERSECT,
-								TSQLKeywords.FOR,
-								TSQLKeywords.OPTION) ||
-							tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
-						)
-					))
+					select);
+
+				if (tokenizer.Current.IsCharacter(TSQLCharacters.Comma))
 				{
-					TSQLSelectColumn column = new TSQLSelectColumnParser().Parse(tokenizer);
+					select.Tokens.Add(tokenizer.Current);
 
-					select.Tokens.AddRange(column.Tokens);
-
-					select.Columns.Add(column);
+					tokenizer.MoveNext();
 
 					TSQLTokenParserHelper.ReadCommentsAndWhitespace(
 						tokenizer,
 						select);
-
-					if (tokenizer.Current.IsCharacter(TSQLCharacters.Comma))
-					{
-						select.Tokens.Add(tokenizer.Current);
-
-						tokenizer.MoveNext();
-
-						TSQLTokenParserHelper.ReadCommentsAndWhitespace(
-							tokenizer,
-							select);
-					}
 				}
 			}
 

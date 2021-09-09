@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using TSQL.Tokens;
+
 namespace TSQL.Expressions
 {
 	public class TSQLColumnExpression : TSQLExpression
@@ -16,8 +18,8 @@ namespace TSQL.Expressions
 			}
 		}
 
-		public string Column { get; internal set; }
+		public TSQLIdentifier Column { get; internal set; }
 
-		public string TableReference { get; internal set; }
+		public List<TSQLToken> TableReference { get; internal set; }
 	}
 }

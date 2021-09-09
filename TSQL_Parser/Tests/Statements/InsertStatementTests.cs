@@ -138,11 +138,11 @@ namespace Tests.Statements
 			Assert.AreEqual("SELECT", insert.Select.Select.Columns[0].Expression.AsConstant.Literal.AsStringLiteral.Value);
 			Assert.IsNull(insert.Select.Select.Columns[1].ColumnAlias);
 			Assert.AreEqual(TSQLExpressionType.Column, insert.Select.Select.Columns[1].Expression.Type);
-			Assert.AreEqual("sp", insert.Select.Select.Columns[1].Expression.AsColumn.TableReference);
-			Assert.AreEqual("BusinessEntityID", insert.Select.Select.Columns[1].Expression.AsColumn.Column);
+			Assert.AreEqual("sp", insert.Select.Select.Columns[1].Expression.AsColumn.TableReference.Single().AsIdentifier.Name);
+			Assert.AreEqual("BusinessEntityID", insert.Select.Select.Columns[1].Expression.AsColumn.Column.Name);
 			Assert.AreEqual(TSQLExpressionType.Column, insert.Select.Select.Columns[3].Expression.Type);
-			Assert.AreEqual("sp", insert.Select.Select.Columns[3].Expression.AsColumn.TableReference);
-			Assert.AreEqual("SalesYTD", insert.Select.Select.Columns[3].Expression.AsColumn.Column);
+			Assert.AreEqual("sp", insert.Select.Select.Columns[3].Expression.AsColumn.TableReference.Single().AsIdentifier.Name);
+			Assert.AreEqual("SalesYTD", insert.Select.Select.Columns[3].Expression.AsColumn.Column.Name);
 		}
 
 		[Test]
