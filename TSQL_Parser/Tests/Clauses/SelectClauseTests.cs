@@ -50,6 +50,7 @@ namespace Tests.Clauses
 			using (ITSQLTokenizer tokenizer = new TSQLTokenizer(reader))
 			{
 				Assert.IsTrue(tokenizer.MoveNext());
+
 				TSQLSelectClause select = new TSQLSelectClauseParser().Parse(tokenizer);
 				Assert.AreEqual(11, select.Tokens.Count);
 				Assert.AreEqual(TSQLKeywords.FROM, tokenizer.Current.AsKeyword.Keyword);
@@ -57,14 +58,17 @@ namespace Tests.Clauses
 				Assert.AreEqual(1, select.Columns.Count);
 				Assert.IsNull(select.Columns[0].ColumnAlias);
 				Assert.AreEqual(TSQLExpressionType.Operator, select.Columns[0].Expression.Type);
-				var operatorExpression = select.Columns[0].Expression.AsOperator;
+
+				TSQLOperatorExpression operatorExpression = select.Columns[0].Expression.AsOperator;
 				Assert.AreEqual("/", operatorExpression.Operator.Text);
 				Assert.AreEqual(TSQLExpressionType.Column, operatorExpression.LeftSide.Type);
-				var leftSide = operatorExpression.LeftSide.AsColumn;
+
+				TSQLColumnExpression leftSide = operatorExpression.LeftSide.AsColumn;
 				Assert.AreEqual("oh", leftSide.TableReference.Single().AsIdentifier.Name);
 				Assert.AreEqual("TaxAmt", leftSide.Column.Name);
 				Assert.AreEqual(TSQLExpressionType.Column, operatorExpression.RightSide.Type);
-				var rightSide = operatorExpression.RightSide.AsColumn;
+
+				TSQLColumnExpression rightSide = operatorExpression.RightSide.AsColumn;
 				Assert.AreEqual("oh", rightSide.TableReference.Single().AsIdentifier.Name);
 				Assert.AreEqual("SubTotal", rightSide.Column.Name);
 				Assert.AreEqual(" tax percent ", select.Columns.Last().Tokens.Last().AsMultilineComment.Comment);
@@ -156,6 +160,41 @@ namespace Tests.Clauses
 				Assert.IsNull(column.ColumnAlias);
 				Assert.AreEqual(TSQLExpressionType.Multicolumn, column.Expression.Type);
 				Assert.AreEqual("p", column.Expression.AsMulticolumn.TableReference.Single().AsIdentifier.Name);
+			}
+		}
+
+		[Test]
+		public void SelectClause_VariableAssignment()
+		{
+			using (StringReader reader = new StringReader(
+				@"SELECT @id = p.ProductID
+				FROM Production.Product p
+				WHERE
+					p.[Name] = 'Blade';"))
+			using (ITSQLTokenizer tokenizer = new TSQLTokenizer(reader))
+			{
+				Assert.IsTrue(tokenizer.MoveNext());
+
+				TSQLSelectClause select = new TSQLSelectClauseParser().Parse(tokenizer);
+				Assert.AreEqual(6, select.Tokens.Count);
+				Assert.AreEqual(TSQLKeywords.FROM, tokenizer.Current.AsKeyword.Keyword);
+
+				Assert.AreEqual(1, select.Columns.Count);
+
+				TSQLSelectColumn column = select.Columns[0];
+
+				Assert.IsNull(column.ColumnAlias);
+				Assert.AreEqual(TSQLExpressionType.Operator, column.Expression.Type);
+
+				TSQLOperatorExpression operatorExpression = column.Expression.AsOperator;
+				Assert.AreEqual("=", operatorExpression.Operator.Text);
+
+				TSQLVariableExpression variableExpression = operatorExpression.LeftSide.AsVariable;
+				Assert.AreEqual("@id", variableExpression.Variable.Text);
+
+				TSQLColumnExpression columnExpression = operatorExpression.RightSide.AsColumn;
+				Assert.AreEqual("p", columnExpression.TableReference.Single().AsIdentifier.Name);
+				Assert.AreEqual("ProductID", columnExpression.Column.Name);
 			}
 		}
 	}

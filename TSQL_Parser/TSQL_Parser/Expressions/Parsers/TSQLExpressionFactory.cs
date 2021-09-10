@@ -238,7 +238,7 @@ namespace TSQL.Expressions.Parsers
 				// if paren, then function
 				// else column
 
-				// alias would be any tokens prior to last period, removing whitespace, concatenated together as string
+				// alias would be any tokens prior to last period, removing whitespace
 
 				// TODO: handle window functions with multiple parts
 
