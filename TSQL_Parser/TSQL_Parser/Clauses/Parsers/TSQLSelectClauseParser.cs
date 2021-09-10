@@ -64,25 +64,41 @@ namespace TSQL.Clauses.Parsers
 					TSQLTokenParserHelper.ReadCommentsAndWhitespace(
 						tokenizer,
 						select);
+
+					// handling for TOP(@RowsToReturn)
+
+					// can also be used in a CROSS APPLY with an outer reference, e.g. TOP(p.RowCount)
+
+					if (tokenizer.Current != null &&
+						tokenizer.Current.Type.In(
+							TSQLTokenType.NumericLiteral,
+							TSQLTokenType.Identifier,
+							TSQLTokenType.IncompleteIdentifier,
+							TSQLTokenType.SystemVariable,
+							TSQLTokenType.Variable))
+					{
+						select.Tokens.Add(tokenizer.Current);
+
+						tokenizer.MoveNext();
+
+						TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+							tokenizer,
+							select);
+					}
+
+					if (tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
+					{
+						select.Tokens.Add(tokenizer.Current);
+
+						tokenizer.MoveNext();
+
+						TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+							tokenizer,
+							select);
+					}
 				}
-
-				// TODO: add handling for TOP(@RowsToReturn)
-
-				// TODO: can also be used in a CROSS APPLY with an outer reference, e.g. TOP(p.RowCount)
-
-				if (tokenizer.Current != null &&
+				else if (tokenizer.Current != null &&
 					tokenizer.Current.Type == TSQLTokenType.NumericLiteral)
-				{
-					select.Tokens.Add(tokenizer.Current);
-
-					tokenizer.MoveNext();
-
-					TSQLTokenParserHelper.ReadCommentsAndWhitespace(
-						tokenizer,
-						select);
-				}
-
-				if (tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
 				{
 					select.Tokens.Add(tokenizer.Current);
 
