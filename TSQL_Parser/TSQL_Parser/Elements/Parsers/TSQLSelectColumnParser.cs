@@ -40,37 +40,61 @@ namespace TSQL.Elements.Parsers
 				tokenizer.MoveNext();
 			}
 
+			// check for operator =, when expression type is column, and return new column expression with alias
+			// e.g. IsFinishedGoods = p.FinishedGoodsFlag
+
 			if (
 				tokenizer.Current != null &&
-				tokenizer.Current.IsKeyword(TSQLKeywords.AS))
+				tokenizer.Current.Type == TSQLTokenType.Operator &&
+				tokenizer.Current.Text == "=" &&
+				columnExpression.Type == TSQLExpressionType.Column
+				)
 			{
 				column.Tokens.Add(tokenizer.Current);
 
 				tokenizer.MoveNext();
 
-				while (
-					tokenizer.Current.IsWhitespace() ||
-					tokenizer.Current.IsComment())
+				TSQLExpression actualColumn = new TSQLExpressionFactory().Parse(tokenizer);
+
+				column.Expression = actualColumn;
+				column.ColumnAlias = columnExpression.AsColumn.Column;
+
+				column.Tokens.AddRange(actualColumn.Tokens);
+			}
+			else
+			{
+				if (
+					tokenizer.Current != null &&
+					tokenizer.Current.IsKeyword(TSQLKeywords.AS))
 				{
 					column.Tokens.Add(tokenizer.Current);
 
 					tokenizer.MoveNext();
+
+					while (
+						tokenizer.Current.IsWhitespace() ||
+						tokenizer.Current.IsComment())
+					{
+						column.Tokens.Add(tokenizer.Current);
+
+						tokenizer.MoveNext();
+					}
 				}
-			}
 
-			if (tokenizer.Current != null &&
-				tokenizer.Current.Type.In(
-					TSQLTokenType.Identifier,
-					TSQLTokenType.IncompleteIdentifier))
-			{
-				column.Tokens.Add(tokenizer.Current);
-
-				if (tokenizer.Current.Type == TSQLTokenType.Identifier)
+				if (tokenizer.Current != null &&
+					tokenizer.Current.Type.In(
+						TSQLTokenType.Identifier,
+						TSQLTokenType.IncompleteIdentifier))
 				{
-					column.ColumnAlias = tokenizer.Current.AsIdentifier;
-				}
+					column.Tokens.Add(tokenizer.Current);
 
-				tokenizer.MoveNext();
+					if (tokenizer.Current.Type == TSQLTokenType.Identifier)
+					{
+						column.ColumnAlias = tokenizer.Current.AsIdentifier;
+					}
+
+					tokenizer.MoveNext();
+				}
 			}
 
 			return column;

@@ -17,16 +17,19 @@ namespace TSQL.Expressions.Parsers
 		{
 			TSQLExpression expression = ParseNext(tokenizer);
 
-			// TODO: should we read whitespace and comments here instead of each individual block?
-
 			if (
 				tokenizer.Current != null &&
 				tokenizer.Current.Type.In(
-					TSQLTokenType.Operator))
-			{
-				// TODO: check for operator =, when expression type is column, and return new column expression with alias
+					TSQLTokenType.Operator) &&
+
+				// check for operator =, when expression type is column, and don't parse operator if found
 				// e.g. IsFinishedGoods = p.FinishedGoodsFlag
 
+				(
+					tokenizer.Current.Text != "=" ||
+					expression.Type != TSQLExpressionType.Column
+				))
+			{
 				return new TSQLOperatorExpressionParser().Parse(
 					tokenizer,
 					expression);
@@ -37,7 +40,7 @@ namespace TSQL.Expressions.Parsers
 			}
 		}
 
-		private TSQLExpression ParseNext(
+		private static TSQLExpression ParseNext(
 			ITSQLTokenizer tokenizer)
 		{
 			if (tokenizer.Current == null)
@@ -112,7 +115,9 @@ namespace TSQL.Expressions.Parsers
 
 					group.Tokens.AddRange(tokens);
 
-					group.InnerExpression = Parse(tokenizer);
+					group.InnerExpression = 
+						new TSQLExpressionFactory().Parse(
+							tokenizer);
 					group.Tokens.AddRange(group.InnerExpression.Tokens);
 
 					if (tokenizer.Current.IsCharacter(

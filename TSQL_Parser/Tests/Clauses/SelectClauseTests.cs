@@ -140,10 +140,10 @@ namespace Tests.Clauses
 
 				column = select.Columns[4];
 
-				//Assert.AreEqual("IsFinishedGoods", column.ColumnAlias.Name);
-				//Assert.AreEqual(TSQLExpressionType.Column, column.Expression.Type);
-				//Assert.AreEqual("p", column.Expression.AsColumn.TableReference.Single().AsIdentifier.Name);
-				//Assert.AreEqual("FinishedGoodsFlag", column.Expression.AsColumn.Column.Name);
+				Assert.AreEqual("IsFinishedGoods", column.ColumnAlias.Name);
+				Assert.AreEqual(TSQLExpressionType.Column, column.Expression.Type);
+				Assert.AreEqual("p", column.Expression.AsColumn.TableReference.Single().AsIdentifier.Name);
+				Assert.AreEqual("FinishedGoodsFlag", column.Expression.AsColumn.Column.Name);
 
 				column = select.Columns[5];
 
