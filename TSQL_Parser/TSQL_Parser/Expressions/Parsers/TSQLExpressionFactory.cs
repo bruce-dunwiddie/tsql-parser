@@ -17,11 +17,16 @@ namespace TSQL.Expressions.Parsers
 		{
 			TSQLExpression expression = ParseNext(tokenizer);
 
+			// TODO: should we read whitespace and comments here instead of each individual block?
+
 			if (
 				tokenizer.Current != null &&
 				tokenizer.Current.Type.In(
 					TSQLTokenType.Operator))
 			{
+				// TODO: check for operator =, when expression type is column, and return new column expression with alias
+				// e.g. IsFinishedGoods = p.FinishedGoodsFlag
+
 				return new TSQLOperatorExpressionParser().Parse(
 					tokenizer,
 					expression);
@@ -40,21 +45,17 @@ namespace TSQL.Expressions.Parsers
 				return null;
 			}
 
+			// look at the current/first token to determine what to do
+
 			if (tokenizer.Current.Text == "*")
 			{
 				TSQLMulticolumnExpression simpleMulti = new TSQLMulticolumnExpression();
 
 				simpleMulti.Tokens.Add(tokenizer.Current);
 
-				while (
-					tokenizer.MoveNext() &&
-					(
-						tokenizer.Current.IsWhitespace() ||
-						tokenizer.Current.IsComment())
-					)
-				{
-					simpleMulti.Tokens.Add(tokenizer.Current);
-				}
+				ReadThroughAnyCommentsOrWhitespace(
+					tokenizer,
+					simpleMulti.Tokens);
 
 				return simpleMulti;
 
@@ -73,18 +74,15 @@ namespace TSQL.Expressions.Parsers
 
 				tokens.Add(tokenizer.Current);
 
-				while (
-					tokenizer.MoveNext() &&
-					(
-						tokenizer.Current.IsWhitespace() ||
-						tokenizer.Current.IsComment())
-					)
-				{
-					tokens.Add(tokenizer.Current);
-				}
+				// read through any whitespace so we can check specifically for a SELECT
+				ReadThroughAnyCommentsOrWhitespace(
+					tokenizer,
+					tokens);
 
 				if (tokenizer.Current.IsKeyword(TSQLKeywords.SELECT))
 				{
+					#region parse subquery
+
 					TSQLSubqueryExpression subquery = new TSQLSubqueryExpression();
 
 					subquery.Tokens.AddRange(tokens);
@@ -103,9 +101,13 @@ namespace TSQL.Expressions.Parsers
 					}
 
 					return subquery;
+
+					#endregion
 				}
 				else
 				{
+					#region parse expression contained/grouped inside parenthesis
+
 					TSQLGroupedExpression group = new TSQLGroupedExpression();
 
 					group.Tokens.AddRange(tokens);
@@ -121,6 +123,8 @@ namespace TSQL.Expressions.Parsers
 					}
 
 					return group;
+
+					#endregion
 				}
 			}
 			else if (tokenizer.Current.Type.In(
@@ -131,15 +135,9 @@ namespace TSQL.Expressions.Parsers
 				variable.Tokens.Add(tokenizer.Current);
 				variable.Variable = tokenizer.Current.AsVariable;
 
-				while (
-					tokenizer.MoveNext() &&
-					(
-						tokenizer.Current.IsWhitespace() ||
-						tokenizer.Current.IsComment())
-					)
-				{
-					variable.Tokens.Add(tokenizer.Current);
-				}
+				ReadThroughAnyCommentsOrWhitespace(
+					tokenizer,
+					variable.Tokens);
 
 				return variable;
 			}
@@ -156,15 +154,9 @@ namespace TSQL.Expressions.Parsers
 
 				constant.Tokens.Add(tokenizer.Current);
 
-				while (
-					tokenizer.MoveNext() &&
-					(
-						tokenizer.Current.IsWhitespace() ||
-						tokenizer.Current.IsComment())
-					)
-				{
-					constant.Tokens.Add(tokenizer.Current);
-				}
+				ReadThroughAnyCommentsOrWhitespace(
+					tokenizer,
+					constant.Tokens);
 
 				return constant;
 			}
@@ -182,21 +174,17 @@ namespace TSQL.Expressions.Parsers
 
 				column.Tokens.Add(tokenizer.Current);
 
-				while (
-					tokenizer.MoveNext() &&
-					(
-						tokenizer.Current.IsWhitespace() ||
-						tokenizer.Current.IsComment())
-					)
-				{
-					column.Tokens.Add(tokenizer.Current);
-				}
+				ReadThroughAnyCommentsOrWhitespace(
+					tokenizer,
+					column.Tokens);
 
 				return column;
 			}
 			else if (tokenizer.Current.Type.In(
 				TSQLTokenType.SystemIdentifier))
 			{
+				#region parse system function
+
 				TSQLFunctionExpression function = new TSQLFunctionExpression();
 
 				function.Name = tokenizer.Current.Text;
@@ -222,18 +210,14 @@ namespace TSQL.Expressions.Parsers
 						function.Tokens.Add(tokenizer.Current);
 					}
 
-					while (
-						tokenizer.MoveNext() &&
-						(
-							tokenizer.Current.IsWhitespace() ||
-							tokenizer.Current.IsComment())
-						)
-					{
-						function.Tokens.Add(tokenizer.Current);
-					}
+					ReadThroughAnyCommentsOrWhitespace(
+						tokenizer,
+						function.Tokens);
 				}
 
 				return function;
+
+				#endregion
 			}
 			else if (tokenizer.Current.Type.In(
 				TSQLTokenType.Identifier))
@@ -261,6 +245,8 @@ namespace TSQL.Expressions.Parsers
 				{
 					if (tokenizer.Current.IsCharacter(TSQLCharacters.OpenParentheses))
 					{
+						#region parse function
+
 						tokens.Add(tokenizer.Current);
 
 						tokenizer.MoveNext();
@@ -280,6 +266,7 @@ namespace TSQL.Expressions.Parsers
 							function.Tokens.Add(tokenizer.Current);
 						}
 
+						// TODO: should we keep these as tokens?
 						function.Name =
 							String.Join(
 								"",
@@ -326,9 +313,13 @@ namespace TSQL.Expressions.Parsers
 						}
 
 						return function;
+
+						#endregion
 					}
 					else if (tokenizer.Current.Text == "*")
 					{
+						#region parse multi column reference
+
 						// e.g. p.*
 
 						TSQLMulticolumnExpression multi = new TSQLMulticolumnExpression();
@@ -354,17 +345,13 @@ namespace TSQL.Expressions.Parsers
 								.ToList();
 						}
 
-						while (
-							tokenizer.MoveNext() &&
-							(
-								tokenizer.Current.IsWhitespace() ||
-								tokenizer.Current.IsComment())
-							)
-						{
-							multi.Tokens.Add(tokenizer.Current);
-						}
+						ReadThroughAnyCommentsOrWhitespace(
+							tokenizer,
+							multi.Tokens);
 
 						return multi;
+
+						#endregion
 					}
 					else if (
 						tokenizer.Current.IsCharacter(TSQLCharacters.Comma) ||
@@ -434,6 +421,21 @@ namespace TSQL.Expressions.Parsers
 			else
 			{
 				return null;
+			}
+		}
+
+		private static void ReadThroughAnyCommentsOrWhitespace(
+			ITSQLTokenizer tokenizer,
+			List<TSQLToken> savedTokens)
+		{
+			while (
+				tokenizer.MoveNext() &&
+				(
+					tokenizer.Current.IsWhitespace() ||
+					tokenizer.Current.IsComment())
+				)
+			{
+				savedTokens.Add(tokenizer.Current);
 			}
 		}
 	}
