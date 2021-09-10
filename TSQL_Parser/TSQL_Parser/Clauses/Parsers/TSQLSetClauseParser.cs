@@ -22,8 +22,7 @@ namespace TSQL.Clauses.Parsers
 
 			set.Tokens.Add(tokenizer.Current);
 
-			// TODO:
-			// parse this rare but valid horror scenario
+			// TODO: parse this rare but valid horror scenario
 			// update output
 			// set output.output = 1
 			// output deleted.*

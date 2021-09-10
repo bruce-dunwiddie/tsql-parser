@@ -240,8 +240,6 @@ namespace TSQL.Expressions.Parsers
 
 				// alias would be any tokens prior to last period, removing whitespace
 
-				// TODO: handle window functions with multiple parts
-
 				List<TSQLToken> tokens = new List<TSQLToken>();
 
 				tokens.Add(tokenizer.Current);
@@ -273,11 +271,14 @@ namespace TSQL.Expressions.Parsers
 
 						// TODO: should we keep these as tokens?
 						function.Name =
-							String.Join(
-								"",
-								tokens
-									.Where(t => !t.IsComment() && !t.IsWhitespace())
-									.Select(t => t.Text));
+							tokens
+								.Where(t => !t.IsComment() && !t.IsWhitespace())
+								.Reverse()
+								// last token will be the open paren
+								.Skip(1)
+								.First()
+								.AsIdentifier
+								.Name;
 
 						tokenizer.MoveNext();
 
@@ -285,6 +286,7 @@ namespace TSQL.Expressions.Parsers
 							tokenizer,
 							function);
 
+						// look for windowed aggregate
 						if (tokenizer.Current.IsKeyword(TSQLKeywords.OVER))
 						{
 							function.Tokens.Add(tokenizer.Current);

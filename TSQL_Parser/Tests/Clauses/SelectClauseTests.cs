@@ -26,6 +26,7 @@ namespace Tests.Clauses
 			using (ITSQLTokenizer tokenizer = new TSQLTokenizer(reader))
 			{
 				Assert.IsTrue(tokenizer.MoveNext());
+
 				TSQLSelectClause select = new TSQLSelectClauseParser().Parse(tokenizer);
 				Assert.AreEqual(2, select.Tokens.Count);
 				Assert.AreEqual(TSQLKeywords.FROM, tokenizer.Current.AsKeyword.Keyword);
@@ -33,7 +34,8 @@ namespace Tests.Clauses
 				Assert.AreEqual(1, select.Columns.Count);
 				Assert.IsNull(select.Columns[0].ColumnAlias);
 				Assert.AreEqual(TSQLExpressionType.Column, select.Columns[0].Expression.Type);
-				var column = select.Columns[0].Expression.AsColumn;
+
+				TSQLColumnExpression column = select.Columns[0].Expression.AsColumn;
 				Assert.IsNull(column.TableReference);
 				Assert.AreEqual("a", column.Column.Name);
 			}
@@ -108,6 +110,7 @@ namespace Tests.Clauses
 			using (ITSQLTokenizer tokenizer = new TSQLTokenizer(reader))
 			{
 				Assert.IsTrue(tokenizer.MoveNext());
+
 				TSQLSelectClause select = new TSQLSelectClauseParser().Parse(tokenizer);
 				Assert.AreEqual(31, select.Tokens.Count);
 				Assert.AreEqual(TSQLKeywords.FROM, tokenizer.Current.AsKeyword.Keyword);
@@ -195,6 +198,55 @@ namespace Tests.Clauses
 				TSQLColumnExpression columnExpression = operatorExpression.RightSide.AsColumn;
 				Assert.AreEqual("p", columnExpression.TableReference.Single().AsIdentifier.Name);
 				Assert.AreEqual("ProductID", columnExpression.Column.Name);
+			}
+		}
+
+		[Test]
+		public void SelectClause_WindowedAggregate()
+		{
+			using (StringReader reader = new StringReader(
+				@"SELECT
+					p.ProductID,
+					p.[Name],
+					ROW_NUMBER() OVER (
+						PARTITION BY 
+							p.DaysToManufacture 
+						ORDER BY 
+							p.[Name]) AS GroupNumber
+				FROM
+					Production.Product p
+				ORDER BY
+					p.DaysToManufacture,
+					p.[Name];"))
+			using (ITSQLTokenizer tokenizer = new TSQLTokenizer(reader))
+			{
+				Assert.IsTrue(tokenizer.MoveNext());
+
+				TSQLSelectClause select = new TSQLSelectClauseParser().Parse(tokenizer);
+				Assert.AreEqual(27, select.Tokens.Count);
+				Assert.AreEqual(TSQLKeywords.FROM, tokenizer.Current.AsKeyword.Keyword);
+
+				Assert.AreEqual(3, select.Columns.Count);
+
+				TSQLSelectColumn column = select.Columns[0];
+
+				Assert.IsNull(column.ColumnAlias);
+				Assert.AreEqual(TSQLExpressionType.Column, column.Expression.Type);
+				Assert.AreEqual("p", column.Expression.AsColumn.TableReference.Single().AsIdentifier.Name);
+				Assert.AreEqual("ProductID", column.Expression.AsColumn.Column.Name);
+
+				column = select.Columns[1];
+
+				Assert.IsNull(column.ColumnAlias);
+				Assert.AreEqual(TSQLExpressionType.Column, column.Expression.Type);
+				Assert.AreEqual("p", column.Expression.AsColumn.TableReference.Single().AsIdentifier.Name);
+				Assert.AreEqual("Name", column.Expression.AsColumn.Column.Name);
+
+				column = select.Columns[2];
+
+				Assert.AreEqual("GroupNumber", column.ColumnAlias.Name);
+				Assert.AreEqual(TSQLExpressionType.Function, column.Expression.Type);
+				Assert.AreEqual("ROW_NUMBER", column.Expression.AsFunction.Name);
 			}
 		}
 	}
