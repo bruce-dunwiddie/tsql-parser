@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using TSQL.Tokens;
+
 namespace TSQL.Expressions
 {
 	public class TSQLFunctionExpression : TSQLExpression
@@ -16,7 +18,9 @@ namespace TSQL.Expressions
 			}
 		}
 
-		public string Name { get; internal set; }
+		public List<TSQLToken> QualifiedPath { get; internal set; }
+
+		public TSQLIdentifier Function { get; internal set; }
 
 		public TSQLArgumentList Arguments { get; internal set; }
 	}

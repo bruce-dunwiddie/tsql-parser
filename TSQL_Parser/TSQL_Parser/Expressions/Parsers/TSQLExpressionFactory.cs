@@ -192,7 +192,7 @@ namespace TSQL.Expressions.Parsers
 
 				TSQLFunctionExpression function = new TSQLFunctionExpression();
 
-				function.Name = tokenizer.Current.Text;
+				function.Function = tokenizer.Current.AsSystemIdentifier;
 
 				function.Tokens.Add(tokenizer.Current);
 
@@ -250,16 +250,33 @@ namespace TSQL.Expressions.Parsers
 					{
 						#region parse function
 
-						tokens.Add(tokenizer.Current);
+						TSQLFunctionExpression function = new TSQLFunctionExpression();
+
+						function.Tokens.AddRange(tokens);
+						function.Tokens.Add(tokenizer.Current);
+						
+						var identityTokens = tokens
+							.Where(t => !t.IsComment() && !t.IsWhitespace())
+							.ToList();
+
+						function.Function =
+							identityTokens[identityTokens.Count - 1]
+								.AsIdentifier;
+
+						if (identityTokens.Count > 1)
+						{
+							function.QualifiedPath =
+								identityTokens
+									.GetRange(
+										0,
+										identityTokens.Count - 2);
+						}
 
 						tokenizer.MoveNext();
 
 						TSQLArgumentList arguments = new TSQLArgumentListParser().Parse(
 							tokenizer);
 
-						TSQLFunctionExpression function = new TSQLFunctionExpression();
-
-						function.Tokens.AddRange(tokens);
 						function.Tokens.AddRange(arguments.Tokens);
 
 						function.Arguments = arguments;
@@ -268,17 +285,6 @@ namespace TSQL.Expressions.Parsers
 						{
 							function.Tokens.Add(tokenizer.Current);
 						}
-
-						// TODO: should we keep these as tokens?
-						function.Name =
-							tokens
-								.Where(t => !t.IsComment() && !t.IsWhitespace())
-								.Reverse()
-								// last token will be the open paren
-								.Skip(1)
-								.First()
-								.AsIdentifier
-								.Name;
 
 						tokenizer.MoveNext();
 

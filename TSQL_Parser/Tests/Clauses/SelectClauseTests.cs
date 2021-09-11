@@ -246,7 +246,66 @@ namespace Tests.Clauses
 
 				Assert.AreEqual("GroupNumber", column.ColumnAlias.Name);
 				Assert.AreEqual(TSQLExpressionType.Function, column.Expression.Type);
-				Assert.AreEqual("ROW_NUMBER", column.Expression.AsFunction.Name);
+				Assert.AreEqual("ROW_NUMBER", column.Expression.AsFunction.Function.Name);
+			}
+		}
+
+		[Test]
+		public void SelectClause_FullyQualifiedFunction()
+		{
+			using (StringReader reader = new StringReader(
+				@"SELECT
+					p.ProductID, 
+					p.[Name],
+					Test.dbo.Multiply(p.SafetyStockLevel, p.StandardCost) AS RestockCost
+				FROM
+					Production.Product p
+				ORDER BY
+					p.[Name];"))
+			using (ITSQLTokenizer tokenizer = new TSQLTokenizer(reader))
+			{
+				Assert.IsTrue(tokenizer.MoveNext());
+
+				TSQLSelectClause select = new TSQLSelectClauseParser().Parse(tokenizer);
+				Assert.AreEqual(25, select.Tokens.Count);
+				Assert.AreEqual(TSQLKeywords.FROM, tokenizer.Current.AsKeyword.Keyword);
+
+				Assert.AreEqual(3, select.Columns.Count);
+
+				TSQLSelectColumn column = select.Columns[0];
+
+				Assert.IsNull(column.ColumnAlias);
+				Assert.AreEqual(TSQLExpressionType.Column, column.Expression.Type);
+				Assert.AreEqual("p", column.Expression.AsColumn.TableReference.Single().AsIdentifier.Name);
+				Assert.AreEqual("ProductID", column.Expression.AsColumn.Column.Name);
+
+				column = select.Columns[1];
+
+				Assert.IsNull(column.ColumnAlias);
+				Assert.AreEqual(TSQLExpressionType.Column, column.Expression.Type);
+				Assert.AreEqual("p", column.Expression.AsColumn.TableReference.Single().AsIdentifier.Name);
+				Assert.AreEqual("Name", column.Expression.AsColumn.Column.Name);
+
+				column = select.Columns[2];
+
+				Assert.AreEqual("RestockCost", column.ColumnAlias.Name);
+				Assert.AreEqual(TSQLExpressionType.Function, column.Expression.Type);
+
+				TSQLFunctionExpression functionExpression = column.Expression.AsFunction;
+
+				Assert.AreEqual("Multiply", functionExpression.Function.Name);
+				Assert.AreEqual(3, functionExpression.QualifiedPath.Count);
+				Assert.AreEqual("Test", functionExpression.QualifiedPath[0].AsIdentifier.Name);
+				Assert.AreEqual(".", functionExpression.QualifiedPath[1].AsCharacter.Text);
+				Assert.AreEqual("dbo", functionExpression.QualifiedPath[2].AsIdentifier.Name);
+
+				TSQLColumnExpression argumentExpression = functionExpression.Arguments[0].AsColumn;
+				Assert.AreEqual("p", argumentExpression.TableReference.Single().AsIdentifier.Name);
+				Assert.AreEqual("SafetyStockLevel", argumentExpression.Column.Name);
+
+				argumentExpression = functionExpression.Arguments[1].AsColumn;
+				Assert.AreEqual("p", argumentExpression.TableReference.Single().AsIdentifier.Name);
+				Assert.AreEqual("StandardCost", argumentExpression.Column.Name);
 			}
 		}
 	}
