@@ -15,6 +15,13 @@ namespace TSQL.Expressions
 			get;
 		}
 
+		public List<TSQLExpression> Expressions
+		{
+			get;
+
+			internal set;
+		}
+
 		public TSQLCaseExpression AsCase
 		{
 			get

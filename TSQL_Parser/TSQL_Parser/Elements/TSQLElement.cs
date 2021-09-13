@@ -10,7 +10,6 @@ namespace TSQL.Elements
 {
 	public abstract class TSQLElement
 	{
-
 		private readonly List<TSQLToken> _tokens = new List<TSQLToken>();
 
 		public List<TSQLToken> Tokens

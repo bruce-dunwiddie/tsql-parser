@@ -17,6 +17,19 @@ namespace TSQL.Expressions.Parsers
 		{
 			TSQLExpression expression = ParseNext(tokenizer);
 
+			// TODO: add handling for compound assignment operators, e.g. +=.
+
+			// TODO: will compound comparison operators be included in above, e.g. <>.
+
+			// https://www.w3schools.com/sql/sql_operators.asp
+
+			// TODO: add handling for logical operators, e.g. AND/OR.
+			// new expression type?
+
+			// TODO: add handling for logical subquery operators, e.g. EXISTS.
+
+			// TODO: add handling for special keyword operators, e.g. BETWEEN and LIKE.
+
 			if (
 				tokenizer.Current != null &&
 				tokenizer.Current.Type.In(

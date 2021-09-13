@@ -39,6 +39,16 @@ namespace TSQL.Expressions
 		/// <summary>
 		///		e.g. 'Active' or 3.14
 		/// </summary>
-		Constant
+		Constant,
+
+		/// <summary>
+		///		e.g. AND/OR
+		/// </summary>
+		Logical,
+
+		/// <summary>
+		///		e.g. @ProductID = p.id
+		/// </summary>
+		VariableAssignment
 	}
 }
