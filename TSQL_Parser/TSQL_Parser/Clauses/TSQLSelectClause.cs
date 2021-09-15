@@ -14,6 +14,8 @@ namespace TSQL.Clauses
 
 		}
 
+		// TODO: add row filters, e.g. TOP/DISTINCT
+
 		public List<TSQLSelectColumn> Columns { get; } = new List<TSQLSelectColumn>();
 	}
 }

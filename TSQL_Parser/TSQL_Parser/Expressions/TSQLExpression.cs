@@ -15,6 +15,8 @@ namespace TSQL.Expressions
 			get;
 		}
 
+		// TODO: populate Expressions list for all expressions recursively
+
 		public List<TSQLExpression> Expressions
 		{
 			get;
