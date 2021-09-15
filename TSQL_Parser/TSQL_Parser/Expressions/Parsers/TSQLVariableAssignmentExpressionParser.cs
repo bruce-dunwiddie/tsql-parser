@@ -35,6 +35,8 @@ namespace TSQL.Expressions.Parsers
 			TSQLExpression rightSide = new TSQLValueExpressionParser().Parse(
 				tokenizer);
 
+			// TODO: add test for nested operators like below
+
 			// a + (b + (c + d))
 
 			if (

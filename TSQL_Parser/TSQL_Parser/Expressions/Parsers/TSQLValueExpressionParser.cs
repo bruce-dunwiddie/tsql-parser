@@ -56,7 +56,7 @@ namespace TSQL.Expressions.Parsers
 				tokens.Add(tokenizer.Current);
 
 				// read through any whitespace so we can check specifically for a SELECT
-				ReadThroughAnyCommentsOrWhitespace(
+				TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
 					tokenizer,
 					tokens);
 
@@ -118,7 +118,7 @@ namespace TSQL.Expressions.Parsers
 				variable.Tokens.Add(tokenizer.Current);
 				variable.Variable = tokenizer.Current.AsVariable;
 
-				ReadThroughAnyCommentsOrWhitespace(
+				TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
 					tokenizer,
 					variable.Tokens);
 
@@ -137,7 +137,7 @@ namespace TSQL.Expressions.Parsers
 
 				constant.Tokens.Add(tokenizer.Current);
 
-				ReadThroughAnyCommentsOrWhitespace(
+				TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
 					tokenizer,
 					constant.Tokens);
 
@@ -157,7 +157,7 @@ namespace TSQL.Expressions.Parsers
 
 				column.Tokens.Add(tokenizer.Current);
 
-				ReadThroughAnyCommentsOrWhitespace(
+				TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
 					tokenizer,
 					column.Tokens);
 
@@ -193,7 +193,7 @@ namespace TSQL.Expressions.Parsers
 						function.Tokens.Add(tokenizer.Current);
 					}
 
-					ReadThroughAnyCommentsOrWhitespace(
+					TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
 						tokenizer,
 						function.Tokens);
 				}
@@ -373,21 +373,6 @@ namespace TSQL.Expressions.Parsers
 			else
 			{
 				return null;
-			}
-		}
-
-		private static void ReadThroughAnyCommentsOrWhitespace(
-			ITSQLTokenizer tokenizer,
-			List<TSQLToken> savedTokens)
-		{
-			while (
-				tokenizer.MoveNext() &&
-				(
-					tokenizer.Current.IsWhitespace() ||
-					tokenizer.Current.IsComment())
-				)
-			{
-				savedTokens.Add(tokenizer.Current);
 			}
 		}
 	}

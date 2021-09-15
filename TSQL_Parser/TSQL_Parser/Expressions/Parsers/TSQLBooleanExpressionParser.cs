@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TSQL.Statements;
 using TSQL.Statements.Parsers;
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Expressions.Parsers
 {
@@ -56,7 +57,7 @@ namespace TSQL.Expressions.Parsers
 				tokens.Add(tokenizer.Current);
 
 				// read through any whitespace so we can check specifically for a SELECT
-				ReadThroughAnyCommentsOrWhitespace(
+				TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
 					tokenizer,
 					tokens);
 
@@ -113,21 +114,6 @@ namespace TSQL.Expressions.Parsers
 			else
 			{
 				return new TSQLValueExpressionParser().ParseNext(tokenizer);
-			}
-		}
-
-		private static void ReadThroughAnyCommentsOrWhitespace(
-			ITSQLTokenizer tokenizer,
-			List<TSQLToken> savedTokens)
-		{
-			while (
-				tokenizer.MoveNext() &&
-				(
-					tokenizer.Current.IsWhitespace() ||
-					tokenizer.Current.IsComment())
-				)
-			{
-				savedTokens.Add(tokenizer.Current);
 			}
 		}
 	}

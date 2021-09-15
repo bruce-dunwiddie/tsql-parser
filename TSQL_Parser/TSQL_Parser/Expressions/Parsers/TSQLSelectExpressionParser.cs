@@ -15,8 +15,6 @@ namespace TSQL.Expressions.Parsers
 		{
 			TSQLExpression expression = ParseNext(tokenizer);
 
-			// TODO: add handling for compound assignment operators, e.g. +=.
-
 			// https://www.w3schools.com/sql/sql_operators.asp
 
 			if (
@@ -81,29 +79,13 @@ namespace TSQL.Expressions.Parsers
 
 				simpleMulti.Tokens.Add(tokenizer.Current);
 
-				ReadThroughAnyCommentsOrWhitespace(
+				TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
 					tokenizer,
 					simpleMulti.Tokens);
 
 				return simpleMulti;
 
 				// still need to seperately check for p.* below
-			}
-			else if (tokenizer.Current.Type.In(
-				TSQLTokenType.Variable,
-				TSQLTokenType.SystemVariable))
-			{
-				// TODO: check for variable assignment expression
-
-				TSQLVariableExpression variable = new TSQLVariableExpression();
-				variable.Tokens.Add(tokenizer.Current);
-				variable.Variable = tokenizer.Current.AsVariable;
-
-				ReadThroughAnyCommentsOrWhitespace(
-					tokenizer,
-					variable.Tokens);
-
-				return variable;
 			}
 			else if (tokenizer.Current.Type.In(
 				TSQLTokenType.Identifier))
@@ -239,7 +221,7 @@ namespace TSQL.Expressions.Parsers
 								.ToList();
 						}
 
-						ReadThroughAnyCommentsOrWhitespace(
+						TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
 							tokenizer,
 							multi.Tokens);
 
@@ -316,21 +298,6 @@ namespace TSQL.Expressions.Parsers
 			{
 				return new TSQLValueExpressionParser().ParseNext(
 					tokenizer);
-			}
-		}
-
-		private static void ReadThroughAnyCommentsOrWhitespace(
-			ITSQLTokenizer tokenizer,
-			List<TSQLToken> savedTokens)
-		{
-			while (
-				tokenizer.MoveNext() &&
-				(
-					tokenizer.Current.IsWhitespace() ||
-					tokenizer.Current.IsComment())
-				)
-			{
-				savedTokens.Add(tokenizer.Current);
 			}
 		}
 	}

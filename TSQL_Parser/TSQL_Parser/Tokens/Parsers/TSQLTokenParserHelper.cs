@@ -107,5 +107,20 @@ namespace TSQL.Tokens.Parsers
 				tokenizer.MoveNext();
 			}
 		}
+
+		public static void ReadThroughAnyCommentsOrWhitespace(
+			ITSQLTokenizer tokenizer,
+			List<TSQLToken> savedTokens)
+		{
+			while (
+				tokenizer.MoveNext() &&
+				(
+					tokenizer.Current.IsWhitespace() ||
+					tokenizer.Current.IsComment())
+				)
+			{
+				savedTokens.Add(tokenizer.Current);
+			}
+		}
 	}
 }
