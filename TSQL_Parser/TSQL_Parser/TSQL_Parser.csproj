@@ -109,6 +109,7 @@
     <Compile Include="Elements\TSQLPredicate.cs" />
     <Compile Include="Expressions\Parsers\TSQLArgumentListParser.cs" />
     <Compile Include="Expressions\Parsers\TSQLBooleanExpressionParser.cs" />
+    <Compile Include="Expressions\Parsers\TSQLVariableAssignmentExpressionParser.cs" />
     <Compile Include="Expressions\Parsers\TSQLValueExpressionParser.cs" />
     <Compile Include="Expressions\Parsers\TSQLSelectExpressionParser.cs" />
     <Compile Include="Elements\Parsers\TSQLValuesParser.cs" />

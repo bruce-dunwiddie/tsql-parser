@@ -112,7 +112,7 @@ namespace TSQL.Expressions.Parsers
 			}
 			else
 			{
-				return new TSQLValueExpressionParser().Parse(tokenizer);
+				return new TSQLValueExpressionParser().ParseNext(tokenizer);
 			}
 		}
 

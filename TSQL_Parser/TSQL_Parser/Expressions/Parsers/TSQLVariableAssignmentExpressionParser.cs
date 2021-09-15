@@ -8,21 +8,18 @@ using TSQL.Tokens;
 
 namespace TSQL.Expressions.Parsers
 {
-	internal class TSQLOperatorExpressionParser
+	internal class TSQLVariableAssignmentExpressionParser
 	{
-		public TSQLOperatorExpression Parse(
+		public TSQLVariableAssignmentExpression Parse(
 			ITSQLTokenizer tokenizer,
-			TSQLExpression leftSide)
+			TSQLVariableExpression variable)
 		{
-			TSQLOperatorExpression opExpression = new TSQLOperatorExpression();
+			TSQLVariableAssignmentExpression opExpression = new TSQLVariableAssignmentExpression();
 
-			opExpression.LeftSide = leftSide;
+			opExpression.Variable = variable.Variable;
 			opExpression.Operator = tokenizer.Current.AsOperator;
 
-			if (leftSide != null)
-			{
-				opExpression.Tokens.AddRange(leftSide.Tokens);
-			}
+			opExpression.Tokens.AddRange(variable.Tokens);
 			opExpression.Tokens.Add(tokenizer.Current);
 
 			while (
@@ -45,12 +42,12 @@ namespace TSQL.Expressions.Parsers
 				tokenizer.Current.Type.In(
 					TSQLTokenType.Operator))
 			{
-				rightSide = Parse(
+				rightSide = new TSQLOperatorExpressionParser().Parse(
 					tokenizer,
 					rightSide);
 			}
 
-			opExpression.RightSide = rightSide;
+			opExpression.ValueExpression = rightSide;
 			opExpression.Tokens.AddRange(rightSide.Tokens);
 
 			return opExpression;

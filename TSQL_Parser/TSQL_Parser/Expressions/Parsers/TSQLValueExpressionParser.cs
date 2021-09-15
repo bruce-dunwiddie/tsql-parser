@@ -32,7 +32,7 @@ namespace TSQL.Expressions.Parsers
 			}
 		}
 
-		private static TSQLExpression ParseNext(
+		public TSQLExpression ParseNext(
 			ITSQLTokenizer tokenizer)
 		{
 			if (tokenizer.Current == null)

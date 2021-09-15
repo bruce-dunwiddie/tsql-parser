@@ -94,5 +94,20 @@ namespace TSQL.Expressions
 			}
 		}
 
+		public TSQLLogicalExpression AsLogical
+		{
+			get
+			{
+				return this as TSQLLogicalExpression;
+			}
+		}
+
+		public TSQLVariableAssignmentExpression AsVariableAssignment
+		{
+			get
+			{
+				return this as TSQLVariableAssignmentExpression;
+			}
+		}
 	}
 }

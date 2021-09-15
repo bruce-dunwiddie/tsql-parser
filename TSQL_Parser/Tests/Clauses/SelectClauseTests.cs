@@ -187,15 +187,14 @@ namespace Tests.Clauses
 				TSQLSelectColumn column = select.Columns[0];
 
 				Assert.IsNull(column.ColumnAlias);
-				Assert.AreEqual(TSQLExpressionType.Operator, column.Expression.Type);
+				Assert.AreEqual(TSQLExpressionType.VariableAssignment, column.Expression.Type);
 
-				TSQLOperatorExpression operatorExpression = column.Expression.AsOperator;
-				Assert.AreEqual("=", operatorExpression.Operator.Text);
+				TSQLVariableAssignmentExpression assignmentExpression = column.Expression.AsVariableAssignment;
+				Assert.AreEqual("=", assignmentExpression.Operator.Text);
 
-				TSQLVariableExpression variableExpression = operatorExpression.LeftSide.AsVariable;
-				Assert.AreEqual("@id", variableExpression.Variable.Text);
+				Assert.AreEqual("@id", assignmentExpression.Variable.Text);
 
-				TSQLColumnExpression columnExpression = operatorExpression.RightSide.AsColumn;
+				TSQLColumnExpression columnExpression = assignmentExpression.ValueExpression.AsColumn;
 				Assert.AreEqual("p", columnExpression.TableReference.Single().AsIdentifier.Name);
 				Assert.AreEqual("ProductID", columnExpression.Column.Name);
 			}
@@ -306,6 +305,37 @@ namespace Tests.Clauses
 				argumentExpression = functionExpression.Arguments[1].AsColumn;
 				Assert.AreEqual("p", argumentExpression.TableReference.Single().AsIdentifier.Name);
 				Assert.AreEqual("StandardCost", argumentExpression.Column.Name);
+			}
+		}
+
+		[Test]
+		public void SelectClause_UnaryOperator()
+		{
+			using (StringReader reader = new StringReader(
+				@"SELECT
+					+1;"))
+			using (ITSQLTokenizer tokenizer = new TSQLTokenizer(reader))
+			{
+				Assert.IsTrue(tokenizer.MoveNext());
+
+				TSQLSelectClause select = new TSQLSelectClauseParser().Parse(tokenizer);
+				Assert.AreEqual(3, select.Tokens.Count);
+				Assert.IsTrue(tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon));
+
+				Assert.AreEqual(1, select.Columns.Count);
+
+				TSQLSelectColumn column = select.Columns[0];
+
+				Assert.IsNull(column.ColumnAlias);
+				Assert.AreEqual(TSQLExpressionType.Operator, column.Expression.Type);
+
+				TSQLOperatorExpression tsqlOperator = column.Expression.AsOperator;
+
+				Assert.AreEqual("+", tsqlOperator.Operator.Text);
+				Assert.IsNull(tsqlOperator.LeftSide);
+
+				Assert.AreEqual(TSQLExpressionType.Constant, tsqlOperator.RightSide.Type);
+				Assert.AreEqual(1, tsqlOperator.RightSide.AsConstant.Literal.AsNumericLiteral.Value);
 			}
 		}
 	}

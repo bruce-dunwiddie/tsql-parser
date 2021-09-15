@@ -29,12 +29,35 @@ namespace TSQL.Expressions.Parsers
 
 				(
 					tokenizer.Current.Text != "=" ||
-					expression.Type != TSQLExpressionType.Column
+					expression?.Type != TSQLExpressionType.Column
 				))
 			{
-				return new TSQLOperatorExpressionParser().Parse(
-					tokenizer,
-					expression);
+				if (
+					expression?.Type == TSQLExpressionType.Variable &&
+					new string[] {
+						"=",
+						"+=",
+						"-=",
+						"*=",
+						"/=",
+						"%=",
+						"&=",
+
+						// TODO: verify that these 2 compound operators are parsed as a single operator
+						"^-=",
+						"|*="
+					}.Contains(tokenizer.Current.AsOperator.Text))
+				{
+					return new TSQLVariableAssignmentExpressionParser().Parse(
+						tokenizer,
+						expression.AsVariable);
+				}
+				else
+				{
+					return new TSQLOperatorExpressionParser().Parse(
+						tokenizer,
+						expression);
+				}
 			}
 			else
 			{
@@ -291,7 +314,7 @@ namespace TSQL.Expressions.Parsers
 			}
 			else
 			{
-				return new TSQLValueExpressionParser().Parse(
+				return new TSQLValueExpressionParser().ParseNext(
 					tokenizer);
 			}
 		}
