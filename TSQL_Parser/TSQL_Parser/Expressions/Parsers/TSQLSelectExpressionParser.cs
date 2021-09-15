@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using TSQL.Statements;
-using TSQL.Statements.Parsers;
 using TSQL.Tokens;
 using TSQL.Tokens.Parsers;
 
 namespace TSQL.Expressions.Parsers
 {
-	internal class TSQLExpressionFactory
+	internal class TSQLSelectExpressionParser
 	{
 		public TSQLExpression Parse(ITSQLTokenizer tokenizer)
 		{
@@ -19,16 +17,7 @@ namespace TSQL.Expressions.Parsers
 
 			// TODO: add handling for compound assignment operators, e.g. +=.
 
-			// TODO: will compound comparison operators be included in above, e.g. <>.
-
 			// https://www.w3schools.com/sql/sql_operators.asp
-
-			// TODO: add handling for logical operators, e.g. AND/OR.
-			// new expression type?
-
-			// TODO: add handling for logical subquery operators, e.g. EXISTS.
-
-			// TODO: add handling for special keyword operators, e.g. BETWEEN and LIKE.
 
 			if (
 				tokenizer.Current != null &&
@@ -77,78 +66,12 @@ namespace TSQL.Expressions.Parsers
 
 				// still need to seperately check for p.* below
 			}
-			// this checks for unary operators, e.g. +, -, and ~
-			else if (tokenizer.Current.Type.In(
-				TSQLTokenType.Operator))
-			{
-				return null;
-			}
-			else if (tokenizer.Current.IsCharacter(
-				TSQLCharacters.OpenParentheses))
-			{
-				List<TSQLToken> tokens = new List<TSQLToken>();
-
-				tokens.Add(tokenizer.Current);
-
-				// read through any whitespace so we can check specifically for a SELECT
-				ReadThroughAnyCommentsOrWhitespace(
-					tokenizer,
-					tokens);
-
-				if (tokenizer.Current.IsKeyword(TSQLKeywords.SELECT))
-				{
-					#region parse subquery
-
-					TSQLSubqueryExpression subquery = new TSQLSubqueryExpression();
-
-					subquery.Tokens.AddRange(tokens);
-
-					TSQLSelectStatement select = new TSQLSelectStatementParser(tokenizer).Parse();
-
-					subquery.Select = select;
-
-					subquery.Tokens.AddRange(select.Tokens);
-
-					if (tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
-					{
-						subquery.Tokens.Add(tokenizer.Current);
-
-						tokenizer.MoveNext();
-					}
-
-					return subquery;
-
-					#endregion
-				}
-				else
-				{
-					#region parse expression contained/grouped inside parenthesis
-
-					TSQLGroupedExpression group = new TSQLGroupedExpression();
-
-					group.Tokens.AddRange(tokens);
-
-					group.InnerExpression = 
-						new TSQLExpressionFactory().Parse(
-							tokenizer);
-					group.Tokens.AddRange(group.InnerExpression.Tokens);
-
-					if (tokenizer.Current.IsCharacter(
-						TSQLCharacters.CloseParentheses))
-					{
-						group.Tokens.Add(tokenizer.Current);
-						tokenizer.MoveNext();
-					}
-
-					return group;
-
-					#endregion
-				}
-			}
 			else if (tokenizer.Current.Type.In(
 				TSQLTokenType.Variable,
 				TSQLTokenType.SystemVariable))
 			{
+				// TODO: check for variable assignment expression
+
 				TSQLVariableExpression variable = new TSQLVariableExpression();
 				variable.Tokens.Add(tokenizer.Current);
 				variable.Variable = tokenizer.Current.AsVariable;
@@ -158,84 +81,6 @@ namespace TSQL.Expressions.Parsers
 					variable.Tokens);
 
 				return variable;
-			}
-			else if (tokenizer.Current.Type.In(
-				TSQLTokenType.BinaryLiteral,
-				TSQLTokenType.MoneyLiteral,
-				TSQLTokenType.NumericLiteral,
-				TSQLTokenType.StringLiteral,
-				TSQLTokenType.IncompleteString))
-			{
-				TSQLConstantExpression constant = new TSQLConstantExpression();
-
-				constant.Literal = tokenizer.Current.AsLiteral;
-
-				constant.Tokens.Add(tokenizer.Current);
-
-				ReadThroughAnyCommentsOrWhitespace(
-					tokenizer,
-					constant.Tokens);
-
-				return constant;
-			}
-			else if (tokenizer.Current.IsKeyword(TSQLKeywords.CASE))
-			{
-				return new TSQLCaseExpressionParser().Parse(tokenizer);
-			}
-			else if (tokenizer.Current.Type.In(
-				TSQLTokenType.SystemColumnIdentifier,
-				TSQLTokenType.IncompleteIdentifier))
-			{
-				TSQLColumnExpression column = new TSQLColumnExpression();
-
-				column.Column = tokenizer.Current.AsSystemColumnIdentifier;
-
-				column.Tokens.Add(tokenizer.Current);
-
-				ReadThroughAnyCommentsOrWhitespace(
-					tokenizer,
-					column.Tokens);
-
-				return column;
-			}
-			else if (tokenizer.Current.Type.In(
-				TSQLTokenType.SystemIdentifier))
-			{
-				#region parse system function
-
-				TSQLFunctionExpression function = new TSQLFunctionExpression();
-
-				function.Function = tokenizer.Current.AsSystemIdentifier;
-
-				function.Tokens.Add(tokenizer.Current);
-
-				if (tokenizer.MoveNext() &&
-					tokenizer.Current.IsCharacter(TSQLCharacters.OpenParentheses))
-				{
-					function.Tokens.Add(tokenizer.Current);
-
-					tokenizer.MoveNext();
-
-					TSQLArgumentList arguments = new TSQLArgumentListParser().Parse(
-						tokenizer);
-
-					function.Tokens.AddRange(arguments.Tokens);
-
-					function.Arguments = arguments;
-
-					if (tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
-					{
-						function.Tokens.Add(tokenizer.Current);
-					}
-
-					ReadThroughAnyCommentsOrWhitespace(
-						tokenizer,
-						function.Tokens);
-				}
-
-				return function;
-
-				#endregion
 			}
 			else if (tokenizer.Current.Type.In(
 				TSQLTokenType.Identifier))
@@ -267,7 +112,7 @@ namespace TSQL.Expressions.Parsers
 
 						function.Tokens.AddRange(tokens);
 						function.Tokens.Add(tokenizer.Current);
-						
+
 						var identityTokens = tokens
 							.Where(t => !t.IsComment() && !t.IsWhitespace())
 							.ToList();
@@ -383,7 +228,7 @@ namespace TSQL.Expressions.Parsers
 						tokenizer.Current.IsCharacter(TSQLCharacters.Comma) ||
 						tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses) ||
 						tokenizer.Current.Type.In(
-							TSQLTokenType.Keyword, 
+							TSQLTokenType.Keyword,
 							TSQLTokenType.Operator) ||
 
 						// this will be a nasty check, but I don't want to copy the internal logic elsewhere
@@ -391,7 +236,7 @@ namespace TSQL.Expressions.Parsers
 						// two identifiers in a row means that the second one is an alias
 						(
 							tokenizer.Current.Type.In(
-								TSQLTokenType.Identifier, 
+								TSQLTokenType.Identifier,
 								TSQLTokenType.IncompleteIdentifier) &&
 							tokens
 								.Where(t => !t.IsComment() && !t.IsWhitespace())
@@ -446,7 +291,8 @@ namespace TSQL.Expressions.Parsers
 			}
 			else
 			{
-				return null;
+				return new TSQLValueExpressionParser().Parse(
+					tokenizer);
 			}
 		}
 

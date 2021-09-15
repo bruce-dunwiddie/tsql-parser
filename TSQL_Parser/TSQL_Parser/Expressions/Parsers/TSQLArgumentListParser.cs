@@ -14,7 +14,7 @@ namespace TSQL.Expressions.Parsers
 		{
 			List<TSQLExpression> arguments = new List<TSQLExpression>();
 
-			TSQLExpressionFactory factory = new TSQLExpressionFactory();
+			TSQLValueExpressionParser factory = new TSQLValueExpressionParser();
 
 			List<TSQLToken> tokens = new List<TSQLToken>();
 

@@ -42,7 +42,7 @@ namespace TSQL.Expressions
 		Constant,
 
 		/// <summary>
-		///		e.g. AND/OR
+		///		e.g. AND, OR, or NOT
 		/// </summary>
 		Logical,
 

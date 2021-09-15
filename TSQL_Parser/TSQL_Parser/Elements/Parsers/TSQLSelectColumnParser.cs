@@ -16,7 +16,7 @@ namespace TSQL.Elements.Parsers
 		{
 			TSQLSelectColumn column = new TSQLSelectColumn();
 
-			TSQLExpression columnExpression = new TSQLExpressionFactory().Parse(tokenizer);
+			TSQLExpression columnExpression = new TSQLSelectExpressionParser().Parse(tokenizer);
 
 			column.Expression = columnExpression;
 
@@ -48,7 +48,7 @@ namespace TSQL.Elements.Parsers
 
 				tokenizer.MoveNext();
 
-				TSQLExpression actualColumn = new TSQLExpressionFactory().Parse(tokenizer);
+				TSQLExpression actualColumn = new TSQLValueExpressionParser().Parse(tokenizer);
 
 				column.Expression = actualColumn;
 				column.ColumnAlias = columnExpression.AsColumn.Column;

@@ -44,6 +44,7 @@ namespace TSQL.Statements.Parsers
 			}
 			else
 			{
+				// TODO: add CREATE, ALTER, DROP
 				return new TSQLUnknownStatementParser(tokenizer);
 			}
 		}

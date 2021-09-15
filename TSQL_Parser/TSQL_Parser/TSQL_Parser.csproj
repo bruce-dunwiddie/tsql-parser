@@ -108,7 +108,9 @@
     <Compile Include="Elements\TSQLElement.cs" />
     <Compile Include="Elements\TSQLPredicate.cs" />
     <Compile Include="Expressions\Parsers\TSQLArgumentListParser.cs" />
-    <Compile Include="Expressions\Parsers\TSQLExpressionFactory.cs" />
+    <Compile Include="Expressions\Parsers\TSQLBooleanExpressionParser.cs" />
+    <Compile Include="Expressions\Parsers\TSQLValueExpressionParser.cs" />
+    <Compile Include="Expressions\Parsers\TSQLSelectExpressionParser.cs" />
     <Compile Include="Elements\Parsers\TSQLValuesParser.cs" />
     <Compile Include="Expressions\Parsers\TSQLOperatorExpressionParser.cs" />
     <Compile Include="Expressions\TSQLArgumentList.cs" />
@@ -118,6 +120,8 @@
     <Compile Include="Expressions\TSQLColumnExpression.cs" />
     <Compile Include="Elements\TSQLDefaultValues.cs" />
     <Compile Include="Expressions\TSQLConstantExpression.cs" />
+    <Compile Include="Expressions\TSQLVariableAssignmentExpression.cs" />
+    <Compile Include="Expressions\TSQLLogicalExpression.cs" />
     <Compile Include="Expressions\TSQLOperatorExpression.cs" />
     <Compile Include="Expressions\TSQLExpressionType.cs" />
     <Compile Include="Expressions\TSQLFunctionExpression.cs" />

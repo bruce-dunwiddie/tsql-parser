@@ -32,7 +32,7 @@ namespace TSQL.Expressions.Parsers
 				opExpression.Tokens.Add(tokenizer.Current);
 			}
 
-			TSQLExpression rightSide = new TSQLExpressionFactory().Parse(
+			TSQLExpression rightSide = new TSQLValueExpressionParser().Parse(
 				tokenizer);
 
 			// a + (b + (c + d))
