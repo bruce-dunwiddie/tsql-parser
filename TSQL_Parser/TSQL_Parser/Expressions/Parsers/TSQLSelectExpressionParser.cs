@@ -15,8 +15,6 @@ namespace TSQL.Expressions.Parsers
 		{
 			TSQLExpression expression = ParseNext(tokenizer);
 
-			// https://www.w3schools.com/sql/sql_operators.asp
-
 			if (
 				tokenizer.Current != null &&
 				tokenizer.Current.Type.In(
@@ -32,6 +30,9 @@ namespace TSQL.Expressions.Parsers
 			{
 				if (
 					expression?.Type == TSQLExpressionType.Variable &&
+
+					// https://docs.microsoft.com/en-us/sql/t-sql/language-elements/compound-operators-transact-sql
+
 					new string[] {
 						"=",
 						"+=",
@@ -40,10 +41,7 @@ namespace TSQL.Expressions.Parsers
 						"/=",
 						"%=",
 						"&=",
-
-						// TODO: verify that these 2 compound operators are parsed as a single operator
-						"^-=",
-						"|*="
+						"|="
 					}.Contains(tokenizer.Current.AsOperator.Text))
 				{
 					return new TSQLVariableAssignmentExpressionParser().Parse(
