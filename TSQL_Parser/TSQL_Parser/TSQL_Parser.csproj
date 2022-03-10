@@ -91,6 +91,7 @@
     <Compile Include="Clauses\TSQLOnClause.cs" />
     <Compile Include="Clauses\TSQLSetClause.cs" />
     <Compile Include="Clauses\TSQLDeleteClause.cs" />
+    <Compile Include="Clauses\TSQLSetOperatorType.cs" />
     <Compile Include="Clauses\TSQLUpdateClause.cs" />
     <Compile Include="Clauses\TSQLUsingClause.cs" />
     <Compile Include="Clauses\TSQLIntoClause.cs" />

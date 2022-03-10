@@ -17,12 +17,12 @@ namespace TSQL.Expressions
 
 		// TODO: populate Expressions list for all expressions recursively
 
-		public List<TSQLExpression> Expressions
-		{
-			get;
+		//public List<TSQLExpression> Expressions
+		//{
+		//	get;
 
-			internal set;
-		}
+		//	internal set;
+		//}
 
 		public TSQLCaseExpression AsCase
 		{

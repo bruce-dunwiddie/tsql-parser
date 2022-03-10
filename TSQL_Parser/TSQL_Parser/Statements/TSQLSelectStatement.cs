@@ -47,6 +47,6 @@ namespace TSQL.Statements
 		public TSQLOptionClause Option { get; internal set; }
 
 		// UNION [ALL], EXCEPT, INTERSECT
-		public TSQLSetOperatorClause SetOperator { get; internal set; }
+		public List<TSQLSetOperatorClause> SetOperators { get; } = new List<TSQLSetOperatorClause>();
 	}
 }

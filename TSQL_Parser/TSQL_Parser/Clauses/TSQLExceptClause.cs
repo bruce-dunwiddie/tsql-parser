@@ -12,5 +12,13 @@ namespace TSQL.Clauses
 		{
 
 		}
+
+		public override TSQLSetOperatorType Type
+		{
+			get
+			{
+				return TSQLSetOperatorType.Except;
+			}
+		}
 	}
 }

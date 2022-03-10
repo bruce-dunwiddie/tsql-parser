@@ -14,12 +14,12 @@ namespace TSQL.Clauses
 
 		}
 
-		public List<TSQLPredicate> Predicates
-		{
-			get
-			{
-				return null;
-			}
-		}
+		//public List<TSQLPredicate> Predicates
+		//{
+		//	get
+		//	{
+		//		return null;
+		//	}
+		//}
 	}
 }

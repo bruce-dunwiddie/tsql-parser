@@ -170,8 +170,6 @@ namespace TSQL.Tokens.Parsers
 				tokenValue[0] == '%' ||
 				tokenValue[0] == ':')
 			{
-				// TODO: should there be known operators, similar to TSQLCharacters?
-
 				return
 					new TSQLOperator(
 						startPosition,

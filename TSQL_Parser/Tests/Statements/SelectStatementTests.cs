@@ -418,5 +418,153 @@ namespace Tests.Statements
 			Assert.AreEqual(4, select.Tokens.Count);
 			Assert.AreEqual(1, select.Select.Columns.Count);
 		}
+		[Test]
+		public void SelectStatement_UnionDontOverrun()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"
+					SELECT TOP 1 L1.ID
+					FROM
+						(SELECT 2 AS ID) L1
+					WHERE
+						L1.ID = 2
+					GROUP BY
+						L1.ID
+					HAVING COUNT(*) > 0
+
+					UNION ALL
+
+					SELECT TOP 1 L2.ID
+					FROM
+						(SELECT 1 AS ID) L2
+					WHERE
+						L2.ID = 1
+					GROUP BY
+						L2.ID
+					HAVING COUNT(*) > 0
+
+					-- the only table alias in scope is the first one
+					-- but all rows from result of UNION are referenced
+					ORDER BY L1.ID
+
+					OPTION (FAST 2)
+
+					FOR XML PATH;",
+				includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+			Assert.IsNotNull(statements[0].AsSelect.SetOperators.SingleOrDefault());
+			Assert.AreEqual(36, statements[0].AsSelect.SetOperators.Single().Tokens.Count);
+			Assert.IsNotNull(statements[0].AsSelect.SetOperators.Single().Select);
+			Assert.AreEqual(34, statements[0].AsSelect.SetOperators.Single().Select.Tokens.Count);
+			Assert.IsNull(statements[0].AsSelect.SetOperators.Single().Select.OrderBy);
+			Assert.IsNotNull(statements[0].AsSelect.OrderBy);
+		}
+
+		[Test]
+		public void SelectStatement_UnionParensRegression()
+		{
+			// regression test for https://github.com/bruce-dunwiddie/tsql-parser/issues/69
+
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT 1 UNION (SELECT 2)",
+				includeWhitespace: false);
+
+			TSQLSelectStatement select = statements[0].AsSelect;
+
+			Assert.AreEqual(1, statements.Count);
+			Assert.AreEqual(7, select.Tokens.Count);
+			Assert.IsNotNull(select.SetOperators.SingleOrDefault());
+		}
+
+		[Test]
+		public void SelectStatement_UnionMultiParens()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT 1 UNION ((SELECT 2)) SELECT 1",
+				includeWhitespace: false);
+
+			TSQLSelectStatement select = statements[0].AsSelect;
+			TSQLSelectStatement select2 = statements[1].AsSelect;
+
+			Assert.AreEqual(2, statements.Count);
+			Assert.AreEqual(9, select.Tokens.Count);
+			Assert.IsNotNull(select.SetOperators.SingleOrDefault());
+			Assert.AreEqual(2, select2.Tokens.Count);
+		}
+
+		[Test]
+		public void SelectStatement_MultipleSetOperatorsRegression()
+		{
+			// regression test for https://github.com/bruce-dunwiddie/tsql-parser/issues/81
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT 1
+				UNION
+				SELECT 2
+				UNION
+				SELECT 3",
+				includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+			TSQLSelectStatement select = statements.Single().AsSelect;
+			Assert.AreEqual(8, select.Tokens.Count);
+
+			Assert.AreEqual(2, select.SetOperators.Count);
+
+			Assert.AreEqual(1, select
+				.Select
+				.Columns
+				.Single()
+				.Expression
+				.AsConstant
+				.Literal
+				.AsNumericLiteral
+				.Value);
+
+			Assert.AreEqual(2, select
+				.SetOperators[0]
+				.Select
+				.Select
+				.Columns
+				.Single()
+				.Expression
+				.AsConstant
+				.Literal
+				.AsNumericLiteral
+				.Value);
+
+			Assert.AreEqual(3, select
+				.SetOperators[1]
+				.Select
+				.Select
+				.Columns
+				.Single()
+				.Expression
+				.AsConstant
+				.Literal
+				.AsNumericLiteral
+				.Value);
+		}
+
+		[Test]
+		public void SelectStatement_DistinctAndTop()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT DISTINCT TOP(5) FirstName
+				FROM
+					Person.Person p;",
+				includeWhitespace: false);
+
+			Assert.AreEqual("FirstName", statements
+				.Single()
+				.AsSelect
+				.Select
+				.Columns
+				.Single()
+				.Expression
+				.AsColumn
+				.Column
+				.Name);
+		}
 	}
 }

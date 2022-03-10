@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace TSQL.Elements
 {
-	public class TSQLPredicate : TSQLElement
-	{
+	//public class TSQLPredicate : TSQLElement
+	//{
 
-	}
+	//}
 }
