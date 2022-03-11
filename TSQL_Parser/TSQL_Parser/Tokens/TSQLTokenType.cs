@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace TSQL.Tokens
 {
@@ -115,5 +116,13 @@ namespace TSQL.Tokens
 		///		e.g. $IDENTITY, $ROWGUID, $ACTION.
 		/// </summary>
 		SystemColumnIdentifier
+	}
+
+	public static class TSQLTokenTypeExtensions
+	{
+		public static bool In(this TSQLTokenType type, params TSQLTokenType[] types)
+		{
+			return types.Any(t => type == t);
+		}
 	}
 }

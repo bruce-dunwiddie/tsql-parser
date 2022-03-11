@@ -102,7 +102,7 @@ namespace TSQL.Statements.Parsers
 				Tokenizer.MoveNext();
 			}
 
-			if (Tokenizer.Current?.AsKeyword != null &&
+			while (Tokenizer.Current?.AsKeyword != null &&
 				Tokenizer.Current.AsKeyword.Keyword.In(
 				TSQLKeywords.UNION,
 				TSQLKeywords.EXCEPT,
@@ -110,7 +110,7 @@ namespace TSQL.Statements.Parsers
 			{
 				TSQLSetOperatorClause set = new TSQLSetOperatorClauseParser().Parse(Tokenizer);
 
-				Statement.SetOperator = set;
+				Statement.SetOperators.Add(set);
 
 				Statement.Tokens.AddRange(set.Tokens);
 			}
@@ -155,13 +155,6 @@ namespace TSQL.Statements.Parsers
 
 					Statement.Tokens.AddRange(optionClause.Tokens);
 				}
-			}
-
-			if (
-				Tokenizer.Current?.AsKeyword != null &&
-				Tokenizer.Current.AsKeyword.Keyword.IsStatementStart())
-			{
-				Tokenizer.Putback();
 			}
 
 			return Statement;

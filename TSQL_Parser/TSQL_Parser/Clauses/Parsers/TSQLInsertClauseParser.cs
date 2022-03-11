@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Clauses.Parsers
 {
@@ -20,7 +21,7 @@ namespace TSQL.Clauses.Parsers
 
 			insert.Tokens.Add(tokenizer.Current);
 
-			TSQLSubqueryHelper.ReadUntilStop(
+			TSQLTokenParserHelper.ReadUntilStop(
 				tokenizer,
 				insert,
 				new List<TSQLFutureKeywords>() {

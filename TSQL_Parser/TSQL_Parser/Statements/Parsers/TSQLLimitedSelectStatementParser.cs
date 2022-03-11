@@ -83,13 +83,6 @@ namespace TSQL.Statements.Parsers
 
 			// OPTION not allowed
 
-			if (
-				Tokenizer.Current?.AsKeyword != null &&
-				Tokenizer.Current.AsKeyword.Keyword.IsStatementStart())
-			{
-				Tokenizer.Putback();
-			}
-
 			return Statement;
 		}
 	}

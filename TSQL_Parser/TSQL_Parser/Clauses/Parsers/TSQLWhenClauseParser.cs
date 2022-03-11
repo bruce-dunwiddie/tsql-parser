@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using TSQL.Statements;
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Clauses.Parsers
 {
@@ -29,7 +29,7 @@ namespace TSQL.Clauses.Parsers
 			// The MERGE statement requires a semicolon (;) as a statement terminator.
 			// Error 10713 is raised when a MERGE statement is run without the terminator.
 
-			TSQLSubqueryHelper.ReadUntilStop(
+			TSQLTokenParserHelper.ReadUntilStop(
 				tokenizer,
 				when,
 				new List<TSQLFutureKeywords>() {

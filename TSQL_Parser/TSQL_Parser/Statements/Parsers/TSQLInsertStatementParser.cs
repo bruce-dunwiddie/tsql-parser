@@ -5,8 +5,8 @@ using System.Text;
 
 using TSQL.Clauses;
 using TSQL.Clauses.Parsers;
-using TSQL.Expressions;
-using TSQL.Expressions.Parsers;
+using TSQL.Elements;
+using TSQL.Elements.Parsers;
 using TSQL.Tokens;
 
 namespace TSQL.Statements.Parsers
@@ -49,7 +49,7 @@ namespace TSQL.Statements.Parsers
 
 			if (Tokenizer.Current.IsKeyword(TSQLKeywords.VALUES))
 			{
-				TSQLValuesExpression values = new TSQLValuesExpressionParser().Parse(Tokenizer);
+				TSQLValues values = new TSQLValuesParser().Parse(Tokenizer);
 
 				Statement.Values = values;
 
@@ -65,7 +65,7 @@ namespace TSQL.Statements.Parsers
 			}
 			else if (Tokenizer.Current.IsKeyword(TSQLKeywords.DEFAULT))
 			{
-				TSQLDefaultValuesExpression defaultValues = new TSQLDefaultValuesExpressionParser().Parse(Tokenizer);
+				TSQLDefaultValues defaultValues = new TSQLDefaultValuesParser().Parse(Tokenizer);
 
 				Statement.Default = defaultValues;
 
@@ -78,13 +78,6 @@ namespace TSQL.Statements.Parsers
 				Statement.Execute = exec;
 
 				Statement.Tokens.AddRange(exec.Tokens);
-			}
-
-			if (
-				Tokenizer.Current?.AsKeyword != null &&
-				Tokenizer.Current.AsKeyword.Keyword.IsStatementStart())
-			{
-				Tokenizer.Putback();
 			}
 
 			return Statement;

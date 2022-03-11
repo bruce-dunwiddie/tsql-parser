@@ -64,14 +64,15 @@
   <ItemGroup>
     <Compile Include="CharactersTests.cs" />
     <Compile Include="Clauses\FromClauseTests.cs" />
-    <Compile Include="Clauses\SetOperatorClauseTests.cs" />
     <Compile Include="Clauses\WhereClauseTests.cs" />
     <Compile Include="Clauses\GroupByClauseTests.cs" />
     <Compile Include="Clauses\HavingClauseTests.cs" />
     <Compile Include="Clauses\OrderByClauseTests.cs" />
     <Compile Include="Clauses\IntoClauseTests.cs" />
     <Compile Include="Clauses\SelectClauseTests.cs" />
+    <Compile Include="Expressions\ArgumentListTests.cs" />
     <Compile Include="Expressions\CaseExpressionTests.cs" />
+    <Compile Include="Expressions\OperatorExpressionTests.cs" />
     <Compile Include="IdentifiersTests.cs" />
     <Compile Include="Parsing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

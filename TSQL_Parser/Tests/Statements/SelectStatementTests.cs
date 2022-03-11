@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 
 using TSQL;
+using TSQL.Clauses;
+using TSQL.Elements;
+using TSQL.Expressions;
 using TSQL.Statements;
 using TSQL.Tokens;
 
@@ -30,6 +33,7 @@ namespace Tests.Statements
 			Assert.AreEqual(TSQLKeywords.SELECT, select.Tokens[0].AsKeyword.Keyword);
 			Assert.AreEqual(" ", select.Tokens[1].AsWhitespace.Text);
 			Assert.AreEqual("1", select.Tokens[2].AsNumericLiteral.Text);
+			Assert.AreEqual(1, select.Select.Columns.Count);
 		}
 
 		[Test]
@@ -46,6 +50,7 @@ namespace Tests.Statements
 			Assert.AreEqual(2, select.Tokens.Count);
 			Assert.AreEqual(TSQLKeywords.SELECT, select.Tokens[0].AsKeyword.Keyword);
 			Assert.AreEqual("1", select.Tokens[1].AsNumericLiteral.Text);
+			Assert.AreEqual(1, select.Select.Columns.Count);
 		}
 
 		[Test]
@@ -65,12 +70,14 @@ namespace Tests.Statements
 			Assert.AreEqual(TSQLKeywords.SELECT, select1.Tokens[0].AsKeyword.Keyword);
 			Assert.AreEqual(" ", select1.Tokens[1].AsWhitespace.Text);
 			Assert.AreEqual("1", select1.Tokens[2].AsNumericLiteral.Text);
+			Assert.AreEqual(1, select1.Select.Columns.Count);
 
 			Assert.AreEqual(TSQLStatementType.Select, select2.Type);
 			Assert.AreEqual(3, select2.Tokens.Count);
 			Assert.AreEqual(TSQLKeywords.SELECT, select2.Tokens[0].AsKeyword.Keyword);
 			Assert.AreEqual(" ", select2.Tokens[1].AsWhitespace.Text);
 			Assert.AreEqual("2", select2.Tokens[2].AsNumericLiteral.Text);
+			Assert.AreEqual(1, select2.Select.Columns.Count);
 		}
 
 		[Test]
@@ -92,6 +99,10 @@ namespace Tests.Statements
 			Assert.AreEqual(" ", select.Tokens[4].AsWhitespace.Text);
 			Assert.AreEqual("1", select.Tokens[5].AsNumericLiteral.Text);
 			Assert.AreEqual(")", select.Tokens[6].AsCharacter.Text);
+			Assert.AreEqual(1, select.Select.Columns.Count);
+			Assert.AreEqual(
+				TSQLExpressionType.Subquery, 
+				select.Select.Columns[0].Expression.Type);
 		}
 
 		[Test]
@@ -122,6 +133,22 @@ namespace Tests.Statements
 			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
 			Assert.AreEqual(98, select.Tokens.Count);
 			Assert.AreEqual(TSQLKeywords.SELECT, select.Tokens[0].AsKeyword.Keyword);
+			TSQLSelectClause selectClause = select.Select;
+			Assert.AreEqual(3, selectClause.Columns.Count);
+			TSQLSelectColumn column = selectClause.Columns[0];
+			Assert.AreEqual(TSQLExpressionType.Column, column.Expression.Type);
+			Assert.AreEqual("t", column.Expression.AsColumn.TableReference.Single().AsIdentifier.Name);
+			Assert.AreEqual("a", column.Expression.AsColumn.Column.Name);
+			column = selectClause.Columns[1];
+			Assert.AreEqual(TSQLExpressionType.Column, column.Expression.Type);
+			Assert.AreEqual("t", column.Expression.AsColumn.TableReference.Single().AsIdentifier.Name);
+			Assert.AreEqual("b", column.Expression.AsColumn.Column.Name);
+			column = selectClause.Columns[2];
+			Assert.AreEqual("e", column.ColumnAlias.AsIdentifier.Name);
+			Assert.AreEqual(TSQLExpressionType.Subquery, column.Expression.Type);
+			TSQLSubqueryExpression subquery = column.Expression.AsSubquery;
+			Assert.AreEqual(1, subquery.Select.Select.Columns.Count);
+			Assert.AreEqual(1, subquery.Select.Select.Columns[0].Expression.AsConstant.Literal.AsNumericLiteral.Value);
 			Assert.AreEqual(" ", select.Tokens[1].AsWhitespace.Text);
 			Assert.AreEqual("t", select.Tokens[2].AsIdentifier.Name);
 			Assert.AreEqual(TSQLCharacters.Period, select.Tokens[3].AsCharacter.Character);
@@ -132,6 +159,8 @@ namespace Tests.Statements
 			Assert.AreEqual(13, select.GroupBy.Tokens.Count);
 			Assert.AreEqual(11, select.Having.Tokens.Count);
 			Assert.AreEqual(12, select.OrderBy.Tokens.Count);
+			Assert.AreEqual(3, select.Select.Columns.Count);
+			Assert.AreEqual("e", select.Select.Columns[2].ColumnAlias.Text);
 		}
 
 		[Test]
@@ -147,8 +176,10 @@ namespace Tests.Statements
 			Assert.AreEqual(2, statements.Count);
 
 			Assert.AreEqual(TSQLStatementType.Select, select1.Type);
+			Assert.AreEqual(1, select1.Select.Columns.Count);
 
 			Assert.AreEqual(TSQLStatementType.Select, select2.Type);
+			Assert.AreEqual(1, select2.Select.Columns.Count);
 		}
 
 		[Test]
@@ -169,6 +200,7 @@ namespace Tests.Statements
 			Assert.AreEqual(12, select.Tokens.Count);
 			Assert.IsNotNull(select.Option);
 			Assert.AreEqual(5, select.Option.Tokens.Count);
+			Assert.AreEqual(1, select.Select.Columns.Count);
 		}
 
 		[Test]
@@ -186,8 +218,10 @@ namespace Tests.Statements
 			TSQLSelectStatement select2 = statements[1] as TSQLSelectStatement;
 
 			Assert.AreEqual(8, select1.Tokens.Count);
+			Assert.AreEqual(1, select1.Select.Columns.Count);
 
 			Assert.AreEqual(2, select2.Tokens.Count);
+			Assert.AreEqual(1, select2.Select.Columns.Count);
 		}
 
 		[Test]
@@ -213,15 +247,49 @@ namespace Tests.Statements
 			Assert.AreEqual(17, select.Select.Tokens.Count);
 
 			Assert.AreEqual(6, select.From.Tokens.Count);
+
+			Assert.AreEqual(2, select.Select.Columns.Count);
 		}
 
 		[Test]
 		public void SelectStatement_MultiLevelParens()
 		{
 			string query = "SELECT ((A/B)-1) FROM SomeTable";
-			var statements = TSQLStatementReader.ParseStatements(query);
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(query);
 			Assert.AreEqual(1, statements.Count);
-			Assert.AreEqual(12, statements[0].Tokens.Count);
+			Assert.AreEqual(TSQLStatementType.Select, statements[0].Type);
+			TSQLSelectStatement selectStatement = statements[0].AsSelect;
+			Assert.AreEqual(12, selectStatement.Tokens.Count);
+			TSQLSelectClause selectClause = selectStatement.Select;
+			Assert.AreEqual(1, selectClause.Columns.Count);
+			// outer parens
+			TSQLExpression lvl1Expression = selectClause.Columns[0].Expression;
+			Assert.AreEqual(TSQLExpressionType.Grouped, lvl1Expression.Type);
+			// contents of outer parens
+			TSQLExpression lvl2Expression = lvl1Expression.AsGrouped.InnerExpression;
+			Assert.AreEqual(TSQLExpressionType.Operator, lvl2Expression.Type);
+			Assert.AreEqual("-", lvl2Expression.AsOperator.Operator.Text);
+			// (A/B)
+			TSQLExpression lvl2aExpression = lvl2Expression.AsOperator.LeftSide;
+			// 1
+			TSQLExpression lvl2bExpression = lvl2Expression.AsOperator.RightSide;
+			Assert.AreEqual(TSQLExpressionType.Grouped, lvl2aExpression.Type);
+			Assert.AreEqual(TSQLExpressionType.Constant, lvl2bExpression.Type);
+			Assert.AreEqual(1, lvl2bExpression.AsConstant.Literal.AsNumericLiteral.Value);
+			// A/B
+			TSQLExpression lvl3Expression = lvl2aExpression.AsGrouped.InnerExpression;
+			Assert.AreEqual(TSQLExpressionType.Operator, lvl3Expression.Type);
+			Assert.AreEqual("/", lvl3Expression.AsOperator.Operator.Text);
+			// A
+			TSQLExpression lvl3aExpression = lvl3Expression.AsOperator.LeftSide;
+			// B
+			TSQLExpression lvl3bExpression = lvl3Expression.AsOperator.RightSide;
+			Assert.AreEqual(TSQLExpressionType.Column, lvl3aExpression.Type);
+			Assert.AreEqual("A", lvl3aExpression.AsColumn.Column.Name);
+			Assert.IsNull(lvl3aExpression.AsColumn.TableReference);
+			Assert.AreEqual(TSQLExpressionType.Column, lvl3bExpression.Type);
+			Assert.AreEqual("B", lvl3bExpression.AsColumn.Column.Name);
+			Assert.IsNull(lvl3bExpression.AsColumn.TableReference);
 		}
 
 		[Test]
@@ -240,6 +308,7 @@ namespace Tests.Statements
 			Assert.AreEqual(4, select.Select.Tokens.Count);
 			Assert.AreEqual(21, select.From.Tokens.Count);
 			Assert.IsNull(select.Where);
+			Assert.AreEqual(1, select.Select.Columns.Count);
 		}
 
 		[Test]
@@ -254,11 +323,17 @@ namespace Tests.Statements
 			TSQLSelectStatement select = statements[0] as TSQLSelectStatement;
 
 			Assert.AreEqual(15, select.Select.Tokens.Count);
+			Assert.AreEqual(2, select.Select.Columns.Count);
+			Assert.AreEqual("Value", select.Select.Columns[0].Expression.AsColumn.Column.Name);
+			TSQLSelectColumn column = select.Select.Columns[1];
+			Assert.AreEqual("Cased", column.ColumnAlias.AsIdentifier.Name);
+			Assert.AreEqual(TSQLExpressionType.Case, column.Expression.Type);
 			Assert.AreEqual(2, select.From.Tokens.Count);
 			Assert.AreEqual("FROM SomeTable",
 				query.Substring(
 					select.From.BeginPosition, 
 					select.From.Length));
+			Assert.AreEqual(2, select.Select.Columns.Count);
 		}
 
 		[Test]
@@ -273,12 +348,14 @@ namespace Tests.Statements
 			TSQLSelectStatement select = statements[0] as TSQLSelectStatement;
 
 			Assert.AreEqual(2, select.Select.Tokens.Count);
+			Assert.AreEqual("Value", select.Select.Columns[0].Expression.AsColumn.Column.Name);
 			Assert.AreEqual(2, select.From.Tokens.Count);
 			Assert.AreEqual("FROM SomeTable",
 				query.Substring(
 					select.From.BeginPosition,
 					select.From.Length));
 			Assert.AreEqual(15, select.Where.Tokens.Count);
+			Assert.AreEqual(1, select.Select.Columns.Count);
 		}
 
 		[Test]
@@ -299,6 +376,7 @@ namespace Tests.Statements
 
 			Assert.AreEqual(16, select.Tokens.Count);
 			Assert.AreEqual("OrderDate", select.Tokens[15].Text);
+			Assert.AreEqual(1, select.Select.Columns.Count);
 		}
 
 		[Test]
@@ -320,6 +398,7 @@ namespace Tests.Statements
 				sql.Substring(
 					statements[1].BeginPosition,
 					statements[1].Length));
+			Assert.AreEqual(1, statements[1].AsSelect.Select.Columns.Count);
 			Assert.AreEqual(1, statements[2].Tokens.Count);
 			Assert.IsTrue(statements[2].Tokens[0].IsKeyword(TSQLKeywords.END));
 		}
@@ -337,6 +416,155 @@ namespace Tests.Statements
 
 			Assert.AreEqual(1, statements.Count);
 			Assert.AreEqual(4, select.Tokens.Count);
+			Assert.AreEqual(1, select.Select.Columns.Count);
+		}
+		[Test]
+		public void SelectStatement_UnionDontOverrun()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"
+					SELECT TOP 1 L1.ID
+					FROM
+						(SELECT 2 AS ID) L1
+					WHERE
+						L1.ID = 2
+					GROUP BY
+						L1.ID
+					HAVING COUNT(*) > 0
+
+					UNION ALL
+
+					SELECT TOP 1 L2.ID
+					FROM
+						(SELECT 1 AS ID) L2
+					WHERE
+						L2.ID = 1
+					GROUP BY
+						L2.ID
+					HAVING COUNT(*) > 0
+
+					-- the only table alias in scope is the first one
+					-- but all rows from result of UNION are referenced
+					ORDER BY L1.ID
+
+					OPTION (FAST 2)
+
+					FOR XML PATH;",
+				includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+			Assert.IsNotNull(statements[0].AsSelect.SetOperators.SingleOrDefault());
+			Assert.AreEqual(36, statements[0].AsSelect.SetOperators.Single().Tokens.Count);
+			Assert.IsNotNull(statements[0].AsSelect.SetOperators.Single().Select);
+			Assert.AreEqual(34, statements[0].AsSelect.SetOperators.Single().Select.Tokens.Count);
+			Assert.IsNull(statements[0].AsSelect.SetOperators.Single().Select.OrderBy);
+			Assert.IsNotNull(statements[0].AsSelect.OrderBy);
+		}
+
+		[Test]
+		public void SelectStatement_UnionParensRegression()
+		{
+			// regression test for https://github.com/bruce-dunwiddie/tsql-parser/issues/69
+
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT 1 UNION (SELECT 2)",
+				includeWhitespace: false);
+
+			TSQLSelectStatement select = statements[0].AsSelect;
+
+			Assert.AreEqual(1, statements.Count);
+			Assert.AreEqual(7, select.Tokens.Count);
+			Assert.IsNotNull(select.SetOperators.SingleOrDefault());
+		}
+
+		[Test]
+		public void SelectStatement_UnionMultiParens()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT 1 UNION ((SELECT 2)) SELECT 1",
+				includeWhitespace: false);
+
+			TSQLSelectStatement select = statements[0].AsSelect;
+			TSQLSelectStatement select2 = statements[1].AsSelect;
+
+			Assert.AreEqual(2, statements.Count);
+			Assert.AreEqual(9, select.Tokens.Count);
+			Assert.IsNotNull(select.SetOperators.SingleOrDefault());
+			Assert.AreEqual(2, select2.Tokens.Count);
+		}
+
+		[Test]
+		public void SelectStatement_MultipleSetOperatorsRegression()
+		{
+			// regression test for https://github.com/bruce-dunwiddie/tsql-parser/issues/81
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT 1
+				UNION
+				SELECT 2
+				UNION
+				SELECT 3",
+				includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+			TSQLSelectStatement select = statements.Single().AsSelect;
+			Assert.AreEqual(8, select.Tokens.Count);
+
+			Assert.AreEqual(2, select.SetOperators.Count);
+
+			Assert.AreEqual(1, select
+				.Select
+				.Columns
+				.Single()
+				.Expression
+				.AsConstant
+				.Literal
+				.AsNumericLiteral
+				.Value);
+
+			Assert.AreEqual(2, select
+				.SetOperators[0]
+				.Select
+				.Select
+				.Columns
+				.Single()
+				.Expression
+				.AsConstant
+				.Literal
+				.AsNumericLiteral
+				.Value);
+
+			Assert.AreEqual(3, select
+				.SetOperators[1]
+				.Select
+				.Select
+				.Columns
+				.Single()
+				.Expression
+				.AsConstant
+				.Literal
+				.AsNumericLiteral
+				.Value);
+		}
+
+		[Test]
+		public void SelectStatement_DistinctAndTop()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT DISTINCT TOP(5) FirstName
+				FROM
+					Person.Person p;",
+				includeWhitespace: false);
+
+			Assert.AreEqual("FirstName", statements
+				.Single()
+				.AsSelect
+				.Select
+				.Columns
+				.Single()
+				.Expression
+				.AsColumn
+				.Column
+				.Name);
 		}
 	}
 }

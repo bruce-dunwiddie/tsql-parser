@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using TSQL.Statements;
-using TSQL.Statements.Parsers;
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Clauses.Parsers
 {
@@ -22,9 +21,7 @@ namespace TSQL.Clauses.Parsers
 
 			orderBy.Tokens.Add(tokenizer.Current);
 
-			// subqueries
-
-			TSQLSubqueryHelper.ReadUntilStop(
+			TSQLTokenParserHelper.ReadUntilStop(
 				tokenizer,
 				orderBy,
 				new List<TSQLFutureKeywords>()
@@ -37,6 +34,8 @@ namespace TSQL.Clauses.Parsers
 				},
 				lookForStatementStarts: true);
 
+			// have to handle OFFSET parsing specially because it can contain FETCH, which would otherwise
+			// signal the start of a new statement instead of still being contained within OFFSET
 			if (tokenizer.Current.IsFutureKeyword(TSQLFutureKeywords.OFFSET))
 			{
 				TSQLOffsetClause offsetClause = new TSQLOffsetClauseParser().Parse(tokenizer);

@@ -7,6 +7,7 @@ using System.Text;
 
 using TSQL.IO;
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL
 {
@@ -15,8 +16,6 @@ namespace TSQL
 		private TSQLCharacterReader _charReader = null;
 		private TSQLToken _current = null;
 		private bool _hasMore = true;
-		private bool _hasExtra = false;
-		private TSQLToken _extraToken;
 
 		public TSQLTokenizer(
 			string tsqlText) :
@@ -43,26 +42,18 @@ namespace TSQL
 
 			if (_hasMore)
 			{
-				if (_hasExtra)
+				if (IncludeWhitespace)
 				{
-					_current = _extraToken;
-					_hasExtra = false;
+					_hasMore = _charReader.Read();
 				}
 				else
 				{
-					if (IncludeWhitespace)
-					{
-						_hasMore = _charReader.Read();
-					}
-					else
-					{
-						_hasMore = _charReader.ReadNextNonWhitespace();
-					}
+					_hasMore = _charReader.ReadNextNonWhitespace();
+				}
 
-					if (_hasMore)
-					{
-						SetCurrent();
-					}
+				if (_hasMore)
+				{
+					SetCurrent();
 				}
 			}
 
@@ -896,232 +887,11 @@ namespace TSQL
 				}
 			}
 
-			_current = DetermineTokenType(
+			_current = new TSQLTokenFactory().Parse(
 				characterHolder.ToString(),
 				startPosition,
-				startPosition + characterHolder.Length - 1);
-		}
-
-		private TSQLToken DetermineTokenType(
-			string tokenValue,
-			int startPosition,
-			int endPosition)
-		{
-			if (
-				char.IsWhiteSpace(tokenValue[0]))
-			{
-				return
-					new TSQLWhitespace(
-						startPosition,
-						tokenValue);
-			}
-			else if (
-				tokenValue[0] == '@')
-			{
-				if (TSQLVariables.IsVariable(tokenValue))
-				{
-					return
-						new TSQLSystemVariable(
-							startPosition,
-							tokenValue);
-				}
-				else
-				{
-					return
-						new TSQLVariable(
-							startPosition,
-							tokenValue);
-				}
-			}
-			else if (tokenValue.StartsWith("--"))
-			{
-				return
-					new TSQLSingleLineComment(
-						startPosition,
-						tokenValue);
-			}
-			else if (tokenValue.StartsWith("/*"))
-			{
-				if (tokenValue.EndsWith("*/"))
-				{
-					return
-						new TSQLMultilineComment(
-							startPosition,
-							tokenValue);
-				}
-				else
-				{
-					return
-						new TSQLIncompleteCommentToken(
-							startPosition,
-							tokenValue);
-				}
-			}
-			else if (
-				tokenValue.StartsWith("'") ||
-				tokenValue.StartsWith("N'"))
-			{
-				// make sure there's an even number of quotes so that it's closed properly
-				if ((tokenValue.Split('\'').Length - 1) % 2 == 0)
-				{
-					return
-						new TSQLStringLiteral(
-							startPosition,
-							tokenValue);
-				}
-				else
-				{
-					return
-						new TSQLIncompleteStringToken(
-							startPosition,
-							tokenValue);
-				}
-			}
-			else if (
-				!UseQuotedIdentifiers &&
-				tokenValue.StartsWith("\""))
-			{
-				// make sure there's an even number of quotes so that it's closed properly
-				if ((tokenValue.Split('\"').Length - 1) % 2 == 0)
-				{
-					return
-						new TSQLStringLiteral(
-							startPosition,
-							tokenValue);
-				}
-				else
-				{
-					return
-						new TSQLIncompleteStringToken(
-							startPosition,
-							tokenValue);
-				}
-			}
-			else if (
-				tokenValue[0] == '$')
-			{
-				// $IDENTITY
-				if (
-					tokenValue.Length > 1 &&
-					char.IsLetter(tokenValue[1]))
-				{
-					return
-						new TSQLSystemColumnIdentifier(
-							startPosition,
-							tokenValue);
-				}
-				// $45.56
-				else
-				{
-					return
-						new TSQLMoneyLiteral(
-							startPosition,
-							tokenValue);
-				}
-			}
-			else if (CharUnicodeInfo.GetUnicodeCategory(tokenValue[0]) == UnicodeCategory.CurrencySymbol)
-			{
-				return
-					new TSQLMoneyLiteral(
-						startPosition,
-						tokenValue);
-			}
-			else if (tokenValue.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
-			{
-				return
-					new TSQLBinaryLiteral(
-						startPosition,
-						tokenValue);
-			}
-			else if (
-				char.IsDigit(tokenValue[0]) ||
-				(
-					tokenValue[0] == '.' &&
-					tokenValue.Length > 1 &&
-					char.IsDigit(tokenValue[1])
-				))
-			{
-				return
-					new TSQLNumericLiteral(
-						startPosition,
-						tokenValue);
-			}
-			else if (
-				tokenValue[0] == '=' ||
-				tokenValue[0] == '~' ||
-				tokenValue[0] == '-' ||
-				tokenValue[0] == '+' ||
-				tokenValue[0] == '*' ||
-				tokenValue[0] == '/' ||
-				tokenValue[0] == '<' ||
-				tokenValue[0] == '>' ||
-				tokenValue[0] == '!' ||
-				tokenValue[0] == '&' ||
-				tokenValue[0] == '|' ||
-				tokenValue[0] == '^' ||
-				tokenValue[0] == '%' ||
-				tokenValue[0] == ':')
-			{
-				return
-					new TSQLOperator(
-						startPosition,
-						tokenValue);
-			}
-			else if (TSQLCharacters.IsCharacter(tokenValue))
-			{
-				return
-					new TSQLCharacter(
-						startPosition,
-						tokenValue);
-			}
-			else if (TSQLKeywords.IsKeyword(tokenValue))
-			{
-				return
-					new TSQLKeyword(
-						startPosition,
-						tokenValue);
-			}
-			else if (TSQLIdentifiers.IsIdentifier(tokenValue))
-			{
-				return
-					new TSQLSystemIdentifier(
-						startPosition,
-						tokenValue);
-			}
-			else
-			{
-				if (
-					(
-						tokenValue.StartsWith("[") &&
-						!tokenValue.EndsWith("]")
-					)	||
-					(
-						UseQuotedIdentifiers &&
-						tokenValue.StartsWith("\"") &&
-						// see if there's an odd number of quotes
-						(tokenValue.Split('\"').Length - 1) % 2 == 1
-					))
-				{
-					return
-						new TSQLIncompleteIdentifierToken(
-							startPosition,
-							tokenValue);
-				}
-				else
-				{
-					return
-						new TSQLIdentifier(
-							startPosition,
-							tokenValue);
-				}
-			}
-		}
-
-		public void Putback()
-		{
-			_hasExtra = true;
-			_extraToken = _current;
-			_hasMore = true;
+				startPosition + characterHolder.Length - 1,
+				UseQuotedIdentifiers);
 		}
 
 		public TSQLToken Current

@@ -8,6 +8,12 @@ namespace TSQL.Expressions
 {
 	public class TSQLCaseExpression : TSQLExpression
 	{
-
+		public override TSQLExpressionType Type
+		{
+			get
+			{
+				return TSQLExpressionType.Case;
+			}
+		}
 	}
 }

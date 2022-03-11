@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 
-using TSQL.Statements;
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Clauses.Parsers
 {
@@ -21,7 +21,7 @@ namespace TSQL.Clauses.Parsers
 
 			// TODO: tighten logic to handle tables named OUTPUT, but still handle ON usage in MERGE
 
-			TSQLSubqueryHelper.ReadUntilStop(
+			TSQLTokenParserHelper.ReadUntilStop(
 				tokenizer,
 				on,
 				new List<TSQLFutureKeywords>() {

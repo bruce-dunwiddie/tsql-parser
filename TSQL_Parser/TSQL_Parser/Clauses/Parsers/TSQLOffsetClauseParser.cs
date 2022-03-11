@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using TSQL.Clauses;
-using TSQL.Clauses.Parsers;
-using TSQL.Tokens;
 
-namespace TSQL.Statements.Parsers
+using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
+
+namespace TSQL.Clauses.Parsers
 {
     internal class TSQLOffsetClauseParser
     {
@@ -18,8 +18,8 @@ namespace TSQL.Statements.Parsers
             }
 
             offset.Tokens.Add(tokenizer.Current);
-            
-            TSQLSubqueryHelper.ReadUntilStop(
+
+            TSQLTokenParserHelper.ReadUntilStop(
                 tokenizer,
                 offset,
                 new List<TSQLFutureKeywords> { },
@@ -27,7 +27,7 @@ namespace TSQL.Statements.Parsers
                 {
                     TSQLKeywords.FETCH
                 },
-                true);
+                lookForStatementStarts: true);
             
             if (tokenizer.Current.IsKeyword(TSQLKeywords.FETCH))
             {

@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 
 using TSQL;
+using TSQL.Expressions;
 using TSQL.Statements;
+using TSQL.Tokens;
 
 namespace Tests.Statements
 {
@@ -130,6 +132,17 @@ namespace Tests.Statements
 			Assert.IsNull(insert.Execute);
 			Assert.AreEqual(5, insert.Insert.Tokens.Count);
 			Assert.AreEqual(50, insert.Select.Tokens.Count);
+			Assert.AreEqual(4, insert.Select.Select.Columns.Count);
+			Assert.IsNull(insert.Select.Select.Columns[0].ColumnAlias);
+			Assert.AreEqual(TSQLExpressionType.Constant, insert.Select.Select.Columns[0].Expression.Type);
+			Assert.AreEqual("SELECT", insert.Select.Select.Columns[0].Expression.AsConstant.Literal.AsStringLiteral.Value);
+			Assert.IsNull(insert.Select.Select.Columns[1].ColumnAlias);
+			Assert.AreEqual(TSQLExpressionType.Column, insert.Select.Select.Columns[1].Expression.Type);
+			Assert.AreEqual("sp", insert.Select.Select.Columns[1].Expression.AsColumn.TableReference.Single().AsIdentifier.Name);
+			Assert.AreEqual("BusinessEntityID", insert.Select.Select.Columns[1].Expression.AsColumn.Column.Name);
+			Assert.AreEqual(TSQLExpressionType.Column, insert.Select.Select.Columns[3].Expression.Type);
+			Assert.AreEqual("sp", insert.Select.Select.Columns[3].Expression.AsColumn.TableReference.Single().AsIdentifier.Name);
+			Assert.AreEqual("SalesYTD", insert.Select.Select.Columns[3].Expression.AsColumn.Column.Name);
 		}
 
 		[Test]

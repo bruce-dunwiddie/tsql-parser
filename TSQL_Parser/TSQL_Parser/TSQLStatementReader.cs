@@ -12,9 +12,9 @@ namespace TSQL
 {
 	public partial class TSQLStatementReader
 	{
-		private TSQLTokenizer _tokenizer = null;
-		private bool _hasMore = true;
-		private TSQLStatement _current = null;
+		private TSQLTokenizer tokenizer = null;
+		private bool hasMore = true;
+		private TSQLStatement current = null;
 
 		public TSQLStatementReader(
 			string tsqlText) :
@@ -26,19 +26,21 @@ namespace TSQL
 		public TSQLStatementReader(
 			TextReader tsqlStream)
 		{
-			_tokenizer = new TSQLTokenizer(tsqlStream);
+			tokenizer = new TSQLTokenizer(tsqlStream);
+			// move to first token
+			tokenizer.MoveNext();
 		}
 
 		public bool UseQuotedIdentifiers
 		{
 			get
 			{
-				return _tokenizer.UseQuotedIdentifiers;
+				return tokenizer.UseQuotedIdentifiers;
 			}
 
 			set
 			{
-				_tokenizer.UseQuotedIdentifiers = value;
+				tokenizer.UseQuotedIdentifiers = value;
 			}
 		}
 
@@ -46,12 +48,12 @@ namespace TSQL
 		{
 			get
 			{
-				return _tokenizer.IncludeWhitespace;
+				return tokenizer.IncludeWhitespace;
 			}
 
 			set
 			{
-				_tokenizer.IncludeWhitespace = value;
+				tokenizer.IncludeWhitespace = value;
 			}
 		}
 
@@ -59,37 +61,35 @@ namespace TSQL
 		{
 			CheckDisposed();
 
-			if (_hasMore)
+			if (hasMore)
 			{
-				// push the tokenizer to the next token
-
 				// eat up any tokens inbetween statements until we get to something that might start a new statement
 				// which should be a keyword if the batch is valid
 
 				// if the last statement parser did not swallow the final semicolon, or there were multiple semicolons, we will swallow it also
 				while (
-					_tokenizer.MoveNext() &&
+					tokenizer.Current != null &&
 					(
-						_tokenizer.Current.Type == TSQLTokenType.SingleLineComment ||
-						_tokenizer.Current.Type == TSQLTokenType.MultilineComment ||
-						_tokenizer.Current.Type == TSQLTokenType.Whitespace ||
+						tokenizer.Current.IsWhitespace() ||
+						tokenizer.Current.IsComment() ||
 						(
-							_tokenizer.Current.Type == TSQLTokenType.Character &&
-							_tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
+							tokenizer.Current.Type == TSQLTokenType.Character &&
+							tokenizer.Current.AsCharacter.Character == TSQLCharacters.Semicolon
 						)
-					));
+					) &&
+					tokenizer.MoveNext());
 
-				if (_tokenizer.Current == null)
+				if (tokenizer.Current == null)
 				{
-					_hasMore = false;
+					hasMore = false;
 
-					return _hasMore;
+					return hasMore;
 				}
 
-				_current = new TSQLStatementParserFactory().Create(_tokenizer).Parse();
+				current = new TSQLStatementParserFactory().Create(tokenizer).Parse();
 			}
 
-			return _hasMore;
+			return hasMore;
 		}
 
 		public TSQLStatement Current
@@ -98,7 +98,7 @@ namespace TSQL
 			{
 				CheckDisposed();
 
-				return _current;
+				return current;
 			}
 		}
 

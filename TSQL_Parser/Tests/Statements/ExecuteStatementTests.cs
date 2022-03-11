@@ -27,6 +27,30 @@ namespace Tests.Statements
 		}
 
 		[Test]
+		public void ExecuteStatement_Simple()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"EXECUTE sp_who2;",
+				includeWhitespace: false);
+			TSQLExecuteStatement exec = statements[0].AsExecute;
+
+			Assert.AreEqual(1, statements.Count);
+			Assert.AreEqual(2, exec.Tokens.Count);
+		}
+
+		[Test]
+		public void ExecuteStatement_ShortWord()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"EXEC sp_who2;",
+				includeWhitespace: false);
+			TSQLExecuteStatement exec = statements[0].AsExecute;
+
+			Assert.AreEqual(1, statements.Count);
+			Assert.AreEqual(2, exec.Tokens.Count);
+		}
+
+		[Test]
 		public void ExecuteStatement_NoEnd()
 		{
 			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(

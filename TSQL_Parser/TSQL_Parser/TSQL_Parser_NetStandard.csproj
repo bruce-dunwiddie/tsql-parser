@@ -4,11 +4,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>TSQL_Parser</AssemblyName>
     <RootNamespace>TSQL_Parser</RootNamespace>
-    <Version>1.5.3.0</Version>
-    <AssemblyVersion>1.5.3.0</AssemblyVersion>
-    <FileVersion>1.5.3.0</FileVersion>
+    <Version>2.0.0.0</Version>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
     <Description>Library for Parsing SQL Server TSQL Scripts</Description>
-    <Copyright>Copyright © 2021</Copyright>
+    <Copyright>Copyright © 2022</Copyright>
     <Company />
     <RepositoryUrl></RepositoryUrl>
     <PackageProjectUrl>https://github.com/bruce-dunwiddie/tsql-parser</PackageProjectUrl>
@@ -40,12 +40,31 @@
     <None Remove="Pack.bat" />
     <None Remove="packages.config" />
     <None Remove="project.json" />
+    <None Remove="project.lock.json" />
     <None Remove="TSQL_Parser.nuspec" />
     <None Remove="TSQL_Parser.xml" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="TSQLTokenizer.*.cs">
+      <DependentUpon>TSQLTokenizer.cs</DependentUpon>
+    </Compile>
+    <Compile Update="TSQLStatementReader.*.cs">
+      <DependentUpon>TSQLStatementReader.cs</DependentUpon>
+    </Compile>
+    <Compile Update="IO\TSQLCharacterReader.*.cs">
+      <DependentUpon>TSQLCharacterReader.cs</DependentUpon>
+    </Compile>
+    <Compile Update="IO\BufferedTextReader.*.cs">
+      <DependentUpon>BufferedTextReader.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Expressions\TSQLArgumentList.*.cs">
+      <DependentUpon>TSQLArgumentList.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

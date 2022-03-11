@@ -159,6 +159,18 @@ namespace TSQL.Tokens
 
 		/// <summary>
 		///		Fluent convenience shortcut for casting object
+		///		as <see cref="TSQL.Tokens.TSQLSystemColumnIdentifier"/>.
+		/// </summary>
+		public TSQLSystemColumnIdentifier AsSystemColumnIdentifier
+		{
+			get
+			{
+				return this as TSQLSystemColumnIdentifier;
+			}
+		}
+
+		/// <summary>
+		///		Fluent convenience shortcut for casting object
 		///		as <see cref="TSQL.Tokens.TSQLKeyword"/>.
 		/// </summary>
 		public TSQLKeyword AsKeyword
@@ -286,87 +298,6 @@ namespace TSQL.Tokens
 			get
 			{
 				return this as TSQLMoneyLiteral;
-			}
-		}
-	}
-
-	public static class TSQLTokenExtensions
-	{
-		public static bool IsKeyword(this TSQLToken token, TSQLKeywords keyword)
-		{
-			if (token == null)
-			{
-				return false;
-			}
-
-			if (token.Type != TSQLTokenType.Keyword)
-			{
-				return false;
-			}
-
-			if (token.AsKeyword.Keyword != keyword)
-			{
-				return false;
-			}
-
-			return true;
-		}
-
-		public static bool IsCharacter(this TSQLToken token, TSQLCharacters character)
-		{
-			if (token == null)
-			{
-				return false;
-			}
-
-			if (token.Type != TSQLTokenType.Character)
-			{
-				return false;
-			}
-
-			if (token.AsCharacter.Character != character)
-			{
-				return false;
-			}
-
-			return true;
-		}
-
-		public static bool IsWhitespace(this TSQLToken token)
-		{
-			if (token == null)
-			{
-				return false;
-			}
-			else
-			{
-				return token.Type == TSQLTokenType.Whitespace;
-			}
-		}
-
-		public static bool IsComment(this TSQLToken token)
-		{
-			if (token == null)
-			{
-				return false;
-			}
-			else
-			{
-				return token.Type == TSQLTokenType.SingleLineComment ||
-					token.Type == TSQLTokenType.MultilineComment ||
-					token.Type == TSQLTokenType.IncompleteComment;
-			}
-		}
-
-		public static bool IsFutureKeyword(this TSQLToken token, TSQLFutureKeywords keyword)
-		{
-			if (token == null)
-			{
-				return false;
-			}
-			else
-			{
-				return TSQLFutureKeywords.Parse(token.Text) == keyword;
 			}
 		}
 	}

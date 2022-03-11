@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using TSQL.Expressions;
-using TSQL.Tokens;
+using TSQL.Elements;
 
 namespace TSQL.Clauses
 {
-	public abstract class TSQLClause : TSQLExpression
+	public abstract class TSQLClause : TSQLElement
 	{
 
 	}

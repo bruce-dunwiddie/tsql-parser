@@ -4,43 +4,111 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using TSQL.Tokens;
+using TSQL.Elements;
 
 namespace TSQL.Expressions
 {
-	public abstract class TSQLExpression
+	public abstract class TSQLExpression : TSQLElement
 	{
-		private readonly List<TSQLToken> _tokens = new List<TSQLToken>();
+		public abstract TSQLExpressionType Type
+		{
+			get;
+		}
 
-		public List<TSQLToken> Tokens
+		// TODO: populate Expressions list for all expressions recursively
+
+		//public List<TSQLExpression> Expressions
+		//{
+		//	get;
+
+		//	internal set;
+		//}
+
+		public TSQLCaseExpression AsCase
 		{
 			get
 			{
-				return _tokens;
+				return this as TSQLCaseExpression;
 			}
 		}
 
-		public int BeginPosition
+		public TSQLColumnExpression AsColumn
 		{
 			get
 			{
-				return Tokens.First().BeginPosition;
+				return this as TSQLColumnExpression;
 			}
 		}
 
-		public int EndPosition
+		public TSQLFunctionExpression AsFunction
 		{
 			get
 			{
-				return Tokens.Last().EndPosition;
+				return this as TSQLFunctionExpression;
 			}
 		}
 
-		public int Length
+		public TSQLSubqueryExpression AsSubquery
 		{
 			get
 			{
-				return EndPosition - BeginPosition + 1;
+				return this as TSQLSubqueryExpression;
+			}
+		}
+
+		public TSQLVariableExpression AsVariable
+		{
+			get
+			{
+				return this as TSQLVariableExpression;
+			}
+		}
+
+		public TSQLMulticolumnExpression AsMulticolumn
+		{
+			get
+			{
+				return this as TSQLMulticolumnExpression;
+			}
+		}
+
+		public TSQLOperatorExpression AsOperator
+		{
+			get
+			{
+				return this as TSQLOperatorExpression;
+			}
+		}
+
+		public TSQLGroupedExpression AsGrouped
+		{
+			get
+			{
+				return this as TSQLGroupedExpression;
+			}
+		}
+
+		public TSQLConstantExpression AsConstant
+		{
+			get
+			{
+				return this as TSQLConstantExpression;
+			}
+		}
+
+		public TSQLLogicalExpression AsLogical
+		{
+			get
+			{
+				return this as TSQLLogicalExpression;
+			}
+		}
+
+		public TSQLVariableAssignmentExpression AsVariableAssignment
+		{
+			get
+			{
+				return this as TSQLVariableAssignmentExpression;
 			}
 		}
 	}

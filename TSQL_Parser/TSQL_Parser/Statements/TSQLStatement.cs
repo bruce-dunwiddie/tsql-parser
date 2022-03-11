@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using TSQL.Expressions;
-using TSQL.Tokens;
+using TSQL.Elements;
 
 namespace TSQL.Statements
 {
-	public abstract class TSQLStatement : TSQLExpression
+	public abstract class TSQLStatement : TSQLElement
 	{
 		public abstract TSQLStatementType Type
 		{

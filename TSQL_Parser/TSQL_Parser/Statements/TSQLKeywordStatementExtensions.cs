@@ -66,7 +66,8 @@ namespace TSQL.Statements
 				TSQLKeywords.RETURN,
 				TSQLKeywords.REVERT,
 				// END isn't exactly a statement start, but it acts like one
-				TSQLKeywords.END
+				TSQLKeywords.END,
+				TSQLKeywords.ELSE
 			};
 
 		public static bool IsStatementStart(this TSQLKeywords keyword)

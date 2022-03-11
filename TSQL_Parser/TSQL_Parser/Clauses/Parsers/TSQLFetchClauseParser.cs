@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Clauses.Parsers
 {
@@ -16,17 +18,12 @@ namespace TSQL.Clauses.Parsers
             }
             
             fetchClause.Tokens.Add(tokenizer.Current);
-            
-            TSQLSubqueryHelper.ReadUntilStop(
+
+            TSQLTokenParserHelper.ReadUntilStop(
                 tokenizer,
                 fetchClause,
-                new List<TSQLFutureKeywords>
-                {
-                    Capacity = 0
-                },
-                new List<TSQLKeywords>
-                {
-                },
+                new List<TSQLFutureKeywords> { },
+                new List<TSQLKeywords> { },
                 true);
 
             return fetchClause;
