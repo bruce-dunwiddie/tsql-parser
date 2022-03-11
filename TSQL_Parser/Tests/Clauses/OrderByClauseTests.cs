@@ -11,6 +11,7 @@ using TSQL;
 using TSQL.Clauses;
 using TSQL.Clauses.Parsers;
 using TSQL.Statements;
+using TSQL.Tokens;
 
 namespace Tests.Clauses
 {
