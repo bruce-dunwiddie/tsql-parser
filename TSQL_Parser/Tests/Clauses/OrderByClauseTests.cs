@@ -10,7 +10,7 @@ using NUnit.Framework;
 using TSQL;
 using TSQL.Clauses;
 using TSQL.Clauses.Parsers;
-using TSQL.Tokens;
+using TSQL.Statements;
 
 namespace Tests.Clauses
 {
@@ -31,6 +31,26 @@ namespace Tests.Clauses
 						TSQLOrderByClause orderBy = new TSQLOrderByClauseParser().Parse(tokenizer);
 					});
 			}
+		}
+
+		[Test]
+		public void OrderByClause_OffsetFetch()
+		{
+			// regression test for https://github.com/bruce-dunwiddie/tsql-parser/issues/75
+
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"
+				SELECT * 
+				FROM Product.Product P 
+				ORDER BY P.ProductId 
+				OFFSET (@page -1) * @RowPerPage ROWS 
+				FETCH NEXT @RowPerPage ROWS ONLY",
+				includeWhitespace: false);
+
+			TSQLSelectStatement select = statements[0].AsSelect;
+
+			Assert.AreEqual(1, statements.Count);
+			Assert.AreEqual(26, select.Tokens.Count);
 		}
 	}
 }

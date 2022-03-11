@@ -44,6 +44,9 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>TSQL_Parser.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Docs|AnyCPU'">
+    <OutputPath>bin\Docs\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />

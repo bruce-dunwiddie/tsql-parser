@@ -38,7 +38,7 @@
     <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
     <CleanIntermediates>True</CleanIntermediates>
     <VisibleItems>ProtectedInternalAsProtected, EditorBrowsableNever, NonBrowsable</VisibleItems>
-    <HelpFileVersion>1.2.7.0</HelpFileVersion>
+    <HelpFileVersion>1.5.3.0</HelpFileVersion>
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>False</NamespaceGrouping>
     <SyntaxFilters>C#</SyntaxFilters>
@@ -103,5 +103,8 @@
     <PostBuildEvent>
     </PostBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Docs' ">
+    <OutputPath>bin\Docs\</OutputPath>
   </PropertyGroup>
 </Project>

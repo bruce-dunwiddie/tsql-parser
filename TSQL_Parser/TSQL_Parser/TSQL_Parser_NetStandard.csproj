@@ -15,6 +15,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>TSQL_Parser.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
+    <Configurations>Debug;Release;Docs</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
