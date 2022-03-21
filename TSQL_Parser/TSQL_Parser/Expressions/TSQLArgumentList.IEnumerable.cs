@@ -6,7 +6,13 @@ namespace TSQL.Expressions
 {
 	public partial class TSQLArgumentList : IList<TSQLExpression>
 	{
-		bool ICollection<TSQLExpression>.IsReadOnly => true;
+		bool ICollection<TSQLExpression>.IsReadOnly
+		{
+			get
+			{
+				return true;
+			}
+		}
 
 		void ICollection<TSQLExpression>.Add(TSQLExpression item)
 		{

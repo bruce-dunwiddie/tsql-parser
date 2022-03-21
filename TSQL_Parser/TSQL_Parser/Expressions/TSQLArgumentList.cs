@@ -20,11 +20,23 @@ namespace TSQL.Expressions
 
 		public TSQLExpression this[int index]
 		{
-			get => arguments[index];
+			get
+			{
+				return arguments[index];
+			}
 
-			set => throw new NotImplementedException();
+			set
+			{
+				throw new NotImplementedException();
+			}
 		}
 
-		public int Count => arguments.Count;
+		public int Count
+		{
+			get
+			{
+				return arguments.Count;
+			}
+		}
 	}
 }
