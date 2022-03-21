@@ -96,13 +96,13 @@ namespace TSQL.Expressions
 			}
 		}
 
-		public TSQLLogicalExpression AsLogical
-		{
-			get
-			{
-				return this as TSQLLogicalExpression;
-			}
-		}
+		//public TSQLLogicalExpression AsLogical
+		//{
+		//	get
+		//	{
+		//		return this as TSQLLogicalExpression;
+		//	}
+		//}
 
 		public TSQLVariableAssignmentExpression AsVariableAssignment
 		{

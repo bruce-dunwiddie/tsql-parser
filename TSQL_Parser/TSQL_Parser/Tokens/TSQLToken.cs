@@ -55,12 +55,18 @@ namespace TSQL.Tokens
 			get;
 		}
 
+		/// <summary>
+		///		Overriding ToString() for helpful watch window display.
+		/// </summary>
 		public override string ToString()
 		{
 			return $"[Type: {Type}; Text: \"{ToLiteral(Text)}\"; BeginPosition: {BeginPosition: #,##0}; Length: {Length: #,##0}]";
 		}
 
 		// https://stackoverflow.com/a/14087738
+		/// <summary>
+		///		For use in the ToString() output above. Collapses token Text value to a single escaped line.
+		/// </summary>
 		private static string ToLiteral(string input)
 		{
 			StringBuilder literal = new StringBuilder(input.Length);
