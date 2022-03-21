@@ -18,7 +18,6 @@ namespace TSQL
 		public static readonly TSQLCharacters OpenParentheses = new TSQLCharacters("(");
 		public static readonly TSQLCharacters CloseParentheses = new TSQLCharacters(")");
 		public static readonly TSQLCharacters Period = new TSQLCharacters(".");
-		//public static readonly TSQLCharacters Asterisk = new TSQLCharacters
 
 #pragma warning restore 1591
 

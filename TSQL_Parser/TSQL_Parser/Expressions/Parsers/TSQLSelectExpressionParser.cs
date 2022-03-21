@@ -17,6 +17,7 @@ namespace TSQL.Expressions.Parsers
 
 			if (
 				tokenizer.Current != null &&
+				tokenizer.Current.Text != "*" &&
 				tokenizer.Current.Type.In(
 					TSQLTokenType.Operator) &&
 
