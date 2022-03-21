@@ -19,6 +19,7 @@ namespace TSQL.Expressions.Parsers
 
 			if (
 				tokenizer.Current != null &&
+				tokenizer.Current.Text != "*" &&
 				tokenizer.Current.Type.In(
 					TSQLTokenType.Operator))
 			{
@@ -42,8 +43,22 @@ namespace TSQL.Expressions.Parsers
 
 			// look at the current/first token to determine what to do
 
+			if (tokenizer.Current.Text == "*")
+			{
+				TSQLMulticolumnExpression simpleMulti = new TSQLMulticolumnExpression();
+
+				simpleMulti.Tokens.Add(tokenizer.Current);
+
+				TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
+					tokenizer,
+					simpleMulti.Tokens);
+
+				return simpleMulti;
+
+				// still need to seperately check for p.* below
+			}
 			// this checks for unary operators, e.g. +, -, and ~
-			if (tokenizer.Current.Type.In(
+			else if (tokenizer.Current.Type.In(
 				TSQLTokenType.Operator))
 			{
 				return null;
@@ -302,6 +317,43 @@ namespace TSQL.Expressions.Parsers
 						}
 
 						return function;
+
+						#endregion
+					}
+					else if (tokenizer.Current.Text == "*")
+					{
+						#region parse multi column reference
+
+						// e.g. p.*
+
+						TSQLMulticolumnExpression multi = new TSQLMulticolumnExpression();
+
+						multi.Tokens.AddRange(tokens);
+
+						multi.Tokens.Add(tokenizer.Current);
+
+						List<TSQLToken> columnReference = tokens
+							.Where(t => !t.IsComment() && !t.IsWhitespace())
+							.ToList();
+
+						if (columnReference.Count > 0)
+						{
+							// p.* will have the single token p in the final list
+
+							// AdventureWorks..ErrorLog.* will have 4 tokens in the final list
+							// e.g. {AdventureWorks, ., ., ErrorLog}
+
+							multi.TableReference = columnReference
+								.GetRange(0, columnReference
+									.FindLastIndex(t => t.IsCharacter(TSQLCharacters.Period)))
+								.ToList();
+						}
+
+						TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
+							tokenizer,
+							multi.Tokens);
+
+						return multi;
 
 						#endregion
 					}

@@ -8,6 +8,7 @@
 /TSQL_Parser/Tests/TestResult.xml
 *.user
 /TSQL_Parser/TSQL_Parser/TSQL.Parser.*.nupkg
+/TSQL_Parser/TSQL_Parser/TSQL.Parser.*.snupkg
 /TSQL_Parser/TSQL_Parser/TSQL_Parser.xml
 /TSQL_Parser/TSQL_Parser/project.lock.json
 **/bin/*

@@ -566,5 +566,23 @@ namespace Tests.Statements
 				.Column
 				.Name);
 		}
+
+		[Test]
+		public void SelectStatement_CountAlias()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT COUNT(*) as count FROM sqlite_master",
+				includeWhitespace: false);
+
+			TSQLSelectColumn count = statements
+				.Single()
+				.AsSelect
+				.Select
+				.Columns
+				.Single();
+
+			Assert.AreEqual("COUNT", count.Expression.AsFunction.Function.Name);
+			Assert.AreEqual("count", count.ColumnAlias.Name);
+		}
 	}
 }
