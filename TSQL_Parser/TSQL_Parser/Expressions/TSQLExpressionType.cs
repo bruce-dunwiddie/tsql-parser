@@ -49,6 +49,11 @@ namespace TSQL.Expressions
 		/// <summary>
 		///		e.g. @ProductID = p.id
 		/// </summary>
-		VariableAssignment
+		VariableAssignment,
+
+		/// <summary>
+		///		e.g. 123.45 AS INT (only used as an argument to CAST function)
+		/// </summary>
+		ValueAsType
 	}
 }

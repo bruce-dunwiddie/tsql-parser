@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TSQL.Expressions;
 using TSQL.Expressions.Parsers;
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Elements.Parsers
 {
@@ -22,17 +23,9 @@ namespace TSQL.Elements.Parsers
 
 			column.Tokens.AddRange(columnExpression.Tokens);
 
-			while (
-				tokenizer.Current != null &&
-				(
-					tokenizer.Current.IsWhitespace() ||
-					tokenizer.Current.IsComment())
-				)
-			{
-				column.Tokens.Add(tokenizer.Current);
-
-				tokenizer.MoveNext();
-			}
+			TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+				tokenizer,
+				column);
 
 			// check for operator =, when expression type is column, and return new column expression with alias
 			// e.g. IsFinishedGoods = p.FinishedGoodsFlag
@@ -57,32 +50,28 @@ namespace TSQL.Elements.Parsers
 			}
 			else
 			{
-				if (
-					tokenizer.Current != null &&
-					tokenizer.Current.IsKeyword(TSQLKeywords.AS))
+				if (tokenizer.Current.IsKeyword(TSQLKeywords.AS))
 				{
 					column.Tokens.Add(tokenizer.Current);
 
 					tokenizer.MoveNext();
 
-					while (
-						tokenizer.Current.IsWhitespace() ||
-						tokenizer.Current.IsComment())
-					{
-						column.Tokens.Add(tokenizer.Current);
-
-						tokenizer.MoveNext();
-					}
+					TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+						tokenizer,
+						column);
 				}
 
 				if (tokenizer.Current != null &&
-					tokenizer.Current.Type.In(
+					tokenizer.Current.Type.In(						
 						TSQLTokenType.Identifier,
+						TSQLTokenType.SystemIdentifier,
 						TSQLTokenType.IncompleteIdentifier))
 				{
 					column.Tokens.Add(tokenizer.Current);
 
-					if (tokenizer.Current.Type == TSQLTokenType.Identifier)
+					if (tokenizer.Current.Type.In(
+						TSQLTokenType.Identifier,
+						TSQLTokenType.SystemIdentifier))
 					{
 						column.ColumnAlias = tokenizer.Current.AsIdentifier;
 					}

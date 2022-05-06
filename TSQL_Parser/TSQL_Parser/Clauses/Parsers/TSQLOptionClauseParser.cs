@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Clauses.Parsers
 {
@@ -42,6 +43,10 @@ namespace TSQL.Clauses.Parsers
 				option.Tokens.Add(tokenizer.Current);
 				tokenizer.MoveNext();
 			}
+
+			TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+				tokenizer,
+				option);
 
 			return option;
 		}

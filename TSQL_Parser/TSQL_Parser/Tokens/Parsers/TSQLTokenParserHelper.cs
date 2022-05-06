@@ -99,10 +99,19 @@ namespace TSQL.Tokens.Parsers
 			ITSQLTokenizer tokenizer,
 			TSQLElement element)
 		{
+			ReadCommentsAndWhitespace(
+				tokenizer,
+				element.Tokens);
+		}
+
+		public static void ReadCommentsAndWhitespace(
+			ITSQLTokenizer tokenizer,
+			List<TSQLToken> savedTokens)
+		{
 			while (tokenizer.Current.IsWhitespace() ||
 				tokenizer.Current.IsComment())
 			{
-				element.Tokens.Add(tokenizer.Current);
+				savedTokens.Add(tokenizer.Current);
 
 				tokenizer.MoveNext();
 			}

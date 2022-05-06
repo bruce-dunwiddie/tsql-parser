@@ -37,6 +37,17 @@ namespace TSQL
 		public static readonly TSQLVariables TOTAL_WRITE = new TSQLVariables("@@TOTAL_WRITE");
 		public static readonly TSQLVariables TRANCOUNT = new TSQLVariables("@@TRANCOUNT");
 		public static readonly TSQLVariables VERSION = new TSQLVariables("@@VERSION");
+		public static readonly TSQLVariables DATEFIRST = new TSQLVariables("@@DATEFIRST");
+		public static readonly TSQLVariables DBTS = new TSQLVariables("@@DBTS");
+		public static readonly TSQLVariables LOCK_TIMEOUT = new TSQLVariables("@@LOCK_TIMEOUT");
+		public static readonly TSQLVariables MAX_PRECISION = new TSQLVariables("@@MAX_PRECISION");
+		public static readonly TSQLVariables NESTLEVEL = new TSQLVariables("@@NESTLEVEL");
+		public static readonly TSQLVariables OPTIONS = new TSQLVariables("@@OPTIONS");
+		public static readonly TSQLVariables REMSERVER = new TSQLVariables("@@REMSERVER");
+		public static readonly TSQLVariables SERVICENAME = new TSQLVariables("@@SERVICENAME");
+		public static readonly TSQLVariables CURSOR_ROWS = new TSQLVariables("@@CURSOR_ROWS");
+		public static readonly TSQLVariables FETCH_STATUS = new TSQLVariables("@@FETCH_STATUS");
+		public static readonly TSQLVariables PROCID = new TSQLVariables("@@PROCID");
 
 #pragma warning restore 1591
 

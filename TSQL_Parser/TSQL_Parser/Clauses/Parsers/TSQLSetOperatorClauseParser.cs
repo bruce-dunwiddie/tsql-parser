@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TSQL.Statements;
 using TSQL.Statements.Parsers;
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Clauses.Parsers
 {
@@ -22,8 +23,11 @@ namespace TSQL.Clauses.Parsers
 
 				set.Tokens.Add(tokenizer.Current);
 
-				if (tokenizer.MoveNext() &&
-					tokenizer.Current.IsKeyword(TSQLKeywords.ALL))
+				TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
+					tokenizer,
+					set.Tokens);
+
+				if (tokenizer.Current.IsKeyword(TSQLKeywords.ALL))
 				{
 					set.Tokens.Add(tokenizer.Current);
 
@@ -47,6 +51,10 @@ namespace TSQL.Clauses.Parsers
 				tokenizer.MoveNext();
 			}
 
+			TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+				tokenizer,
+				set);
+
 			int level = 0;
 
 			while (tokenizer.Current.IsCharacter(TSQLCharacters.OpenParentheses))
@@ -57,6 +65,10 @@ namespace TSQL.Clauses.Parsers
 
 				tokenizer.MoveNext();
 			}
+
+			TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+				tokenizer,
+				set);
 
 			TSQLSelectStatement select = new TSQLLimitedSelectStatementParser(tokenizer).Parse();
 
@@ -72,6 +84,10 @@ namespace TSQL.Clauses.Parsers
 
 				tokenizer.MoveNext();
 			}
+
+			TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+				tokenizer,
+				set);
 
 			return set;
 		}

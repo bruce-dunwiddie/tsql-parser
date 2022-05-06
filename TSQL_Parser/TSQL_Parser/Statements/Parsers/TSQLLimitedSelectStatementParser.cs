@@ -6,6 +6,7 @@ using System.Text;
 using TSQL.Clauses;
 using TSQL.Clauses.Parsers;
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Statements.Parsers
 {
@@ -82,6 +83,10 @@ namespace TSQL.Statements.Parsers
 			// FOR not allowed
 
 			// OPTION not allowed
+
+			TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+				Tokenizer,
+				Statement);
 
 			return Statement;
 		}

@@ -179,46 +179,8 @@ namespace TSQL.Expressions.Parsers
 				return column;
 			}
 			else if (tokenizer.Current.Type.In(
+				TSQLTokenType.Identifier,
 				TSQLTokenType.SystemIdentifier))
-			{
-				#region parse system function
-
-				TSQLFunctionExpression function = new TSQLFunctionExpression();
-
-				function.Function = tokenizer.Current.AsSystemIdentifier;
-
-				function.Tokens.Add(tokenizer.Current);
-
-				if (tokenizer.MoveNext() &&
-					tokenizer.Current.IsCharacter(TSQLCharacters.OpenParentheses))
-				{
-					function.Tokens.Add(tokenizer.Current);
-
-					tokenizer.MoveNext();
-
-					TSQLArgumentList arguments = new TSQLArgumentListParser().Parse(
-						tokenizer);
-
-					function.Tokens.AddRange(arguments.Tokens);
-
-					function.Arguments = arguments;
-
-					if (tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
-					{
-						function.Tokens.Add(tokenizer.Current);
-					}
-
-					TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
-						tokenizer,
-						function.Tokens);
-				}
-
-				return function;
-
-				#endregion
-			}
-			else if (tokenizer.Current.Type.In(
-				TSQLTokenType.Identifier))
 			{
 				// column, with or without alias, or with full explicit table name with up to 5 parts
 
@@ -265,8 +227,19 @@ namespace TSQL.Expressions.Parsers
 
 						tokenizer.MoveNext();
 
-						TSQLArgumentList arguments = new TSQLArgumentListParser().Parse(
-							tokenizer);
+						TSQLArgumentList arguments = null;
+
+						// CAST function has it's own very unique argument syntax
+						if (function.Function.IsIdentifier(TSQLIdentifiers.CAST))
+						{
+							arguments = new TSQLValueAsTypeExpressionParser().Parse(
+								tokenizer);
+						}
+						else
+						{
+							arguments = new TSQLArgumentListParser().Parse(
+								tokenizer);
+						}
 
 						function.Tokens.AddRange(arguments.Tokens);
 

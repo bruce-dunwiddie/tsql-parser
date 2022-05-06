@@ -77,5 +77,29 @@ namespace Tests.Statements
 			Assert.IsInstanceOf(typeof(TSQLSelectStatement), statements[0]);
 			Assert.AreEqual(24, statements[0].AsSelect.Tokens.Count);
 		}
+
+		[Test]
+		public void WithStatement_SelectInParensWithWhitespace()
+		{
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"WITH test AS
+				(
+					SELECT 1 AS value
+				),
+				test2 AS
+				(
+					SELECT 2 AS value
+				)
+				(
+					SELECT *
+					FROM
+						test
+				)",
+				includeWhitespace: true);
+
+			Assert.AreEqual(1, statements.Count);
+			Assert.IsInstanceOf(typeof(TSQLSelectStatement), statements[0]);
+			Assert.AreEqual(46, statements[0].AsSelect.Tokens.Count);
+		}
 	}
 }

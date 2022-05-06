@@ -49,6 +49,26 @@ namespace TSQL.Tokens
 			return true;
 		}
 
+		public static bool IsIdentifier(this TSQLToken token, TSQLIdentifiers identifier)
+		{
+			if (token == null)
+			{
+				return false;
+			}
+
+			if (token.Type != TSQLTokenType.SystemIdentifier)
+			{
+				return false;
+			}
+
+			if (token.AsSystemIdentifier.Identifier != identifier)
+			{
+				return false;
+			}
+
+			return true;
+		}
+
 		public static bool IsWhitespace(this TSQLToken token)
 		{
 			if (token == null)
