@@ -6,6 +6,7 @@ using System.Text;
 using TSQL.Clauses;
 using TSQL.Clauses.Parsers;
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Statements.Parsers
 {
@@ -40,6 +41,10 @@ namespace TSQL.Statements.Parsers
 				level++;
 
 				Tokenizer.MoveNext();
+
+				TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+					Tokenizer,
+					Statement);
 			}
 
 			TSQLSelectClause selectClause = new TSQLSelectClauseParser().Parse(Tokenizer);

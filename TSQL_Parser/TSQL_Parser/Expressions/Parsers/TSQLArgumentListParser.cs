@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Expressions.Parsers
 {
@@ -21,34 +22,18 @@ namespace TSQL.Expressions.Parsers
 			// need to do this before starting the argument loop
 			// so we can handle an empty argument list of just whitespace
 			// and comments
-			while (
-				tokenizer.Current != null &&
-				(
-					tokenizer.Current.IsComment() ||
-					tokenizer.Current.IsWhitespace()
-				))
-			{
-				tokens.Add(tokenizer.Current);
-
-				tokenizer.MoveNext();
-			}
+			TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+				tokenizer,
+				tokens);
 
 			while (
 				tokenizer.Current != null &&
 				!tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
 			{
-				while (
-					tokenizer.Current != null &&
-					(
-						tokenizer.Current.IsComment() ||
-						tokenizer.Current.IsWhitespace()
-					))
-				{
-					tokens.Add(tokenizer.Current);
+				TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+					tokenizer,
+					tokens);
 
-					tokenizer.MoveNext();
-				}
-				
 				TSQLExpression argument = factory.Parse(tokenizer);
 
 				tokens.AddRange(argument.Tokens);
@@ -58,13 +43,12 @@ namespace TSQL.Expressions.Parsers
 				if (tokenizer.Current.IsCharacter(TSQLCharacters.Comma))
 				{
 					tokens.Add(tokenizer.Current);
-				}
 
-				if (
-					tokenizer.Current != null &&
-					!tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses))
-				{
 					tokenizer.MoveNext();
+
+					TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+						tokenizer,
+						tokens);
 				}
 			}
 
