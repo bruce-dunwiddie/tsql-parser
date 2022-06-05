@@ -275,7 +275,6 @@ namespace TSQL
 		public static readonly TSQLIdentifiers COLUMNS_UPDATED = new TSQLIdentifiers("COLUMNS_UPDATED");
 		public static readonly TSQLIdentifiers EVENTDATA = new TSQLIdentifiers("EVENTDATA");
 		public static readonly TSQLIdentifiers TRIGGER_NESTLEVEL = new TSQLIdentifiers("TRIGGER_NESTLEVEL");
-		public static readonly TSQLIdentifiers UPDATE = new TSQLIdentifiers("UPDATE");
 
 #pragma warning restore 1591
 
