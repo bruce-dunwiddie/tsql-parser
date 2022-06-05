@@ -744,5 +744,53 @@ namespace Tests.Statements
 			TSQLSelectStatement select = statements.Single().AsSelect;
 			Assert.AreEqual(14, select.Tokens.Count);
 		}
+
+		[Test]
+		public void SelectStatement_system_user_Regression()
+		{
+			// regression test for https://github.com/bruce-dunwiddie/tsql-parser/issues/93
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				//@"SELECT system_user;",
+				@"SELECT system_user;",
+				includeWhitespace: false);
+
+			// System.NullReferenceException
+			// this shouldn't happen even if only because it encountered the end of the string
+
+			// system_user is a system property, not a function
+			// is it trying to parse arguments?
+
+			// should system properties be split out from system functions?
+			// what should each be named?
+
+			Assert.AreEqual(1, statements.Count);
+			TSQLSelectStatement select = statements.Single().AsSelect;
+			Assert.AreEqual(3, select.Tokens.Count);
+			Assert.AreEqual("system_user", select.Select.Columns[0].Expression.AsColumn.Column.Name);
+		}
+
+		[Test]
+		public void SelectStatement_system_user_Regression_without_semicolon()
+		{
+			// regression test for https://github.com/bruce-dunwiddie/tsql-parser/issues/93
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				//@"SELECT system_user;",
+				@"SELECT system_user",
+				includeWhitespace: false);
+
+			// System.NullReferenceException
+			// this shouldn't happen even if only because it encountered the end of the string
+
+			// system_user is a system property, not a function
+			// is it trying to parse arguments?
+
+			// should system properties be split out from system functions?
+			// what should each be named?
+
+			Assert.AreEqual(1, statements.Count);
+			TSQLSelectStatement select = statements.Single().AsSelect;
+			Assert.AreEqual(2, select.Tokens.Count);
+			Assert.AreEqual("system_user", select.Select.Columns[0].Expression.AsColumn.Column.Name);
+		}
 	}
 }

@@ -393,7 +393,39 @@ namespace TSQL.Expressions.Parsers
 					}
 				}
 
-				return null;
+				// this is the fall through if none of the "returns" hit above
+
+				// will also hit if we parse a simple single column expression, e.g. "SELECT blah"
+
+				TSQLColumnExpression simpleColumn = new TSQLColumnExpression();
+
+				simpleColumn.Tokens.AddRange(tokens);
+
+				List<TSQLToken> simpleColumnReference = tokens
+					.Where(t =>
+						!t.IsComment() &&
+						!t.IsWhitespace() &&
+						!t.IsCharacter(TSQLCharacters.Semicolon))
+					.ToList();
+
+				if (simpleColumnReference.Count > 1)
+				{
+					// p.ProductID will have the single token p in the final list
+
+					// AdventureWorks..ErrorLog.ErrorLogID will have 4 tokens in the final list
+					// e.g. {AdventureWorks, ., ., ErrorLog}
+
+					simpleColumn.TableReference = simpleColumnReference
+						.GetRange(0, simpleColumnReference
+							.FindLastIndex(t => t.IsCharacter(TSQLCharacters.Period)))
+						.ToList();
+				}
+
+				simpleColumn.Column = simpleColumnReference
+					.Last()
+					.AsIdentifier;
+
+				return simpleColumn;
 			}
 			else
 			{
