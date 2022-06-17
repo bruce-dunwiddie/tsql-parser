@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>TSQL.Parser</id>
-		<version>2.2.0</version>
+		<version>2.2.1</version>
 		<title>TSQL.Parser</title>
 		<authors>Bruce Dunwiddie</authors>
 		<owners>shriop</owners>
