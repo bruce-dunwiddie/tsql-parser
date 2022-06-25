@@ -750,18 +750,8 @@ namespace Tests.Statements
 		{
 			// regression test for https://github.com/bruce-dunwiddie/tsql-parser/issues/93
 			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
-				//@"SELECT system_user;",
 				@"SELECT system_user;",
 				includeWhitespace: false);
-
-			// System.NullReferenceException
-			// this shouldn't happen even if only because it encountered the end of the string
-
-			// system_user is a system property, not a function
-			// is it trying to parse arguments?
-
-			// should system properties be split out from system functions?
-			// what should each be named?
 
 			Assert.AreEqual(1, statements.Count);
 			TSQLSelectStatement select = statements.Single().AsSelect;
@@ -772,25 +762,66 @@ namespace Tests.Statements
 		[Test]
 		public void SelectStatement_system_user_Regression_without_semicolon()
 		{
-			// regression test for https://github.com/bruce-dunwiddie/tsql-parser/issues/93
 			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
-				//@"SELECT system_user;",
 				@"SELECT system_user",
 				includeWhitespace: false);
-
-			// System.NullReferenceException
-			// this shouldn't happen even if only because it encountered the end of the string
-
-			// system_user is a system property, not a function
-			// is it trying to parse arguments?
-
-			// should system properties be split out from system functions?
-			// what should each be named?
 
 			Assert.AreEqual(1, statements.Count);
 			TSQLSelectStatement select = statements.Single().AsSelect;
 			Assert.AreEqual(2, select.Tokens.Count);
 			Assert.AreEqual("system_user", select.Select.Columns[0].Expression.AsColumn.Column.Name);
+		}
+
+		[Test]
+		public void SelectStatement_CAST_argument_parsing()
+		{
+			// regression test for https://github.com/bruce-dunwiddie/tsql-parser/issues/98
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT CAST(123.45 AS INT), CAST(456.321 AS VARCHAR(10)), Column_1 FROM MyTable",
+				includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+			TSQLSelectStatement select = statements.Single().AsSelect;
+			Assert.AreEqual(21, select.Tokens.Count);
+			Assert.AreEqual(3, select.Select.Columns.Count);
+			TSQLFunctionExpression function = select.Select.Columns[0].Expression.AsFunction;
+			Assert.AreEqual(6, function.Tokens.Count);
+			TSQLValueAsTypeExpression argument = function.Arguments[0].AsValueAsType;
+			Assert.AreEqual(3, argument.Tokens.Count);
+			Assert.AreEqual(123.45, argument.Expression.AsConstant.Literal.AsNumericLiteral.Value);
+			Assert.AreEqual("INT", argument.DataType);
+			function = select.Select.Columns[1].Expression.AsFunction;
+			Assert.AreEqual(9, function.Tokens.Count);
+			argument = function.Arguments[0].AsValueAsType;
+			Assert.AreEqual(6, argument.Tokens.Count);
+			Assert.AreEqual(456.321, argument.Expression.AsConstant.Literal.AsNumericLiteral.Value);
+			Assert.AreEqual("VARCHAR(10)", argument.DataType);
+		}
+
+		[Test]
+		public void SelectStatement_CAST_argument_parsing_with_whitespace()
+		{
+			// regression test for https://github.com/bruce-dunwiddie/tsql-parser/issues/98
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT CAST(123.45 AS INT), CAST(456.321 AS VARCHAR(10) ), Column_1 FROM MyTable",
+				includeWhitespace: true);
+
+			Assert.AreEqual(1, statements.Count);
+			TSQLSelectStatement select = statements.Single().AsSelect;
+			Assert.AreEqual(31, select.Tokens.Count);
+			Assert.AreEqual(3, select.Select.Columns.Count);
+			TSQLFunctionExpression function = select.Select.Columns[0].Expression.AsFunction;
+			Assert.AreEqual(8, function.Tokens.Count);
+			TSQLValueAsTypeExpression argument = function.Arguments[0].AsValueAsType;
+			Assert.AreEqual(5, argument.Tokens.Count);
+			Assert.AreEqual(123.45, argument.Expression.AsConstant.Literal.AsNumericLiteral.Value);
+			Assert.AreEqual("INT", argument.DataType);
+			function = select.Select.Columns[1].Expression.AsFunction;
+			Assert.AreEqual(12, function.Tokens.Count);
+			argument = function.Arguments[0].AsValueAsType;
+			Assert.AreEqual(9, argument.Tokens.Count);
+			Assert.AreEqual(456.321, argument.Expression.AsConstant.Literal.AsNumericLiteral.Value);
+			Assert.AreEqual("VARCHAR(10)", argument.DataType);
 		}
 	}
 }
