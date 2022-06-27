@@ -21,7 +21,7 @@ namespace Tests.Tokens
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
-						new TSQLIncompleteStringToken(0, "'")
+						new TSQLIncompleteString(0, "'")
 					},
 				tokens);
 			Assert.IsFalse(tokens[0].IsComplete);
@@ -34,7 +34,7 @@ namespace Tests.Tokens
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
-						new TSQLIncompleteIdentifierToken(0, "[dbo")
+						new TSQLIncompleteIdentifier(0, "[dbo")
 					},
 				tokens);
 			Assert.IsFalse(tokens[0].IsComplete);
@@ -47,7 +47,7 @@ namespace Tests.Tokens
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
-						new TSQLIncompleteCommentToken(0, "/* something")
+						new TSQLIncompleteComment(0, "/* something")
 					},
 				tokens);
 			Assert.IsFalse(tokens[0].IsComplete);
@@ -63,7 +63,7 @@ namespace Tests.Tokens
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
-						new TSQLIncompleteIdentifierToken(0, "\"dbo")
+						new TSQLIncompleteIdentifier(0, "\"dbo")
 					},
 				tokens);
 			Assert.IsFalse(tokens[0].IsComplete);
@@ -79,7 +79,7 @@ namespace Tests.Tokens
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
-						new TSQLIncompleteStringToken(0, "\"something")
+						new TSQLIncompleteString(0, "\"something")
 					},
 				tokens);
 			Assert.IsFalse(tokens[0].IsComplete);

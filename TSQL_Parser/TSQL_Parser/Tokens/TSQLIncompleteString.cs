@@ -2,9 +2,9 @@
 
 namespace TSQL.Tokens
 {
-	public class TSQLIncompleteStringToken : TSQLIncompleteToken
+	public class TSQLIncompleteString : TSQLIncompleteToken
 	{
-		internal TSQLIncompleteStringToken(
+		internal TSQLIncompleteString(
 			int beginPosition,
 			string text) :
 			base(

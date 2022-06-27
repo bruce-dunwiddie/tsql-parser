@@ -16,51 +16,78 @@ namespace TSQL.Expressions.Parsers
 	{
 		public TSQLArgumentList Parse(ITSQLTokenizer tokenizer)
 		{
-			List<TSQLToken> tokens = new List<TSQLToken>();
+			TSQLValueAsTypeExpression argument = new TSQLValueAsTypeExpression();
 
 			// need to do this before starting the argument loop
 			// so we can handle an empty argument list of just whitespace
 			// and comments
 			TSQLTokenParserHelper.ReadCommentsAndWhitespace(
 				tokenizer,
-				tokens);
-
-			TSQLValueAsTypeExpression argument = new TSQLValueAsTypeExpression();
+				argument);
 
 			TSQLExpression expression = new TSQLValueExpressionParser().Parse(tokenizer);
 
 			argument.Expression = expression;
 
-			tokens.AddRange(expression.Tokens);
+			argument.Tokens.AddRange(expression.Tokens);
 
 			TSQLTokenParserHelper.ReadCommentsAndWhitespace(
 				tokenizer,
-				tokens);
+				argument);
 
 			if (!tokenizer.Current.IsKeyword(TSQLKeywords.AS))
 			{
 				throw new InvalidOperationException("AS expected.");
 			}
 
-			tokens.Add(tokenizer.Current);
+			argument.Tokens.Add(tokenizer.Current);
 
 			TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
 				tokenizer,
-				tokens);
+				argument.Tokens);
 
-			argument.DataType = tokenizer.Current.AsIdentifier;
+			List<TSQLToken> dataTypeTokens = new List<TSQLToken>();
 
-			tokens.Add(tokenizer.Current);
+			dataTypeTokens.Add(tokenizer.Current);
 
-			// reading until closing paren
-			TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
-				tokenizer,
-				tokens);
+			int nestedLevel = 0;
+
+			while (
+				tokenizer.MoveNext() &&
+				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
+				!(
+					nestedLevel == 0 &&
+					tokenizer.Current.IsCharacter(TSQLCharacters.CloseParentheses)
+				))
+			{
+				if (tokenizer.Current.Type == TSQLTokenType.Character)
+				{
+					dataTypeTokens.Add(tokenizer.Current);
+
+					TSQLCharacters character = tokenizer.Current.AsCharacter.Character;
+
+					if (character == TSQLCharacters.OpenParentheses)
+					{
+						nestedLevel++;
+					}
+					else if (character == TSQLCharacters.CloseParentheses)
+					{
+						nestedLevel--;
+					}
+				}
+				else
+				{
+					dataTypeTokens.Add(tokenizer.Current);
+				}
+			}
+
+			argument.DataType = String.Join("", dataTypeTokens.Select(t => t.Text)).TrimEnd();
+			argument.Tokens.AddRange(dataTypeTokens);
 
 			TSQLArgumentList argList = new TSQLArgumentList(
 				new List<TSQLExpression> { argument });
 
-			argList.Tokens.AddRange(tokens);
+			argList.Tokens.AddRange(argument.Tokens);
 
 			return argList;
 		}

@@ -60,7 +60,7 @@ namespace TSQL.Tokens.Parsers
 				else
 				{
 					return
-						new TSQLIncompleteCommentToken(
+						new TSQLIncompleteComment(
 							startPosition,
 							tokenValue);
 				}
@@ -80,7 +80,7 @@ namespace TSQL.Tokens.Parsers
 				else
 				{
 					return
-						new TSQLIncompleteStringToken(
+						new TSQLIncompleteString(
 							startPosition,
 							tokenValue);
 				}
@@ -100,7 +100,7 @@ namespace TSQL.Tokens.Parsers
 				else
 				{
 					return
-						new TSQLIncompleteStringToken(
+						new TSQLIncompleteString(
 							startPosition,
 							tokenValue);
 				}
@@ -211,7 +211,7 @@ namespace TSQL.Tokens.Parsers
 					))
 				{
 					return
-						new TSQLIncompleteIdentifierToken(
+						new TSQLIncompleteIdentifier(
 							startPosition,
 							tokenValue);
 				}

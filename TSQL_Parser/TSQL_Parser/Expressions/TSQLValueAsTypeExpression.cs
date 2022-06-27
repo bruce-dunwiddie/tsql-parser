@@ -20,6 +20,6 @@ namespace TSQL.Expressions
 
 		public TSQLExpression Expression { get; internal set; }
 
-		public TSQLIdentifier DataType { get; internal set; }
+		public string DataType { get; internal set; }
 	}
 }

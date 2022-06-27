@@ -2,9 +2,9 @@
 
 namespace TSQL.Tokens
 {
-	public class TSQLIncompleteCommentToken : TSQLIncompleteToken
+	public class TSQLIncompleteIdentifier : TSQLIncompleteToken
 	{
-		internal TSQLIncompleteCommentToken(
+		internal TSQLIncompleteIdentifier(
 			int beginPosition,
 			string text) :
 			base(
@@ -20,7 +20,7 @@ namespace TSQL.Tokens
 		{
 			get
 			{
-				return TSQLTokenType.IncompleteComment;
+				return TSQLTokenType.IncompleteIdentifier;
 			}
 		}
 

@@ -174,9 +174,9 @@
     <Compile Include="Statements\TSQLUpdateStatement.cs" />
     <Compile Include="Tokens\Parsers\TSQLTokenFactory.cs" />
     <Compile Include="Tokens\Parsers\TSQLTokenParserHelper.cs" />
-    <Compile Include="Tokens\TSQLIncompleteCommentToken.cs" />
-    <Compile Include="Tokens\TSQLIncompleteIdentifierToken.cs" />
-    <Compile Include="Tokens\TSQLIncompleteStringToken.cs" />
+    <Compile Include="Tokens\TSQLIncompleteComment.cs" />
+    <Compile Include="Tokens\TSQLIncompleteIdentifier.cs" />
+    <Compile Include="Tokens\TSQLIncompleteString.cs" />
     <Compile Include="Tokens\TSQLIncompleteToken.cs" />
     <Compile Include="Tokens\TSQLSystemColumnIdentifier.cs" />
     <Compile Include="Tokens\TSQLSystemIdentifier.cs" />

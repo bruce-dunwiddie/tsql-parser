@@ -111,5 +111,13 @@ namespace TSQL.Expressions
 				return this as TSQLVariableAssignmentExpression;
 			}
 		}
+
+		public TSQLValueAsTypeExpression AsValueAsType
+		{
+			get
+			{
+				return this as TSQLValueAsTypeExpression;
+			}
+		}
 	}
 }
