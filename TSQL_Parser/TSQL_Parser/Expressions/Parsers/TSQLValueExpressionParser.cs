@@ -19,7 +19,6 @@ namespace TSQL.Expressions.Parsers
 
 			if (
 				tokenizer.Current != null &&
-				tokenizer.Current.Text != "*" &&
 				tokenizer.Current.Type.In(
 					TSQLTokenType.Operator))
 			{
@@ -111,6 +110,7 @@ namespace TSQL.Expressions.Parsers
 					group.InnerExpression = 
 						new TSQLValueExpressionParser().Parse(
 							tokenizer);
+
 					group.Tokens.AddRange(group.InnerExpression.Tokens);
 
 					if (tokenizer.Current.IsCharacter(
@@ -293,7 +293,8 @@ namespace TSQL.Expressions.Parsers
 
 						#endregion
 					}
-					else if (tokenizer.Current.Text == "*")
+					else if (tokenizer.Current.Text == "*" &&
+						tokens.Last().IsCharacter(TSQLCharacters.Period))
 					{
 						#region parse multi column reference
 
@@ -309,18 +310,15 @@ namespace TSQL.Expressions.Parsers
 							.Where(t => !t.IsComment() && !t.IsWhitespace())
 							.ToList();
 
-						if (columnReference.Count > 0)
-						{
-							// p.* will have the single token p in the final list
+						// p.* will have the single token p in the final list
 
-							// AdventureWorks..ErrorLog.* will have 4 tokens in the final list
-							// e.g. {AdventureWorks, ., ., ErrorLog}
+						// AdventureWorks..ErrorLog.* will have 4 tokens in the final list
+						// e.g. {AdventureWorks, ., ., ErrorLog}
 
-							multi.TableReference = columnReference
-								.GetRange(0, columnReference
-									.FindLastIndex(t => t.IsCharacter(TSQLCharacters.Period)))
-								.ToList();
-						}
+						multi.TableReference = columnReference
+							.GetRange(0, columnReference
+								.FindLastIndex(t => t.IsCharacter(TSQLCharacters.Period)))
+							.ToList();
 
 						TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
 							tokenizer,
