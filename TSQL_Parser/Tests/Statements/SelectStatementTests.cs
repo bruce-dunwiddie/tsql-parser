@@ -823,5 +823,26 @@ namespace Tests.Statements
 			Assert.AreEqual(456.321, argument.Expression.AsConstant.Literal.AsNumericLiteral.Value);
 			Assert.AreEqual("VARCHAR(10)", argument.DataType);
 		}
+
+		[Test]
+		public void SelectStatement_ColumnAliasAsEquals()
+		{
+			// example from https://docs.microsoft.com/en-us/sql/t-sql/queries/select-examples-transact-sql?view=sql-server-ver16
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT p.Name AS ProductName, 
+				NonDiscountSales = (OrderQty * UnitPrice),
+				Discounts = ((OrderQty * UnitPrice) * UnitPriceDiscount)
+				FROM Production.Product AS p 
+				INNER JOIN Sales.SalesOrderDetail AS sod
+				ON p.ProductID = sod.ProductID 
+				ORDER BY ProductName DESC;",
+				includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+			TSQLSelectStatement select = statements.Single().AsSelect;
+			Assert.AreEqual(3, select.Select.Columns.Count);
+			Assert.AreEqual("NonDiscountSales", select.Select.Columns[1].ColumnAlias.Name);
+			Assert.AreEqual("Discounts", select.Select.Columns[2].ColumnAlias.Name);
+		}
 	}
 }
