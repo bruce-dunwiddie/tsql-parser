@@ -44,7 +44,7 @@ namespace TSQL.Expressions.Parsers
 				tokenizer.Current.Type.In(
 					TSQLTokenType.Operator))
 			{
-				rightSide = new TSQLOperatorExpressionParser().Parse(
+				rightSide = new TSQLOperationExpressionParser().Parse(
 					tokenizer,
 					rightSide);
 			}

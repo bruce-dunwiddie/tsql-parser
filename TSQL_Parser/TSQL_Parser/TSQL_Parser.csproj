@@ -118,7 +118,7 @@
     <Compile Include="Expressions\Parsers\TSQLValueExpressionParser.cs" />
     <Compile Include="Expressions\Parsers\TSQLSelectExpressionParser.cs" />
     <Compile Include="Elements\Parsers\TSQLValuesParser.cs" />
-    <Compile Include="Expressions\Parsers\TSQLOperatorExpressionParser.cs" />
+    <Compile Include="Expressions\Parsers\TSQLOperationExpressionParser.cs" />
     <Compile Include="Expressions\TSQLArgumentList.cs" />
     <Compile Include="Expressions\TSQLArgumentList.IEnumerable.cs">
       <DependentUpon>TSQLArgumentList.cs</DependentUpon>
@@ -126,10 +126,11 @@
     <Compile Include="Expressions\TSQLColumnExpression.cs" />
     <Compile Include="Elements\TSQLDefaultValues.cs" />
     <Compile Include="Expressions\TSQLConstantExpression.cs" />
+    <Compile Include="Expressions\TSQLDuplicateSpecificationExpression.cs" />
     <Compile Include="Expressions\TSQLValueAsTypeExpression.cs" />
     <Compile Include="Expressions\TSQLVariableAssignmentExpression.cs" />
     <Compile Include="Expressions\TSQLLogicalExpression.cs" />
-    <Compile Include="Expressions\TSQLOperatorExpression.cs" />
+    <Compile Include="Expressions\TSQLOperationExpression.cs" />
     <Compile Include="Expressions\TSQLExpressionType.cs" />
     <Compile Include="Expressions\TSQLFunctionExpression.cs" />
     <Compile Include="Expressions\TSQLGroupedExpression.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Expressions\TSQLCaseExpression.cs" />
     <Compile Include="Expressions\Parsers\TSQLCaseExpressionParser.cs" />
     <Compile Include="Expressions\TSQLExpression.cs" />
+    <Compile Include="Expressions\TSQLNullExpression.cs" />
     <Compile Include="Expressions\TSQLVariableExpression.cs" />
     <Compile Include="IO\BufferedTextReader.cs" />
     <Compile Include="IO\BufferedTextReader.IDisposable.cs">

@@ -72,7 +72,7 @@
     <Compile Include="Clauses\SelectClauseTests.cs" />
     <Compile Include="Expressions\ArgumentListTests.cs" />
     <Compile Include="Expressions\CaseExpressionTests.cs" />
-    <Compile Include="Expressions\OperatorExpressionTests.cs" />
+    <Compile Include="Expressions\OperationExpressionTests.cs" />
     <Compile Include="IdentifiersTests.cs" />
     <Compile Include="Parsing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -22,7 +22,7 @@ namespace TSQL.Expressions.Parsers
 				tokenizer.Current.Type.In(
 					TSQLTokenType.Operator))
 			{
-				return new TSQLOperatorExpressionParser().Parse(
+				return new TSQLOperationExpressionParser().Parse(
 					tokenizer,
 					expression);
 			}
@@ -125,6 +125,39 @@ namespace TSQL.Expressions.Parsers
 					#endregion
 				}
 			}
+			else if (
+					tokenizer.Current.IsKeyword(TSQLKeywords.DISTINCT) ||
+					tokenizer.Current.IsKeyword(TSQLKeywords.ALL))
+			{
+				#region parse rest of expression contained inside parenthesis
+
+				TSQLDuplicateSpecificationExpression distinct = new TSQLDuplicateSpecificationExpression();
+
+				distinct.Tokens.Add(tokenizer.Current);
+
+				if (tokenizer.Current.IsKeyword(TSQLKeywords.ALL))
+				{
+					distinct.DuplicateSpecificationType = TSQLDuplicateSpecificationExpression.TSQLDuplicateSpecificationType.All;
+				}
+				else
+				{
+					distinct.DuplicateSpecificationType = TSQLDuplicateSpecificationExpression.TSQLDuplicateSpecificationType.Distinct;
+				}
+
+				TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
+					tokenizer,
+					distinct.Tokens);
+
+				distinct.InnerExpression =
+					new TSQLValueExpressionParser().Parse(
+						tokenizer);
+
+				distinct.Tokens.AddRange(distinct.InnerExpression.Tokens);
+
+				return distinct;
+
+				#endregion
+			}
 			else if (tokenizer.Current.Type.In(
 				TSQLTokenType.Variable,
 				TSQLTokenType.SystemVariable))
@@ -157,6 +190,18 @@ namespace TSQL.Expressions.Parsers
 					constant.Tokens);
 
 				return constant;
+			}
+			else if (tokenizer.Current.IsKeyword(TSQLKeywords.NULL))
+			{
+				TSQLNullExpression nullExp = new TSQLNullExpression();
+
+				nullExp.Tokens.Add(tokenizer.Current);
+
+				TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
+					tokenizer,
+					nullExp.Tokens);
+
+				return nullExp;
 			}
 			else if (tokenizer.Current.IsKeyword(TSQLKeywords.CASE))
 			{

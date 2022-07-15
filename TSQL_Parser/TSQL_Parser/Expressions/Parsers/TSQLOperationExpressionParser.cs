@@ -8,13 +8,13 @@ using TSQL.Tokens;
 
 namespace TSQL.Expressions.Parsers
 {
-	internal class TSQLOperatorExpressionParser
+	internal class TSQLOperationExpressionParser
 	{
-		public TSQLOperatorExpression Parse(
+		public TSQLOperationExpression Parse(
 			ITSQLTokenizer tokenizer,
 			TSQLExpression leftSide)
 		{
-			TSQLOperatorExpression opExpression = new TSQLOperatorExpression();
+			TSQLOperationExpression opExpression = new TSQLOperationExpression();
 
 			opExpression.LeftSide = leftSide;
 			opExpression.Operator = tokenizer.Current.AsOperator;

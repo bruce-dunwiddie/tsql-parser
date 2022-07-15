@@ -16,10 +16,10 @@ using Tests.Tokens;
 namespace Tests.Expressions
 {
 	[TestFixture(Category = "Expression Parsing")]
-	public class OperatorExpressionTests
+	public class OperationExpressionTests
 	{
 		[Test]
-		public void OperatorExpression_Simple()
+		public void OperationExpression_Simple()
 		{
 			TSQLTokenizer tokenizer = new TSQLTokenizer(
 				"+ 2 - 3")
@@ -38,7 +38,7 @@ namespace Tests.Expressions
 
 			Assert.IsTrue(tokenizer.MoveNext());
 
-			TSQLOperatorExpression op = new TSQLOperatorExpressionParser().Parse(
+			TSQLOperationExpression op = new TSQLOperationExpressionParser().Parse(
 				tokenizer,
 				leftSide);
 
@@ -61,8 +61,8 @@ namespace Tests.Expressions
 
 			Assert.AreEqual("+", op.Operator.Text);
 
-			Assert.AreEqual(TSQLExpressionType.Operator, op.RightSide.Type);
-			TSQLOperatorExpression rightSide = op.RightSide.AsOperator;
+			Assert.AreEqual(TSQLExpressionType.Operation, op.RightSide.Type);
+			TSQLOperationExpression rightSide = op.RightSide.AsOperation;
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
