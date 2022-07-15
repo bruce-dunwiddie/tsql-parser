@@ -860,7 +860,18 @@ namespace Tests.Statements
 			Assert.AreEqual(11, select.Tokens.Count);
 			Assert.AreEqual(1, select.Select.Columns.Count);
 			Assert.AreEqual("AssetId_changes", select.Select.Columns[0].ColumnAlias.Name);
-			Assert.AreEqual("id", select.Select.Columns[0].Expression.AsDuplicateSpecification.InnerExpression.AsColumn.Column.Name)
+			Assert.AreEqual("id", 
+				select
+				.Select
+				.Columns[0]
+				.Expression
+				.AsFunction
+				.Arguments[0]
+				.AsDuplicateSpecification
+				.InnerExpression
+				.AsColumn
+				.Column
+				.Name);
 		}
 
 		[Test]
