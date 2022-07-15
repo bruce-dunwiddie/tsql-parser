@@ -29,7 +29,7 @@ namespace TSQL.Expressions
 		/// </summary>
 		Multicolumn,
 
-		Operator,
+		Operation,
 
 		/// <summary>
 		///		i.e. an expression surrounded by parenthesis, but not containing a subquery
@@ -54,6 +54,16 @@ namespace TSQL.Expressions
 		/// <summary>
 		///		e.g. 123.45 AS INT (only used as an argument to CAST function)
 		/// </summary>
-		ValueAsType
+		ValueAsType,
+
+		/// <summary>
+		///		e.g. NULL
+		/// </summary>
+		Null,
+
+		/// <summary>
+		///		e.g. DISTINCT or ALL
+		/// </summary>
+		DuplicateSpecification
 	}
 }

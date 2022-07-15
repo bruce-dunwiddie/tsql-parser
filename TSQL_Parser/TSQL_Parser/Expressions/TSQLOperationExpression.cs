@@ -8,13 +8,13 @@ using TSQL.Tokens;
 
 namespace TSQL.Expressions
 {
-	public class TSQLOperatorExpression : TSQLExpression
+	public class TSQLOperationExpression : TSQLExpression
 	{
 		public override TSQLExpressionType Type
 		{
 			get
 			{
-				return TSQLExpressionType.Operator;
+				return TSQLExpressionType.Operation;
 			}
 		}
 

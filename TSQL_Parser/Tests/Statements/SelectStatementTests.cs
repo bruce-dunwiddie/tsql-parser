@@ -267,23 +267,23 @@ namespace Tests.Statements
 			Assert.AreEqual(TSQLExpressionType.Grouped, lvl1Expression.Type);
 			// contents of outer parens
 			TSQLExpression lvl2Expression = lvl1Expression.AsGrouped.InnerExpression;
-			Assert.AreEqual(TSQLExpressionType.Operator, lvl2Expression.Type);
-			Assert.AreEqual("-", lvl2Expression.AsOperator.Operator.Text);
+			Assert.AreEqual(TSQLExpressionType.Operation, lvl2Expression.Type);
+			Assert.AreEqual("-", lvl2Expression.AsOperation.Operator.Text);
 			// (A/B)
-			TSQLExpression lvl2aExpression = lvl2Expression.AsOperator.LeftSide;
+			TSQLExpression lvl2aExpression = lvl2Expression.AsOperation.LeftSide;
 			// 1
-			TSQLExpression lvl2bExpression = lvl2Expression.AsOperator.RightSide;
+			TSQLExpression lvl2bExpression = lvl2Expression.AsOperation.RightSide;
 			Assert.AreEqual(TSQLExpressionType.Grouped, lvl2aExpression.Type);
 			Assert.AreEqual(TSQLExpressionType.Constant, lvl2bExpression.Type);
 			Assert.AreEqual(1, lvl2bExpression.AsConstant.Literal.AsNumericLiteral.Value);
 			// A/B
 			TSQLExpression lvl3Expression = lvl2aExpression.AsGrouped.InnerExpression;
-			Assert.AreEqual(TSQLExpressionType.Operator, lvl3Expression.Type);
-			Assert.AreEqual("/", lvl3Expression.AsOperator.Operator.Text);
+			Assert.AreEqual(TSQLExpressionType.Operation, lvl3Expression.Type);
+			Assert.AreEqual("/", lvl3Expression.AsOperation.Operator.Text);
 			// A
-			TSQLExpression lvl3aExpression = lvl3Expression.AsOperator.LeftSide;
+			TSQLExpression lvl3aExpression = lvl3Expression.AsOperation.LeftSide;
 			// B
-			TSQLExpression lvl3bExpression = lvl3Expression.AsOperator.RightSide;
+			TSQLExpression lvl3bExpression = lvl3Expression.AsOperation.RightSide;
 			Assert.AreEqual(TSQLExpressionType.Column, lvl3aExpression.Type);
 			Assert.AreEqual("A", lvl3aExpression.AsColumn.Column.Name);
 			Assert.IsNull(lvl3aExpression.AsColumn.TableReference);
@@ -843,6 +843,51 @@ namespace Tests.Statements
 			Assert.AreEqual(3, select.Select.Columns.Count);
 			Assert.AreEqual("NonDiscountSales", select.Select.Columns[1].ColumnAlias.Name);
 			Assert.AreEqual("Discounts", select.Select.Columns[2].ColumnAlias.Name);
+		}
+
+		[Test]
+		public void SelectStatement_SELECT_DISTINCT()
+		{
+			// regression test for https://github.com/bruce-dunwiddie/tsql-parser/issues/101
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT 
+					COUNT(DISTINCT id) AssetId_changes
+				FROM [gs].[ESG_ResolvedGSID_Merged]",
+				includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+			TSQLSelectStatement select = statements.Single().AsSelect;
+			Assert.AreEqual(11, select.Tokens.Count);
+			Assert.AreEqual(1, select.Select.Columns.Count);
+			Assert.AreEqual("AssetId_changes", select.Select.Columns[0].ColumnAlias.Name);
+			Assert.AreEqual("id", 
+				select
+				.Select
+				.Columns[0]
+				.Expression
+				.AsFunction
+				.Arguments[0]
+				.AsDuplicateSpecification
+				.InnerExpression
+				.AsColumn
+				.Column
+				.Name);
+		}
+
+		[Test]
+		public void SelectStatement_SELECT_NULL()
+		{
+			// regression test for https://github.com/bruce-dunwiddie/tsql-parser/issues/104
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT 1, 2, 3, NULL, 5 FROM MyTable",
+				includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+			TSQLSelectStatement select = statements.Single().AsSelect;
+			Assert.AreEqual(12, select.Tokens.Count);
+			Assert.AreEqual(5, select.Select.Columns.Count);
+			Assert.AreEqual(TSQLExpressionType.Null, select.Select.Columns[3].Expression.Type);
+			Assert.AreEqual(5, select.Select.Columns[4].Expression.AsConstant.Literal.AsNumericLiteral.Value);
 		}
 	}
 }

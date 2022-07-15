@@ -59,18 +59,18 @@ namespace Tests.Clauses
 
 				Assert.AreEqual(1, select.Columns.Count);
 				Assert.IsNull(select.Columns[0].ColumnAlias);
-				Assert.AreEqual(TSQLExpressionType.Operator, select.Columns[0].Expression.Type);
+				Assert.AreEqual(TSQLExpressionType.Operation, select.Columns[0].Expression.Type);
 
-				TSQLOperatorExpression operatorExpression = select.Columns[0].Expression.AsOperator;
-				Assert.AreEqual("/", operatorExpression.Operator.Text);
-				Assert.AreEqual(TSQLExpressionType.Column, operatorExpression.LeftSide.Type);
+				TSQLOperationExpression operationExpression = select.Columns[0].Expression.AsOperation;
+				Assert.AreEqual("/", operationExpression.Operator.Text);
+				Assert.AreEqual(TSQLExpressionType.Column, operationExpression.LeftSide.Type);
 
-				TSQLColumnExpression leftSide = operatorExpression.LeftSide.AsColumn;
+				TSQLColumnExpression leftSide = operationExpression.LeftSide.AsColumn;
 				Assert.AreEqual("oh", leftSide.TableReference.Single().AsIdentifier.Name);
 				Assert.AreEqual("TaxAmt", leftSide.Column.Name);
-				Assert.AreEqual(TSQLExpressionType.Column, operatorExpression.RightSide.Type);
+				Assert.AreEqual(TSQLExpressionType.Column, operationExpression.RightSide.Type);
 
-				TSQLColumnExpression rightSide = operatorExpression.RightSide.AsColumn;
+				TSQLColumnExpression rightSide = operationExpression.RightSide.AsColumn;
 				Assert.AreEqual("oh", rightSide.TableReference.Single().AsIdentifier.Name);
 				Assert.AreEqual("SubTotal", rightSide.Column.Name);
 				Assert.AreEqual(" tax percent ", select.Columns.Last().Tokens.Last().AsMultilineComment.Comment);
@@ -327,9 +327,9 @@ namespace Tests.Clauses
 				TSQLSelectColumn column = select.Columns[0];
 
 				Assert.IsNull(column.ColumnAlias);
-				Assert.AreEqual(TSQLExpressionType.Operator, column.Expression.Type);
+				Assert.AreEqual(TSQLExpressionType.Operation, column.Expression.Type);
 
-				TSQLOperatorExpression tsqlOperator = column.Expression.AsOperator;
+				TSQLOperationExpression tsqlOperator = column.Expression.AsOperation;
 
 				Assert.AreEqual("+", tsqlOperator.Operator.Text);
 				Assert.IsNull(tsqlOperator.LeftSide);

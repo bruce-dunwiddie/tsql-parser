@@ -51,7 +51,7 @@ namespace TSQL.Expressions.Parsers
 				}
 				else
 				{
-					return new TSQLOperatorExpressionParser().Parse(
+					return new TSQLOperationExpressionParser().Parse(
 						tokenizer,
 						expression);
 				}

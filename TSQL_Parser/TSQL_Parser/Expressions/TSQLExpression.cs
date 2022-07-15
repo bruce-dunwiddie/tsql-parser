@@ -72,11 +72,11 @@ namespace TSQL.Expressions
 			}
 		}
 
-		public TSQLOperatorExpression AsOperator
+		public TSQLOperationExpression AsOperation
 		{
 			get
 			{
-				return this as TSQLOperatorExpression;
+				return this as TSQLOperationExpression;
 			}
 		}
 
@@ -117,6 +117,22 @@ namespace TSQL.Expressions
 			get
 			{
 				return this as TSQLValueAsTypeExpression;
+			}
+		}
+
+		public TSQLNullExpression AsNull
+		{
+			get
+			{
+				return this as TSQLNullExpression;
+			}
+		}
+
+		public TSQLDuplicateSpecificationExpression AsDuplicateSpecification
+		{
+			get
+			{
+				return this as TSQLDuplicateSpecificationExpression;
 			}
 		}
 	}
