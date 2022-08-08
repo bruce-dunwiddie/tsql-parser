@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 using TSQL.Tokens;
-using TSQL.Tokens.Parsers;
 
 namespace TSQL.Expressions.Parsers
 {
@@ -17,7 +16,6 @@ namespace TSQL.Expressions.Parsers
 
 			if (
 				tokenizer.Current != null &&
-				tokenizer.Current.Text != "*" &&
 				tokenizer.Current.Type.In(
 					TSQLTokenType.Operator) &&
 

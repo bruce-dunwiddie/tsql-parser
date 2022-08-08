@@ -309,6 +309,8 @@ namespace Tests.Statements
 			Assert.AreEqual(21, select.From.Tokens.Count);
 			Assert.IsNull(select.Where);
 			Assert.AreEqual(1, select.Select.Columns.Count);
+			Assert.AreEqual(3, select.Select.Columns[0].Tokens.Count);
+			Assert.AreEqual("a", select.Select.Columns[0].Expression.AsMulticolumn.TableReference.Single().Text);
 		}
 
 		[Test]
@@ -888,6 +890,20 @@ namespace Tests.Statements
 			Assert.AreEqual(5, select.Select.Columns.Count);
 			Assert.AreEqual(TSQLExpressionType.Null, select.Select.Columns[3].Expression.Type);
 			Assert.AreEqual(5, select.Select.Columns[4].Expression.AsConstant.Literal.AsNumericLiteral.Value);
+		}
+
+		[Test]
+		public void SelectStatement_ChainedOperators()
+		{
+			// regression test for https://github.com/bruce-dunwiddie/tsql-parser/issues/110
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"select isnull(a, 0) * isnull(b, 0) / 100 as Result from myTable",
+				includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+			TSQLSelectStatement select = statements.Single().AsSelect;
+			Assert.AreEqual(20, select.Tokens.Count);
+			Assert.AreEqual(1, select.Select.Columns.Count);
 		}
 	}
 }
