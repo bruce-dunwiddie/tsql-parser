@@ -6,6 +6,7 @@ using System.Text;
 using TSQL.Statements;
 using TSQL.Statements.Parsers;
 using TSQL.Tokens;
+using TSQL.Tokens.Parsers;
 
 namespace TSQL.Clauses.Parsers
 {
@@ -23,23 +24,42 @@ namespace TSQL.Clauses.Parsers
 
 			forClause.Tokens.Add(tokenizer.Current);
 
-			while (
-				tokenizer.MoveNext() &&
-				!tokenizer.Current.IsCharacter(TSQLCharacters.Semicolon) &&
-				(
-					tokenizer.Current.Type != TSQLTokenType.Keyword ||
-					(
-						tokenizer.Current.Type == TSQLTokenType.Keyword &&
-						!tokenizer.Current.AsKeyword.Keyword.In
-						(
-							TSQLKeywords.OPTION
-						) &&
-						!tokenizer.Current.AsKeyword.Keyword.IsStatementStart()
-					)
-				))
+			TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
+				tokenizer,
+				forClause.Tokens);
+
+			if (tokenizer.Current.AsIdentifier?.Text?.ToUpper() != "XML")
 			{
-				forClause.Tokens.Add(tokenizer.Current);
+				throw new InvalidOperationException("XML expected.");
 			}
+
+			forClause.Tokens.Add(tokenizer.Current);
+
+			TSQLTokenParserHelper.ReadThroughAnyCommentsOrWhitespace(
+				tokenizer,
+				forClause.Tokens);
+
+			// https://docs.microsoft.com/en-us/sql/relational-databases/xml/for-xml-sql-server?view=sql-server-ver16
+
+			if (!new List<string>
+				{
+					"RAW",
+					"AUTO",
+					"EXPLICIT",
+					"PATH"
+				}.Contains(tokenizer.Current.AsIdentifier?.Text?.ToUpper()))
+			{
+				throw new InvalidOperationException("RAW, AUTO, EXPLICIT, or PATH expected.");
+			}
+
+			forClause.Tokens.Add(tokenizer.Current);
+
+			TSQLTokenParserHelper.ReadUntilStop(
+				tokenizer,
+				forClause,
+				new List<TSQLFutureKeywords> { },
+				new List<TSQLKeywords> { },
+				lookForStatementStarts: true);
 
 			return forClause;
 		}

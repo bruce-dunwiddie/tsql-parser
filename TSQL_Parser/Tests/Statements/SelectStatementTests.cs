@@ -905,5 +905,28 @@ namespace Tests.Statements
 			Assert.AreEqual(20, select.Tokens.Count);
 			Assert.AreEqual(1, select.Select.Columns.Count);
 		}
+
+		[Test]
+		public void SelectStatement_Stuff()
+		{
+			// regression test for https://github.com/bruce-dunwiddie/tsql-parser/issues/108
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"select stuff ( (select top 10 note from asset_note where note is not null order by note_id for XML path('')) , 1 , 1 , 'Note: ' );",
+				includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+			TSQLSelectStatement select = statements.Single().AsSelect;
+
+			TSQLSelectStatement innerSelect = select
+				.Select
+				.Columns[0]
+				.Expression
+				.AsFunction
+				.Arguments[0]
+				.AsSubquery
+				.Select;
+
+			Assert.AreEqual(6, innerSelect.For.Tokens.Count);
+		}
 	}
 }
