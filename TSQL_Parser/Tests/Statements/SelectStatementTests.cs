@@ -712,7 +712,7 @@ namespace Tests.Statements
 				.Columns
 				.Single();
 
-			Assert.AreEqual("COUNT", count.Expression.AsFunction.Function.Name);
+			Assert.AreEqual("COUNT", count.Expression.AsFunction.Function.Text);
 			Assert.AreEqual("count", count.ColumnAlias.Name);
 		}
 
@@ -730,7 +730,7 @@ namespace Tests.Statements
 				.Columns
 				.Single();
 
-			Assert.AreEqual("COUNT", count.Expression.AsFunction.Function.Name);
+			Assert.AreEqual("COUNT", count.Expression.AsFunction.Function.Text);
 			Assert.AreEqual("count", count.ColumnAlias.Name);
 		}
 
@@ -927,6 +927,34 @@ namespace Tests.Statements
 				.Select;
 
 			Assert.AreEqual(6, innerSelect.For.Tokens.Count);
+		}
+
+		[Test]
+		public void SelectStatement_CoalesceWithInnerFunctions()
+		{
+			// regression test for https://github.com/bruce-dunwiddie/tsql-parser/discussions/114
+			List<TSQLStatement> statements = TSQLStatementReader.ParseStatements(
+				@"SELECT COALESCE(added_by, RIGHT(user, LEN(user)-5)) AS changed_by FROM my_table",
+				includeWhitespace: false);
+
+			Assert.AreEqual(1, statements.Count);
+			TSQLSelectStatement select = statements.Single().AsSelect;
+
+			Assert.AreEqual(21, select.Tokens.Count);
+
+			TSQLFunctionExpression functionExpression = select
+				.Select
+				.Columns[0]
+				.Expression
+				.AsFunction
+				.Arguments[1]
+				.AsFunction;
+
+			TSQLToken right = functionExpression
+				.Function;
+
+			Assert.AreEqual("RIGHT", right.Text);
+			Assert.IsNull(functionExpression.QualifiedPath);
 		}
 	}
 }

@@ -225,7 +225,9 @@ namespace TSQL.Expressions.Parsers
 			}
 			else if (tokenizer.Current.Type.In(
 				TSQLTokenType.Identifier,
-				TSQLTokenType.SystemIdentifier))
+				TSQLTokenType.SystemIdentifier,
+				// RIGHT is a keyword, but can be used as a function call
+				TSQLTokenType.Keyword))
 			{
 				// column, with or without alias, or with full explicit table name with up to 5 parts
 
@@ -258,8 +260,7 @@ namespace TSQL.Expressions.Parsers
 							.ToList();
 
 						function.Function =
-							identityTokens[identityTokens.Count - 1]
-								.AsIdentifier;
+							identityTokens[identityTokens.Count - 1];
 
 						if (identityTokens.Count > 1)
 						{

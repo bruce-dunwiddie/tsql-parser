@@ -245,7 +245,7 @@ namespace Tests.Clauses
 
 				Assert.AreEqual("GroupNumber", column.ColumnAlias.Name);
 				Assert.AreEqual(TSQLExpressionType.Function, column.Expression.Type);
-				Assert.AreEqual("ROW_NUMBER", column.Expression.AsFunction.Function.Name);
+				Assert.AreEqual("ROW_NUMBER", column.Expression.AsFunction.Function.Text);
 			}
 		}
 
@@ -292,7 +292,7 @@ namespace Tests.Clauses
 
 				TSQLFunctionExpression functionExpression = column.Expression.AsFunction;
 
-				Assert.AreEqual("Multiply", functionExpression.Function.Name);
+				Assert.AreEqual("Multiply", functionExpression.Function.Text);
 				Assert.AreEqual(3, functionExpression.QualifiedPath.Count);
 				Assert.AreEqual("Test", functionExpression.QualifiedPath[0].AsIdentifier.Name);
 				Assert.AreEqual(".", functionExpression.QualifiedPath[1].AsCharacter.Text);
