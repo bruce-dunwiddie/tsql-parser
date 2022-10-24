@@ -20,7 +20,7 @@ namespace TSQL.Expressions
 
 		public List<TSQLToken> QualifiedPath { get; internal set; }
 
-		public TSQLIdentifier Function { get; internal set; }
+		public TSQLToken Function { get; internal set; }
 
 		public TSQLArgumentList Arguments { get; internal set; }
 	}
