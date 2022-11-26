@@ -44,3 +44,13 @@ Available on Nuget, [TSQL.Parser](https://www.nuget.org/packages/TSQL.Parser/).
 
 ### Future Additions
 - More statement parsers built on top of tokenizer.
+
+## Building From Source
+If you're looking to fork the project or build from source, the dependencies below are required for backwards compatibility support.
+
+### .Net Framework 4.5.2
+- Download and install the [.Net Framework 4.5.2 Targeting Pack](<https://www.microsoft.com/en-us/download/details.aspx?id=42637>).
+
+### Sandcastle Help File Builder
+- Follow instructions for installing the latest [SFHB release](<https://github.com/EWSoftware/SHFB/releases>).
+- Update the target .Net Framework on SandcastleDocs project if prompted.
