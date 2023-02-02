@@ -10,6 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Update="TSQLTokenizer.*.cs">
+      <DependentUpon>TSQLTokenizer.cs</DependentUpon>
+    </Compile>
+    <Compile Update="TSQLStatementReader.*.cs">
+      <DependentUpon>TSQLStatementReader.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
      <None Include="TSQL_Parser.snk" />
   </ItemGroup>
 </Project>
