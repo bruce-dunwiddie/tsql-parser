@@ -9,4 +9,7 @@
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+     <None Include="TSQL_Parser.snk" />
+  </ItemGroup>
 </Project>
