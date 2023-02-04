@@ -87,9 +87,8 @@ namespace Tests.Expressions
 		[TestCase(true, 31)]
 		public void CaseExpression_Should_Include_TrailingWhitespace_If_Flag_Is_True(bool includeWhiteSpace, int expectedEndPosition)
 		{
-			const string sql =
-			//   0123456789012345678901234567890123456789
-				"CASE 1 WHEN 2 THEN 2 ELSE 3 END ";
+			//                  0123456789012345678901234567890123456789
+			const string sql = "CASE 1 WHEN 2 THEN 2 ELSE 3 END ";
 
 			TSQLTokenizer tokenizer = new TSQLTokenizer(sql)
 			{
