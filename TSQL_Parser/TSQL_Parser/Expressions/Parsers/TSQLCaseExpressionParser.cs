@@ -39,6 +39,10 @@ namespace TSQL.Expressions.Parsers
 
 			tokenizer.MoveNext();
 
+			TSQLTokenParserHelper.ReadCommentsAndWhitespace(
+				tokenizer,
+				caseExpression.Tokens);
+
 			return caseExpression;
 		}
 	}
