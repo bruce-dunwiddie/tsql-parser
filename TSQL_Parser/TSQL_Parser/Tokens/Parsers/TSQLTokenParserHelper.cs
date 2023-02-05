@@ -104,6 +104,12 @@ namespace TSQL.Tokens.Parsers
 				element.Tokens);
 		}
 
+		/// <summary>
+		/// Precondition: tokenizer.Current has not been consumed
+		/// Postcondition: tokenizer advanced if token consumed
+		/// </summary>
+		/// <param name="tokenizer"></param>
+		/// <param name="savedTokens"></param>
 		public static void ReadCommentsAndWhitespace(
 			ITSQLTokenizer tokenizer,
 			List<TSQLToken> savedTokens)
