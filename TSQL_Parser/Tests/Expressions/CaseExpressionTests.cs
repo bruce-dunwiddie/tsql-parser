@@ -102,5 +102,26 @@ namespace Tests.Expressions
 			Assert.AreEqual(expectedEndPosition, expression.EndPosition);
 
 		}
+
+		[Test]
+		public void CaseExpression_Inside_CaseExpression()
+		{
+			const string sql = @"CASE 10
+WHEN 20 THEN 30
+ELSE CASE 40
+ WHEN 50 THEN 60
+ ELSE 70
+ END
+END";
+
+			TSQLTokenizer tokenizer = new TSQLTokenizer(sql);
+
+			Assert.IsTrue(tokenizer.MoveNext());
+
+			var expression = new TSQLCaseExpressionParser().Parse(tokenizer);
+			CollectionAssert.AllItemsAreNotNull(expression.Tokens);
+			Assert.AreEqual(0, expression.BeginPosition);
+
+		}
 	}
 }
