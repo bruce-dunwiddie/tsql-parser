@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using NUnit.Framework;
+using TSQL.Expressions;
 
 namespace Tests
 {
@@ -13,32 +14,42 @@ namespace Tests
         public static void CompareArrays<T>(T[] expected, T[] actual)
         {
             Assert.AreEqual(
-                expected == null, 
-                actual == null, 
-                "Expected {0}null value and {1}null found.", 
-                expected == null ? "" : "not", 
+                expected == null,
+                actual == null,
+                "Expected {0}null value and {1}null found.",
+                expected == null ? "" : "not",
                 actual == null ? "" : "not");
 
             if (expected == null || actual == null)
                 return;
 
             Assert.AreEqual(
-                expected.LongLength, 
-                actual.LongLength, 
-                "Expected Length is {0} actual: {1}", 
-                expected.LongLength, 
+                expected.LongLength,
+                actual.LongLength,
+                "Expected Length is {0} actual: {1}",
+                expected.LongLength,
                 actual.LongLength);
 
             for (int i = 0; i < expected.Length; i++)
             {
                 Assert.AreEqual(
-                    expected[i], 
-                    actual[i], 
-                    "Values on index {0} are not equal. Expected {1} actual: {2}", 
-                    i, 
-                    expected[i], 
+                    expected[i],
+                    actual[i],
+                    "Values on index {0} are not equal. Expected {1} actual: {2}",
+                    i,
+                    expected[i],
                     actual[i]);
             }
+        }
+
+        /// <summary>
+        /// To aid debugging
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public static string TokensAsText(this TSQLExpression expression)
+        {
+            return string.Join(" ", expression.Tokens.Select(t => t.Text));
         }
     }
 }

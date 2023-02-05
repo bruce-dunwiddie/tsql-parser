@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using NUnit.Framework;
 
 using TSQL;
@@ -98,9 +98,41 @@ namespace Tests.Expressions
 			Assert.IsTrue(tokenizer.MoveNext());
 
 			var expression = new TSQLCaseExpressionParser().Parse(tokenizer);
+			Assert.NotNull(expression.InputExpression);
+
+			var expectedInputTokenExpression = includeWhiteSpace
+				? new List<TSQLToken>
+				{
+					new TSQLNumericLiteral(5, "1"),
+					new TSQLWhitespace(6, " "),
+				}
+				: new List<TSQLToken>
+				{
+					new TSQLNumericLiteral(5, "1"),
+				};
+
+			TokenComparisons.CompareTokenLists(expectedInputTokenExpression, expression.InputExpression.Tokens);
 			Assert.AreEqual(0, expression.BeginPosition);
 			Assert.AreEqual(expectedEndPosition, expression.EndPosition);
 
+		}
+
+		[Test]
+		public void CaseExpression_Else_Is_Optional()
+		{
+			const string sql = @"CASE 
+WHEN TBL.COL = 25 THEN 30
+END";
+
+			TSQLTokenizer tokenizer = new TSQLTokenizer(sql);
+
+			Assert.IsTrue(tokenizer.MoveNext());
+
+			var expression = new TSQLCaseExpressionParser().Parse(tokenizer);
+			Assert.AreEqual(1, expression.WhenExpressions.Count);
+			Assert.AreEqual("TBL . COL = 25", expression.WhenExpressions.First().TokensAsText());
+			CollectionAssert.AllItemsAreNotNull(expression.Tokens);
+			Assert.AreEqual(0, expression.BeginPosition);
 		}
 
 		[Test]
@@ -122,6 +154,55 @@ END";
 			CollectionAssert.AllItemsAreNotNull(expression.Tokens);
 			Assert.AreEqual(0, expression.BeginPosition);
 
+		}
+
+		[TestCase("CASE END", "should have a WHEN keyword")]
+		// [TestCase("CASE WHEN END THEN END END", "should be a THEN keyword")]
+		[TestCase("CASE WHEN", "should be an expression")]
+		[TestCase("CASE WHEN END", "should be a THEN keyword")]
+		public void CaseExpression_ParseException(string sql, string message)
+		{
+			TSQLTokenizer tokenizer = new TSQLTokenizer(sql);
+
+			Assert.IsTrue(tokenizer.MoveNext());
+
+			var exception = Assert.Throws<TSQLParseException>(() => new TSQLCaseExpressionParser().Parse(tokenizer));
+			StringAssert.Contains(message, exception.Message);
+		}
+
+		[Test]
+		public void CaseExpression_Trailing_Comments_Stress_Test()
+		{
+			const string sql = @"CASE  -- COMMENT
+  T.COL * 25 -- COMMENT
+
+WHEN /* COMMENT */ 20 * 25 -- COMMENT 
+ THEN -- COMMENT
+ 30 -- COMMENT
+ELSE -- COMMENT 
+
+CASE /* MULTI-LINE 
+        COMMENT */
+
+ 40 -- COMMENT
+ WHEN /* COMMENT */ 50 /* COMMENT */ THEN /* COMMENT */
+              
+                     60
+
+ ELSE 70
+ END
+      -- COMMENT 
+         END /* MULTILINE COMMENT
+  */
+";
+
+			TSQLTokenizer tokenizer = new TSQLTokenizer(sql);
+
+			Assert.IsTrue(tokenizer.MoveNext());
+
+			var expression = new TSQLCaseExpressionParser().Parse(tokenizer);
+			CollectionAssert.AllItemsAreNotNull(expression.Tokens);
+			Assert.AreEqual(0, expression.BeginPosition);
 		}
 	}
 }

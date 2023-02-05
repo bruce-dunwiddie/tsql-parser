@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TSQL.Expressions
 {
@@ -29,7 +26,19 @@ namespace TSQL.Expressions
 			}
 		}
 
+		public void AddWhenExpression(TSQLExpression when)
+		{
+			if (when == null) throw new ArgumentException("Should not be null", nameof(when));
+			if (when.Tokens.Count == 0) throw new ArgumentException("Should have tokens", nameof(when));
+
+			((List<TSQLExpression>)WhenExpressions).Add(when);
+		}
+
 		public bool IsSimpleCaseExpression { get; set; }
+
+		public TSQLExpression InputExpression { get; set; }
+
+		public IReadOnlyList<TSQLExpression> WhenExpressions { get; } = new List<TSQLExpression>();
 	}
 
 

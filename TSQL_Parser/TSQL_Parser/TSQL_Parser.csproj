@@ -188,6 +188,7 @@
     <Compile Include="Tokens\TSQLTokenExtensions.cs" />
     <Compile Include="TSQLFutureKeywords.cs" />
     <Compile Include="TSQLIdentifiers.cs" />
+    <Compile Include="TSQLParseException.cs" />
     <Compile Include="TSQLStatementReader.cs" />
     <Compile Include="TSQLStatementReader.IDisposable.cs">
       <DependentUpon>TSQLStatementReader.cs</DependentUpon>
