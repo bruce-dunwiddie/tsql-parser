@@ -8,13 +8,7 @@ Available on Nuget, [TSQL.Parser](https://www.nuget.org/packages/TSQL.Parser/).
 
 [![NuGet](https://img.shields.io/nuget/dt/TSQL.Parser.svg)](https://www.nuget.org/packages/TSQL.Parser/)
 
-[![Travis](https://api.travis-ci.com/bruce-dunwiddie/tsql-parser.svg)](https://app.travis-ci.com/github/bruce-dunwiddie/tsql-parser/)
-
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/lcfjc4jox76dia8q?svg=true)](https://ci.appveyor.com/project/bruce-dunwiddie/tsql-parser)
-
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=tsqlparser&metric=coverage)](https://sonarcloud.io/component_measures?id=tsqlparser&metric=coverage)
-
-[![Code Quality](https://sonarcloud.io/api/project_badges/measure?project=tsqlparser&metric=alert_status)](https://sonarcloud.io/dashboard?id=tsqlparser)
 
 [![Coverity](https://scan.coverity.com/projects/9334/badge.svg)](https://scan.coverity.com/projects/bruce-dunwiddie-tsql-parser)
 
