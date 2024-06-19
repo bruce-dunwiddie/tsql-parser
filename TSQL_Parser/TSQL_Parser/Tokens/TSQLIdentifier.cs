@@ -24,12 +24,6 @@ namespace TSQL.Tokens
 					.Substring(1, Text.Length - 2)
 					.Replace("\"\"", "\"");
 			}
-			else if (Text.StartsWith("N\""))
-			{
-				Name = Text
-					.Substring(2, Text.Length - 3)
-					.Replace("\"\"", "\"");
-			}
 			else
 			{
 				Name = Text;

@@ -124,13 +124,13 @@ namespace Tests.Tokens
 		}
 
 		[Test]
-		public void IdentifierToken_QuotedUnicodeIdentifier()
+		public void IdentifierToken_UnicodeLiteral()
 		{
-			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("N\"name\" ", useQuotedIdentifiers: true, includeWhitespace: true);
+			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("N\'name\' ", useQuotedIdentifiers: true, includeWhitespace: true);
 			TokenComparisons.CompareTokenLists(
 				new List<TSQLToken>()
 					{
-						new TSQLIdentifier(0, "N\"name\""),
+						new TSQLStringLiteral(0, "N\'name\'"),
 						new TSQLWhitespace(7, " ")
 					},
 				tokens);
@@ -181,13 +181,6 @@ namespace Tests.Tokens
 		public void IdentifierToken_QuotedName()
 		{
 			TSQLIdentifier token = new TSQLIdentifier(0, "\"name\"");
-			Assert.AreEqual("name", token.Name);
-		}
-
-		[Test]
-		public void IdentifierToken_QuotedUnicodeName()
-		{
-			TSQLIdentifier token = new TSQLIdentifier(0, "N\"name\"");
 			Assert.AreEqual("name", token.Name);
 		}
 	}

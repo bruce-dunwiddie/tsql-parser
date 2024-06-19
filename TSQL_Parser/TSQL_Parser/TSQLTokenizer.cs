@@ -809,7 +809,8 @@ namespace TSQL
 									case '\r':
 									case '\n':
 									case '\'':
-									case '.':
+                                    case '\"':
+                                    case '.':
 									case ',':
 									case ';':
 									case '(':
