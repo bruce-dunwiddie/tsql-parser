@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using NUnit.Framework;
 
 using TSQL;
+using TSQL.Expressions.Parsers;
 using TSQL.Statements;
 using TSQL.Tokens;
 
 using Tests.Tokens;
-using TSQL.Expressions.Parsers;
 
 namespace Tests.Expressions
 {
@@ -130,7 +131,7 @@ END";
 
 			var expression = new TSQLCaseExpressionParser().Parse(tokenizer);
 			Assert.AreEqual(1, expression.WhenExpressions.Count);
-			Assert.AreEqual("TBL . COL = 25", expression.WhenExpressions.First().TokensAsText());
+			Assert.AreEqual(new string[] {"TBL", ".", "COL", "=", "25"}, expression.WhenExpressions.First().TokenTextArray());
 			CollectionAssert.AllItemsAreNotNull(expression.Tokens);
 			Assert.AreEqual(0, expression.BeginPosition);
 		}

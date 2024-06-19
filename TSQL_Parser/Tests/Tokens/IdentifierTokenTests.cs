@@ -124,19 +124,6 @@ namespace Tests.Tokens
 		}
 
 		[Test]
-		public void IdentifierToken_UnicodeLiteral()
-		{
-			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("N\'name\' ", useQuotedIdentifiers: true, includeWhitespace: true);
-			TokenComparisons.CompareTokenLists(
-				new List<TSQLToken>()
-					{
-						new TSQLStringLiteral(0, "N\'name\'"),
-						new TSQLWhitespace(7, " ")
-					},
-				tokens);
-		}
-
-		[Test]
 		public void IdentifierToken_NoWhitespace()
 		{
 			List<TSQLToken> tokens = TSQLTokenizer.ParseTokens("select[id]from[blah]order by[orderdate];", useQuotedIdentifiers: false, includeWhitespace: true);

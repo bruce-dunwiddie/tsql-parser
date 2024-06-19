@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using NUnit.Framework;
+using TSQL.Elements;
 using TSQL.Expressions;
 
 namespace Tests
@@ -42,14 +43,9 @@ namespace Tests
             }
         }
 
-        /// <summary>
-        /// To aid debugging
-        /// </summary>
-        /// <param name="expression"></param>
-        /// <returns></returns>
-        public static string TokensAsText(this TSQLExpression expression)
+        public static string[] TokenTextArray(this TSQLElement element)
         {
-            return string.Join(" ", expression.Tokens.Select(t => t.Text));
+            return element.Tokens.Select(t => t.Text).ToArray();
         }
     }
 }
