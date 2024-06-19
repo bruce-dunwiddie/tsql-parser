@@ -337,6 +337,27 @@ namespace Tests.Clauses
 				Assert.AreEqual(TSQLExpressionType.Constant, tsqlOperator.RightSide.Type);
 				Assert.AreEqual(1, tsqlOperator.RightSide.AsConstant.Literal.AsNumericLiteral.Value);
 			}
-		}
-	}
+        }
+
+        [Test]
+        public void SelectClause_NoWhitespace()
+        {
+            using (StringReader reader = new StringReader(
+                @"SELECT'1'"))
+            using (ITSQLTokenizer tokenizer = new TSQLTokenizer(reader))
+            {
+                Assert.IsTrue(tokenizer.MoveNext());
+
+                TSQLSelectClause select = new TSQLSelectClauseParser().Parse(tokenizer);
+                Assert.AreEqual(2, select.Tokens.Count);
+
+                Assert.AreEqual(1, select.Columns.Count);
+
+                TSQLSelectColumn column = select.Columns[0];
+
+                Assert.IsNull(column.ColumnAlias);
+                Assert.AreEqual(TSQLExpressionType.Constant, column.Expression.Type);
+            }
+        }
+    }
 }
